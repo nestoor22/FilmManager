@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate, login
 from graphene_django import DjangoObjectType
 from graphene.types import Field, List
 from .models import User
@@ -50,3 +51,23 @@ class CreateUser(graphene.Mutation):
         user.set_password(password)
         user.save()
         return CreateUser(id=user.id)
+
+
+class SignIn(graphene.Mutation):
+    id = graphene.Int()
+    first_name = graphene.String()
+    last_name = graphene.String()
+    email = graphene.String()
+
+    class Arguments:
+        email = graphene.String()
+        password = graphene.String()
+
+    @staticmethod
+    def mutate(parent, info, **kwargs):
+        user = authenticate(username=kwargs.get('email'), password=kwargs.get('password'))
+        if not user:
+            return None
+
+        login(info.context, user)
+        return SignIn(id=user.id, first_name=user.first_name, last_name=user.last_name, email=user.email)

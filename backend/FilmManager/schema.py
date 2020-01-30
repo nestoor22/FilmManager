@@ -1,5 +1,5 @@
-from show.schema import ShowQuery, CreateShow
-from user.schema import CreateUser, UserQuery
+from show.schema import ShowQuery
+from user.schema import SignIn, UserQuery
 import graphene
 
 
@@ -8,7 +8,7 @@ class Query(ShowQuery, UserQuery):
 
 
 class Mutation(graphene.ObjectType):
-    create_user = CreateUser.Field()
+    sign_in = SignIn.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

@@ -1,12 +1,7 @@
 from graphene_django import DjangoObjectType
 from graphene.types import Field, List
-from .models import Shows, Actors, ShowActors
+from .models import Shows, Actors, Genres, Countries
 import graphene
-
-
-class ShowsType(DjangoObjectType):
-    class Meta:
-        model = Shows
 
 
 class ActorsType(DjangoObjectType):
@@ -14,16 +9,40 @@ class ActorsType(DjangoObjectType):
         model = Actors
 
 
-class ShowActorType(DjangoObjectType):
+class GenresType(DjangoObjectType):
     class Meta:
-        model = ShowActors
-        fields = ('show', 'actor', )
+        model = Genres
+
+
+class CountryType(DjangoObjectType):
+    class Meta:
+        model = Countries
+
+
+class ShowsType(DjangoObjectType):
+    class Meta:
+        model = Shows
+
+    actors = graphene.List(ActorsType)
+    genres = graphene.List(GenresType)
+    countries = graphene.List(CountryType)
+
+    @staticmethod
+    def resolve_actors(parent, info):
+        return Actors.objects.filter(showactors__show_id=parent.show_id)
+
+    @staticmethod
+    def resolve_genres(parent, info):
+        return Genres.objects.filter(showgenre__show_id=parent.show_id)
+
+    @staticmethod
+    def resolve_countries(parent, info):
+        return Countries.objects.filter(showcountry__show_id=parent.show_id)
 
 
 class ShowQuery(graphene.ObjectType):
     show = graphene.List(ShowsType, show_id=graphene.Int())
-    actor = graphene.List(ActorsType, actor_id=graphene.Int())
-    film_actors = graphene.List(ShowActorType)
+    actors = graphene.List(ActorsType, actor_id=graphene.Int())
 
     @staticmethod
     def resolve_show(parent, info, show_id):
@@ -32,14 +51,3 @@ class ShowQuery(graphene.ObjectType):
     @staticmethod
     def resolve_actors(parent, info):
         return Actors.objects.all()
-
-
-class CreateShow(graphene.Mutation):
-    id = graphene.Int()
-
-    class Arguments:
-        id = graphene.Int()
-
-    def mutate(self, info, id):
-        instance = Shows.objects.create(show_id=id)
-        return CreateShow(id=instance.id)

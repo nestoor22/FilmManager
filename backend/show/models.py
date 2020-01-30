@@ -71,7 +71,7 @@ class ShowActors(models.Model):
         return f"Film-{self.show} Actor-{self.actor}"
 
 
-class FilmCountry(models.Model):
+class ShowCountry(models.Model):
     show = models.ForeignKey(Shows, models.CASCADE)
     country = models.ForeignKey(Countries, models.CASCADE)
 
@@ -82,7 +82,7 @@ class FilmCountry(models.Model):
         return f"Show-{self.show} Country-{self.country}"
 
 
-class FilmGenre(models.Model):
+class ShowGenre(models.Model):
     show = models.ForeignKey(Shows, models.CASCADE)
     genre = models.ForeignKey(Genres, models.CASCADE)
 
