@@ -1,10 +1,12 @@
-.css-yk16xz-control, .css-yk16xz-control:hover, .css-yk16xz-control:focus{
+.css-yk16xz-control, .css-yk16xz-control:hover, .css-yk16xz-control:focus, .select__control--is-focused{
     background-color: #330202!important;
+    margin-bottom: 25px!important;
 }
 
 .select__control--is-focused, .select__control--menu-is-open, .select__menu, .select__value-container {
     color: darkgray;
     background-color: #330202!important;
+    text-align: center!important;
     border-color: darkgray!important;
 }
 .css-1pahdxg-control, .css-1pahdxg-control:hover, .css-1pahdxg-control:focus{
@@ -23,7 +25,7 @@
     background-color: #5A0000!important;
 }
 .filters{
-    height: 200px;
+    height: auto;
     background-color: #2B2828;
 
 }
@@ -50,6 +52,7 @@
 
 .css-1hwfws3{
     overflow-y: scroll!important;
+    margin-bottom: 15px;
 }
 
 .css-1hwfws3::-webkit-scrollbar {
