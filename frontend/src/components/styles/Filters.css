@@ -1,6 +1,31 @@
+.css-yk16xz-control, .css-yk16xz-control:hover, .css-yk16xz-control:focus{
+    background-color: #330202!important;
+}
+
+.select__control--is-focused, .select__control--menu-is-open, .select__menu, .select__value-container {
+    color: darkgray;
+    background-color: #330202!important;
+    border-color: darkgray!important;
+}
+.css-1pahdxg-control, .css-1pahdxg-control:hover, .css-1pahdxg-control:focus{
+    border-color: darkgray!important;
+    box-shadow: 0 0 0 1px darkgray!important;
+}
+
+.select__option, .css-1n7v3ny-option{
+    background-color: #330202!important;
+}
+
+.basic-multi-select{
+    border-color: darkgray!important;
+}
+.select__option:hover{
+    background-color: #5A0000!important;
+}
 .filters{
     height: 200px;
     background-color: #2B2828;
+
 }
 
 .filterTitle{
@@ -12,4 +37,32 @@
     font-size: 24px;
     text-align: center;
     color: #E5E5E5;
+}
+
+.css-1hwfws3{
+    border-radius: 3px!important;
+    max-height: 90px;
+}
+
+.css-4ljt47-MenuList{
+    max-height: 150px!important;
+}
+
+.css-1hwfws3{
+    overflow-y: scroll!important;
+}
+
+.css-1hwfws3::-webkit-scrollbar {
+    width: 2px;
+}
+
+/* Handle */
+.css-1hwfws3::-webkit-scrollbar-thumb {
+    background: darkgray;
+    border-radius: 20px;
+}
+
+.filtersName{
+    color: darkgray;
+    text-align: left!important;
 }
