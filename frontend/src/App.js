@@ -1,15 +1,16 @@
 import React from 'react';
-import './App.css';
-import Header from "./components/staticParts/Header";
-import Main from "./components/main/Main";
+import { ThemeProvider } from '@material-ui/core/styles';
+
+import Routes from './routes';
+import theme from './theme';
+
 
 function App() {
-  return (
-    <div className="App">
-      <Header/>
-      <Main/>
-    </div>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <Routes />
+        </ThemeProvider>
+    );
 }
 
 export default App;

@@ -1,7 +1,7 @@
 import React from "react";
 import './../styles/Filters.css'
-import Genres from "../forms/GenresOptions";
-import ReleaseDate from "../forms/ReleaseDateOptions";
+import Genres from "../filters/GenresOptions";
+import ReleaseDate from "../filters/ReleaseDateOptions";
 
 function Filters() {
     return (

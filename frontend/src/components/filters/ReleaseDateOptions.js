@@ -3,7 +3,7 @@ import Select from 'react-select'
 
 let years = [];
 
-for(let i=1920; i<=2020;i++){
+for(let i=2020; i>=1920;i--){
     years.push({value: i, label: i})
 }
 
