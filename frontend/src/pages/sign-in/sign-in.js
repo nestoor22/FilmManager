@@ -11,9 +11,40 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import useStyles from "./styles";
-
+import { useMutation } from '@apollo/react-hooks';
+import { useHistory } from 'react-router-dom';
+import useForm from "./useForm";
+import { SIGNIN_MUTATION } from './../../mutations/sign-in.js';
+import useField from "./useFields";
 function SignInSide() {
+
+    const loginForm = useForm({
+        onSubmit: (formData, formValid) => {
+            console.log(formData);
+            if (!formValid) {
+                return;
+            }
+            signIn({
+                variables: { email: formData.email, password: formData.password }
+            }).then(
+                () => history.push('/'),
+                () => {
+                }
+            );
+        }
+    });
     const classes = useStyles();
+    const [signIn] = useMutation(SIGNIN_MUTATION);
+    const history = useHistory();
+
+    const emailField = useField('email', loginForm, {
+        defaultValue: ''
+    });
+
+    const passwordField = useField('password', loginForm, {
+        defaultValue: '',
+    });
+
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
@@ -37,15 +68,18 @@ function SignInSide() {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    <form id="form" onSubmit={loginForm.handleSubmit} className={classes.form}>
                         <TextField
                             variant="outlined"
                             margin="normal"
                             required
                             fullWidth
+                            value={emailField.value}
+                            onChange={emailField.onChange}
                             id="email"
                             label="Email Address"
                             name="email"
+                            form="form"
                             autoComplete="email"
                             autoFocus
                         />
@@ -54,7 +88,10 @@ function SignInSide() {
                             margin="normal"
                             required
                             fullWidth
+                            form={"form"}
                             name="password"
+                            value={passwordField.value}
+                            onChange={passwordField.onChange}
                             label="Password"
                             type="password"
                             id="password"
@@ -69,6 +106,7 @@ function SignInSide() {
                             fullWidth
                             variant="contained"
                             color="primary"
+                            form="form"
                             className={classes.submit}
                         >
                             Sign In
