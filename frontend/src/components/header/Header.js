@@ -1,6 +1,6 @@
 import React from 'react';
-import Logo from "./Logo";
-import '../styles/Header.css'
+import Logo from "../logo/Logo";
+import './Header.css'
 
 function Header() {
     return (
@@ -17,7 +17,7 @@ function Header() {
                 </div>
                 <div className="navbar-nav ml-auto">
                     <a href="#s" className="nav-item nav-link">About</a>
-                    <a href="#s" className="nav-item nav-link">Login</a>
+                    <a href="/signIn/" className="nav-item nav-link">Login</a>
                 </div>
             </div>
             <Logo/>

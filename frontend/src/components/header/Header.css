@@ -1,0 +1,33 @@
+.header{
+    background-color: #5A0000;
+    height: 70px;
+    padding: 0;
+}
+
+.navbar-collapse.show{
+    background-color: #5A0000;
+    z-index: 2;
+}
+.header-row{
+    width: 100%;
+}
+.mb-3{
+    width: 275px;
+    height: 40px;
+    top: 5px;
+    margin-bottom: 0;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    font-family: Pridi;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 37px;
+    color: #C4C4C4;
+    margin-right: 15px;
+}
+
+.navbar-light .navbar-nav .nav-link:hover{
+    color: darkgray;
+}
