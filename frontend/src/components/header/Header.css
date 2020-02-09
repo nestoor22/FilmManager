@@ -31,3 +31,7 @@
 .navbar-light .navbar-nav .nav-link:hover{
     color: darkgray;
 }
+
+.nav-link.active{
+    color: #707070 !important;
+}

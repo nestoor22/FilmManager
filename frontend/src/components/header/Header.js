@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from "../logo/Logo";
 import './Header.css'
+import {NavLink} from "react-router-dom";
 
 function Header() {
     return (
@@ -16,8 +17,7 @@ function Header() {
                     </form>
                 </div>
                 <div className="navbar-nav ml-auto">
-                    <a href="#s" className="nav-item nav-link">About</a>
-                    <a href="/signIn/" className="nav-item nav-link">Login</a>
+                    <NavLink to="/signIn/" className="nav-item nav-link">Login</NavLink>
                 </div>
             </div>
             <Logo/>

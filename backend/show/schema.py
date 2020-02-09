@@ -1,5 +1,4 @@
 from graphene_django import DjangoObjectType
-from graphene.types import Field, List
 from .models import Shows, Actors, Genres, Countries
 import graphene
 
