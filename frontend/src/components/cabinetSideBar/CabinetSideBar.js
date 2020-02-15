@@ -7,7 +7,7 @@ function CabinetSideBar(props) {
         <nav id="sidebar">
             <ul className="list-unstyled components">
                 <p>{props.name}  {props.lastName}</p>
-                <li className="active">
+                <li>
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
                        className="dropdown-toggle">Account</a>
                     <ul className="collapse list-unstyled" id="homeSubmenu">

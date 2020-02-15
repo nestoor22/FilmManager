@@ -18,7 +18,7 @@ function SignInSide() {
             signIn({
                 variables: { email: formData.email, password: formData.password }
             }).then(
-                () => history.push('/'),
+                () => history.push('/account'),
                 () => {
                 }
             );

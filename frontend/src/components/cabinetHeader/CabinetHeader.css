@@ -6,11 +6,11 @@ p {
     color: #999;
 }
 .nav-link{
+    color: #C4C4C4!important;
     text-align: center!important;
 }
-a,
-a:hover,
-a:focus {
+
+a:hover, a:focus {
     color: #999!important;
     text-decoration: none;
     transition: all 0.3s;

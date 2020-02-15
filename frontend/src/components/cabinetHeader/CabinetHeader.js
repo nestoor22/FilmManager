@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 
 function CabinetHeader() {
     return(
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-md navbar-light bg-light">
         <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
             <span className="navbar-toggler-icon"></span>
         </button>
