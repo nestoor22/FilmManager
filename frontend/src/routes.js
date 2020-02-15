@@ -1,10 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
+import CabinetHeader from "./components/cabinetHeader/CabinetHeader";
 import SignInPage from './pages/sign-in/SignIn';
-import Main from "./pages/main/Main";
 import Logo from "./components/logo/Logo";
-
+import CabinetSideBar from "./components/cabinetSideBar/CabinetSideBar";
 
 function Routes() {
   return (
@@ -14,8 +13,11 @@ function Routes() {
                 <Logo/>
                 <SignInPage />
             </Route>
-            <Route path="/">
-                <Main/>
+            <Route path="/account">
+                <div id="content">
+                    <CabinetHeader/>
+                    <CabinetSideBar name="Yaroslav" lastName="Nestor"/>
+                </div>
             </Route>
           </Switch>
         </Router>
