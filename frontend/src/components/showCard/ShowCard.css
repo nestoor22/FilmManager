@@ -1,0 +1,31 @@
+.card{
+    margin: 15px;
+    height: 280px;
+    width: 152px;
+}
+
+.card:hover{
+    transition-duration: 0.5s;
+    -webkit-transform: scale(1.05);
+    -ms-ransform: scale(1.05);
+    transform: scale(1.05);
+}
+
+.filmsCardsRow{
+    display: inline;
+}
+
+.card-body{
+    padding: 0;
+}
+.card-text{
+    font-size: small;
+    margin: 0!important;
+}
+
+.card-title{
+    max-width: 152px;
+    display: flex;
+    overflow: hidden;
+    margin: 0!important;
+}

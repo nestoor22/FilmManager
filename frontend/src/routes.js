@@ -4,8 +4,7 @@ import CabinetHeader from "./components/cabinetHeader/CabinetHeader";
 import SignInPage from './pages/sign-in/SignIn';
 import Logo from "./components/logo/Logo";
 import CabinetSideBar from "./components/cabinetSideBar/CabinetSideBar";
-import Header from "./components/header/Header";
-import FilterSideBar from "./components/filterSideBar/FilterSideBar";
+import FilmsPage from "./pages/films/Films";
 
 function Routes() {
   return (
@@ -22,9 +21,7 @@ function Routes() {
                 </div>
             </Route>
             <Route exact path="/data/films/">
-                <Logo/>
-                <Header/>
-                <FilterSideBar/>
+                <FilmsPage/>
             </Route>
           </Switch>
         </Router>

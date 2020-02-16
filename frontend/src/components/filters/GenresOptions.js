@@ -11,7 +11,7 @@ const options = [
     { value: 17, label: 'Military' }, { value: 18, label: 'Cartoon' }, { value: 19, label: 'Short film' },
     { value: 20, label: 'Musical' }, { value: 21, label: 'Childish' }, { value: 22, label: 'Music' },
     { value: 24, label: 'Anime' }, { value: 25, label: 'Documentary' }, { value: 26, label: 'Western' },
-    { value: 27, label: 'TV-show' }, { value: 28, label: 'Film noir' }, { value: 30, label: 'Game' },
+    { value: 27, label: 'TV-showCard' }, { value: 28, label: 'Film noir' }, { value: 30, label: 'Game' },
     { value: 31, label: 'News' }, { value: 32, label: 'Adult' }, { value: 33, label: 'Concert' }
 ];
 
