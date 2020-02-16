@@ -1,0 +1,9 @@
+#FilterSidebar {
+    max-width: 200px;
+    background: #343232;
+    transition: all 0.3s;
+}
+
+#FilterSidebar ul{
+    border-bottom: none;
+}

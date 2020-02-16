@@ -1,5 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
+import './styles.css'
 
 let years = [];
 
@@ -14,7 +15,7 @@ function ReleaseDate(){
             isMulti
             name="years"
             options={years}
-            className="basic-multi-select"
+            className="basic-multi-select releaseDate"
             classNamePrefix="select"
             placeholder="Select years..."
         />

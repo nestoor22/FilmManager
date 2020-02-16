@@ -4,6 +4,8 @@ import CabinetHeader from "./components/cabinetHeader/CabinetHeader";
 import SignInPage from './pages/sign-in/SignIn';
 import Logo from "./components/logo/Logo";
 import CabinetSideBar from "./components/cabinetSideBar/CabinetSideBar";
+import Header from "./components/header/Header";
+import FilterSideBar from "./components/filterSideBar/FilterSideBar";
 
 function Routes() {
   return (
@@ -13,11 +15,16 @@ function Routes() {
                 <Logo/>
                 <SignInPage />
             </Route>
-            <Route path="/account">
+            <Route path="/account/">
                 <div id="content">
                     <CabinetHeader/>
                     <CabinetSideBar name="Yaroslav" lastName="Nestor"/>
                 </div>
+            </Route>
+            <Route exact path="/data/films/">
+                <Logo/>
+                <Header/>
+                <FilterSideBar/>
             </Route>
           </Switch>
         </Router>

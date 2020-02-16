@@ -1,5 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
+import './styles.css'
 
 const options = [
     { value: 1, label: 'Comedy' }, { value: 2, label: 'Fantastic' }, { value: 3, label: 'Thriller' },
@@ -20,7 +21,7 @@ function Genres(){
             isMulti
             name="genres"
             options={options}
-            className="basic-multi-select"
+            className="basic-multi-select Genres"
             classNamePrefix="select"
             placeholder="Select genres..."
         />
