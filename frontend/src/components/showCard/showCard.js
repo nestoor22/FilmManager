@@ -2,14 +2,18 @@ import React from 'react';
 import './ShowCard.css'
 
 function ShowCard(props) {
+    const countryList = props.countries.map(country => {
+        return `${country.name}`
+    });
+
     return(
         <div className="card">
             <img className="card-img-top" width="152" height="220"
-                 src="http://ex-fs.net/uploads/posts/2019-11/1574937559_24a7492.jpg" alt="Poster"/>
+                 src={props.poster} alt="Poster"/>
                 <div className="card-body">
-                    <h6 className="card-title">{props.name_eng}</h6>
-                    <p className="card-text">{props.release_date}, IMDb: {props.imdb_rating}</p>
-                    <p className="card-text"><small className="text-muted">{props.countries}</small></p>
+                    <h6 className="card-title">{props.nameEng}</h6>
+                    <p className="card-text">{props.releaseDate}, IMDb: {props.imdbRating}</p>
+                    <p className="card-text"><small className="text-muted">{countryList.join(',')}</small></p>
                 </div>
         </div>
     )

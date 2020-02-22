@@ -24,8 +24,16 @@
 }
 
 .card-title{
+    font-family: "Candara";
+    font-size: smaller;
     max-width: 152px;
     display: flex;
-    overflow: hidden;
+    overflow: hidden!important;
     margin: 0!important;
+}
+
+@media screen and (max-width: 640px) {
+    .card{
+        margin-left: calc(50% - 200px/2);
+    }
 }
