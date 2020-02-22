@@ -40,12 +40,19 @@ class ShowsType(DjangoObjectType):
 
 
 class ShowQuery(graphene.ObjectType):
-    show = graphene.List(ShowsType, show_id=graphene.Int())
+    shows = graphene.List(ShowsType, show_type=graphene.String(), page=graphene.Int(), order_by=graphene.String())
     actors = graphene.List(ActorsType, actor_id=graphene.Int())
 
     @staticmethod
-    def resolve_show(parent, info, show_id):
-        return Shows.objects.filter(show_id=show_id)
+    def resolve_shows(parent, info, **kwargs):
+        number_of_returned_values = 16
+        page = kwargs.get('page', 0)
+        offset = number_of_returned_values * page
+        show_type = kwargs.get('show_type')
+        if show_type:
+            return Shows.objects.filter(showtype=show_type)[offset:offset+number_of_returned_values]
+        else:
+            return Shows.objects.all()[offset:offset+number_of_returned_values]
 
     @staticmethod
     def resolve_actors(parent, info):
