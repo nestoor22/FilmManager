@@ -12,3 +12,8 @@
         margin-left: calc(50% - 283px/2);
     }
 }
+
+.page-link{
+    width: 150px;
+    text-align: center;
+}

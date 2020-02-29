@@ -18,16 +18,18 @@
 .card-body{
     padding: 0;
 }
-.card-text{
+.card-text {
+    position: absolute;
     font-size: small;
-    margin: 0!important;
+    bottom: 0!important;
+    text-align: center;
+    width: 100%;
 }
 
 .card-title{
     font-family: "Candara";
+    text-align: center;
     font-size: smaller;
-    max-width: 152px;
-    display: flex;
     overflow: hidden!important;
     margin: 0!important;
 }

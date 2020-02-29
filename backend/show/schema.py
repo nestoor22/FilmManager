@@ -1,5 +1,5 @@
 from graphene_django import DjangoObjectType
-from .models import Shows, Actors, Genres, Countries
+from .models import Shows, Actors, Genres
 import graphene
 
 
@@ -13,18 +13,12 @@ class GenresType(DjangoObjectType):
         model = Genres
 
 
-class CountryType(DjangoObjectType):
-    class Meta:
-        model = Countries
-
-
 class ShowsType(DjangoObjectType):
     class Meta:
         model = Shows
 
     actors = graphene.List(ActorsType)
     genres = graphene.List(GenresType)
-    countries = graphene.List(CountryType)
 
     @staticmethod
     def resolve_actors(parent, info):
@@ -34,10 +28,6 @@ class ShowsType(DjangoObjectType):
     def resolve_genres(parent, info):
         return Genres.objects.filter(showgenre__show_id=parent.show_id)
 
-    @staticmethod
-    def resolve_countries(parent, info):
-        return Countries.objects.filter(showcountry__show_id=parent.show_id)
-
 
 class ShowQuery(graphene.ObjectType):
     shows = graphene.List(ShowsType, show_type=graphene.String(), page=graphene.Int(), order_by=graphene.String())
@@ -45,7 +35,7 @@ class ShowQuery(graphene.ObjectType):
 
     @staticmethod
     def resolve_shows(parent, info, **kwargs):
-        number_of_returned_values = 16
+        number_of_returned_values = 20
         page = kwargs.get('page', 0)
         offset = number_of_returned_values * page
         show_type = kwargs.get('show_type')

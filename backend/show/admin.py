@@ -1,8 +1,7 @@
 from django.contrib import admin
-from .models import Shows, Countries, Actors, Genres
+from .models import Shows, Actors, Genres
 
 
 admin.site.register(Shows)
-admin.site.register(Countries)
 admin.site.register(Actors)
 admin.site.register(Genres)

@@ -5,14 +5,10 @@ export const SHOWS_QUERY = gql`
     {
         shows(showType: $showType, page: $page, orderBy: $orderBy)
         {
-            showId,
-            nameEng,
-            releaseDate,
-            posterUrl,
-            imdbRating,
-            countries{
-                name
-            }
+            showId
+            title
+            releaseDate
+            posterUrl
         }
     }
 `;

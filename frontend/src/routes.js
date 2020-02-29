@@ -20,8 +20,7 @@ function Routes() {
                     <CabinetSideBar name="Yaroslav" lastName="Nestor"/>
                 </div>
             </Route>
-            <Route exact path="/data/films/">
-                <FilmsPage/>
+            <Route path="/data/films/:pageId?" component={FilmsPage}>
             </Route>
           </Switch>
         </Router>
