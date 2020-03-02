@@ -5,14 +5,15 @@ import FilterSideBar from "../../components/filterSideBar/FilterSideBar";
 import ShowCard from "../../components/showCard/showCard";
 import { useQuery } from '@apollo/react-hooks';
 import SHOWS_QUERY from "../../queries/shows";
-import './Films.css'
-import {NavLink} from 'react-router-dom';
+import './Shows.css'
+import Pagination from "./Pagination";
 
 
 function FilmsPage(props) {
     const page = parseInt(props.match.params.pageId) ? parseInt(props.match.params.pageId) : 0;
     const { loading, error, data } = useQuery(SHOWS_QUERY, {variables:{
-        "page": page
+        "page": page,
+        "showType": "film"
         }});
 
     if (loading) return 'Loading...';
@@ -26,7 +27,7 @@ function FilmsPage(props) {
                 <div className="col-2 filterParent">
                     <FilterSideBar/>
                 </div>
-                <div className="col-10 filmCardsParent">
+                <div className="col-10 showCardsParent">
                     <div className="row">
                     {data.shows.map(show => (
                         <ShowCard showId={show.showId} title={show.title.length > 40 ? show.title.slice(0, 40)+ '...' : show.title}
@@ -36,16 +37,7 @@ function FilmsPage(props) {
                     </div>
                 </div>
             </div>
-            <nav aria-label="Page navigation example">
-            <ul className="pagination justify-content-center">
-                <li className="page-item">
-                    <NavLink className="page-link" to={"/data/films/" + (page-1 >=1 ? page-1 : "").toString()}>Previous</NavLink>
-                </li>
-                <li className="page-item">
-                    <NavLink className="page-link" to={"/data/films/" + (page+1).toString()}>Next</NavLink>
-                </li>
-            </ul>
-            </nav>
+            <Pagination showType="films" page={page}/>
         </div>
     )
 }

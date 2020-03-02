@@ -4,7 +4,8 @@ import CabinetHeader from "./components/cabinetHeader/CabinetHeader";
 import SignInPage from './pages/sign-in/SignIn';
 import Logo from "./components/logo/Logo";
 import CabinetSideBar from "./components/cabinetSideBar/CabinetSideBar";
-import FilmsPage from "./pages/films/Films";
+import FilmsPage from "./pages/shows/Films";
+import SeriesPage from "./pages/shows/Series";
 
 function Routes() {
   return (
@@ -21,6 +22,8 @@ function Routes() {
                 </div>
             </Route>
             <Route path="/data/films/:pageId?" component={FilmsPage}>
+            </Route>
+            <Route path="/data/series/:pageId?" component={SeriesPage}>
             </Route>
           </Switch>
         </Router>
