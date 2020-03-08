@@ -30,7 +30,8 @@ class ShowsType(DjangoObjectType):
 
 
 class ShowQuery(graphene.ObjectType):
-    shows = graphene.List(ShowsType, show_type=graphene.String(), page=graphene.Int(), order_by=graphene.String())
+    shows = graphene.List(ShowsType, show_type=graphene.String(), page=graphene.Int(), order_by=graphene.String(),
+                          is_random=graphene.Boolean())
     actors = graphene.List(ActorsType, actor_id=graphene.Int())
 
     @staticmethod
@@ -39,8 +40,13 @@ class ShowQuery(graphene.ObjectType):
         page = kwargs.get('page', 0)
         offset = number_of_returned_values * page
         show_type = kwargs.get('show_type')
-        if show_type:
-            return Shows.objects.filter(showtype=show_type)[offset:offset+number_of_returned_values]
+        is_random = kwargs.get('is_random')
+
+        if show_type and is_random:
+            return Shows.objects.filter(showtype=show_type).order_by('?')[offset:offset+number_of_returned_values]
+
+        elif show_type:
+            return Shows.objects.filter(showtype=show_type)[offset:offset + number_of_returned_values]
         else:
             return Shows.objects.all()[offset:offset+number_of_returned_values]
 

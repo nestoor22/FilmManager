@@ -24,11 +24,13 @@ function MainPage(props) {
     const page = parseInt(props.match.params.pageId) ? parseInt(props.match.params.pageId) : 0;
     const { loading: filmsLoading, error: filmsErrors, data: films } = useQuery(SHOWS_QUERY, {variables:{
             "page": page,
-            "showType": "film"
+            "showType": "film",
+            "isRandom": true
         }});
     const { loading: seriesLoading, error: seriesErrors, data: series } = useQuery(SHOWS_QUERY, {variables:{
             "page": page,
-            "showType": "serie"
+            "showType": "serie",
+            "isRandom": true
         }});
 
     if ((filmsLoading)||(seriesLoading)) return 'Loading...';
