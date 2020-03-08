@@ -6,6 +6,7 @@ import Logo from "./components/logo/Logo";
 import CabinetSideBar from "./components/cabinetSideBar/CabinetSideBar";
 import FilmsPage from "./pages/shows/Films";
 import SeriesPage from "./pages/shows/Series";
+import MainPage from "./pages/shows/Main";
 
 function Routes() {
   return (
@@ -20,6 +21,9 @@ function Routes() {
                     <CabinetHeader/>
                     <CabinetSideBar name="Yaroslav" lastName="Nestor"/>
                 </div>
+            </Route>
+            <Route exact path="/data/" component={MainPage}>
+
             </Route>
             <Route path="/data/films/:pageId?" component={FilmsPage}>
             </Route>
