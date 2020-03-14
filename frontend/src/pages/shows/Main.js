@@ -43,8 +43,11 @@ function MainPage(props) {
                 <Link to="/data/films/"><h2 className="slider-header">Movies</h2></Link>
                 <Slider {...settings}>
                 {films.shows.map(show => (
-                    <ShowCard showId={show.showId} title={show.title.length > 40 ? show.title.slice(0, 40)+ '...' : show.title}
-                              releaseDate={show.releaseDate} poster={show.posterUrl}>
+                    <ShowCard
+                        showId={show.showId}
+                        title={show.title.length > 40 ? show.title.slice(0, 40)+ '...' : show.title}
+                        releaseDate={show.releaseDate}
+                        poster={show.posterUrl}>
                     </ShowCard>
                 ))}
                 </Slider>

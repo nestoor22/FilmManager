@@ -41,14 +41,14 @@ class ShowQuery(graphene.ObjectType):
         offset = number_of_returned_values * page
         show_type = kwargs.get('show_type')
         is_random = kwargs.get('is_random')
+        order_by = kwargs.get('order_by', 'show_id')
 
         if show_type and is_random:
             return Shows.objects.filter(showtype=show_type).order_by('?')[offset:offset+number_of_returned_values]
-
         elif show_type:
-            return Shows.objects.filter(showtype=show_type)[offset:offset + number_of_returned_values]
+            return Shows.objects.filter(showtype=show_type).order_by(order_by)[offset:offset + number_of_returned_values]
         else:
-            return Shows.objects.all()[offset:offset+number_of_returned_values]
+            return Shows.objects.all().order_by(order_by)[offset:offset+number_of_returned_values]
 
     @staticmethod
     def resolve_actors(parent, info):

@@ -1,11 +1,12 @@
 import React from 'react';
-import './Logo.css'
+import { useStyles } from './styles';
 import {NavLink} from "react-router-dom";
 
 function Logo(){
+    const classes = useStyles();
     return (
-        <NavLink className="App-logo" to="/">
-            <h4 className="logoTitle">FilmsManager</h4>
+        <NavLink className={classes.appLogo} to="/">
+            <h4 className={classes.logoTitle}>FilmsManager</h4>
         </NavLink>
     );
 }

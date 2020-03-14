@@ -1,9 +1,9 @@
 import gql from 'graphql-tag';
 
 export const SHOWS_QUERY = gql`
-    query shows($showType: String, $page: Int, $orderBy: String)
+    query shows($showType: String, $page: Int, $orderBy: String, $isRandom: Boolean)
     {
-        shows(showType: $showType, page: $page, orderBy: $orderBy)
+        shows(showType: $showType, page: $page, orderBy: $orderBy, isRandom: $isRandom)
         {
             showId
             title
