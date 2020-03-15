@@ -9,13 +9,15 @@ import { Link, useRouteMatch } from 'react-router-dom';
 export default function AppHeader({ className }) {
     const classes = useStyles();
     return (
-        <AppBar className={classNames(classes.header, className)} position="static">
-            <Logo className={classes.logo} />
+        <AppBar className={classes.header} position="static">
+            <Logo/>
             <nav className={classes.navigation}>
                 <ul className={classes.navigationItems}>
                     <MenuLink to="/data" label="All" />
                     <MenuLink to="/data/films" label="Films" />
                     <MenuLink to="/data/series" label="Series" />
+                    <MenuLink to="/data" label="Teams" />
+                    <MenuLink to="/data" label="Boards" />
                     <MenuLink to="/signIn" label="Login" />
                 </ul>
             </nav>

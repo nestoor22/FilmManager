@@ -4,6 +4,7 @@ export const useStyles = makeStyles(theme => ({
     header: {
         display: 'flex',
         flexDirection: 'row',
+        justifyContent: "flex-end",
         flex: '0 1 auto',
         height: 72,
         backgroundColor: '#5A0000',
@@ -19,7 +20,7 @@ export const useStyles = makeStyles(theme => ({
         marginRight: '20px',
         listStyle: 'none',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     navigationItem: {
         fontSize: '20px',
@@ -27,6 +28,9 @@ export const useStyles = makeStyles(theme => ({
         cursor: 'pointer',
         '&:not(:last-child)': {
             marginRight: 25
+        },
+        '&:hover':{
+            color: "#FFFFFF"
         }
     },
     navigationItemLink: {
