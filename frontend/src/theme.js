@@ -1,17 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
-    palette: {
-        primary: {
-            main: '#330202'
-        },
-        secondary: {
-            main: '#C4C4C4'
-        },
-        error: {
-            main: '#EB5757'
-        }
-    },
     typography: {
         fontFamily: 'Fira Sans',
         h1: {
