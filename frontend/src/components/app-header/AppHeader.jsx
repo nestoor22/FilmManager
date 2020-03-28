@@ -19,7 +19,7 @@ export default function AppHeader({ className }) {
                     <MenuLink to="/#" label="Teams" />
                     <MenuLink to="/#" label="Latest" />
                     <MenuLink to="/#" label="Messages" />
-                    <MenuLink to="/#" label="Login" />
+                    <MenuLink to="/login" label="Login" />
                 </ul>
             </nav>
         </AppBar>

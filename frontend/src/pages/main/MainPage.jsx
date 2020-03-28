@@ -120,7 +120,7 @@ function MainPage() {
                             labelId="demo-mutiple-chip-label"
                             id="demo-mutiple-chip"
                             multiple
-                            value={0}
+                            value={[]}
                             className={classes.select}
                             onChange={handleYearChange}
                             input={<Input className={classes.input} id="select-multiple-chip" />}
@@ -141,7 +141,7 @@ function MainPage() {
                             labelId="demo-mutiple-chip-label"
                             id="demo-mutiple-chip"
                             multiple
-                            value={0}
+                            value={[]}
                             className={classes.select}
                             onChange={handleYearChange}
                             input={<Input className={classes.input} id="select-multiple-chip" />}
