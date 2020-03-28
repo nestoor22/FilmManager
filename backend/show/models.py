@@ -8,7 +8,7 @@ class Shows(models.Model):
     poster_url = models.CharField(max_length=500, blank=True, null=True)
 
     imdb_rating = models.FloatField(blank=True, null=True)
-    users_rating = models.FloatField(default=0.0)
+    users_rating = models.FloatField(blank=True, null=True)
     release_date = models.IntegerField()
     plot = models.TextField()
 
@@ -35,7 +35,7 @@ class Genres(models.Model):
 class Actors(models.Model):
     actor_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    number_of_films = models.IntegerField(default=None)
+    number_of_films = models.IntegerField(blank=True, null=True)
 
     class Meta:
         db_table = 'actors'

@@ -9,7 +9,7 @@ import useStyles from './styles'
 
 function MainPage() {
     const classes = useStyles();
-    const [value, setValue] = React.useState(2);
+    const [value, setValue] = React.useState(1);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -32,7 +32,7 @@ function MainPage() {
                                 selected: classes.selected,
                                 textColorInherit: classes.textColorInheritCustom
                             }}
-                            label="All"
+                            label="Movies"
                         />
                         <Tab
                             classes={{
@@ -41,7 +41,7 @@ function MainPage() {
                                 selected: classes.selected,
                                 textColorInherit: classes.textColorInheritCustom
                             }}
-                            label="Movies"
+                            label="All"
                         />
                         <Tab
                             classes={{
