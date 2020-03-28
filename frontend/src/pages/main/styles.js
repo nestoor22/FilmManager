@@ -58,6 +58,36 @@ const useStyles = makeStyles({
     textColorInheritCustom: {
         opacity: 1,
         color: '#E2F5F8',
+    },
+    contentRoot:{
+        display: 'flex',
+        paddingTop: '50px',
+        width: '100%'
+    },
+    filterListRoot:{
+        width: '300px',
+        padding: '40px 10px',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        justifyContent: 'center'
+    },
+    chips: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    chip: {
+        margin: 2,
+    },
+    select: {
+        width: '250px',
+        '&:after': {
+            backgroundColor: '#071B27',
+            height: '2px'
+        },
+        '&:before': {
+            height: '2px',
+            backgroundColor: '#335267'
+        }
     }
 });
 
