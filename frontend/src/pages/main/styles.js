@@ -53,7 +53,7 @@ const useStyles = makeStyles({
         color: 'inherit'
     },
     tabContentWrapper: {
-        padding: '24px 20px 22px 20px'
+        padding: '0'
     },
     textColorInheritCustom: {
         opacity: 1,

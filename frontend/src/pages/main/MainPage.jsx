@@ -7,14 +7,14 @@ import AppHeader from "../../components/app-header/AppHeader";
 
 import useStyles from './styles'
 import ListItem from "@material-ui/core/ListItem";
-import Typography from "@material-ui/core/Typography";
+import TabPanel from "../../components/tabs-panel/TabsPanel";
 import List from "@material-ui/core/List";
 import Select from "@material-ui/core/Select";
 import Input from "@material-ui/core/Input";
 import Chip from "@material-ui/core/Chip";
 import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
 import ListSubheader from "@material-ui/core/ListSubheader";
+import ItemsList from "../../components/items-list/ItemsList";
 
 
 var years = [];
@@ -32,19 +32,26 @@ const MenuProps = {
     },
 };
 
+function verticalTabProps(index) {
+    return {
+        id: `vertical-tab-${index}`,
+        'aria-controls': `vertical-tabpanel-${index}`
+    };
+}
+
 function MainPage() {
 
     const classes = useStyles();
     const [value, setValue] = React.useState(1);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
     const [year, setYear] = React.useState([]);
 
     const handleYearChange = (event) => {
         setYear(event.target.value);
     };
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
     return (
         <div className={classes.root}>
         <AppHeader />
@@ -64,6 +71,7 @@ function MainPage() {
                                 textColorInherit: classes.textColorInheritCustom
                             }}
                             label="Movies"
+                            {...verticalTabProps(0)}
                         />
                         <Tab
                             classes={{
@@ -73,6 +81,7 @@ function MainPage() {
                                 textColorInherit: classes.textColorInheritCustom
                             }}
                             label="All"
+                            {...verticalTabProps(1)}
                         />
                         <Tab
                             classes={{
@@ -82,6 +91,7 @@ function MainPage() {
                                 textColorInherit: classes.textColorInheritCustom
                             }}
                             label="Series"
+                            {...verticalTabProps(2)}
                         />
                     </Tabs>
                 </div>
@@ -157,6 +167,29 @@ function MainPage() {
                         </Select>
                     </ListItem>
                 </List>
+                <div className={classes.tabsRoot}>
+                    <TabPanel
+                        className={classes.tabContentWrapper}
+                        value={value}
+                        index={0}
+                    >
+                        <ItemsList/>
+                    </TabPanel>
+                    <TabPanel
+                        className={classes.tabContentWrapper}
+                        value={value}
+                        index={1}
+                    >
+                        <ItemsList/>
+                    </TabPanel>
+                    <TabPanel
+                        className={classes.tabContentWrapper}
+                        value={value}
+                        index={2}
+                    >
+                        <ItemsList/>
+                    </TabPanel>
+                </div>
             </div>
         </div>
     );
