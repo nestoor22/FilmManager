@@ -4,11 +4,9 @@ const useStyles = makeStyles({
     itemsRoot: {
         display: 'flex',
         flexWrap: 'wrap',
-        alignSelf: 'center',
-        width: '700px',
-        marginLeft: '40px',
+        width: '85%',
+        marginLeft: '80px',
         height: '100%',
-        backgroundColor: '#ee0208'
     }
 });
 

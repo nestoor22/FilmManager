@@ -5,7 +5,6 @@ import Tab from "@material-ui/core/Tab";
 
 import AppHeader from "../../components/app-header/AppHeader";
 
-import useStyles from './styles'
 import ListItem from "@material-ui/core/ListItem";
 import TabPanel from "../../components/tabs-panel/TabsPanel";
 import List from "@material-ui/core/List";
@@ -15,6 +14,9 @@ import Chip from "@material-ui/core/Chip";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import ItemsList from "../../components/items-list/ItemsList";
+import {ALL_SHOWS} from "../../graphql/queries/shows"
+
+import useStyles from './styles'
 
 
 var years = [];
@@ -180,7 +182,7 @@ function MainPage() {
                         value={value}
                         index={1}
                     >
-                        <ItemsList/>
+                        <ItemsList query={ALL_SHOWS}/>
                     </TabPanel>
                     <TabPanel
                         className={classes.tabContentWrapper}

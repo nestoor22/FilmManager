@@ -23,9 +23,10 @@ const useStyles = makeStyles({
     },
     customTabRoot: {
         padding: '18px 30px',
+        width: '180px',
         borderBottom: '1px solid #E2EBF6',
         boxSizing: 'border-box',
-        fontSize: '15px',
+        fontSize: '20px',
         '&:focus': {
             outline: 'none',
         },
@@ -38,7 +39,8 @@ const useStyles = makeStyles({
     },
     tabsRoot: {
         flex: '1 1 auto',
-        display: 'flex'
+        display: 'flex',
+        width: '100%'
     },
     tabs: {
         flex: '0 1 220px'
@@ -65,7 +67,8 @@ const useStyles = makeStyles({
         width: '100%'
     },
     filterListRoot:{
-        width: '300px',
+        width: '250px',
+        maxHeight: '350px',
         padding: '40px 10px',
         alignItems: 'center',
         backgroundColor: '#fff',

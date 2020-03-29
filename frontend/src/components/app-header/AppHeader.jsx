@@ -4,15 +4,12 @@ import classNames from 'classnames';
 
 import AppBar from '@material-ui/core/AppBar';
 
-import AppLogo from "../app-logo/AppLogo";
-
 import useStyles from './styles'
 
 export default function AppHeader({ className }) {
     const classes = useStyles();
     return (
         <AppBar className={classNames(classes.header, className)} position="static">
-            <AppLogo/>
             <nav className={classes.navigation}>
                 <ul className={classes.navigationItems}>
                     <MenuLink to="/#" label="Boards" />
