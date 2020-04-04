@@ -9,9 +9,9 @@ class User(AbstractUser):
     email = models.EmailField('Email', unique=True)
     first_name = models.TextField('First name', max_length=255)
     last_name = models.TextField('Last namme', max_length=255)
-    bio = models.TextField('Biographi', null=True)
+    bio = models.TextField('Biography', null=True)
     city = models.TextField('City', null=True)
-    county = models.TextField('Country', null=True)
+    country = models.TextField('Country', null=True)
     birthday = models.DateField('Birthday', null=True)
 
     USERNAME_FIELD = 'email'

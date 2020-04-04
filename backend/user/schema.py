@@ -18,7 +18,7 @@ class UserInput(graphene.InputObjectType):
     bio = graphene.String()
     city = graphene.String()
     country = graphene.String()
-    birtday = graphene.Date()
+    birthday = graphene.Date()
 
 
 class UserQuery(graphene.ObjectType):
