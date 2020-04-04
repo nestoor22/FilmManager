@@ -8,7 +8,7 @@ class User(AbstractUser):
 
     email = models.EmailField('Email', unique=True)
     first_name = models.TextField('First name', max_length=255)
-    last_name = models.TextField('Last namme', max_length=255)
+    last_name = models.TextField('Last name', max_length=255)
     bio = models.TextField('Biography', null=True)
     city = models.TextField('City', null=True)
     country = models.TextField('Country', null=True)
