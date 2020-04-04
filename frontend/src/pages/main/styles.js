@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     toolbar: {
         display: 'flex',
         paddingTop: '80px',
+        marginLeft: '150px',
         justifyContent: 'center',
         boxSizing: 'border-box',
         alignItems: 'center',

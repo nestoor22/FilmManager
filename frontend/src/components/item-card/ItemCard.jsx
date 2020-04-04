@@ -10,14 +10,25 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 175,
-        maxHeight: 320,
+        maxWidth: 185,
+        maxHeight: 330,
         margin: 20
     },
+    title: {
+        margin: 0,
+        fontSize: '15px'
+    },
+    content: {
+        padding: 0
+    },
+    actionsContent: {
+        padding: 0
+    }
 });
 
 function ItemCard({showInfo}) {
     const classes = useStyles();
+    const title = showInfo.title.length < 22  ? showInfo.title : showInfo.title.slice(0, 22) + '...';
     return (
         <Card className={classes.root}>
             <CardActionArea>
@@ -25,22 +36,22 @@ function ItemCard({showInfo}) {
                     component="img"
                     alt="Poster"
                     height="250"
-                    width="175"
+                    width="185"
                     image={showInfo.posterUrl}
                     title="Poster"
                 />
-                <CardContent>
-                    <Typography gutterBottom variant="h6" component="h6">
-                        {showInfo.title}
+                <CardContent className={classes.content}>
+                    <Typography className={classes.title} gutterBottom variant="h6" component="h6">
+                        { title }
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {showInfo.releaseDate}
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
+            <CardActions className={classes.actionsContent}>
                 <Button size="small" color="primary">
-                    Add to card
+                    Add to list
                 </Button>
                 <Button size="small" color="primary">
                     More

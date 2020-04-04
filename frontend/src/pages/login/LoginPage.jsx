@@ -81,7 +81,6 @@ const SignIn = () => {
                       alt="Logo"
                       height="350"
                       image={logo}
-                      title="Poster"
                   />
               </div>
               <div className={classes.loginForm}>

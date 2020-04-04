@@ -14,7 +14,7 @@ import Chip from "@material-ui/core/Chip";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import ItemsList from "../../components/items-list/ItemsList";
-import {ALL_SHOWS} from "../../graphql/queries/shows"
+import {SHOWS} from "../../graphql/queries/shows"
 
 import useStyles from './styles'
 
@@ -175,21 +175,21 @@ function MainPage() {
                         value={value}
                         index={0}
                     >
-                        <ItemsList/>
+                        <ItemsList query={SHOWS} showType='film'/>
                     </TabPanel>
                     <TabPanel
                         className={classes.tabContentWrapper}
                         value={value}
                         index={1}
                     >
-                        <ItemsList query={ALL_SHOWS}/>
+                        <ItemsList query={SHOWS} showType=''/>
                     </TabPanel>
                     <TabPanel
                         className={classes.tabContentWrapper}
                         value={value}
                         index={2}
                     >
-                        <ItemsList/>
+                        <ItemsList query={SHOWS} showType='serie'/>
                     </TabPanel>
                 </div>
             </div>

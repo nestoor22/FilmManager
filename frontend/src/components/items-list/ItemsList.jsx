@@ -4,9 +4,13 @@ import { useQuery } from '@apollo/react-hooks';
 import ItemCard from "../item-card/ItemCard";
 import useStyles from "./styles";
 
-function ItemsList({ query }) {
+function ItemsList({ query, showType }) {
     const classes = useStyles();
-    const { data, refetch} = useQuery(query);
+    const { data, refetch} = useQuery(query, {
+        variables: {
+            showType: showType
+        }
+    });
 
     return (
         <div className={classes.itemsRoot}>
