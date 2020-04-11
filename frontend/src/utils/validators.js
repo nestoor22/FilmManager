@@ -5,15 +5,15 @@ const passwordRegex = /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)(
 // eslint-disable-next-line react-hooks/exhaustive-deps
 
 export const isEmail = (value, errorMessage) => {
-    return !emailValidationRegex.test(value) && errorMessage;
+  return !emailValidationRegex.test(value) && errorMessage;
 };
 
 export const isRequired = (value, errorMessage) => {
-    if (value === 0) return false;
-    if (!value) return errorMessage;
-    return !value.length && errorMessage;
+  if (value === 0) return false;
+  if (!value) return errorMessage;
+  return !value.length && errorMessage;
 };
 
 export const isValidPassword = (value, errorMessage) => {
-    return !passwordRegex.test(value) && errorMessage;
+  return !passwordRegex.test(value) && errorMessage;
 };
