@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   paper: {
     minWidth: "80%",
-    minHeight: "600px",
+    height: "450px",
   },
   closeBtn: {
     position: "absolute",
@@ -18,6 +18,18 @@ const useStyles = makeStyles({
     fontSize: "17px",
     color: "#000",
   },
+  showTitle: {
+    fontSize: '24px',
+    borderBottom: '1px solid #74c8e8'
+  },
+  dialogContent: {
+    display: 'flex'
+  },
+  dialogPoster: {
+    width: '300px',
+    height: '450px',
+    objectFit: 'fill'
+  }
 });
 
 export default useStyles;

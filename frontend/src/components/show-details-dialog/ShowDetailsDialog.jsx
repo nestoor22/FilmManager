@@ -1,5 +1,5 @@
 import React from "react";
-
+import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
 import IconButton from "@material-ui/core/IconButton";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
@@ -21,21 +21,28 @@ const ShowDetailsDialog = ({ open, show, onClose }) => {
       </IconButton>
       {show && (
         <div className={classes.dialogContent}>
-          <CardMedia
-            component="img"
-            alt="Poster"
-            height="250"
-            width="185"
-            image={show.posterUrl}
-            title="Poster"
-          />
-          <DialogTitle
-            id="alert-dialog-title"
-            classes={{ root: classes.title }}
-            disableTypography={true}
-          >
-            {show.title}
-          </DialogTitle>
+          <div>
+            <CardMedia
+              className={classes.dialogPoster}
+              component="img"
+              alt="Poster"
+              height="450"
+              width="300"
+              image={show.posterUrl}
+              title="Poster"
+            />
+          </div>
+          <div className={classes.showDetails}>
+            <DialogTitle
+              id="alert-dialog-title"
+              classes={{ root: classes.title }}
+              disableTypography={true}
+            >
+              <Typography className={classes.showTitle}>
+                {show.title}
+              </Typography>
+            </DialogTitle>
+          </div>
         </div>
       )}
     </Dialog>
