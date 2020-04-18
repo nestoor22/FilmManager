@@ -155,7 +155,7 @@ function MainPage() {
                   ))}
                 </div>
               )}
-            ></Select>
+            />
           </ListItem>
           <ListSubheader style={{ lineHeight: "12px" }}>Actors</ListSubheader>
           <ListItem
@@ -180,7 +180,7 @@ function MainPage() {
                   ))}
                 </div>
               )}
-            ></Select>
+            />
           </ListItem>
         </List>
         <div className={classes.tabsRoot}>

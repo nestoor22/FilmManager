@@ -69,7 +69,7 @@ const useStyles = makeStyles({
   },
   filterListRoot: {
     width: "250px",
-    maxHeight: "350px",
+    height: "fit-content",
     padding: "40px 10px",
     alignItems: "center",
     backgroundColor: "#fff",
