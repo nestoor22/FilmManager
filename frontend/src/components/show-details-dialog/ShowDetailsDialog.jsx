@@ -6,10 +6,27 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import useStyles from "./styles";
 import CardMedia from "@material-ui/core/CardMedia";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import TabPanel from "../tabs-panel/TabsPanel";
+import ItemsList from "../items-list/ItemsList";
+import { SHOWS } from "../../graphql/queries/shows";
+import CustomChips from "../custom-chips/CustomChips";
+
+function verticalTabProps(index) {
+  return {
+    id: `vertical-tab-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
+  };
+}
 
 const ShowDetailsDialog = ({ open, show, onClose }) => {
   const classes = useStyles();
+  const [value, setValue] = React.useState(1);
 
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   if (Object.keys(show).length === 0) {
     return null;
   }
@@ -42,6 +59,71 @@ const ShowDetailsDialog = ({ open, show, onClose }) => {
                 {show.title}
               </Typography>
             </DialogTitle>
+            <div className={classes.toolbar}>
+              <div className={classes.toolbarSwitchers}>
+                <Tabs
+                  classes={{
+                    indicator: classes.indicator,
+                  }}
+                  value={value}
+                  onChange={handleChange}
+                >
+                  <Tab
+                    classes={{
+                      root: classes.customTabRoot,
+                      wrapper: classes.customTabWrapper,
+                      selected: classes.selected,
+                      textColorInherit: classes.textColorInheritCustom,
+                    }}
+                    label="Cast"
+                    {...verticalTabProps(0)}
+                  />
+                  <Tab
+                    classes={{
+                      root: classes.customTabRoot,
+                      wrapper: classes.customTabWrapper,
+                      selected: classes.selected,
+                      textColorInherit: classes.textColorInheritCustom,
+                    }}
+                    label="General"
+                    {...verticalTabProps(1)}
+                  />
+                  <Tab
+                    classes={{
+                      root: classes.customTabRoot,
+                      wrapper: classes.customTabWrapper,
+                      selected: classes.selected,
+                      textColorInherit: classes.textColorInheritCustom,
+                    }}
+                    label="Watch here"
+                    {...verticalTabProps(2)}
+                  />
+                </Tabs>
+              </div>
+            </div>
+            <div className={classes.tabsRoot}>
+              <TabPanel
+                className={classes.tabContentWrapper}
+                value={value}
+                index={0}
+              >
+                <CustomChips chipsElements={show.actors.slice(0, 25)} />
+              </TabPanel>
+              <TabPanel
+                className={classes.tabContentWrapper}
+                value={value}
+                index={1}
+              >
+                GENERAL
+              </TabPanel>
+              <TabPanel
+                className={classes.tabContentWrapper}
+                value={value}
+                index={2}
+              >
+                WHERE TO WATCH
+              </TabPanel>
+            </div>
           </div>
         </div>
       )}
