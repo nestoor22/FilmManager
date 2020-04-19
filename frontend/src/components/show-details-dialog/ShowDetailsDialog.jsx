@@ -9,8 +9,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import TabPanel from "../tabs-panel/TabsPanel";
-import ItemsList from "../items-list/ItemsList";
-import { SHOWS } from "../../graphql/queries/shows";
 import CustomChips from "../custom-chips/CustomChips";
 
 function verticalTabProps(index) {
@@ -107,7 +105,7 @@ const ShowDetailsDialog = ({ open, show, onClose }) => {
                 value={value}
                 index={0}
               >
-                <CustomChips chipsElements={show.actors.slice(0, 25)} />
+                <CustomChips chipsElements={show.actors} />
               </TabPanel>
               <TabPanel
                 className={classes.tabContentWrapper}

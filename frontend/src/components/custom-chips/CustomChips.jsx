@@ -7,8 +7,12 @@ import useStyles from "./styles";
 function CustomChips({ chipsElements }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(1);
+  const [offset, setOffset] = React.useState(0);
 
+  const chipsPerPage = 25;
+  const pagesNumber = Math.ceil(chipsElements.length / chipsPerPage);
   const pageHandler = (event, value) => {
+    setOffset(chipsPerPage * (value-1));
     setPage(value);
   };
 
@@ -16,7 +20,7 @@ function CustomChips({ chipsElements }) {
     <div className={classes.root}>
       <div className={classes.tabsRoot}>
         {chipsElements &&
-          chipsElements.map((element) => {
+          chipsElements.slice(offset, offset + chipsPerPage).map((element) => {
             return (
               <Chip
                 label={element.name}
@@ -26,7 +30,7 @@ function CustomChips({ chipsElements }) {
             );
           })}
       </div>
-      <Pagination page={page} count={10} onChange={pageHandler} />
+      <Pagination page={page} count={pagesNumber} onChange={pageHandler} />
     </div>
   );
 }

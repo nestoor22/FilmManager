@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
   toolbar: {
     display: "flex",
-    color: '#335267',
+    color: "#335267",
     justifyContent: "center",
     boxSizing: "border-box",
     alignItems: "center",
@@ -28,8 +28,8 @@ const useStyles = makeStyles({
   },
   showTitle: {
     fontSize: "24px",
-    color: '#335267',
-    width: 'fit-content',
+    color: "#335267",
+    width: "fit-content",
     borderBottom: "1px solid #74c8e8",
   },
   dialogContent: {
@@ -38,12 +38,19 @@ const useStyles = makeStyles({
   showDetails: {
     display: "flex",
     flexDirection: "column",
-    width: '100%'
+    width: "100%",
+    height: "100%",
   },
   dialogPoster: {
     width: "300px",
     height: "450px",
     objectFit: "fill",
+  },
+  tabsRoot: {
+    flex: "1 1 auto",
+    display: "flex",
+    width: "100%",
+    height: "100%",
   },
   customTabRoot: {
     borderBottom: "1px solid #E2EBF6",

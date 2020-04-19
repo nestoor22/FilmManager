@@ -6,6 +6,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    height: "100%",
   },
   pagination: {
     outline: "none !important",
@@ -20,6 +21,8 @@ const useStyles = makeStyles({
     justifyContent: "center",
     flexWrap: "wrap",
     padding: "20px",
+    height: "80%",
+    width: "85%"
   },
   customChip: {
     textTransform: "capitalize",
