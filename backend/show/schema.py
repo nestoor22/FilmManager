@@ -43,7 +43,7 @@ class ShowQuery(graphene.ObjectType):
 
     @staticmethod
     def resolve_shows(parent, info, **kwargs):
-        number_of_returned_values = 24
+        number_of_returned_values = 20
         page = kwargs.get('page', 0)
         offset = number_of_returned_values * page
         show_type = kwargs.get('show_type')

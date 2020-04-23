@@ -10,6 +10,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import TabPanel from "../tabs-panel/TabsPanel";
 import CustomChips from "../custom-chips/CustomChips";
+import GeneralShowInfo from "../general-show-info/GeneralShowInfo";
 
 function verticalTabProps(index) {
   return {
@@ -112,7 +113,7 @@ const ShowDetailsDialog = ({ open, show, onClose }) => {
                 value={value}
                 index={1}
               >
-                GENERAL
+                <GeneralShowInfo show={show} />
               </TabPanel>
               <TabPanel
                 className={classes.tabContentWrapper}
