@@ -7,7 +7,7 @@ import LabPaginationItem from "@material-ui/lab/PaginationItem";
 import useStyles from "./styles";
 
 const Pagination = ({ total, ...props }) => {
-  const classes = useStyles();
+  const classes = useStyles( );
 
   return (
     <div className={classes.container}>

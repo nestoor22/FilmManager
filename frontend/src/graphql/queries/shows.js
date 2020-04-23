@@ -16,5 +16,6 @@ export const SHOWS = gql`
         name
       }
     }
+    showsNumberOfPages(showType: $showType)
   }
 `;

@@ -17,6 +17,7 @@ import ItemsList from "../../components/items-list/ItemsList";
 import { SHOWS } from "../../graphql/queries/shows";
 
 import useStyles from "./styles";
+import Pagination from "../../components/pagination/Pagination";
 
 var years = [];
 
@@ -132,7 +133,9 @@ function MainPage() {
               ))}
             </Select>
           </ListItem>
-          <ListSubheader style={{ lineHeight: "12px", color: "#fff" }}>Genres</ListSubheader>
+          <ListSubheader style={{ lineHeight: "12px", color: "#fff" }}>
+            Genres
+          </ListSubheader>
           <ListItem
             style={{ justifyContent: "center", paddingBottom: "50px" }}
             alignItems="center"
@@ -157,7 +160,9 @@ function MainPage() {
               )}
             />
           </ListItem>
-          <ListSubheader style={{ lineHeight: "12px", color: "#fff" }}>Actors</ListSubheader>
+          <ListSubheader style={{ lineHeight: "12px", color: "#fff" }}>
+            Actors
+          </ListSubheader>
           <ListItem
             style={{ justifyContent: "center", paddingBottom: "0px" }}
             alignItems="center"
