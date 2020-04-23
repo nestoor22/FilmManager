@@ -29,10 +29,11 @@ const useStyles = makeStyles({
     },
   },
   itemSelected: {
-    color: "#335267",
+    color: "#fff",
     "&:focus": {
       outline: "none !important",
     },
+    backgroundColor: "#0E8BB4 !important",
   },
 });
 

@@ -4,13 +4,13 @@ import Dialog from "@material-ui/core/Dialog";
 import IconButton from "@material-ui/core/IconButton";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import useStyles from "./styles";
 import CardMedia from "@material-ui/core/CardMedia";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import TabPanel from "../tabs-panel/TabsPanel";
 import CustomChips from "../custom-chips/CustomChips";
 import GeneralShowInfo from "../general-show-info/GeneralShowInfo";
+import useStyles from "./styles";
 
 function verticalTabProps(index) {
   return {
@@ -49,21 +49,19 @@ const ShowDetailsDialog = ({ open, show, onClose }) => {
             />
           </div>
           <div className={classes.showDetails}>
-            <DialogTitle
-              id="alert-dialog-title"
-              classes={{ root: classes.title }}
-              disableTypography={true}
-            >
-              <Typography className={classes.showTitle}>
-                {show.title}
-              </Typography>
-            </DialogTitle>
+            {/*<DialogTitle*/}
+            {/*  id="alert-dialog-title"*/}
+            {/*  classes={{ root: classes.title }}*/}
+            {/*  disableTypography={true}*/}
+            {/*>*/}
+            {/*  <Typography className={classes.showTitle}>*/}
+            {/*    {show.title}*/}
+            {/*  </Typography>*/}
+            {/*</DialogTitle>*/}
             <div className={classes.toolbar}>
               <div className={classes.toolbarSwitchers}>
                 <Tabs
-                  classes={{
-                    indicator: classes.indicator,
-                  }}
+                  indicatorColor="primary"
                   value={value}
                   onChange={handleChange}
                 >

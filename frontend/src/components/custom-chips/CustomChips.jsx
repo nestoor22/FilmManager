@@ -12,7 +12,7 @@ function CustomChips({ chipsElements }) {
   const chipsPerPage = 25;
   const pagesNumber = Math.ceil(chipsElements.length / chipsPerPage);
   const pageHandler = (event, value) => {
-    setOffset(chipsPerPage * (value-1));
+    setOffset(chipsPerPage * (value - 1));
     setPage(value);
   };
 

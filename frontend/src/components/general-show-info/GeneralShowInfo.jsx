@@ -1,11 +1,11 @@
 import React from "react";
 
-import useStyles from "./styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
+import useStyles from "./styles";
+import CustomChips from "../custom-chips/CustomChips";
+import Chip from "@material-ui/core/Chip";
 
 function GeneralShowInfo({ show }) {
   const classes = useStyles();
@@ -13,12 +13,27 @@ function GeneralShowInfo({ show }) {
   return (
     <div className={classes.root}>
       <List>
-        <ListSubheader>Title</ListSubheader>
-        <ListItem>{show.title}</ListItem>
-        <ListSubheader>Release year</ListSubheader>
-        <ListItem>{show.releaseDate}</ListItem>
-        <ListSubheader>Plot</ListSubheader>
-        <ListItem>{show.plot}</ListItem>
+        <ListSubheader className={classes.subheader}>Title</ListSubheader>
+        <ListItem className={classes.title}>{show.title}</ListItem>
+        <ListSubheader className={classes.subheader}>
+          Release year
+        </ListSubheader>
+        <ListItem className={classes.description}>{show.releaseDate}</ListItem>
+        <ListSubheader className={classes.subheader}>Plot</ListSubheader>
+        <ListItem className={classes.description}>{show.plot}</ListItem>
+        <ListSubheader className={classes.subheader}>Genres</ListSubheader>
+        <div className={classes.tabsRoot}>
+          {show.genres &&
+            show.genres.map((element) => {
+              return (
+                <Chip
+                  label={element.genreName}
+                  className={classes.customChip}
+                  variant="outlined"
+                />
+              );
+            })}
+        </div>
       </List>
     </div>
   );

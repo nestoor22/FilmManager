@@ -72,7 +72,6 @@ const useStyles = makeStyles({
     height: "fit-content",
     padding: "40px 10px",
     alignItems: "center",
-    backgroundColor: "#fff",
     justifyContent: "center",
   },
   chips: {
@@ -85,12 +84,12 @@ const useStyles = makeStyles({
   select: {
     width: "250px",
     "&:after": {
-      backgroundColor: "#071B27",
+      backgroundColor: "#fff",
       height: "2px",
     },
     "&:before": {
       height: "2px",
-      backgroundColor: "#335267",
+      backgroundColor: "#fff",
     },
   },
 });

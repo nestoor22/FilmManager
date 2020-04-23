@@ -4,6 +4,19 @@ const useStyles = makeStyles({
   paper: {
     minWidth: "80%",
     height: "450px",
+    top: "-120px",
+    "&::-webkit-scrollbar": {
+      width: "6px",
+    },
+    "&::-webkit-scrollbar-track": {
+      background: "#C2C2C2",
+      borderRadius: "2px",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#335267",
+      opacity: 0.48,
+      borderRadius: "2px",
+    },
   },
   closeBtn: {
     position: "absolute",
@@ -21,6 +34,7 @@ const useStyles = makeStyles({
     boxSizing: "border-box",
     alignItems: "center",
     minHeight: "48px",
+    paddingTop: "20px",
   },
   closeIcon: {
     fontSize: "17px",

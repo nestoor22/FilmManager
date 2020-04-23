@@ -99,7 +99,7 @@ function MainPage() {
       </div>
       <div className={classes.contentRoot}>
         <List className={classes.filterListRoot}>
-          <ListSubheader style={{ lineHeight: "12px" }}>
+          <ListSubheader style={{ lineHeight: "12px", color: "#fff" }}>
             Release years
           </ListSubheader>
           <ListItem
@@ -132,7 +132,7 @@ function MainPage() {
               ))}
             </Select>
           </ListItem>
-          <ListSubheader style={{ lineHeight: "12px" }}>Genres</ListSubheader>
+          <ListSubheader style={{ lineHeight: "12px", color: "#fff" }}>Genres</ListSubheader>
           <ListItem
             style={{ justifyContent: "center", paddingBottom: "50px" }}
             alignItems="center"
@@ -157,7 +157,7 @@ function MainPage() {
               )}
             />
           </ListItem>
-          <ListSubheader style={{ lineHeight: "12px" }}>Actors</ListSubheader>
+          <ListSubheader style={{ lineHeight: "12px", color: "#fff" }}>Actors</ListSubheader>
           <ListItem
             style={{ justifyContent: "center", paddingBottom: "0px" }}
             alignItems="center"
