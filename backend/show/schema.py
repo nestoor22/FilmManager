@@ -1,6 +1,8 @@
-from graphene_django import DjangoObjectType
-from .models import Shows, Actors, Genres
+from math import ceil
 import graphene
+from graphene_django import DjangoObjectType
+
+from .models import Shows, Actors, Genres
 
 
 class ActorsType(DjangoObjectType):
@@ -40,6 +42,7 @@ class ShowQuery(graphene.ObjectType):
         is_random=graphene.Boolean())
 
     actors = graphene.List(ActorsType, actor_id=graphene.Int())
+    shows_number_of_pages = graphene.Int(show_type=graphene.String())
 
     @staticmethod
     def resolve_shows(parent, info, **kwargs):
@@ -67,3 +70,13 @@ class ShowQuery(graphene.ObjectType):
     @staticmethod
     def resolve_actors(parent, info):
         return Actors.objects.all()
+
+    @staticmethod
+    def resolve_shows_number_of_pages(parent, info, **kwargs):
+        number_of_returned_values = 20
+        show_type = kwargs.get('show_type')
+
+        if show_type:
+            return ceil(Shows.objects.filter(showtype=show_type).count() / number_of_returned_values)
+        else:
+            return ceil(Shows.objects.all().count() / number_of_returned_values)
