@@ -6,6 +6,7 @@ import AppHeader from "../../components/app-header/AppHeader";
 import BoardsStatisticsTab from "../../components/boards-statistics-tabs/BoardsStatisticsTab";
 import useStyles from "./styles";
 import Button from "@material-ui/core/Button";
+import CreationPopUp from "../../components/create-board-popup/CreateBoardPopUp";
 
 const testChartData = [
   { name: "Private", value: 43, legendTitle: "Private" },
@@ -17,7 +18,10 @@ const testColors = {
 };
 const Boards = () => {
   const classes = useStyles();
-
+  const [openCreationPopup, setOpenCreationPopup] = React.useState(false);
+  const handleClosePopup = () => {
+    setOpenCreationPopup(false);
+  };
   return (
     <div className={classes.root}>
       <AppHeader />
@@ -75,7 +79,10 @@ const Boards = () => {
             <div className={classes.boardCard}>
               <Typography className={classes.boardTitle}>TEST 1</Typography>
             </div>
-            <Button classes={{ root: classes.createNewButton }}>
+            <Button
+              classes={{ root: classes.createNewButton }}
+              onClick={() => setOpenCreationPopup(true)}
+            >
               <div className={classes.addNewCard}>
                 <AddCircleOutlineIcon
                   style={{ fontSize: 50, fill: "#fff" }}
@@ -93,7 +100,10 @@ const Boards = () => {
             <div className={classes.boardCard}>
               <Typography className={classes.boardTitle}>TEST 1</Typography>
             </div>
-            <Button classes={{ root: classes.createNewButton }}>
+            <Button
+              classes={{ root: classes.createNewButton }}
+              onClick={() => setOpenCreationPopup(true)}
+            >
               <div className={classes.addNewCard}>
                 <AddCircleOutlineIcon
                   style={{ fontSize: 50, fill: "#fff" }}
@@ -106,6 +116,7 @@ const Boards = () => {
           </div>
         </div>
       </div>
+      <CreationPopUp open={openCreationPopup} onClose={handleClosePopup} />
     </div>
   );
 };
