@@ -8,10 +8,16 @@ import Pagination from "../pagination/Pagination";
 
 function ItemsList({ query, showType }) {
   const classes = useStyles();
+  const [page, setPage] = React.useState(1);
+
+  const pageHandler = (event, value) => {
+    setPage(value);
+  };
 
   const { data } = useQuery(query, {
     variables: {
       showType: showType,
+      page: page - 1,
     },
   });
 
@@ -22,7 +28,13 @@ function ItemsList({ query, showType }) {
         data.shows.map((show) => {
           return <ItemCard showInfo={show} />;
         })}
-      {data && <Pagination page={1} count={data.showsNumberOfPages} />}
+      {data && (
+        <Pagination
+          page={page}
+          onChange={pageHandler}
+          count={data.showsNumberOfPages}
+        />
+      )}
     </div>
   );
 }

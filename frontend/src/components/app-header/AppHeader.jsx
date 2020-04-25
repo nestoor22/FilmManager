@@ -12,7 +12,7 @@ export default function AppHeader({ className }) {
     <AppBar className={classNames(classes.header, className)} position="static">
       <nav className={classes.navigation}>
         <ul className={classes.navigationItems}>
-          <MenuLink to="/#" label="Boards" />
+          <MenuLink to="/boards" label="Boards" />
           <MenuLink to="/#" label="Teams" />
           <MenuLink to="/#" label="Latest" />
           <MenuLink to="/#" label="Messages" />
