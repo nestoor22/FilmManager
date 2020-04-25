@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
@@ -17,7 +16,6 @@ import ItemsList from "../../components/items-list/ItemsList";
 import { SHOWS } from "../../graphql/queries/shows";
 
 import useStyles from "./styles";
-import Pagination from "../../components/pagination/Pagination";
 
 var years = [];
 

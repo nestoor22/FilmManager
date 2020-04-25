@@ -9,7 +9,7 @@ import Pagination from "../pagination/Pagination";
 function ItemsList({ query, showType }) {
   const classes = useStyles();
 
-  const { data, refetch } = useQuery(query, {
+  const { data } = useQuery(query, {
     variables: {
       showType: showType,
     },

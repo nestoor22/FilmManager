@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Typography } from "@material-ui/core";
 import LabPagination from "@material-ui/lab/Pagination";
 import LabPaginationItem from "@material-ui/lab/PaginationItem";
 

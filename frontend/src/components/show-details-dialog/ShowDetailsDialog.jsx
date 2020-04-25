@@ -1,9 +1,7 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
 import IconButton from "@material-ui/core/IconButton";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import CardMedia from "@material-ui/core/CardMedia";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -49,15 +47,6 @@ const ShowDetailsDialog = ({ open, show, onClose }) => {
             />
           </div>
           <div className={classes.showDetails}>
-            {/*<DialogTitle*/}
-            {/*  id="alert-dialog-title"*/}
-            {/*  classes={{ root: classes.title }}*/}
-            {/*  disableTypography={true}*/}
-            {/*>*/}
-            {/*  <Typography className={classes.showTitle}>*/}
-            {/*    {show.title}*/}
-            {/*  </Typography>*/}
-            {/*</DialogTitle>*/}
             <div className={classes.toolbar}>
               <div className={classes.toolbarSwitchers}>
                 <Tabs
