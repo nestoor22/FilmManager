@@ -43,47 +43,35 @@ const Boards = () => {
               style={{ backgroundColor: "red" }}
               className={classes.boardCard}
             >
-              <Typography
-                className={classes.boardTitle}
-              >
-                TEST 1
-              </Typography>
+              <Typography className={classes.boardTitle}>TEST 1</Typography>
             </div>
             <div
               style={{ backgroundColor: "yellow" }}
               className={classes.boardCard}
             >
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
+              <Typography className={classes.boardTitle}>
+                Best History
+              </Typography>
             </div>
             <div
               style={{ backgroundColor: "gray" }}
               className={classes.boardCard}
             >
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
+              <Typography className={classes.boardTitle}>
+                Best Comedy
+              </Typography>
             </div>
             <div
               style={{ backgroundColor: "#2255ff" }}
               className={classes.boardCard}
             >
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
+              <Typography className={classes.boardTitle}>Best 2020</Typography>
             </div>
           </div>
           <Typography className={classes.boardsBlockTitle}>
             Personal boards
           </Typography>
           <div className={classes.boardsRow}>
-            <div className={classes.boardCard}>
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
-            </div>
-            <div className={classes.boardCard}>
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
-            </div>
-            <div className={classes.boardCard}>
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
-            </div>
-            <div className={classes.boardCard}>
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
-            </div>
             <div className={classes.boardCard}>
               <Typography className={classes.boardTitle}>TEST 1</Typography>
             </div>
@@ -102,18 +90,6 @@ const Boards = () => {
             Teams boards
           </Typography>
           <div className={classes.boardsRow}>
-            <div className={classes.boardCard}>
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
-            </div>
-            <div className={classes.boardCard}>
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
-            </div>
-            <div className={classes.boardCard}>
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
-            </div>
-            <div className={classes.boardCard}>
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
-            </div>
             <div className={classes.boardCard}>
               <Typography className={classes.boardTitle}>TEST 1</Typography>
             </div>

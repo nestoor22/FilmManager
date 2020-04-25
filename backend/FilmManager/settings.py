@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'graphene_django',
     'user',
-    'show'
+    'show',
+    'boards',
+    'lists',
+    'teams'
 ]
 
 MIDDLEWARE = [
