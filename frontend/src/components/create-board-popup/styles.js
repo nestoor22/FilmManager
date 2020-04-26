@@ -29,6 +29,18 @@ const useStyles = makeStyles({
     fontSize: '18px',
     color: '#fff',
     paddingLeft: '30px'
+  },
+  formWrapper:{
+    width: '100%',
+    height: '100%',
+    padding: '30px'
+  },
+  input: {
+    width: '80%',
+    marginBottom: '30px'
+  },
+  radioGroupRootClass: {
+    padding: '10px 20px'
   }
 });
 

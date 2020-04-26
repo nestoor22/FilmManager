@@ -25,7 +25,7 @@ SECRET_KEY = 'tcy8v$51_)c9g319vlivt7xk=zuo13d+d5=v)y^2%0%7tl-r48'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -74,7 +74,9 @@ TEMPLATES = [
         },
     },
 ]
+
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 WSGI_APPLICATION = 'FilmManager.wsgi.application'
 
 
@@ -102,7 +104,7 @@ AUTHENTICATION_BACKENDS = (
 
 GRAPHENE = {'SCHEMA': 'FilmManager.schema.schema', }
 
-
+SESSION_COOKIE_DOMAIN = 'localhost'
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 

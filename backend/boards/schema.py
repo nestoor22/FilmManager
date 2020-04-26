@@ -39,6 +39,7 @@ class CreateBoardMutation(graphene.Mutation):
     @staticmethod
     def mutate(parent, info, **kwargs):
         board_info = kwargs.get('board')
+
         board_info['owner_id'] = info.context.session.get('_auth_user_id')
 
         board = Board.objects.create(**board_info)

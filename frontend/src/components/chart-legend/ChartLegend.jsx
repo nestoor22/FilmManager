@@ -27,9 +27,9 @@ const CustomChartLegend = ({
         </div>
       )}
       <List component="nav" className={classes.root} aria-label="contacts">
-        {legendData.map((item) => {
+        {legendData.map((item, index) => {
           return (
-            <ListItem className={classes.legendItem}>
+            <ListItem key={index} className={classes.legendItem}>
               <ListItemIcon className={classes.listIcon}>
                 <FiberManualRecordIcon
                   style={{
