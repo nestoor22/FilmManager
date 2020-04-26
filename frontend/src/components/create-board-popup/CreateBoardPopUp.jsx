@@ -24,8 +24,9 @@ const initialValues = {
   name: "",
   color: "",
   type: "Private",
+  team: "",
 };
-const CreationPopUp = ({ open, onClose, boardData, refetch }) => {
+const CreationPopUp = ({ open, onClose, boardData, isTeamBoard, refetch }) => {
   const classes = useStyles();
   const [createBoard] = useMutation(CREATE_BOARD);
   const { enqueueSnackbar } = useSnackbar();
@@ -60,6 +61,14 @@ const CreationPopUp = ({ open, onClose, boardData, refetch }) => {
           className={classes.input}
           component={RadioButtonsGroup}
         />
+        {isTeamBoard && (
+          <Field
+            label="Team name"
+            name="team"
+            className={classes.input}
+            component={Input}
+          />
+        )}
         <Field
           label="Background color"
           name="color"

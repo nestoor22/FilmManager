@@ -4,6 +4,8 @@ export const useStyles = makeStyles({
   wrapper: {
     display: "flex",
     justifyContent: "flex-end",
+    paddingBottom: '30px',
+    paddingRight: '20px'
   },
   cancelBtnRoot: {
     border: "1px solid #0e8bb4",

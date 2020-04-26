@@ -19,6 +19,8 @@ const testColors = {
 const Boards = () => {
   const classes = useStyles();
   const [openCreationPopup, setOpenCreationPopup] = React.useState(false);
+  const [isTeamBoard, setIsTeamBoard] = React.useState(false);
+
   const handleClosePopup = () => {
     setOpenCreationPopup(false);
   };
@@ -102,7 +104,10 @@ const Boards = () => {
             </div>
             <Button
               classes={{ root: classes.createNewButton }}
-              onClick={() => setOpenCreationPopup(true)}
+              onClick={() => {
+                setOpenCreationPopup(true);
+                setIsTeamBoard(true);
+              }}
             >
               <div className={classes.addNewCard}>
                 <AddCircleOutlineIcon
@@ -116,7 +121,11 @@ const Boards = () => {
           </div>
         </div>
       </div>
-      <CreationPopUp open={openCreationPopup} onClose={handleClosePopup} />
+      <CreationPopUp
+        open={openCreationPopup}
+        onClose={handleClosePopup}
+        isTeamBoard={isTeamBoard}
+      />
     </div>
   );
 };

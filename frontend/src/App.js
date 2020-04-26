@@ -2,10 +2,7 @@ import React from "react";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
-import {
-  InMemoryCache,
-  IntrospectionFragmentMatcher,
-} from "apollo-cache-inmemory";
+import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-boost";
 import { HttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
