@@ -1,12 +1,18 @@
 import React from "react";
 
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useHistory } from "react-router-dom";
+
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+
 import AppHeader from "../../components/app-header/AppHeader";
 import BoardsStatisticsTab from "../../components/boards-statistics-tabs/BoardsStatisticsTab";
-import useStyles from "./styles";
-import Button from "@material-ui/core/Button";
 import CreationPopUp from "../../components/create-board-popup/CreateBoardPopUp";
+import useStyles from "./styles";
+import { BOARDS } from "../../graphql/queries/boards";
+import { SET_LAST_VISITED_BOARD } from "../../graphql/mutations/boards";
 
 const testChartData = [
   { name: "Private", value: 43, legendTitle: "Private" },
@@ -18,12 +24,17 @@ const testColors = {
 };
 const Boards = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [openCreationPopup, setOpenCreationPopup] = React.useState(false);
   const [isTeamBoard, setIsTeamBoard] = React.useState(false);
+  const [setLastVisitedBoard] = useMutation(SET_LAST_VISITED_BOARD);
+
+  const { data } = useQuery(BOARDS);
 
   const handleClosePopup = () => {
     setOpenCreationPopup(false);
   };
+
   return (
     <div className={classes.root}>
       <AppHeader />
@@ -45,42 +56,51 @@ const Boards = () => {
             Latest visited boards
           </Typography>
           <div className={classes.boardsRow}>
-            <div
-              style={{ backgroundColor: "red" }}
-              className={classes.boardCard}
-            >
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
-            </div>
-            <div
-              style={{ backgroundColor: "yellow" }}
-              className={classes.boardCard}
-            >
-              <Typography className={classes.boardTitle}>
-                Best History
-              </Typography>
-            </div>
-            <div
-              style={{ backgroundColor: "gray" }}
-              className={classes.boardCard}
-            >
-              <Typography className={classes.boardTitle}>
-                Best Comedy
-              </Typography>
-            </div>
-            <div
-              style={{ backgroundColor: "#2255ff" }}
-              className={classes.boardCard}
-            >
-              <Typography className={classes.boardTitle}>Best 2020</Typography>
-            </div>
+            {data &&
+              data.lastVisitedBoards &&
+              data.lastVisitedBoards.map((board) => {
+                return (
+                  <div
+                    style={{ backgroundColor: board.backgroundColor }}
+                    className={classes.boardCard}
+                    onClick={() => {
+                      setLastVisitedBoard({
+                        variables: { lastVisitedBoardId: board.id },
+                      }).then(() => {});
+                      history.push(`/boards/${board.id}`);
+                    }}
+                  >
+                    <Typography className={classes.boardTitle}>
+                      {board.name}
+                    </Typography>
+                  </div>
+                );
+              })}
           </div>
           <Typography className={classes.boardsBlockTitle}>
             Personal boards
           </Typography>
           <div className={classes.boardsRow}>
-            <div className={classes.boardCard}>
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
-            </div>
+            {data &&
+              data.boards &&
+              data.boards.map((board) => {
+                return (
+                  <div
+                    style={{ backgroundColor: board.backgroundColor }}
+                    className={classes.boardCard}
+                    onClick={() => {
+                      setLastVisitedBoard({
+                        variables: { lastVisitedBoardId: board.id },
+                      }).then(() => {});
+                      history.push(`/boards/${board.id}`);
+                    }}
+                  >
+                    <Typography className={classes.boardTitle}>
+                      {board.name}
+                    </Typography>
+                  </div>
+                );
+              })}
             <Button
               classes={{ root: classes.createNewButton }}
               onClick={() => setOpenCreationPopup(true)}
@@ -99,9 +119,6 @@ const Boards = () => {
             Teams boards
           </Typography>
           <div className={classes.boardsRow}>
-            <div className={classes.boardCard}>
-              <Typography className={classes.boardTitle}>TEST 1</Typography>
-            </div>
             <Button
               classes={{ root: classes.createNewButton }}
               onClick={() => {

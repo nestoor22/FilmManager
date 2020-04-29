@@ -74,3 +74,7 @@ class BoardsQuery(graphene.ObjectType):
     def resolve_boards(parent, info):
         user_id = info.context.session.get('_auth_user_id')
         return Board.objects.filter(owner_id=user_id).order_by('created_at')
+
+    @staticmethod
+    def resolve_last_visited_boards(parent, info):
+        return Board.objects.filter(id__in=info.context.session.get('last_boards', []))

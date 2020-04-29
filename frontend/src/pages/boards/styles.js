@@ -59,13 +59,18 @@ const useStyles = makeStyles({
     width: "200px",
     height: "100px",
     marginBottom: "30px",
-    backgroundColor: "#fff",
+    borderRadius: "3px",
+    transition: "0.3s",
+    "&:hover": {
+      transform: "scale(1.05, 1.05)",
+      cursor: "pointer",
+    },
   },
   boardsRow: {
     display: "flex",
     flexFlow: "wrap",
     alignItems: "flex-start",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     width: "100%",
     flexDirection: "row",
     marginBottom: "20px",
@@ -75,7 +80,7 @@ const useStyles = makeStyles({
     paddingTop: "10px",
     fontWeight: "bold",
     fontSize: "15px",
-    color: "white",
+    color: "#000",
   },
 });
 
