@@ -65,12 +65,14 @@ const useStyles = makeStyles({
       transform: "scale(1.05, 1.05)",
       cursor: "pointer",
     },
+    "&:not(:last-child)": {
+      marginRight: 25,
+    },
   },
   boardsRow: {
     display: "flex",
     flexFlow: "wrap",
     alignItems: "flex-start",
-    justifyContent: "space-evenly",
     width: "100%",
     flexDirection: "row",
     marginBottom: "20px",

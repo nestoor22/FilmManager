@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'show',
     'boards',
     'lists',
-    'teams'
+    'communities'
 ]
 
 MIDDLEWARE = [
