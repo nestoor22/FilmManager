@@ -47,10 +47,30 @@ class CreateBoardMutation(graphene.Mutation):
         return CreateBoardMutation(id=board.id)
 
 
+class SetLastVisitedBoard(graphene.Mutation):
+    ok = graphene.Boolean()
+
+    class Arguments:
+        last_visited_board_id = graphene.Int()
+
+    @staticmethod
+    def mutate(parent, info, last_visited_board_id):
+        last_visited_boards = info.context.session.get('last_boards', [])
+
+        if last_visited_board_id in last_visited_boards:
+            last_visited_boards.remove(last_visited_board_id)
+
+        info.context.session['last_boards'] = [last_visited_board_id] + last_visited_boards[:2] \
+            if len(last_visited_boards) == 4 else [last_visited_board_id] + last_visited_boards
+
+        return SetLastVisitedBoard(ok=True)
+
+
 class BoardsQuery(graphene.ObjectType):
     boards = graphene.List(BoardType)
+    last_visited_boards = graphene.List(BoardType)
 
     @staticmethod
     def resolve_boards(parent, info):
         user_id = info.context.session.get('_auth_user_id')
-        return Board.objects.filter(owner_id=user_id)
+        return Board.objects.filter(owner_id=user_id).order_by('created_at')
