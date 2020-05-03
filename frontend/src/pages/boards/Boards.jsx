@@ -57,7 +57,7 @@ const Boards = () => {
           </Typography>
           <div className={classes.boardsRow}>
             {data &&
-              data.lastVisitedBoards &&
+              data.lastVisitedBoards.length !== 0 &&
               data.lastVisitedBoards.map((board) => {
                 return (
                   <div
@@ -76,6 +76,11 @@ const Boards = () => {
                   </div>
                 );
               })}
+            {data && data.lastVisitedBoards.length === 0 && (
+              <Typography className={classes.boardsBlockTitle}>
+                You have not visited boards in current session
+              </Typography>
+            )}
           </div>
           <Typography className={classes.boardsBlockTitle}>
             Personal boards

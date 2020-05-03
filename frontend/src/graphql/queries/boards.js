@@ -20,3 +20,24 @@ export const BOARDS = gql`
     }
   }
 `;
+
+export const BOARD = gql`
+  query board($boardId: Int!) {
+    board(boardId: $boardId) {
+      id
+      sharedTimes
+      backgroundColor
+      isOpen
+      name
+      createdAt
+    }
+    lastVisitedBoards {
+      id
+      sharedTimes
+      backgroundColor
+      isOpen
+      name
+      createdAt
+    }
+  }
+`;

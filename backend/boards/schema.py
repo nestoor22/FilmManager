@@ -67,8 +67,13 @@ class SetLastVisitedBoard(graphene.Mutation):
 
 
 class BoardsQuery(graphene.ObjectType):
+    board = graphene.Field(BoardType, board_id=graphene.Int(required=True))
     boards = graphene.List(BoardType)
     last_visited_boards = graphene.List(BoardType)
+
+    @staticmethod
+    def resolve_board(parent, info, board_id):
+        return Board.objects.get(id=board_id)
 
     @staticmethod
     def resolve_boards(parent, info):
