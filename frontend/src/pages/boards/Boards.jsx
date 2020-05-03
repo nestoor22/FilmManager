@@ -103,7 +103,10 @@ const Boards = () => {
               })}
             <Button
               classes={{ root: classes.createNewButton }}
-              onClick={() => setOpenCreationPopup(true)}
+              onClick={() => {
+                setOpenCreationPopup(true);
+                setIsTeamBoard(false);
+              }}
             >
               <div className={classes.addNewCard}>
                 <AddCircleOutlineIcon

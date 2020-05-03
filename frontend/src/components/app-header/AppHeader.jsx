@@ -26,7 +26,6 @@ export default function AppHeader({ className }) {
           {data && data.user && (
             <div>
               <MenuLink
-                to="/login"
                 label={`${data.user.firstName} ${data.user.lastName}`}
               />
             </div>

@@ -25,8 +25,8 @@ function ItemsList({ query, showType }) {
     <div className={classes.itemsRoot}>
       {data &&
         data.shows &&
-        data.shows.map((show) => {
-          return <ItemCard showInfo={show} />;
+        data.shows.map((show, index) => {
+          return <ItemCard key={index} showInfo={show} />;
         })}
       {data && (
         <Pagination

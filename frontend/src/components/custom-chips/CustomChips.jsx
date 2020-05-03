@@ -20,9 +20,10 @@ function CustomChips({ chipsElements }) {
     <div className={classes.root}>
       <div className={classes.tabsRoot}>
         {chipsElements &&
-          chipsElements.slice(offset, offset + chipsPerPage).map((element) => {
+          chipsElements.slice(offset, offset + chipsPerPage).map((element, index) => {
             return (
               <Chip
+                key={index}
                 label={element.name}
                 className={classes.customChip}
                 variant="outlined"

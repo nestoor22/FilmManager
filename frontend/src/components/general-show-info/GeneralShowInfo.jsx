@@ -23,9 +23,10 @@ function GeneralShowInfo({ show }) {
         <ListSubheader className={classes.subheader}>Genres</ListSubheader>
         <div className={classes.tabsRoot}>
           {show.genres &&
-            show.genres.map((element) => {
+            show.genres.map((element, index) => {
               return (
                 <Chip
+                  key={index}
                   label={element.genreName}
                   className={classes.customChip}
                   variant="outlined"
