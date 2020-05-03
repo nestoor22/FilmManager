@@ -11,7 +11,12 @@ const OpenBoard = () => {
   const classes = useStyles();
   const { id } = useParams();
   const { data } = useQuery(BOARD, { variables: { boardId: id } });
-  document.body.style.backgroundColor = "#fff";
+
+  React.useEffect(() => {
+    if (data) {
+      document.body.style.backgroundColor = data.board.backgroundColor;
+    }
+  }, [data]);
 
   return (
     <div className={classes.root}>

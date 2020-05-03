@@ -41,6 +41,7 @@ function verticalTabProps(index) {
 
 function MainPage() {
   const classes = useStyles();
+  document.body.style.backgroundColor = '#254052';
   const [value, setValue] = React.useState(1);
   const [year, setYear] = React.useState([]);
 

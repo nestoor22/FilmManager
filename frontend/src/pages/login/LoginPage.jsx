@@ -27,7 +27,7 @@ const SignIn = () => {
   const history = useHistory();
 
   const [signIn] = useMutation(SIGNIN_MUTATION);
-
+  document.body.style.backgroundColor = '#254052';
   const loginForm = useForm({
     onSubmit: (formData, formValid) => {
       if (!formValid) return;

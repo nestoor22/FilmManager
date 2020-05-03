@@ -24,6 +24,7 @@ const testColors = {
 };
 const Boards = () => {
   const classes = useStyles();
+  document.body.style.backgroundColor = '#254052';
   const history = useHistory();
   const [openCreationPopup, setOpenCreationPopup] = React.useState(false);
   const [isTeamBoard, setIsTeamBoard] = React.useState(false);
