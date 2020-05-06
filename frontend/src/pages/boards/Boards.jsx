@@ -90,9 +90,10 @@ const Boards = () => {
           <div className={classes.boardsRow}>
             {data &&
               data.boards &&
-              data.boards.map((board) => {
+              data.boards.map((board, index) => {
                 return (
                   <div
+                    key={index}
                     style={{ backgroundColor: board.backgroundColor }}
                     className={classes.boardCard}
                     onClick={() => {

@@ -42,6 +42,19 @@ const useStyles = makeStyles({
     color: "#071B27",
     fontWeight: "bold",
   },
+  button: {
+    color: "#335267 !important",
+    "&:focus": {
+      outline: "none",
+    },
+    "&:hover": {
+      backgroundColor: "#fff !important",
+      textDecoration: "none",
+    },
+  },
+  menuItem: {
+    color: "#335267 !important",
+  },
 });
 
 export default useStyles;

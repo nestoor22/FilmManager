@@ -12,10 +12,12 @@ import useStyles from "./styles";
 import PopoverWrapper from "../../../components/popover-wrapper/PopoverWrapper";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import Button from "@material-ui/core/Button";
+import { useSnackbar } from "notistack";
 
 const OpenBoard = () => {
   const classes = useStyles();
   const { id } = useParams();
+  const { enqueueSnackbar } = useSnackbar();
   const [copied, setCopied] = React.useState(false);
   const { data } = useQuery(BOARD, { variables: { boardId: id } });
 
@@ -24,6 +26,13 @@ const OpenBoard = () => {
       document.body.style.backgroundColor = data.board.backgroundColor;
     }
   }, [data]);
+
+  React.useEffect(() => {
+    if (copied) {
+      enqueueSnackbar("Copied !", { variant: "success" });
+      setCopied(false);
+    }
+  }, [copied, enqueueSnackbar]);
 
   return (
     <div className={classes.root}>
