@@ -24,7 +24,7 @@ const testColors = {
 };
 const Boards = () => {
   const classes = useStyles();
-  document.body.style.backgroundColor = '#254052';
+  document.body.style.backgroundColor = "#254052";
   const history = useHistory();
   const [openCreationPopup, setOpenCreationPopup] = React.useState(false);
   const [isTeamBoard, setIsTeamBoard] = React.useState(false);
@@ -59,9 +59,10 @@ const Boards = () => {
           <div className={classes.boardsRow}>
             {data &&
               data.lastVisitedBoards.length !== 0 &&
-              data.lastVisitedBoards.map((board) => {
+              data.lastVisitedBoards.map((board, index) => {
                 return (
                   <div
+                    key={index}
                     style={{ backgroundColor: board.backgroundColor }}
                     className={classes.boardCard}
                     onClick={() => {
