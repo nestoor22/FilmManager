@@ -27,7 +27,7 @@ const SignIn = () => {
   const history = useHistory();
 
   const [signIn] = useMutation(SIGNIN_MUTATION);
-  document.body.style.backgroundColor = '#254052';
+  document.body.style.backgroundColor = "#254052";
   const loginForm = useForm({
     onSubmit: (formData, formValid) => {
       if (!formValid) return;
@@ -98,7 +98,10 @@ const SignIn = () => {
               label="Password"
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton onClick={onShowPasswordClick}>
+                  <IconButton
+                    className={classes.showIcon}
+                    onClick={onShowPasswordClick}
+                  >
                     {showPassword ? (
                       <Visibility className={classes.passwordIcon} />
                     ) : (
@@ -122,6 +125,12 @@ const SignIn = () => {
               Login
             </Button>
           </form>
+          <Typography
+            onClick={() => history.push("/register")}
+            className={classes.createNewAccount}
+          >
+            Don't have an account ? Create new !
+          </Typography>
         </div>
       </div>
     </div>

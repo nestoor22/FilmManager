@@ -40,6 +40,18 @@ const useStyles = makeStyles((theme) => ({
   passwordIcon: {
     fontSize: 18,
   },
+  createNewAccount: {
+    textAlign: "center",
+    fontWeight: "bold",
+    "&:hover": {
+      cursor: "pointer",
+    },
+  },
+  showIcon: {
+    "&:focus": {
+      outline: "none",
+    },
+  },
 }));
 
 export default useStyles;
