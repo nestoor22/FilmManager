@@ -16,6 +16,7 @@ import Input from "../../components/simple-input/Input";
 
 import useStyles from "./styles";
 import TextInput from "../../components/text-input/TextInput";
+import SingleDatePicker from "../../components/date-picker/DatePicker";
 
 const initialValues = {
   firstName: "",
@@ -26,7 +27,7 @@ const initialValues = {
   bio: "",
   city: "",
   country: "",
-  birthday: "",
+  birthday: null,
 };
 
 const RegisterPage = () => {
@@ -50,14 +51,14 @@ const RegisterPage = () => {
               <Field
                 name="firstName"
                 placeholder="First name"
-                label="First name"
+                label="First name *"
                 inputClass={classes.nameField}
                 component={Input}
               />
               <Field
                 name="lastName"
                 placeholder="Last name"
-                label="Last name"
+                label="Last name *"
                 inputClass={classes.nameField}
                 component={Input}
               />
@@ -65,7 +66,7 @@ const RegisterPage = () => {
             <Field
               name="email"
               placeholder="Email"
-              label="Email"
+              label="Email *"
               className={classes.inputIndent}
               component={Input}
             />
@@ -74,7 +75,7 @@ const RegisterPage = () => {
               className={classes.inputIndent}
               type={showPassword ? "text" : "password"}
               placeholder="Password"
-              label="Password"
+              label="Password *"
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -96,7 +97,7 @@ const RegisterPage = () => {
               name="confirmPassword"
               className={classes.inputIndent}
               placeholder="Confirm password"
-              label="Confirm password"
+              label="Confirm password *"
               autoComplete="new-password"
               component={Input}
             />
@@ -106,6 +107,14 @@ const RegisterPage = () => {
               placeholder="Tell something about you"
               label="Tell something about you"
               component={TextInput}
+            />
+            <Field
+              className={classes.inputIndent}
+              name="birthday"
+              disableFuture={true}
+              placeholder="Tell something about you"
+              label="Birthday"
+              component={SingleDatePicker}
             />
             <Button
               type="submit"
