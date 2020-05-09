@@ -10,7 +10,6 @@ const useStyles = makeStyles({
   registerForm: {
     width: '600px',
     backgroundColor: '#fff',
-    padding: '20px 20px',
   },
   showIcon: {
     '&:focus': {
@@ -21,7 +20,19 @@ const useStyles = makeStyles({
     marginBottom: '20px',
   },
   title: {
+    color: '#fff',
+  },
+  registerFormHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    backgroundColor: '#335267',
+    width: '100%',
+    height: '48px',
     marginBottom: '20px',
+    paddingLeft: '20px',
+  },
+  registerFormFieldsWrapper: {
+    padding: '0px 20px',
   },
   inlineFieldsWrapper: {
     width: '100%',

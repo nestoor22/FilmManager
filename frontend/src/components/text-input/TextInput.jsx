@@ -29,7 +29,6 @@ const TextInput = ({
         className={classNames(classes.textarea, {
           [classes.error]: touched && error,
         })}
-        rowsMin={4}
         rowsMax={6}
         {...input}
         {...otherProps}

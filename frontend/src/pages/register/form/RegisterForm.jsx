@@ -42,98 +42,101 @@ const RegisterPage = ({ handleSubmit }) => {
 
   return (
     <div className={classes.registerForm}>
-      <Typography className={classes.title} variant="h1">
-        Register
-      </Typography>
-
-      <form onSubmit={handleSubmit}>
-        <div className={classes.inlineFieldsWrapper}>
+      <div className={classes.registerFormHeader}>
+        <Typography className={classes.title} variant="h1">
+          Register
+        </Typography>
+      </div>
+      <div className={classes.registerFormFieldsWrapper}>
+        <form onSubmit={handleSubmit}>
+          <div className={classes.inlineFieldsWrapper}>
+            <Field
+              name="firstName"
+              placeholder="First name"
+              label="First name *"
+              inputClass={classes.nameField}
+              component={Input}
+            />
+            <Field
+              name="lastName"
+              placeholder="Last name"
+              label="Last name *"
+              inputClass={classes.nameField}
+              component={Input}
+            />
+          </div>
           <Field
-            name="firstName"
-            placeholder="First name"
-            label="First name *"
-            inputClass={classes.nameField}
+            name="email"
+            placeholder="Email"
+            label="Email *"
+            className={classes.inputIndent}
             component={Input}
           />
           <Field
-            name="lastName"
-            placeholder="Last name"
-            label="Last name *"
-            inputClass={classes.nameField}
+            name="password"
+            className={classes.inputIndent}
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Password"
+            label="Password *"
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  className={classes.showIcon}
+                  onClick={onShowPasswordClick}
+                >
+                  {showPassword ? (
+                    <Visibility className={classes.passwordIcon} />
+                  ) : (
+                    <VisibilityOff className={classes.passwordIcon} />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            }
+            autoComplete="new-password"
             component={Input}
           />
-        </div>
-        <Field
-          name="email"
-          placeholder="Email"
-          label="Email *"
-          className={classes.inputIndent}
-          component={Input}
-        />
-        <Field
-          name="password"
-          className={classes.inputIndent}
-          type={showPassword ? 'text' : 'password'}
-          placeholder="Password"
-          label="Password *"
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                className={classes.showIcon}
-                onClick={onShowPasswordClick}
-              >
-                {showPassword ? (
-                  <Visibility className={classes.passwordIcon} />
-                ) : (
-                  <VisibilityOff className={classes.passwordIcon} />
-                )}
-              </IconButton>
-            </InputAdornment>
-          }
-          autoComplete="new-password"
-          component={Input}
-        />
-        <Field
-          name="confirmPassword"
-          type="password"
-          className={classes.inputIndent}
-          placeholder="Confirm password"
-          label="Confirm password *"
-          autoComplete="new-password"
-          component={Input}
-        />
-        <Field
-          className={classes.inputIndent}
-          name="bio"
-          placeholder="Tell something about you"
-          label="Tell something about you"
-          component={TextInput}
-        />
-        <Field
-          className={classes.inputIndent}
-          name="birthday"
-          disableFuture={true}
-          placeholder="Tell something about you"
-          label="Birthday"
-          component={SingleDatePicker}
-        />
-        <div className={classes.inlineFieldsWrapper}>
           <Field
+            name="confirmPassword"
+            type="password"
             className={classes.inputIndent}
-            name="country"
-            label="Country"
-            component={CustomCountryPicker}
+            placeholder="Confirm password"
+            label="Confirm password *"
+            autoComplete="new-password"
+            component={Input}
           />
           <Field
             className={classes.inputIndent}
-            name="city"
-            country={'Ukraine'}
-            label="City"
-            component={CustomCityPicker}
+            name="bio"
+            placeholder="Tell something about you"
+            label="Tell something about you"
+            component={TextInput}
           />
-        </div>
-        <FormButtons actionLabel="Create account" />
-      </form>
+          <Field
+            className={classes.inputIndent}
+            name="birthday"
+            disableFuture={true}
+            placeholder="Tell something about you"
+            label="Birthday"
+            component={SingleDatePicker}
+          />
+          <div className={classes.inlineFieldsWrapper}>
+            <Field
+              className={classes.inputIndent}
+              name="country"
+              label="Country"
+              component={CustomCountryPicker}
+            />
+            <Field
+              className={classes.inputIndent}
+              name="city"
+              country={'Ukraine'}
+              label="City"
+              component={CustomCityPicker}
+            />
+          </div>
+          <FormButtons actionLabel="Create account" />
+        </form>
+      </div>
     </div>
   );
 };
