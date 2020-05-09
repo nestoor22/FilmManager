@@ -1,11 +1,11 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 
-import InputBase from "@material-ui/core/InputBase";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
+import InputBase from '@material-ui/core/InputBase';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
-import { useStyles } from "./styles";
+import { useStyles } from './styles';
 
 const SimpleInput = (props) => {
   const { input, label, className, errors, errorText, ...otherProps } = props;

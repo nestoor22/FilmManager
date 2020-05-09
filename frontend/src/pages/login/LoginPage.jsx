@@ -1,25 +1,25 @@
-import React from "react";
+import React from 'react';
 
-import { useMutation } from "@apollo/react-hooks";
-import { useHistory } from "react-router-dom";
+import { useMutation } from '@apollo/react-hooks';
+import { useHistory } from 'react-router-dom';
 import {
   Typography,
   Button,
   InputAdornment,
   IconButton,
-} from "@material-ui/core";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+} from '@material-ui/core';
 
-import SimpleInput from "../../components/simple-input/SimpleInput";
-import { useField, useForm } from "../../hooks";
-import { SIGNIN_MUTATION } from "../../graphql/mutations/auth";
-import { isRequired, isEmail, isValidPassword } from "../../utils/validators";
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import CardMedia from '@material-ui/core/CardMedia';
 
-import useStyles from "./styles";
-import logo from "../../assets/logo.png";
-import AppHeader from "../../components/app-header/AppHeader";
-import CardMedia from "@material-ui/core/CardMedia";
+import logo from 'assets/logo.png';
+import { useField, useForm } from 'hooks';
+import { SimpleInput, AppHeader } from 'components';
+import { SIGNIN_MUTATION } from 'graphql/mutations/auth';
+import { isRequired, isEmail, isValidPassword } from 'utils/validators';
+
+import useStyles from './styles';
 
 const SignIn = () => {
   const classes = useStyles();
@@ -27,7 +27,7 @@ const SignIn = () => {
   const history = useHistory();
 
   const [signIn] = useMutation(SIGNIN_MUTATION);
-  document.body.style.backgroundColor = "#254052";
+  document.body.style.backgroundColor = '#254052';
   const loginForm = useForm({
     onSubmit: (formData, formValid) => {
       if (!formValid) return;
@@ -35,12 +35,12 @@ const SignIn = () => {
       signIn({
         variables: { email: formData.email, password: formData.password },
       }).then(
-        () => history.push("/"),
+        () => history.push('/'),
         () => {
           passwordField.setError(
-            "Email or password is incorrect, please try again"
+            'Email or password is incorrect, please try again'
           );
-          emailField.setError("");
+          emailField.setError('');
         }
       );
     },
@@ -51,22 +51,22 @@ const SignIn = () => {
     setShowPassword(!showPassword);
   };
 
-  const emailField = useField("email", loginForm, {
-    defaultValue: "",
+  const emailField = useField('email', loginForm, {
+    defaultValue: '',
     validations: [
-      (formData) => isRequired(formData.email, "Email is required"),
-      (formData) => isEmail(formData.email, "Invalid email"),
+      (formData) => isRequired(formData.email, 'Email is required'),
+      (formData) => isEmail(formData.email, 'Invalid email'),
     ],
   });
 
-  const passwordField = useField("password", loginForm, {
-    defaultValue: "",
+  const passwordField = useField('password', loginForm, {
+    defaultValue: '',
     validations: [
-      (formData) => isRequired(formData.password, "Password is required"),
+      (formData) => isRequired(formData.password, 'Password is required'),
       (formData) =>
         isValidPassword(
           formData.password,
-          "The password must include at least 8 characters with 1 symbol, 1 digit, 1 uppercase letter, 1 lowercase letter"
+          'The password must include at least 8 characters with 1 symbol, 1 digit, 1 uppercase letter, 1 lowercase letter'
         ),
     ],
   });
@@ -93,7 +93,7 @@ const SignIn = () => {
               errorText={emailField.errors[0]}
             />
             <SimpleInput
-              type={showPassword ? "text" : "password"}
+              type={showPassword ? 'text' : 'password'}
               placeholder="Password"
               label="Password"
               endAdornment={
@@ -126,7 +126,7 @@ const SignIn = () => {
             </Button>
           </form>
           <Typography
-            onClick={() => history.push("/register")}
+            onClick={() => history.push('/register')}
             className={classes.createNewAccount}
           >
             Don't have an account ? Create new !

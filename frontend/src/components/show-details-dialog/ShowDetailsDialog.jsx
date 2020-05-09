@@ -1,19 +1,20 @@
-import React from "react";
-import Dialog from "@material-ui/core/Dialog";
-import IconButton from "@material-ui/core/IconButton";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import CardMedia from "@material-ui/core/CardMedia";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import TabPanel from "../tabs-panel/TabsPanel";
-import CustomChips from "../custom-chips/CustomChips";
-import GeneralShowInfo from "../general-show-info/GeneralShowInfo";
-import useStyles from "./styles";
+import React from 'react';
+
+import Dialog from '@material-ui/core/Dialog';
+import IconButton from '@material-ui/core/IconButton';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import CardMedia from '@material-ui/core/CardMedia';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
+import { TabPanel, CustomChips, GeneralShowInfo } from 'components';
+
+import useStyles from './styles';
 
 function verticalTabProps(index) {
   return {
     id: `vertical-tab-${index}`,
-    "aria-controls": `vertical-tabpanel-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`,
   };
 }
 

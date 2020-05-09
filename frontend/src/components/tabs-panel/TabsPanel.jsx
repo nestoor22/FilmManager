@@ -1,19 +1,20 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   tabs: {
-    width: "100%",
+    width: '100%',
     borderRight: `1px solid ${theme.palette.divider}`,
-    boxSizing: "border-box",
+    boxSizing: 'border-box',
   },
   tabPanel: {
     flex: 1,
   },
 }));
+
 function TabPanel(props) {
   const classes = useStyles();
   const { children, value, className, index, ...other } = props;

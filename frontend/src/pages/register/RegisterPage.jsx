@@ -1,140 +1,53 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
-import { connect } from "react-redux";
+import React from 'react';
 
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import {
-  Button,
-  IconButton,
-  InputAdornment,
-  Typography,
-} from "@material-ui/core";
+import moment from 'moment';
+import { connect } from 'react-redux';
+import { useMutation } from '@apollo/react-hooks';
 
-import AppHeader from "../../components/app-header/AppHeader";
-import Input from "../../components/simple-input/Input";
+import RegisterForm from './form/RegisterForm';
+import { Loader, AppHeader } from 'components';
+import { CREATE_USER } from 'graphql/mutations/auth';
 
-import useStyles from "./styles";
-import TextInput from "../../components/text-input/TextInput";
-import SingleDatePicker from "../../components/date-picker/DatePicker";
+import useStyles from './styles';
 
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-  bio: "",
-  city: "",
-  country: "",
-  birthday: null,
-};
-
-const RegisterPage = () => {
+const RegisterPage = ({ registerForm }) => {
   const classes = useStyles();
-  const [showPassword, setShowPassword] = React.useState(false);
-  const onShowPasswordClick = () => {
-    setShowPassword(!showPassword);
+  const [savedForms, setSavedForms] = React.useState({});
+  const [loading, setLoading] = React.useState(false);
+  const [createUser] = useMutation(CREATE_USER);
+
+  const handleSubmit = () => {
+    delete registerForm.confirmPassword;
+    setLoading(true);
+    registerForm.birthday = moment(registerForm.birthday, 'YYYY-MM-DD');
+    console.log(registerForm);
+    // createUser({ variables: { user: { ...registerForm } } }).then(() => {});
   };
 
-  document.body.style.backgroundColor = "#254052";
+  document.body.style.backgroundColor = '#254052';
+
   return (
     <div className={classes.root}>
       <AppHeader />
+      <Loader isLoading={loading} />
       <div className={classes.registerFormWrapper}>
-        <div className={classes.registerForm}>
-          <Typography className={classes.title} variant="h1">
-            Register
-          </Typography>
-          <form onSubmit={() => {}}>
-            <div className={classes.nameFieldsWrapper}>
-              <Field
-                name="firstName"
-                placeholder="First name"
-                label="First name *"
-                inputClass={classes.nameField}
-                component={Input}
-              />
-              <Field
-                name="lastName"
-                placeholder="Last name"
-                label="Last name *"
-                inputClass={classes.nameField}
-                component={Input}
-              />
-            </div>
-            <Field
-              name="email"
-              placeholder="Email"
-              label="Email *"
-              className={classes.inputIndent}
-              component={Input}
-            />
-            <Field
-              name="password"
-              className={classes.inputIndent}
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              label="Password *"
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    className={classes.showIcon}
-                    onClick={onShowPasswordClick}
-                  >
-                    {showPassword ? (
-                      <Visibility className={classes.passwordIcon} />
-                    ) : (
-                      <VisibilityOff className={classes.passwordIcon} />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              }
-              autoComplete="new-password"
-              component={Input}
-            />
-            <Field
-              name="confirmPassword"
-              className={classes.inputIndent}
-              placeholder="Confirm password"
-              label="Confirm password *"
-              autoComplete="new-password"
-              component={Input}
-            />
-            <Field
-              className={classes.inputIndent}
-              name="bio"
-              placeholder="Tell something about you"
-              label="Tell something about you"
-              component={TextInput}
-            />
-            <Field
-              className={classes.inputIndent}
-              name="birthday"
-              disableFuture={true}
-              placeholder="Tell something about you"
-              label="Birthday"
-              component={SingleDatePicker}
-            />
-            <Button
-              type="submit"
-              className={classes.button}
-              variant="contained"
-              color="primary"
-            >
-              Create account
-            </Button>
-          </form>
-        </div>
+        <RegisterForm
+          onSubmit={(values) => {
+            setSavedForms({
+              ...savedForms,
+              integrationSettingsForm: { ...values },
+            });
+            handleSubmit(values);
+          }}
+        />
       </div>
     </div>
   );
 };
 
-export default reduxForm({
-  form: "registerForm",
-  destroyOnUnmount: false,
-  forceUnregisterOnUnmount: false,
-  touchOnBlur: false,
-  initialValues,
-})(connect(null)(RegisterPage));
+const mapStateToProps = (state) => {
+  return {
+    registerForm: state.form.registerForm,
+  };
+};
+export default connect(mapStateToProps)(RegisterPage);

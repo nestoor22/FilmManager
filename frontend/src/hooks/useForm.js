@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default ({ onSubmit }) => {
   let [submitted, setSubmitted] = React.useState(false);

@@ -1,11 +1,11 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 
-import InputBase from "@material-ui/core/InputBase";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
+import InputBase from '@material-ui/core/InputBase';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
-import { useStyles } from "./styles";
+import { useStyles } from './styles';
 
 const Input = (props) => {
   const {
@@ -23,9 +23,11 @@ const Input = (props) => {
   } = props;
   const classes = useStyles();
 
+  console.log(`submit: ${submitFailed} touched: ${touched} error: ${error}`);
+
   const onChangeHandler = (e) => {
     if (isOnlyNumber) {
-      input.onChange(e.target.value.replace(/\D/g, ""));
+      input.onChange(e.target.value.replace(/\D/g, ''));
       return;
     }
 

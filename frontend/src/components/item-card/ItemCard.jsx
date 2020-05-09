@@ -1,13 +1,14 @@
-import React from "react";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-import ShowDetailsDialog from "../show-details-dialog/ShowDetailsDialog";
-import useStyles from "./styles";
+import { ShowDetailsDialog } from 'components';
+
+import useStyles from './styles';
 
 function ItemCard({ showInfo }) {
   const classes = useStyles();
@@ -26,7 +27,7 @@ function ItemCard({ showInfo }) {
   const title =
     showInfo.title.length < 22
       ? showInfo.title
-      : showInfo.title.slice(0, 22) + "...";
+      : showInfo.title.slice(0, 22) + '...';
 
   return (
     <Card

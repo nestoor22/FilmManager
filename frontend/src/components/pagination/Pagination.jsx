@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import LabPagination from "@material-ui/lab/Pagination";
-import LabPaginationItem from "@material-ui/lab/PaginationItem";
+import LabPagination from '@material-ui/lab/Pagination';
+import LabPaginationItem from '@material-ui/lab/PaginationItem';
 
-import useStyles from "./styles";
+import useStyles from './styles';
 
 const Pagination = ({ total, ...props }) => {
-  const classes = useStyles( );
+  const classes = useStyles();
 
   return (
     <div className={classes.container}>

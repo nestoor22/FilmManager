@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import Typography from "@material-ui/core/Typography";
-import Popover from "@material-ui/core/Popover";
+import Typography from '@material-ui/core/Typography';
+import Popover from '@material-ui/core/Popover';
 
-import { useStyles } from "./styles";
+import { useStyles } from './styles';
 
 const PopoverWrapper = ({ children, text }) => {
   const classes = useStyles();
@@ -23,7 +23,7 @@ const PopoverWrapper = ({ children, text }) => {
     <div>
       <div
         className={classes.children}
-        aria-owns={open ? "mouse-over-popover-wrapper" : undefined}
+        aria-owns={open ? 'mouse-over-popover-wrapper' : undefined}
         aria-haspopup="true"
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
@@ -40,12 +40,12 @@ const PopoverWrapper = ({ children, text }) => {
         open={open}
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
+          vertical: 'bottom',
+          horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
+          vertical: 'top',
+          horizontal: 'center',
         }}
         onClose={handlePopoverClose}
         disableRestoreFocus

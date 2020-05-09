@@ -1,18 +1,19 @@
-import React from "react";
-import { useQuery } from "@apollo/react-hooks";
-import { useParams } from "react-router-dom";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import Typography from "@material-ui/core/Typography";
-import ShareIcon from "@material-ui/icons/Share";
+import React from 'react';
 
-import AppHeader from "../../../components/app-header/AppHeader";
-import { BOARD } from "../../../graphql/queries/boards";
+import { useSnackbar } from 'notistack';
+import { useQuery } from '@apollo/react-hooks';
+import { useParams } from 'react-router-dom';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import useStyles from "./styles";
-import PopoverWrapper from "../../../components/popover-wrapper/PopoverWrapper";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import Button from "@material-ui/core/Button";
-import { useSnackbar } from "notistack";
+import Button from '@material-ui/core/Button';
+import ShareIcon from '@material-ui/icons/Share';
+import Typography from '@material-ui/core/Typography';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+
+import { BOARD } from 'graphql/queries/boards';
+import { AppHeader, PopoverWrapper } from 'components';
+
+import useStyles from './styles';
 
 const OpenBoard = () => {
   const classes = useStyles();
@@ -29,7 +30,7 @@ const OpenBoard = () => {
 
   React.useEffect(() => {
     if (copied) {
-      enqueueSnackbar("Copied !", { variant: "success" });
+      enqueueSnackbar('Copied !', { variant: 'success' });
       setCopied(false);
     }
   }, [copied, enqueueSnackbar]);
@@ -42,7 +43,7 @@ const OpenBoard = () => {
           <Typography className={classes.boardName}>
             {data.board.name}
           </Typography>
-          <PopoverWrapper text={"Copy share link"}>
+          <PopoverWrapper text={'Copy share link'}>
             <CopyToClipboard
               text={data.board.name}
               onCopy={() => setCopied(true)}

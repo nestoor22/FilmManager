@@ -1,41 +1,52 @@
-import React from "react";
+import React from 'react';
 
-import { useSnackbar } from "notistack";
-import { useMutation } from "@apollo/react-hooks";
-import { connect } from "react-redux";
-import { Field, reduxForm } from "redux-form";
+import { connect } from 'react-redux';
+import { useSnackbar } from 'notistack';
+import { useMutation } from '@apollo/react-hooks';
+import { Field, reduxForm } from 'redux-form';
 
-import Dialog from "@material-ui/core/Dialog";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import Dialog from '@material-ui/core/Dialog';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
-import Input from "../input/Input";
-import FormButtons from "../form-buttons/FormButtons";
-import ColorButtonsGroup from "../color-buttons/ColorButtons";
-import RadioButtonsGroup from "../radio-buttons/RadioButtons";
+import {
+  Input,
+  FormButtons,
+  ColorButtonsGroup,
+  RadioButtonsGroup,
+} from 'components';
 
-import { CREATE_BOARD } from "../../graphql/mutations/boards";
-import { getPreparedBoardDataForCreation } from "../../utils/getPreparedBoardDataForCreation";
+import { CREATE_BOARD } from 'graphql/mutations/boards';
+import { getPreparedBoardDataForCreation } from 'utils/getPreparedBoardDataForCreation';
 
-import useStyles from "./styles";
+import useStyles from './styles';
 
 const initialValues = {
-  name: "",
-  color: "",
-  type: "Private",
-  team: "",
+  name: '',
+  color: '',
+  type: 'Private',
+  team: '',
 };
-const CreationPopUp = ({ open, onClose, boardData, isTeamBoard, refetch }) => {
+const CreateBoardPopUp = ({
+  open,
+  onClose,
+  boardData,
+  isTeamBoard,
+  refetch,
+}) => {
   const classes = useStyles();
   const [createBoard] = useMutation(CREATE_BOARD);
   const { enqueueSnackbar } = useSnackbar();
 
+  React.useEffect(() => {
+    refetch();
+  });
   const onSubmit = () => {
     const preparedData = getPreparedBoardDataForCreation(boardData);
     createBoard({ variables: { board: { ...preparedData } } }).then(() => {
       onClose(false);
-      enqueueSnackbar("Your board created !", { variant: "success" });
+      enqueueSnackbar('Your board created !', { variant: 'success' });
     });
   };
 
@@ -57,7 +68,7 @@ const CreationPopUp = ({ open, onClose, boardData, isTeamBoard, refetch }) => {
         <Field
           label="Board type"
           name="type"
-          list={["Private", "Public"]}
+          list={['Private', 'Public']}
           className={classes.input}
           component={RadioButtonsGroup}
         />
@@ -73,20 +84,20 @@ const CreationPopUp = ({ open, onClose, boardData, isTeamBoard, refetch }) => {
           label="Background color"
           name="color"
           list={[
-            "#02522a",
-            "#000",
-            "#ff551a",
-            "#f21ada",
-            "#dd4455",
-            "#dc6705",
-            "#3e2d3b",
-            "#051c92",
-            "#4c0505",
-            "#55fff3",
-            "#fdd321",
-            "#07ad7f",
-            "#4b4646",
-            "#075c9c",
+            '#02522a',
+            '#000',
+            '#ff551a',
+            '#f21ada',
+            '#dd4455',
+            '#dc6705',
+            '#3e2d3b',
+            '#051c92',
+            '#4c0505',
+            '#55fff3',
+            '#fdd321',
+            '#07ad7f',
+            '#4b4646',
+            '#075c9c',
           ]}
           className={classes.input}
           component={ColorButtonsGroup}
@@ -110,9 +121,9 @@ const mapStateToProps = (state) => {
 };
 
 export default reduxForm({
-  form: "boardForm",
+  form: 'boardForm',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: false,
   touchOnBlur: false,
   initialValues,
-})(connect(mapStateToProps, null)(CreationPopUp));
+})(connect(mapStateToProps, null)(CreateBoardPopUp));

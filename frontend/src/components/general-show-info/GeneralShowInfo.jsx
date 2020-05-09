@@ -1,10 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import Chip from "@material-ui/core/Chip";
-import useStyles from "./styles";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import Chip from '@material-ui/core/Chip';
+
+import useStyles from './styles';
 
 function GeneralShowInfo({ show }) {
   const classes = useStyles();

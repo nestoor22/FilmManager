@@ -1,21 +1,19 @@
-import React from "react";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import React from 'react';
 
-import AppHeader from "../../components/app-header/AppHeader";
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import List from '@material-ui/core/List';
+import Chip from '@material-ui/core/Chip';
+import Input from '@material-ui/core/Input';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItem from '@material-ui/core/ListItem';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
-import ListItem from "@material-ui/core/ListItem";
-import TabPanel from "../../components/tabs-panel/TabsPanel";
-import List from "@material-ui/core/List";
-import Select from "@material-ui/core/Select";
-import Input from "@material-ui/core/Input";
-import Chip from "@material-ui/core/Chip";
-import MenuItem from "@material-ui/core/MenuItem";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import ItemsList from "../../components/items-list/ItemsList";
-import { SHOWS } from "../../graphql/queries/shows";
+import { AppHeader, TabPanel, ItemsList } from 'components';
+import { SHOWS } from 'graphql/queries/shows';
 
-import useStyles from "./styles";
+import useStyles from './styles';
 
 var years = [];
 
@@ -35,7 +33,7 @@ const MenuProps = {
 function verticalTabProps(index) {
   return {
     id: `vertical-tab-${index}`,
-    "aria-controls": `vertical-tabpanel-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`,
   };
 }
 
@@ -99,11 +97,11 @@ function MainPage() {
       </div>
       <div className={classes.contentRoot}>
         <List className={classes.filterListRoot}>
-          <ListSubheader style={{ lineHeight: "12px", color: "#fff" }}>
+          <ListSubheader style={{ lineHeight: '12px', color: '#fff' }}>
             Release years
           </ListSubheader>
           <ListItem
-            style={{ justifyContent: "center", paddingBottom: "50px" }}
+            style={{ justifyContent: 'center', paddingBottom: '50px' }}
             alignItems="center"
           >
             <Select
@@ -132,11 +130,11 @@ function MainPage() {
               ))}
             </Select>
           </ListItem>
-          <ListSubheader style={{ lineHeight: "12px", color: "#fff" }}>
+          <ListSubheader style={{ lineHeight: '12px', color: '#fff' }}>
             Genres
           </ListSubheader>
           <ListItem
-            style={{ justifyContent: "center", paddingBottom: "50px" }}
+            style={{ justifyContent: 'center', paddingBottom: '50px' }}
             alignItems="center"
           >
             <Select
@@ -159,11 +157,11 @@ function MainPage() {
               )}
             />
           </ListItem>
-          <ListSubheader style={{ lineHeight: "12px", color: "#fff" }}>
+          <ListSubheader style={{ lineHeight: '12px', color: '#fff' }}>
             Actors
           </ListSubheader>
           <ListItem
-            style={{ justifyContent: "center", paddingBottom: "0px" }}
+            style={{ justifyContent: 'center', paddingBottom: '0px' }}
             alignItems="center"
           >
             <Select

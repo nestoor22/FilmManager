@@ -1,5 +1,5 @@
-import React from "react";
-import { PieChart, Pie, Cell } from "recharts";
+import React from 'react';
+import { PieChart, Pie, Cell } from 'recharts';
 
 const SimplePieChart = ({ data, colorsInfo }) => {
   return (

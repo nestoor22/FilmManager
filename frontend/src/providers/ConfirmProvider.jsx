@@ -1,6 +1,8 @@
-import React, { useState, useCallback, Fragment } from "react";
-import ConfirmContext from "../contexts/ConfirmContext";
-import ConfirmationDialog from "../components/confirmation-popup/ConfirmationPopup";
+import React, { useState, useCallback, Fragment } from 'react';
+
+import ConfirmContext from 'contexts/ConfirmContext';
+import { ConfirmationDialog } from 'components';
+
 const ConfirmProvider = ({ children }) => {
   const [options, setOptions] = useState({});
   const [resolveReject, setResolveReject] = useState([]);

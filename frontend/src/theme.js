@@ -1,19 +1,19 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#0E8BB4",
+      main: '#0E8BB4',
     },
     secondary: {
-      main: "#05458d",
+      main: '#05458d',
     },
     error: {
-      main: "#EB5757",
+      main: '#EB5757',
     },
   },
   typography: {
-    fontFamily: "Fira Sans",
+    fontFamily: 'Fira Sans',
     h1: {
       fontSize: 18,
       fontWeight: 500,
@@ -28,14 +28,14 @@ const theme = createMuiTheme({
     },
     body1: {
       fontSize: 13,
-      color: "#071B27",
+      color: '#071B27',
     },
     body2: {
       fontSize: 11,
       fontWeight: 500,
     },
     button: {
-      textTransform: "capitalize",
+      textTransform: 'capitalize',
       fontWeight: 500,
     },
   },

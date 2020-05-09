@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import Typography from "@material-ui/core/Typography";
+import Typography from '@material-ui/core/Typography';
 
-import useStyles from "./styles";
-import SimplePieChart from "../simple-pie-chart/SimplePieChart";
-import CustomChartLegend from "../chart-legend/ChartLegend";
+import { SimplePieChart, CustomChartLegend } from 'components';
+
+import useStyles from './styles';
 
 const BoardsStatisticsTab = ({ title, chartData, colorsInfo }) => {
   const classes = useStyles();

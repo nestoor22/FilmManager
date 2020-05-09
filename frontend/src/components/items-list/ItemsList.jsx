@@ -1,10 +1,9 @@
-import React from "react";
-import { useQuery } from "@apollo/react-hooks";
+import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
 
-import ItemCard from "../item-card/ItemCard";
+import { ItemCard, Pagination } from 'components';
 
-import useStyles from "./styles";
-import Pagination from "../pagination/Pagination";
+import useStyles from './styles';
 
 function ItemsList({ query, showType }) {
   const classes = useStyles();

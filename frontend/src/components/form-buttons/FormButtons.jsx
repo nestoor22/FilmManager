@@ -1,11 +1,11 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
-import Button from "@material-ui/core/Button";
+import Button from '@material-ui/core/Button';
 
-import ConfirmContext from "../../contexts/ConfirmContext";
+import ConfirmContext from 'contexts/ConfirmContext';
 
-import { useStyles } from "./styles";
+import { useStyles } from './styles';
 
 const FormButtons = ({
   cancelPath,
@@ -20,9 +20,9 @@ const FormButtons = ({
 
   const onCancelHandler = () => {
     confirm({
-      title: "Are you sure you want to cancel?",
-      confirmationText: "Cancel",
-      cancellationText: "Back",
+      title: 'Are you sure you want to cancel?',
+      confirmationText: 'Cancel',
+      cancellationText: 'Back',
     })
       .then(() => {
         setOpenPopup(false);
@@ -35,15 +35,17 @@ const FormButtons = ({
 
   return (
     <div className={classes.wrapper}>
-      <Button
-        variant="outlined"
-        onClick={onCancelHandler}
-        classes={{
-          root: classes.cancelBtnRoot,
-        }}
-      >
-        Cancel
-      </Button>
+      {cancelPath && (
+        <Button
+          variant="outlined"
+          onClick={onCancelHandler}
+          classes={{
+            root: classes.cancelBtnRoot,
+          }}
+        >
+          Cancel
+        </Button>
+      )}
       <Button
         type="submit"
         variant="contained"

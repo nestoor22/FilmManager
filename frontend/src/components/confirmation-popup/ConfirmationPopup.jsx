@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
-import { useStyles } from "./styles";
+import { useStyles } from './styles';
 
 const ConfirmationDialog = ({
   open,

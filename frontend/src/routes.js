@@ -1,11 +1,11 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import MainPage from "./pages/main/MainPage";
-import LoginPage from "./pages/login/LoginPage";
-import Boards from "./pages/boards/Boards";
-import OpenBoard from "./pages/boards/open-board/OpenBoard";
-import RegisterPage from "./pages/register/RegisterPage";
+import MainPage from './pages/main/MainPage';
+import LoginPage from './pages/login/LoginPage';
+import Boards from './pages/boards/Boards';
+import OpenBoard from './pages/boards/open-board/OpenBoard';
+import RegisterPage from './pages/register/RegisterPage';
 
 function Routes() {
   return (

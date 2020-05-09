@@ -2,19 +2,16 @@ import React from 'react';
 import classNames from 'classnames';
 
 import InputLabel from '@material-ui/core/InputLabel';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 import { useStyles } from './styles';
+import { CountryDropdown } from 'react-country-region-selector';
 
-const TextInput = ({
+const CustomCountryPicker = ({
   input,
   label,
-  isTranslateError,
-  language,
   className,
   meta: { touched, error },
-  ...otherProps
 }) => {
   const classes = useStyles();
 
@@ -24,15 +21,13 @@ const TextInput = ({
         {label}
       </InputLabel>
 
-      <TextareaAutosize
-        id={`${label}-input`}
-        className={classNames(classes.textarea, {
+      <CountryDropdown
+        defaultOptionLabel="Select country"
+        value={input.value}
+        onChange={input.onChange}
+        className={classNames(classes.countryDropDown, {
           [classes.error]: touched && error,
         })}
-        rowsMin={4}
-        rowsMax={6}
-        {...input}
-        {...otherProps}
       />
 
       {touched && error && <FormHelperText error>{error}</FormHelperText>}
@@ -40,4 +35,4 @@ const TextInput = ({
   );
 };
 
-export default TextInput;
+export default CustomCountryPicker;

@@ -1,24 +1,24 @@
-import React from "react";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+import React from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloClient } from "apollo-boost";
-import { HttpLink } from "apollo-link-http";
-import { onError } from "apollo-link-error";
-import { createUploadLink } from "apollo-upload-client";
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloClient } from 'apollo-boost';
+import { HttpLink } from 'apollo-link-http';
+import { onError } from 'apollo-link-error';
+import { createUploadLink } from 'apollo-upload-client';
 
-import { ApolloLink } from "apollo-link";
-import { ApolloProvider } from "react-apollo";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { ApolloLink } from 'apollo-link';
+import { ApolloProvider } from 'react-apollo';
+import { ThemeProvider } from '@material-ui/core/styles';
 
-import Routes from "./routes";
-import theme from "./theme";
-import { URI } from "./config";
-import rootReducer from "./reducers";
+import Routes from './routes';
+import theme from './theme';
+import { URI } from './config';
+import rootReducer from './reducers';
 
-import { SnackbarProvider } from "notistack";
-import ConfirmProvider from "./providers/ConfirmProvider";
+import { SnackbarProvider } from 'notistack';
+import ConfirmProvider from './providers/ConfirmProvider';
 
 const store = createStore(rootReducer);
 
@@ -30,16 +30,16 @@ const client = new ApolloClient({
           console.log(
             `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
           );
-          if (message === "User is not logged in") {
+          if (message === 'User is not logged in') {
             window.location = `/login`;
           }
         });
       if (networkError) console.log(`[Network error]: ${networkError}`);
     }),
-    createUploadLink({ uri: URI, credentials: "include" }),
+    createUploadLink({ uri: URI, credentials: 'include' }),
     new HttpLink({
       uri: URI,
-      credentials: "include",
+      credentials: 'include',
     }),
   ]),
 
@@ -56,8 +56,8 @@ function App() {
               autoHideDuration={3000}
               maxSnack={1}
               anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right',
               }}
             >
               <Routes />

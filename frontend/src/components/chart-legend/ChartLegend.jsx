@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { Typography } from "@material-ui/core";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
-import ListItemText from "@material-ui/core/ListItemText";
+import { Typography } from '@material-ui/core';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import ListItemText from '@material-ui/core/ListItemText';
 
-import useStyles from "./styles";
+import useStyles from './styles';
 
 const CustomChartLegend = ({
   legendData,
@@ -38,14 +38,14 @@ const CustomChartLegend = ({
                 />
               </ListItemIcon>
               <ListItemText className={classes.itemName}>
-                <Typography style={{ color: "#fff" }}>
+                <Typography style={{ color: '#fff' }}>
                   {item.legendTitle}
                 </Typography>
               </ListItemText>
 
               <ListItemText>
                 <Typography
-                  style={{ color: "#fff" }}
+                  style={{ color: '#fff' }}
                 >{`${item.value}%`}</Typography>
               </ListItemText>
             </ListItem>

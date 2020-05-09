@@ -1,20 +1,20 @@
-import React from "react";
-import classNames from "classnames";
-import { useQuery } from "@apollo/react-hooks";
-import { Link, useRouteMatch, useHistory } from "react-router-dom";
+import React from 'react';
+import classNames from 'classnames';
+import { useQuery } from '@apollo/react-hooks';
+import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import Grow from "@material-ui/core/Grow";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Popper from "@material-ui/core/Popper";
-import MenuItem from "@material-ui/core/MenuItem";
-import Paper from "@material-ui/core/Paper";
-import MenuList from "@material-ui/core/MenuList";
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Grow from '@material-ui/core/Grow';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
+import MenuList from '@material-ui/core/MenuList';
 
-import { USER } from "../../graphql/queries/user";
+import { USER } from 'graphql/queries/user';
 
-import useStyles from "./styles";
+import useStyles from './styles';
 
 export default function AppHeader({ className }) {
   const classes = useStyles();
@@ -38,7 +38,7 @@ export default function AppHeader({ className }) {
   };
 
   function handleListKeyDown(event) {
-    if (event.key === "Tab") {
+    if (event.key === 'Tab') {
       event.preventDefault();
       setOpen(false);
     }
@@ -66,7 +66,7 @@ export default function AppHeader({ className }) {
             <div>
               <Button
                 ref={anchorRef}
-                aria-controls={open ? "menu-list-grow" : undefined}
+                aria-controls={open ? 'menu-list-grow' : undefined}
                 aria-haspopup="true"
                 onClick={handleToggle}
                 classes={{ root: classes.button }}
@@ -85,7 +85,7 @@ export default function AppHeader({ className }) {
                     {...TransitionProps}
                     style={{
                       transformOrigin:
-                        placement === "bottom" ? "center top" : "center bottom",
+                        placement === 'bottom' ? 'center top' : 'center bottom',
                     }}
                   >
                     <Paper>

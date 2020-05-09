@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default (name, form, { defaultValue, validations = [] }) => {
   const [value, setValue] = React.useState(defaultValue);

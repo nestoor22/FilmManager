@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
@@ -8,14 +8,14 @@ const useStyles = makeStyles({
   },
   title: {
     margin: 0,
-    fontSize: "15px",
+    fontSize: '15px',
   },
   content: {
     padding: 0,
-    "&:focus": {
-      outline: "none",
+    '&:focus': {
+      outline: 'none',
     },
-    "&:last-child": {
+    '&:last-child': {
       padding: 0,
     },
   },
@@ -23,8 +23,8 @@ const useStyles = makeStyles({
     padding: 0,
   },
   button: {
-    "&:focus": {
-      outline: "none",
+    '&:focus': {
+      outline: 'none',
     },
   },
 });

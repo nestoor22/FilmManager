@@ -1,14 +1,15 @@
-import React from "react";
-import moment from "moment";
-import Moment from "react-moment";
-import classNames from "classnames";
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import { Typography } from "@material-ui/core";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import DateRangeIcon from "@material-ui/icons/DateRange";
-import MomentUtils from "@date-io/moment";
+import React from 'react';
 
-import { useStyles } from "./styles";
+import Moment from 'react-moment';
+import classNames from 'classnames';
+import MomentUtils from '@date-io/moment';
+
+import { Typography } from '@material-ui/core';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+
+import { useStyles } from './styles';
 
 const SingleDatePicker = ({
   input,
@@ -31,7 +32,7 @@ const SingleDatePicker = ({
         ) : (
           <label className={classes.label}>
             <Typography
-              variant={labelTypographyVariant ? labelTypographyVariant : "h2"}
+              variant={labelTypographyVariant ? labelTypographyVariant : 'h2'}
             >
               {label}
             </Typography>
@@ -66,13 +67,9 @@ const SingleDatePicker = ({
           </label>
         )}
 
-        <div
-          className={classNames(classes.hiddenDateRangePicker, {
-            ["inputSinglePicker"]: isInput,
-          })}
-        >
+        <div className={classNames(classes.hiddenDateRangePicker)}>
           <DatePicker
-            format={input.value ? "MMM D, YYYY" : undefined}
+            format={input.value ? 'MMM D, YYYY' : undefined}
             disableFuture={disableFuture}
             classes={{ root: classes.hiddenDateRangePicker }}
             value={input.value ? input.value : null}

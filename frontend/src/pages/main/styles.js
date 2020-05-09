@@ -1,95 +1,95 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    height: "100%",
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    height: '100%',
   },
   toolbar: {
-    display: "flex",
-    paddingTop: "80px",
-    marginLeft: "150px",
-    justifyContent: "center",
-    boxSizing: "border-box",
-    alignItems: "center",
-    minHeight: "48px",
+    display: 'flex',
+    paddingTop: '80px',
+    marginLeft: '150px',
+    justifyContent: 'center',
+    boxSizing: 'border-box',
+    alignItems: 'center',
+    minHeight: '48px',
   },
   selected: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   indicator: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   customTabRoot: {
-    padding: "18px 30px",
-    width: "180px",
-    borderBottom: "1px solid #E2EBF6",
-    boxSizing: "border-box",
-    fontSize: "20px",
-    "&:focus": {
-      outline: "none",
+    padding: '18px 30px',
+    width: '180px',
+    borderBottom: '1px solid #E2EBF6',
+    boxSizing: 'border-box',
+    fontSize: '20px',
+    '&:focus': {
+      outline: 'none',
     },
   },
   buttonRoot: {
-    fontSize: "13px",
-    fontWeight: "bold",
-    padding: "3px 20px",
-    marginLeft: "10px",
+    fontSize: '13px',
+    fontWeight: 'bold',
+    padding: '3px 20px',
+    marginLeft: '10px',
   },
   tabsRoot: {
-    flex: "1 1 auto",
-    display: "flex",
-    width: "100%",
+    flex: '1 1 auto',
+    display: 'flex',
+    width: '100%',
   },
   tabs: {
-    flex: "0 1 220px",
+    flex: '0 1 220px',
   },
   customTabWrapper: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   tabItemTitle: {
-    fontWeight: "bold",
-    lineHeight: "18px",
+    fontWeight: 'bold',
+    lineHeight: '18px',
     marginBottom: 12,
-    color: "inherit",
+    color: 'inherit',
   },
   tabContentWrapper: {
-    padding: "0",
+    padding: '0',
   },
   textColorInheritCustom: {
     opacity: 1,
-    color: "#E2F5F8",
+    color: '#E2F5F8',
   },
   contentRoot: {
-    display: "flex",
-    paddingTop: "50px",
-    width: "100%",
+    display: 'flex',
+    paddingTop: '50px',
+    width: '100%',
   },
   filterListRoot: {
-    width: "250px",
-    height: "fit-content",
-    padding: "40px 10px",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '250px',
+    height: 'fit-content',
+    padding: '40px 10px',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   chips: {
-    display: "flex",
-    flexWrap: "wrap",
+    display: 'flex',
+    flexWrap: 'wrap',
   },
   chip: {
     margin: 2,
   },
   select: {
-    width: "250px",
-    "&:after": {
-      backgroundColor: "#fff",
-      height: "2px",
+    width: '250px',
+    '&:after': {
+      backgroundColor: '#fff',
+      height: '2px',
     },
-    "&:before": {
-      height: "2px",
-      backgroundColor: "#fff",
+    '&:before': {
+      height: '2px',
+      backgroundColor: '#fff',
     },
   },
 });
