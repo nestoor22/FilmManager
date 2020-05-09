@@ -25,6 +25,9 @@ export const useStyles = makeStyles({
     letterSpacing: '0.035em',
   },
   hiddenDateRangePicker: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
     position: 'static',
     top: '26px',
     left: '0',
@@ -32,6 +35,11 @@ export const useStyles = makeStyles({
     '&:focus': {
       outline: 'none',
     },
+  },
+  calendarIcon: {
+    fill: '#335267',
+    marginTop: '5px',
+    marginRight: '35px',
   },
   customInputDate: {
     display: 'flex',
@@ -50,10 +58,6 @@ export const useStyles = makeStyles({
     '&:hover': {
       border: '1px solid #41B7D7',
     },
-  },
-  calendarIcon: {
-    fontSize: '20px',
-    marginRight: '7px',
   },
   focus: {
     boxShadow: '0 0 3px 3px rgba(65, 183, 215, 0.35)',

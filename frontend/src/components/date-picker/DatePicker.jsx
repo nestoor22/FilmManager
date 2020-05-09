@@ -4,6 +4,7 @@ import Moment from 'react-moment';
 import classNames from 'classnames';
 import MomentUtils from '@date-io/moment';
 
+import EventIcon from '@material-ui/icons/Event';
 import { Typography } from '@material-ui/core';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -68,6 +69,7 @@ const SingleDatePicker = ({
         )}
 
         <div className={classNames(classes.hiddenDateRangePicker)}>
+          <EventIcon className={classes.calendarIcon} />
           <DatePicker
             format={input.value ? 'MMM D, YYYY' : undefined}
             disableFuture={disableFuture}

@@ -112,15 +112,10 @@ const RegisterPage = ({ handleSubmit }) => {
             label="Tell something about you"
             component={TextInput}
           />
-          <Field
-            className={classes.inputIndent}
-            name="birthday"
-            disableFuture={true}
-            placeholder="Tell something about you"
-            label="Birthday"
-            component={SingleDatePicker}
-          />
-          <div className={classes.inlineFieldsWrapper}>
+          <div
+            className={classes.inlineFieldsWrapper}
+            style={{ marginBottom: 0 }}
+          >
             <Field
               className={classes.inputIndent}
               changeCountry={setCountry}
@@ -136,6 +131,14 @@ const RegisterPage = ({ handleSubmit }) => {
               component={CustomCityPicker}
             />
           </div>
+          <Field
+            className={classes.inputIndent}
+            name="birthday"
+            disableFuture={true}
+            placeholder="Tell something about you"
+            label="Birthday"
+            component={SingleDatePicker}
+          />
           <FormButtons actionLabel="Create account" />
         </form>
       </div>
