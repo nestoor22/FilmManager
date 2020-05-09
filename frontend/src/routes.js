@@ -6,6 +6,7 @@ import LoginPage from './pages/login/LoginPage';
 import Boards from './pages/boards/Boards';
 import OpenBoard from './pages/boards/open-board/OpenBoard';
 import RegisterPage from './pages/register/RegisterPage';
+import AccountPage from './pages/account/AccountPage';
 
 function Routes() {
   return (
@@ -25,6 +26,9 @@ function Routes() {
         </Route>
         <Route exact path="/register">
           <RegisterPage />
+        </Route>
+        <Route exact path="/account">
+          <AccountPage />
         </Route>
       </Switch>
     </Router>

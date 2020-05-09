@@ -12,14 +12,15 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import MenuList from '@material-ui/core/MenuList';
 
-import { USER } from 'graphql/queries/user';
+import { USER_NAME } from 'graphql/queries/user';
 
 import useStyles from './styles';
 
 export default function AppHeader({ className }) {
   const classes = useStyles();
 
-  const { data } = useQuery(USER);
+  const history = useHistory();
+  const { data } = useQuery(USER_NAME);
 
   const anchorRef = React.useRef(null);
   const [open, setOpen] = React.useState(false);
@@ -97,13 +98,19 @@ export default function AppHeader({ className }) {
                         >
                           <MenuItem
                             classes={{ root: classes.menuItem }}
-                            onClick={handleClose}
+                            onClick={(e) => {
+                              handleClose(e);
+                              history.push('/account');
+                            }}
                           >
                             Profile
                           </MenuItem>
                           <MenuItem
                             classes={{ root: classes.menuItem }}
-                            onClick={handleClose}
+                            onClick={(e) => {
+                              handleClose(e);
+                              history.push('/account/settings');
+                            }}
                           >
                             Settings
                           </MenuItem>

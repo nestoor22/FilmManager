@@ -4,7 +4,6 @@ export const useStyles = makeStyles({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
   },
   label: {
     marginBottom: 6,

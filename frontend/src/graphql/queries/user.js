@@ -13,3 +13,12 @@ export const USER = gql`
     }
   }
 `;
+
+export const USER_NAME = gql`
+  {
+    user {
+      firstName
+      lastName
+    }
+  }
+`;
