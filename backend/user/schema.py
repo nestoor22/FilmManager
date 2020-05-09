@@ -1,8 +1,10 @@
+import graphene
+
 from django.contrib.auth import authenticate, login
 from graphene_django import DjangoObjectType
 from graphene.types import Field, List
+
 from .models import User
-import graphene
 
 
 class UserType(DjangoObjectType):
