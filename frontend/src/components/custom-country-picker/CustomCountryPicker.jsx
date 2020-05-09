@@ -10,10 +10,16 @@ import { CountryDropdown } from 'react-country-region-selector';
 const CustomCountryPicker = ({
   input,
   label,
+  changeCountry,
   className,
   meta: { touched, error },
 }) => {
   const classes = useStyles();
+
+  const handleChange = (country) => {
+    changeCountry(country);
+    input.onChange(country);
+  };
 
   return (
     <div className={classNames(classes.root, className)}>
@@ -24,7 +30,7 @@ const CustomCountryPicker = ({
       <CountryDropdown
         defaultOptionLabel="Select country"
         value={input.value}
-        onChange={input.onChange}
+        onChange={(e) => handleChange(e)}
         className={classNames(classes.countryDropDown, {
           [classes.error]: touched && error,
         })}

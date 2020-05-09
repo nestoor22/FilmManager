@@ -12,13 +12,13 @@ import { CREATE_USER } from 'graphql/mutations/auth';
 
 import useStyles from './styles';
 
-const RegisterPage = ({ registerForm }) => {
+const RegisterPage = () => {
   const classes = useStyles();
 
   const history = useHistory();
 
   const { enqueueSnackbar } = useSnackbar();
-  const [savedForms, setSavedForms] = React.useState({});
+
   const [loading, setLoading] = React.useState(false);
   const [createUser] = useMutation(CREATE_USER);
 
@@ -47,10 +47,6 @@ const RegisterPage = ({ registerForm }) => {
       <div className={classes.registerFormWrapper}>
         <RegisterForm
           onSubmit={(values) => {
-            setSavedForms({
-              ...savedForms,
-              integrationSettingsForm: { ...values },
-            });
             handleSubmit(values);
           }}
         />

@@ -33,6 +33,7 @@ const initialValues = {
 const RegisterPage = ({ handleSubmit }) => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = React.useState(false);
+  const [country, setCountry] = React.useState('');
 
   const onShowPasswordClick = () => {
     setShowPassword(!showPassword);
@@ -122,6 +123,7 @@ const RegisterPage = ({ handleSubmit }) => {
           <div className={classes.inlineFieldsWrapper}>
             <Field
               className={classes.inputIndent}
+              changeCountry={setCountry}
               name="country"
               label="Country"
               component={CustomCountryPicker}
@@ -129,7 +131,7 @@ const RegisterPage = ({ handleSubmit }) => {
             <Field
               className={classes.inputIndent}
               name="city"
-              country={'Ukraine'}
+              country={country}
               label="City"
               component={CustomCityPicker}
             />
