@@ -1,6 +1,6 @@
 import graphene
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from graphene_django import DjangoObjectType
 from graphene.types import Field, List
 
@@ -80,3 +80,12 @@ class SignIn(graphene.Mutation):
             first_name=user.first_name,
             last_name=user.last_name,
             email=user.email)
+
+
+class LogOut(graphene.Mutation):
+    ok = graphene.Boolean()
+
+    @staticmethod
+    def mutate(parent, info):
+        logout(info.context)
+        return LogOut(ok=True)
