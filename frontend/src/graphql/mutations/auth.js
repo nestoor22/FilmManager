@@ -18,3 +18,11 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
+export const LOG_OUT = gql`
+  mutation logOut {
+    logOut {
+      ok
+    }
+  }
+`;

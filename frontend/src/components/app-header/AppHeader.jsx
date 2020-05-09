@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -12,6 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import MenuList from '@material-ui/core/MenuList';
 
+import { LOG_OUT } from 'graphql/mutations/auth';
 import { USER_NAME } from 'graphql/queries/user';
 
 import useStyles from './styles';
@@ -21,13 +22,18 @@ export default function AppHeader({ className }) {
 
   const history = useHistory();
   const { data } = useQuery(USER_NAME);
-
+  const [logOut] = useMutation(LOG_OUT);
   const anchorRef = React.useRef(null);
   const [open, setOpen] = React.useState(false);
   const prevOpen = React.useRef(open);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleLogOut = () => {
+    logOut().then(() => {});
+    history.push('/login');
   };
 
   const handleClose = (event) => {
@@ -116,7 +122,7 @@ export default function AppHeader({ className }) {
                           </MenuItem>
                           <MenuItem
                             classes={{ root: classes.menuItem }}
-                            onClick={handleClose}
+                            onClick={handleLogOut}
                           >
                             Log-out
                           </MenuItem>
