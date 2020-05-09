@@ -8,6 +8,9 @@ const validate = (values) => {
     errors.confirmPassword = 'Passwords are not the same. Please check again';
   }
 
+  if (isRequired(values.password || '', true)) {
+    errors.password = 'Password is required';
+  }
   if (isRequired(values.firstName || '', true)) {
     errors.firstName = 'First name is required';
   }
@@ -21,7 +24,7 @@ const validate = (values) => {
   } else if (isEmail(values.email || '', true)) {
     errors.email = 'Invalid email';
   }
-  console.log(errors);
+
   return errors;
 };
 

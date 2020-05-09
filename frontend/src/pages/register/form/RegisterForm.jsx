@@ -143,7 +143,6 @@ export default reduxForm({
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: false,
   touchOnBlur: false,
-  touchOnChange: true,
   initialValues,
   validate,
 })(RegisterPage);

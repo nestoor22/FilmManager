@@ -1,7 +1,9 @@
 import React from 'react';
 
 import moment from 'moment';
+import { useSnackbar } from 'notistack';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 
 import RegisterForm from './form/RegisterForm';
@@ -12,16 +14,28 @@ import useStyles from './styles';
 
 const RegisterPage = ({ registerForm }) => {
   const classes = useStyles();
+
+  const history = useHistory();
+
+  const { enqueueSnackbar } = useSnackbar();
   const [savedForms, setSavedForms] = React.useState({});
   const [loading, setLoading] = React.useState(false);
   const [createUser] = useMutation(CREATE_USER);
 
-  const handleSubmit = () => {
-    delete registerForm.confirmPassword;
+  const handleSubmit = (values) => {
+    delete values.confirmPassword;
     setLoading(true);
-    registerForm.birthday = moment(registerForm.birthday, 'YYYY-MM-DD');
-    console.log(registerForm);
-    // createUser({ variables: { user: { ...registerForm } } }).then(() => {});
+    values.birthday = values.birthday
+      ? moment(values.birthday).format('YYYY-MM-DD')
+      : null;
+
+    createUser({ variables: { user: { ...values } } }).then(() => {
+      setLoading(false);
+      enqueueSnackbar('You create account ! Check your email to confirm !', {
+        variant: 'success',
+      });
+      history.push('/');
+    });
   };
 
   document.body.style.backgroundColor = '#254052';
