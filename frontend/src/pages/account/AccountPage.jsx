@@ -3,6 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { AppHeader } from 'components';
+import Sidebar from './components/sidebar/Sidebar';
 
 import useStyles from './styles';
 
@@ -17,6 +18,7 @@ const AccountPage = () => {
   return (
     <div className={classes.root}>
       <AppHeader />
+      <Sidebar />
     </div>
   );
 };
