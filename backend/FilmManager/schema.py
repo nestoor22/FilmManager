@@ -1,6 +1,6 @@
 import graphene
 
-from show.schema import ShowQuery, SetShowRate
+from show.schema import ShowQuery, SetShowRate, DeleteShowRate
 from user.schema import SignIn, UserQuery, CreateUser, LogOut
 from boards.schema import BoardsQuery, CreateBoardMutation, SetLastVisitedBoard
 
@@ -16,6 +16,7 @@ class Mutation(graphene.ObjectType):
     create_board = CreateBoardMutation.Field()
     set_last_visited_board = SetLastVisitedBoard.Field()
     set_show_rate = SetShowRate.Field()
+    delete_show_rate = DeleteShowRate.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

@@ -47,7 +47,6 @@ class ShowsType(DjangoObjectType):
 
 class ShowRateInput(graphene.InputObjectType):
     show_id = graphene.Int(required=True)
-    user_id = graphene.Int(required=True)
     rating = graphene.Float(required=True)
 
 
@@ -113,5 +112,23 @@ class SetShowRate(graphene.Mutation):
 
     @staticmethod
     def mutate(parent, info, show_rate_info):
+        show_rate_info['user_id'] = info.context.session.get('_auth_user_id')
+
         rate_id = ShowsLogic(show_rate_info).add_rate_for_show()
+
         return SetShowRate(id=rate_id)
+
+
+class DeleteShowRate(graphene.Mutation):
+    ok = graphene.Boolean()
+
+    class Arguments:
+        show_rate_id = graphene.Int(required=True)
+
+    @staticmethod
+    def mutate(parent, info, show_rate_id):
+        user_id = info.context.session.get('_auth_user_id')
+
+        ok = ShowsLogic.delete_show_rate(show_id=show_rate_id, user_id=user_id)
+
+        return SetShowRate(ok=ok)

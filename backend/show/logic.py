@@ -22,3 +22,8 @@ class ShowsLogic(object):
     @staticmethod
     def compute_show_rate(show_id):
         return ShowRates.objects.all().aggregate(Avg('rating'))['rating__avg']
+
+    @staticmethod
+    def delete_show_rate(show_id, user_id):
+        ShowRates.objects.filter(show_id=show_id, user_id=user_id).delete()
+        return True
