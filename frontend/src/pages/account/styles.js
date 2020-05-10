@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   content: {
     display: 'flex',
+    flex: '1 0 100%',
     width: '100%',
   },
   sidebar: {
@@ -10,6 +11,9 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: '#fff',
+  },
+  tabsRoot: {
+    width: '100%'
   },
   iconWrapper: {
     height: '100px',

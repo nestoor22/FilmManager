@@ -10,6 +10,7 @@ import ContactsIcon from '@material-ui/icons/Contacts';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 import { AppHeader, TabPanel } from 'components';
+import AccountTab from './components/AccountTab/AccountTab';
 
 import useStyles from './styles';
 
@@ -103,7 +104,7 @@ const AccountPage = () => {
             value={value}
             index={0}
           >
-            Account
+            <AccountTab />
           </TabPanel>
           <TabPanel
             className={classes.tabContentWrapper}
