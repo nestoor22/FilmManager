@@ -12,32 +12,43 @@ const ShowPanel = ({ className, showsInfo }) => {
   const classes = useStyles();
   return (
     <div className={classNames(classes.root, className)}>
-      <div className={classNames(classes.showRow)}>
-        <CardMedia
-          className={classes.poster}
-          component="img"
-          alt="Poster"
-          height="80"
-          width="60"
-          image={
-            'http://ex-fs.net/uploads/posts/2020-05/1589097188_legionnaires-trail.jpg'
-          }
-          title="Poster"
-        />
-        <div>
-          <Typography className={classes.showTitle}>Legion</Typography>
-          <Typography className={classes.releaseYear}>2020</Typography>
-        </div>
-        <Typography className={classes.showRating}>9.2</Typography>
-      </div>
-      <div className={classes.actionsIcons}>
-        <div className={classes.iconWrapper}>
-          <EditIcon />
-        </div>
-        <div className={classes.iconWrapper}>
-          <DeleteIcon />
-        </div>
-      </div>
+      {showsInfo &&
+        showsInfo.map((showInfo) => {
+          return (
+            <div style={{ display: 'flex' }}>
+              <div className={classNames(classes.showRow)}>
+                <CardMedia
+                  className={classes.poster}
+                  component="img"
+                  alt="Poster"
+                  height="80"
+                  width="60"
+                  image={showInfo.show.posterUrl}
+                  title="Poster"
+                />
+                <div>
+                  <Typography className={classes.showTitle}>
+                    {showInfo.show.title}
+                  </Typography>
+                  <Typography className={classes.releaseYear}>
+                    {showInfo.show.releaseDate}
+                  </Typography>
+                </div>
+                <Typography className={classes.showRating}>
+                  {showInfo.rating}
+                </Typography>
+              </div>
+              <div className={classes.actionsIcons}>
+                <div className={classes.iconWrapper}>
+                  <EditIcon />
+                </div>
+                <div className={classes.iconWrapper}>
+                  <DeleteIcon />
+                </div>
+              </div>
+            </div>
+          );
+        })}
     </div>
   );
 };

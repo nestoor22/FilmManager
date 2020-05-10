@@ -20,10 +20,10 @@ const AccountTab = () => {
   const classes = useStyles();
 
   const { data } = useQuery(USER);
-
+  console.log(data);
   return (
     <div className={classes.accountTab}>
-      {data && data.user && (
+      {data && data.user && data.showsRatings && (
         <div className={classes.generalInfo}>
           <div className={classes.avatarWrapper}>
             {data.user.photo && (
@@ -86,9 +86,7 @@ const AccountTab = () => {
               <Typography className={classes.blockTitle}>
                 Given ratings
               </Typography>
-              <ShowPanel />
-              <ShowPanel />
-              <ShowPanel />
+              <ShowPanel showsInfo={data.showsRatings} />
             </div>
           </div>
         </div>

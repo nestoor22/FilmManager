@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 export const USER = gql`
   {
     user {
+      id
       firstName
       lastName
       email
@@ -12,6 +13,15 @@ export const USER = gql`
       city
       country
       birthday
+    }
+    showsRatings {
+      id
+      show {
+        title
+        posterUrl
+        releaseDate
+      }
+      rating
     }
   }
 `;
