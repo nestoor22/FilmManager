@@ -52,6 +52,9 @@ const useStyles = makeStyles({
     '&:hover': {
       cursor: 'pointer',
     },
+    '&:focus': {
+      outline: 'none',
+    },
   },
 });
 

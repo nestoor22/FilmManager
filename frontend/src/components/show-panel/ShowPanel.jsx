@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
+import IconButton from '@material-ui/core/IconButton';
 
 import { EditIcon, DeleteIcon } from 'components';
 
@@ -13,9 +14,9 @@ const ShowPanel = ({ className, showsInfo }) => {
   return (
     <div className={classNames(classes.root, className)}>
       {showsInfo &&
-        showsInfo.map((showInfo) => {
+        showsInfo.map((showInfo, index) => {
           return (
-            <div style={{ display: 'flex' }}>
+            <div key={index} style={{ display: 'flex' }}>
               <div className={classNames(classes.showRow)}>
                 <CardMedia
                   className={classes.poster}
@@ -39,12 +40,20 @@ const ShowPanel = ({ className, showsInfo }) => {
                 </Typography>
               </div>
               <div className={classes.actionsIcons}>
-                <div className={classes.iconWrapper}>
+                <IconButton
+                  className={classes.iconWrapper}
+                  disableTouchRipple={true}
+                  disableFocusRipple={true}
+                >
                   <EditIcon />
-                </div>
-                <div className={classes.iconWrapper}>
+                </IconButton>
+                <IconButton
+                  className={classes.iconWrapper}
+                  disableTouchRipple={true}
+                  disableFocusRipple={true}
+                >
                   <DeleteIcon />
-                </div>
+                </IconButton>
               </div>
             </div>
           );
