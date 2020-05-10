@@ -6,6 +6,8 @@ export const USER = gql`
       firstName
       lastName
       email
+      photo
+      favoriteShow
       bio
       city
       country
