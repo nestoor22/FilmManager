@@ -1,7 +1,9 @@
 from math import ceil
+
 import graphene
 from graphene_django import DjangoObjectType
 
+from .logic import ShowsLogic
 from .models import Shows, Actors, Genres
 
 
@@ -31,6 +33,12 @@ class ShowsType(DjangoObjectType):
     def resolve_genres(parent, info):
         return Genres.objects.filter(
             showgenre__show_id=parent.show_id)
+
+
+class ShowRateInput(graphene.InputObjectType):
+    show_id = graphene.Int(required=True)
+    user_id = graphene.Int(required=True)
+    rating = graphene.Float(required=True)
 
 
 class ShowQuery(graphene.ObjectType):
@@ -80,3 +88,15 @@ class ShowQuery(graphene.ObjectType):
             return ceil(Shows.objects.filter(showtype=show_type).count() / number_of_returned_values)
         else:
             return ceil(Shows.objects.all().count() / number_of_returned_values)
+
+
+class SetShowRate(graphene.Mutation):
+    id = graphene.Int()
+
+    class Arguments:
+        show_rate_info = ShowRateInput(required=True)
+
+    @staticmethod
+    def mutate(parent, info, show_rate_info):
+        rate_id = ShowsLogic(show_rate_info).add_rate_for_show()
+        return SetShowRate(id=rate_id)

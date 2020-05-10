@@ -1,5 +1,7 @@
 from django.db import models
 
+from user.models import User
+
 
 class Shows(models.Model):
     show_id = models.AutoField(primary_key=True)
@@ -65,3 +67,16 @@ class ShowGenre(models.Model):
 
     def __str__(self):
         return f"Show-{self.show} Genre-{self.genre}"
+
+
+class ShowRates(models.Model):
+    show = models.ForeignKey(Shows, models.CASCADE)
+    user = models.ForeignKey(User, models.CASCADE)
+
+    rating = models.DecimalField('Rating', max_digits=5, decimal_places=2, default=0)
+
+    class Meta:
+        db_table = 'show_rates'
+
+    def __str__(self):
+        return f"Show-{self.show} rating-{self.rating}"
