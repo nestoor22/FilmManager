@@ -8,6 +8,7 @@ class User(AbstractUser):
 
     email = models.EmailField('Email', unique=True)
     photo = models.FileField('Photo', null=True)
+    favorite_show = models.TextField('Favorite show', null=True)
     first_name = models.TextField('First name', max_length=255)
     last_name = models.TextField('Last name', max_length=255)
     bio = models.TextField('Biography', null=True)

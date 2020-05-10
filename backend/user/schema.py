@@ -18,6 +18,7 @@ class UserInput(graphene.InputObjectType):
     email = graphene.String()
     password = graphene.String()
     bio = graphene.String()
+    favorite_show = graphene.String()
     city = graphene.String()
     country = graphene.String()
     birthday = graphene.Date()

@@ -24,6 +24,7 @@ const initialValues = {
   email: '',
   password: '',
   confirmPassword: '',
+  favoriteShow: '',
   bio: '',
   city: '',
   country: '',
@@ -131,14 +132,25 @@ const RegisterPage = ({ handleSubmit }) => {
               component={CustomCityPicker}
             />
           </div>
-          <Field
-            className={classes.inputIndent}
-            name="birthday"
-            disableFuture={true}
-            placeholder="Tell something about you"
-            label="Birthday"
-            component={SingleDatePicker}
-          />
+          <div
+            className={classes.inlineFieldsWrapper}
+            style={{ marginBottom: 0 }}
+          >
+            <Field
+              style={{ width: 255 }}
+              name="birthday"
+              disableFuture={true}
+              label="Birthday"
+              component={SingleDatePicker}
+            />
+            <Field
+              style={{ width: 255 }}
+              name="favoriteShow"
+              placeholder="Favorite movie/series"
+              label="Favorite movie/series"
+              component={Input}
+            />
+          </div>
           <FormButtons actionLabel="Create account" />
         </form>
       </div>
