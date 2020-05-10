@@ -5,6 +5,7 @@ import TabPanel from './tabs-panel/TabsPanel';
 import ItemsList from './items-list/ItemsList';
 import TextInput from './text-input/TextInput';
 import AppHeader from './app-header/AppHeader';
+import ShowPanel from './show-panel/ShowPanel';
 import Pagination from './pagination/Pagination';
 import SimpleInput from './simple-input/SimpleInput';
 import FormButtons from './form-buttons/FormButtons';
@@ -22,15 +23,20 @@ import ConfirmationDialog from './confirmation-popup/ConfirmationPopup';
 import ShowDetailsDialog from './show-details-dialog/ShowDetailsDialog';
 import CustomCountryPicker from './custom-country-picker/CustomCountryPicker';
 import BoardsStatisticsTab from './boards-statistics-tabs/BoardsStatisticsTab';
+import EditIcon from './custom-icons/EditIcon';
+import DeleteIcon from './custom-icons/DeleteIcon';
 
 export {
   Input,
   Loader,
   ItemCard,
   TabPanel,
+  EditIcon,
   AppHeader,
   TextInput,
   ItemsList,
+  ShowPanel,
+  DeleteIcon,
   Pagination,
   SimpleInput,
   FormButtons,

@@ -11,6 +11,7 @@ const useStyles = makeStyles({
   generalInfo: {
     display: 'flex',
     paddingTop: '20px',
+    width: '100%',
     paddingLeft: '160px',
   },
   avatarImage: {
@@ -23,11 +24,13 @@ const useStyles = makeStyles({
     display: 'flex',
     paddingLeft: '120px',
     paddingTop: '20px',
+    width: '100%',
     flexDirection: 'column',
   },
   avatarWrapper: {
     display: 'flex',
     flexDirection: 'column',
+    minWidth: '220px',
   },
   nameInput: {
     fontSize: '32px',

@@ -1,14 +1,16 @@
 import React from 'react';
 
-import Typography from '@material-ui/core/Typography';
+import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import CakeRoundedIcon from '@material-ui/icons/CakeRounded';
 import EmailRoundedIcon from '@material-ui/icons/EmailRounded';
 import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 
+import { ShowPanel } from 'components';
+
 import useStyles from './styles';
-import Chip from '@material-ui/core/Chip';
 
 const AccountTab = () => {
   const classes = useStyles();
@@ -61,13 +63,9 @@ const AccountTab = () => {
             <Typography className={classes.blockTitle}>
               Given ratings
             </Typography>
-            <div className={classes.infoRow}>
-              <Chip
-                label={'Action'}
-                className={classes.customChip}
-                variant="outlined"
-              />
-            </div>
+            <ShowPanel />
+            <ShowPanel />
+            <ShowPanel />
           </div>
         </div>
       </div>
