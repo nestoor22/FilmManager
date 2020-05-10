@@ -128,7 +128,6 @@ class DeleteShowRate(graphene.Mutation):
     @staticmethod
     def mutate(parent, info, show_rate_id):
         user_id = info.context.session.get('_auth_user_id')
-
         ok = ShowsLogic.delete_show_rate(show_id=show_rate_id, user_id=user_id)
 
-        return SetShowRate(ok=ok)
+        return DeleteShowRate(ok=ok)

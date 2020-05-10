@@ -40,7 +40,6 @@ const useStyles = makeStyles({
     color: '#fff',
   },
   actionsIcons: {
-    width: '100px',
     marginBottom: '10px',
     height: '50px',
     backgroundColor: '#fff',

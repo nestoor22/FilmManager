@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     display: 'flex',
     paddingTop: '20px',
     width: '100%',
-    paddingLeft: '160px',
+    paddingLeft: '110px',
   },
   avatarImage: {
     width: '200px',

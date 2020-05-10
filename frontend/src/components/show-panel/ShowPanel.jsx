@@ -1,16 +1,47 @@
 import React from 'react';
+
 import classNames from 'classnames';
+import { useSnackbar } from 'notistack';
+import { useMutation } from '@apollo/react-hooks';
 
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 
 import { EditIcon, DeleteIcon } from 'components';
+import ConfirmContext from 'contexts/ConfirmContext';
+import { DELETE_RATING } from 'graphql/mutations/user';
 
 import useStyles from './styles';
 
-const ShowPanel = ({ className, showsInfo }) => {
+const ShowPanel = ({ className, showsInfo, refetch }) => {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const confirm = React.useContext(ConfirmContext);
+  const [deleteShowRateId] = useMutation(DELETE_RATING);
+
+  const onDeleteRateHandler = (showRateId) => {
+    confirm({
+      title: 'Are you sure you want to remove your rate?',
+      confirmationText: 'Remove',
+      cancellationText: 'Back',
+    })
+      .then(() => {
+        deleteShowRateId({
+          variables: {
+            showRateId: showRateId,
+          },
+        }).then(() => {
+          enqueueSnackbar('Your rate was successfully removed', {
+            variant: 'success',
+          });
+          refetch();
+        });
+      })
+      .catch(() => {});
+  };
+
   return (
     <div className={classNames(classes.root, className)}>
       {showsInfo &&
@@ -48,6 +79,10 @@ const ShowPanel = ({ className, showsInfo }) => {
                   <EditIcon />
                 </IconButton>
                 <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDeleteRateHandler(showInfo.show.showId);
+                  }}
                   className={classes.iconWrapper}
                   disableTouchRipple={true}
                   disableFocusRipple={true}

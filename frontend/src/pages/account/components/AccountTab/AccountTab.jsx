@@ -19,8 +19,8 @@ import useStyles from './styles';
 const AccountTab = () => {
   const classes = useStyles();
 
-  const { data } = useQuery(USER);
-  console.log(data);
+  const { data, refetch } = useQuery(USER);
+
   return (
     <div className={classes.accountTab}>
       {data && data.user && data.showsRatings && (
@@ -86,7 +86,7 @@ const AccountTab = () => {
               <Typography className={classes.blockTitle}>
                 Given ratings
               </Typography>
-              <ShowPanel showsInfo={data.showsRatings} />
+              <ShowPanel refetch={refetch} showsInfo={data.showsRatings} />
             </div>
           </div>
         </div>

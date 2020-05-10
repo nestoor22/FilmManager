@@ -17,6 +17,7 @@ export const USER = gql`
     showsRatings {
       id
       show {
+        showId
         title
         posterUrl
         releaseDate
@@ -29,6 +30,7 @@ export const USER = gql`
 export const USER_NAME = gql`
   {
     user {
+      id
       firstName
       lastName
     }
