@@ -10,7 +10,6 @@ class Shows(models.Model):
     poster_url = models.CharField(max_length=500, blank=True, null=True)
 
     imdb_rating = models.FloatField(blank=True, null=True)
-    users_rating = models.FloatField(blank=True, null=True)
     release_date = models.IntegerField()
     plot = models.TextField()
 

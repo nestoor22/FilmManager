@@ -4,7 +4,7 @@ import graphene
 from graphene_django import DjangoObjectType
 
 from .logic import ShowsLogic
-from .models import Shows, Actors, Genres
+from .models import Shows, Actors, Genres, ShowRates
 
 
 class ActorsType(DjangoObjectType):
@@ -17,12 +17,18 @@ class GenresType(DjangoObjectType):
         model = Genres
 
 
+class RatesType(DjangoObjectType):
+    class Meta:
+        model = ShowRates
+
+
 class ShowsType(DjangoObjectType):
     class Meta:
         model = Shows
 
     actors = graphene.List(ActorsType)
     genres = graphene.List(GenresType)
+    users_rating = graphene.Float()
 
     @staticmethod
     def resolve_actors(parent, info):
@@ -33,6 +39,10 @@ class ShowsType(DjangoObjectType):
     def resolve_genres(parent, info):
         return Genres.objects.filter(
             showgenre__show_id=parent.show_id)
+
+    @staticmethod
+    def resolve_users_rating(parent, info):
+        return ShowsLogic.compute_show_rate(parent.show_id)
 
 
 class ShowRateInput(graphene.InputObjectType):
@@ -49,7 +59,8 @@ class ShowQuery(graphene.ObjectType):
         order_by=graphene.String(),
         is_random=graphene.Boolean())
 
-    actors = graphene.List(ActorsType, actor_id=graphene.Int())
+    shows_ratings = graphene.List(RatesType)
+    actors = graphene.List(ActorsType, Ra=graphene.Int())
     shows_number_of_pages = graphene.Int(show_type=graphene.String())
 
     @staticmethod
@@ -88,6 +99,10 @@ class ShowQuery(graphene.ObjectType):
             return ceil(Shows.objects.filter(showtype=show_type).count() / number_of_returned_values)
         else:
             return ceil(Shows.objects.all().count() / number_of_returned_values)
+
+    @staticmethod
+    def resolve_shows_ratings(parent, info):
+        return ShowRates.objects.all()
 
 
 class SetShowRate(graphene.Mutation):
