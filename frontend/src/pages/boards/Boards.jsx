@@ -42,18 +42,6 @@ const Boards = () => {
     <div className={classes.root}>
       <AppHeader />
       <div className={classes.content}>
-        <div className={classes.verticalTabs}>
-          <BoardsStatisticsTab
-            title="Your boards"
-            chartData={testChartData}
-            colorsInfo={testColors}
-          />
-          <BoardsStatisticsTab
-            title="Your boards"
-            chartData={testChartData}
-            colorsInfo={testColors}
-          />
-        </div>
         <div className={classes.boardsCardsWrapper}>
           <Typography className={classes.boardsBlockTitle}>
             Latest visited boards
