@@ -106,7 +106,7 @@ const ShowPanel = ({ className, showsInfo, refetch }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       setOpenRateId(showInfo.show.showId);
-                      setOpenRateForm(true);
+                      setOpenRateForm(!openRateForm);
                     }}
                   >
                     <EditIcon />
