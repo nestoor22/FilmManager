@@ -9,7 +9,7 @@ class ShowsLogic(object):
     def add_rate_for_show(self):
         show_rate_instance = ShowRates.objects.filter(
             user_id=self.data.get('user_id'),
-            show_id=self.data.get('show_id')
+            show_id=self.data.get('show_id').first()
         )
 
         if show_rate_instance:
@@ -21,7 +21,7 @@ class ShowsLogic(object):
 
     @staticmethod
     def compute_show_rate(show_id):
-        return ShowRates.objects.all().aggregate(Avg('rating'))['rating__avg']
+        return ShowRates.objects.filter(show_id=show_id).aggregate(Avg('rating'))['rating__avg']
 
     @staticmethod
     def delete_show_rate(show_id, user_id):
