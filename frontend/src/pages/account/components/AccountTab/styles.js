@@ -66,7 +66,7 @@ const useStyles = makeStyles({
     marginTop: '20px',
   },
   ratingsInfo: {
-    marginTop: '20px',
+    marginTop: '0px',
   },
   blockTitle: {
     fontSize: '15px',

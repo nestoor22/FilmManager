@@ -6,6 +6,9 @@ const useStyles = makeStyles({
     maxHeight: 330,
     margin: 20,
   },
+  menuItem: {
+    color: '#335267 !important',
+  },
   title: {
     margin: 0,
     fontSize: '15px',
