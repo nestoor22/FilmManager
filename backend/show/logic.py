@@ -1,6 +1,7 @@
 from django.db.models import Avg
 
-from .models import Shows, ShowRates
+from .models import ShowRates
+
 
 class ShowsLogic(object):
     def __init__(self, data):
@@ -9,12 +10,12 @@ class ShowsLogic(object):
     def add_rate_for_show(self):
         show_rate_instance = ShowRates.objects.filter(
             user_id=self.data.get('user_id'),
-            show_id=self.data.get('show_id').first()
+            show_id=self.data.get('show_id')
         )
 
         if show_rate_instance:
             show_rate_instance.update(**self.data)
-            return show_rate_instance.id
+            return self.data.get('show_id')
         else:
             show_rate_instance = ShowRates.objects.create(**self.data)
             return show_rate_instance.id

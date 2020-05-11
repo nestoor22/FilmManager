@@ -17,6 +17,9 @@ export const SHOWS = gql`
       title
       plot
       posterUrl
+      showtype
+      usersRating
+      currentUserRating
       releaseDate
       imdbRating
       genres {
@@ -27,5 +30,27 @@ export const SHOWS = gql`
       }
     }
     showsNumberOfPages(showType: $showType)
+  }
+`;
+
+export const SINGLE_SHOW = gql`
+  query shows($id: Int) {
+    shows(id: $id) {
+      showId
+      title
+      plot
+      posterUrl
+      showtype
+      usersRating
+      currentUserRating
+      releaseDate
+      imdbRating
+      genres {
+        genreName
+      }
+      actors {
+        name
+      }
+    }
   }
 `;

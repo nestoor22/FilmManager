@@ -29,6 +29,7 @@ class ShowsType(DjangoObjectType):
     actors = graphene.List(ActorsType)
     genres = graphene.List(GenresType)
     users_rating = graphene.Float()
+    current_user_rating = graphene.Float()
 
     @staticmethod
     def resolve_actors(parent, info):
@@ -44,6 +45,17 @@ class ShowsType(DjangoObjectType):
     def resolve_users_rating(parent, info):
         return ShowsLogic.compute_show_rate(parent.show_id)
 
+    @staticmethod
+    def resolve_current_user_rating(parent, info):
+        user_id = info.context.session.get('_auth_user_id')
+
+        try:
+            rate_instance = ShowRates.objects.get(user_id=user_id, show_id=parent.show_id)
+        except ShowRates.DoesNotExist:
+            return None
+
+        return rate_instance.rating
+
 
 class ShowRateInput(graphene.InputObjectType):
     show_id = graphene.Int(required=True)
@@ -53,6 +65,7 @@ class ShowRateInput(graphene.InputObjectType):
 class ShowQuery(graphene.ObjectType):
     shows = graphene.List(
         ShowsType,
+        id=graphene.Int(),
         show_type=graphene.String(),
         page=graphene.Int(),
         order_by=graphene.String(),
@@ -66,12 +79,16 @@ class ShowQuery(graphene.ObjectType):
     def resolve_shows(parent, info, **kwargs):
         number_of_returned_values = 20
         page = kwargs.get('page', 0)
+        show_id = kwargs.get('id')
         offset = number_of_returned_values * page
         show_type = kwargs.get('show_type')
         is_random = kwargs.get('is_random')
         order_by = kwargs.get('order_by', 'show_id')
 
-        if show_type and is_random:
+        if show_id:
+            return Shows.objects.filter(show_id=show_id)
+
+        elif show_type and is_random:
             return Shows.objects.filter(
                 showtype=show_type).order_by(
                 '?')[offset:offset+number_of_returned_values]
@@ -101,7 +118,8 @@ class ShowQuery(graphene.ObjectType):
 
     @staticmethod
     def resolve_shows_ratings(parent, info):
-        return ShowRates.objects.all()
+        user_id = info.context.session.get('_auth_user_id')
+        return ShowRates.objects.filter(user_id=user_id)
 
 
 class SetShowRate(graphene.Mutation):

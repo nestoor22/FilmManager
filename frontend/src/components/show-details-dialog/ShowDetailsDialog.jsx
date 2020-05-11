@@ -101,7 +101,7 @@ const ShowDetailsDialog = ({ open, show, onClose }) => {
                 value={value}
                 index={1}
               >
-                <GeneralShowInfo show={show} />
+                <GeneralShowInfo showId={show.showId} />
               </TabPanel>
               <TabPanel
                 className={classes.tabContentWrapper}

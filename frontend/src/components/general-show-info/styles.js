@@ -14,11 +14,22 @@ const useStyles = makeStyles({
   subheader: {
     fontSize: '15px',
     fontWeight: 'bold',
+    height: '35px',
   },
   description: {
-    fontSize: '18px',
+    fontSize: '15px',
     paddingBottom: '0px',
     paddingTop: '0px',
+  },
+  rateTitle: {
+    color: '#005a81',
+    fontWeight: 'bold',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  ratingsWrapper: {
+    display: 'flex',
   },
   tabsRoot: {
     padding: 0,
@@ -31,6 +42,12 @@ const useStyles = makeStyles({
     border: '1px solid #E2EBF6',
     color: '#fff',
     backgroundColor: '#005a81',
+  },
+  editIconWrapper: {
+    marginLeft: '10px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
 });
 

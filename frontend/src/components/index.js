@@ -6,11 +6,14 @@ import ItemsList from './items-list/ItemsList';
 import TextInput from './text-input/TextInput';
 import AppHeader from './app-header/AppHeader';
 import ShowPanel from './show-panel/ShowPanel';
+import EditIcon from './custom-icons/EditIcon';
 import Pagination from './pagination/Pagination';
+import DeleteIcon from './custom-icons/DeleteIcon';
 import SimpleInput from './simple-input/SimpleInput';
 import FormButtons from './form-buttons/FormButtons';
 import CustomChips from './custom-chips/CustomChips';
 import SingleDatePicker from './date-picker/DatePicker';
+import RateShowForm from './rate-show-form/RateShowForm';
 import CustomChartLegend from './chart-legend/ChartLegend';
 import RadioButtonsGroup from './radio-buttons/RadioButtons';
 import ColorButtonsGroup from './color-buttons/ColorButtons';
@@ -23,8 +26,7 @@ import ConfirmationDialog from './confirmation-popup/ConfirmationPopup';
 import ShowDetailsDialog from './show-details-dialog/ShowDetailsDialog';
 import CustomCountryPicker from './custom-country-picker/CustomCountryPicker';
 import BoardsStatisticsTab from './boards-statistics-tabs/BoardsStatisticsTab';
-import EditIcon from './custom-icons/EditIcon';
-import DeleteIcon from './custom-icons/DeleteIcon';
+import CustomSliderField from './custom-slider-field/CustomSliderField';
 
 export {
   Input,
@@ -41,12 +43,14 @@ export {
   SimpleInput,
   FormButtons,
   CustomChips,
+  RateShowForm,
   PopoverWrapper,
   SimplePieChart,
   GeneralShowInfo,
   CreateBoardPopUp,
   SingleDatePicker,
   CustomCityPicker,
+  CustomSliderField,
   ShowDetailsDialog,
   ColorButtonsGroup,
   RadioButtonsGroup,
