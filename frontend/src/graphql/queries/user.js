@@ -21,8 +21,8 @@ export const USER = gql`
         title
         posterUrl
         releaseDate
+        currentUserRating
       }
-      rating
     }
   }
 `;
