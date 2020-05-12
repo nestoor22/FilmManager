@@ -17,4 +17,3 @@ class Query(graphene.ObjectType):
     def resolve_shows_list(parent, info):
         user_id = info.context.session.get('_auth_user_id')
         return ShowsList.objects.filter(owner_id=user_id)
-

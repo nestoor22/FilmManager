@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'show',
     'boards',
     'lists',
-    'communities'
+    'communities',
 ]
 
 MIDDLEWARE = [
@@ -97,12 +97,14 @@ DATABASES = {
 AUTH_USER_MODEL = 'user.User'
 
 AUTHENTICATION_BACKENDS = (
-        'django.contrib.auth.backends.RemoteUserBackend',
-        'user.email_auth.EmailBackend',
-        'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.RemoteUserBackend',
+    'user.email_auth.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
-GRAPHENE = {'SCHEMA': 'FilmManager.schema.schema', }
+GRAPHENE = {
+    'SCHEMA': 'FilmManager.schema.schema',
+}
 
 SESSION_COOKIE_DOMAIN = 'localhost'
 # Password validation
@@ -112,15 +114,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
 

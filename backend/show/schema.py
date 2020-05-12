@@ -33,13 +33,11 @@ class ShowsType(DjangoObjectType):
 
     @staticmethod
     def resolve_actors(parent, info):
-        return Actors.objects.filter(
-            showactors__show_id=parent.show_id)
+        return Actors.objects.filter(showactors__show_id=parent.show_id)
 
     @staticmethod
     def resolve_genres(parent, info):
-        return Genres.objects.filter(
-            showgenre__show_id=parent.show_id)
+        return Genres.objects.filter(showgenre__show_id=parent.show_id)
 
     @staticmethod
     def resolve_users_rating(parent, info):
@@ -50,7 +48,9 @@ class ShowsType(DjangoObjectType):
         user_id = info.context.session.get('_auth_user_id')
 
         try:
-            rate_instance = ShowRates.objects.get(user_id=user_id, show_id=parent.show_id)
+            rate_instance = ShowRates.objects.get(
+                user_id=user_id, show_id=parent.show_id
+            )
         except ShowRates.DoesNotExist:
             return None
 
@@ -69,7 +69,8 @@ class ShowQuery(graphene.ObjectType):
         show_type=graphene.String(),
         page=graphene.Int(),
         order_by=graphene.String(),
-        is_random=graphene.Boolean())
+        is_random=graphene.Boolean(),
+    )
 
     shows_ratings = graphene.List(RatesType)
     actors = graphene.List(ActorsType, Ra=graphene.Int())
@@ -89,18 +90,19 @@ class ShowQuery(graphene.ObjectType):
             return Shows.objects.filter(show_id=show_id)
 
         elif show_type and is_random:
-            return Shows.objects.filter(
-                showtype=show_type).order_by(
-                '?')[offset:offset+number_of_returned_values]
+            return Shows.objects.filter(showtype=show_type).order_by('?')[
+                offset : offset + number_of_returned_values
+            ]
 
         elif show_type:
-            return Shows.objects.filter(
-                showtype=show_type).order_by(
-                order_by)[offset:offset + number_of_returned_values]
+            return Shows.objects.filter(showtype=show_type).order_by(order_by)[
+                offset : offset + number_of_returned_values
+            ]
 
         else:
-            return Shows.objects.all().order_by(
-                order_by)[offset:offset+number_of_returned_values]
+            return Shows.objects.all().order_by(order_by)[
+                offset : offset + number_of_returned_values
+            ]
 
     @staticmethod
     def resolve_actors(parent, info):
@@ -112,7 +114,10 @@ class ShowQuery(graphene.ObjectType):
         show_type = kwargs.get('show_type')
 
         if show_type:
-            return ceil(Shows.objects.filter(showtype=show_type).count() / number_of_returned_values)
+            return ceil(
+                Shows.objects.filter(showtype=show_type).count()
+                / number_of_returned_values
+            )
         else:
             return ceil(Shows.objects.all().count() / number_of_returned_values)
 

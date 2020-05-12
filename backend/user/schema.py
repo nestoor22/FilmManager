@@ -69,8 +69,8 @@ class SignIn(graphene.Mutation):
     @staticmethod
     def mutate(parent, info, **kwargs):
         user = authenticate(
-            username=kwargs.get('email'),
-            password=kwargs.get('password'))
+            username=kwargs.get('email'), password=kwargs.get('password')
+        )
 
         if not user:
             raise Exception('Incorrect credentials')
@@ -80,7 +80,8 @@ class SignIn(graphene.Mutation):
             id=user.id,
             first_name=user.first_name,
             last_name=user.last_name,
-            email=user.email)
+            email=user.email,
+        )
 
 
 class LogOut(graphene.Mutation):

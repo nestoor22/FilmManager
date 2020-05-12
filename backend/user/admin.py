@@ -8,7 +8,11 @@ from .models import User
 class UserCreationForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', )
+        fields = (
+            'email',
+            'first_name',
+            'last_name',
+        )
 
 
 class UserAdmin(ModelAdmin):
@@ -16,14 +20,24 @@ class UserAdmin(ModelAdmin):
 
     model = User
 
-    list_display = ('email', 'first_name', 'last_name', )
-    list_filter = ('email', 'first_name', 'last_name', )
+    list_display = (
+        'email',
+        'first_name',
+        'last_name',
+    )
+    list_filter = (
+        'email',
+        'first_name',
+        'last_name',
+    )
 
     ordering = ['id']
 
     def get_readonly_fields(self, request, obj=None):
         if obj:
-            return ['email', ]
+            return [
+                'email',
+            ]
         else:
             return []
 

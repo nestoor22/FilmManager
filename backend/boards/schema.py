@@ -60,8 +60,11 @@ class SetLastVisitedBoard(graphene.Mutation):
         if last_visited_board_id in last_visited_boards:
             last_visited_boards.remove(last_visited_board_id)
 
-        info.context.session['last_boards'] = [last_visited_board_id] + last_visited_boards[:2] \
-            if len(last_visited_boards) == 4 else [last_visited_board_id] + last_visited_boards
+        info.context.session['last_boards'] = (
+            [last_visited_board_id] + last_visited_boards[:2]
+            if len(last_visited_boards) == 4
+            else [last_visited_board_id] + last_visited_boards
+        )
 
         return SetLastVisitedBoard(ok=True)
 

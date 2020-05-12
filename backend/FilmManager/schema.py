@@ -5,7 +5,7 @@ from user.schema import SignIn, UserQuery, CreateUser, LogOut
 from boards.schema import BoardsQuery, CreateBoardMutation, SetLastVisitedBoard
 
 
-class Query( BoardsQuery, ShowQuery, UserQuery):
+class Query(BoardsQuery, ShowQuery, UserQuery):
     pass
 
 
