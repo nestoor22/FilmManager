@@ -1,12 +1,12 @@
 import graphene
 
-from lists.schema import AddShowToList, CreateList
 from user.schema import SignIn, UserQuery, CreateUser, LogOut
 from show.schema import ShowQuery, SetShowRate, DeleteShowRate
+from lists.schema import AddShowToList, CreateList, ShowsListsQuery
 from boards.schema import BoardsQuery, CreateBoardMutation, SetLastVisitedBoard
 
 
-class Query(BoardsQuery, ShowQuery, UserQuery):
+class Query(ShowsListsQuery, BoardsQuery, ShowQuery, UserQuery):
     pass
 
 
