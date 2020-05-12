@@ -20,7 +20,7 @@ class ShowsList(models.Model):
         return f'List-{self.id}'
 
 
-class ListShow(models.Model):
+class ListShowRelation(models.Model):
     list = models.ForeignKey(ShowsList, on_delete=models.CASCADE)
     show = models.ForeignKey(Shows, on_delete=models.CASCADE)
 
