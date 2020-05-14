@@ -27,6 +27,7 @@ class CreateList(graphene.Mutation):
 
     class Arguments:
         list_name = graphene.String()
+        shows_on_list = graphene.List(graphene.Int)
         board_id = graphene.Int()
 
     @staticmethod
