@@ -31,9 +31,51 @@ const useStyles = makeStyles({
   },
   list: {
     width: '250px',
-    height: '500px',
-    backgroundColor: '#fff',
+    height: 'fit-content',
+    backgroundColor: '#cfdfea',
     margin: '10px',
+    borderRadius: '3px'
+  },
+  listTitleWrapper: {
+    height: '24px',
+    display: 'flex',
+    alignItems: 'center',
+    width: '100%',
+  },
+  listItemsWrapper: {
+    padding: '5px',
+  },
+  listTitle: {
+    fontSize: '18px',
+    paddingLeft: '20px',
+    fontWeight: 'bold',
+  },
+  showRow: {
+    height: '30px',
+    position: 'relative',
+    width: '100%',
+    borderRadius: '3px',
+    paddingRight: '10px',
+    marginBottom: '5px',
+    display: 'flex',
+    alignItems: 'center',
+    backgroundColor: '#0a2b5c',
+  },
+  poster: {
+    borderTopLeftRadius: '3px',
+    borderBottomLeftRadius: '3px',
+    height: '30px',
+    width: '20px',
+  },
+  showTitle: {
+    paddingLeft: '20px',
+    width: '200px',
+    fontSize: '15px',
+    color: '#fff',
+  },
+  releaseYear: {
+    paddingLeft: '20px',
+    color: '#fff',
   },
   addNewCard: {
     display: 'flex',

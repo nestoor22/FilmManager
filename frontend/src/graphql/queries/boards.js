@@ -30,14 +30,19 @@ export const BOARD = gql`
       isOpen
       name
       createdAt
-    }
-    lastVisitedBoards {
-      id
-      sharedTimes
-      backgroundColor
-      isOpen
-      name
-      createdAt
+      lists {
+        id
+        name
+        showsOnList {
+          id
+          show {
+            showId
+            posterUrl
+            title
+            releaseDate
+          }
+        }
+      }
     }
   }
 `;
