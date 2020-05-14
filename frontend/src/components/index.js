@@ -27,6 +27,7 @@ import ShowDetailsDialog from './show-details-dialog/ShowDetailsDialog';
 import CustomCountryPicker from './custom-country-picker/CustomCountryPicker';
 import BoardsStatisticsTab from './boards-statistics-tabs/BoardsStatisticsTab';
 import CustomSliderField from './custom-slider-field/CustomSliderField';
+import CreateListPopup from './create-list-popup/CreateListPopup';
 
 export {
   Input,
@@ -47,6 +48,7 @@ export {
   PopoverWrapper,
   SimplePieChart,
   GeneralShowInfo,
+  CreateListPopup,
   CreateBoardPopUp,
   SingleDatePicker,
   CustomCityPicker,

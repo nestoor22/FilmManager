@@ -7,22 +7,13 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import { AppHeader, BoardsStatisticsTab, CreateBoardPopUp } from 'components';
+import { AppHeader, CreateBoardPopUp } from 'components';
 
 import { BOARDS } from 'graphql/queries/boards';
 import { SET_LAST_VISITED_BOARD } from 'graphql/mutations/boards';
 
 import useStyles from './styles';
 
-const testChartData = [
-  { name: 'Private', value: 43, legendTitle: 'Private' },
-  { name: 'Public', value: 57, legendTitle: 'Public' },
-];
-
-const testColors = {
-  Private: '#034a5a',
-  Public: '#12c3e2',
-};
 const Boards = () => {
   const classes = useStyles();
   document.body.style.backgroundColor = '#254052';

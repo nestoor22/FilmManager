@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 import { BOARD } from 'graphql/queries/boards';
-import { AppHeader, PopoverWrapper } from 'components';
+import { AppHeader, CreateListPopup, PopoverWrapper } from 'components';
 
 import useStyles from './styles';
 import classNames from 'classnames';
@@ -22,8 +22,13 @@ const OpenBoard = () => {
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
   const [copied, setCopied] = React.useState(false);
-  const { data } = useQuery(BOARD, { variables: { boardId: id } });
+  const [open, setOpen] = React.useState(false);
 
+  const { data, refetch } = useQuery(BOARD, { variables: { boardId: id } });
+
+  const onCloseHandler = () => {
+    setOpen(false);
+  };
   React.useEffect(() => {
     if (data) {
       document.body.style.backgroundColor = data.board.backgroundColor;
@@ -91,7 +96,7 @@ const OpenBoard = () => {
               </div>
             );
           })}
-        <Button classes={{ root: classes.createNewButton }}>
+        <Button onClick={setOpen} classes={{ root: classes.createNewButton }}>
           <div className={classes.addNewCard}>
             <AddCircleOutlineIcon className={classes.addNewIcon} />
             <Typography className={classes.createNewButtonText}>
@@ -99,6 +104,11 @@ const OpenBoard = () => {
             </Typography>
           </div>
         </Button>
+        <CreateListPopup
+          open={open}
+          onClose={onCloseHandler}
+          refetch={refetch}
+        />
       </div>
     </div>
   );

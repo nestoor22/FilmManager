@@ -13,7 +13,7 @@ function ItemsList({ query, showType }) {
     setPage(value);
   };
 
-  const { data, refetch } = useQuery(query, {
+  const { data } = useQuery(query, {
     variables: {
       showType: showType,
       page: page - 1,
