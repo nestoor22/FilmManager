@@ -8,6 +8,7 @@ import AppHeader from './app-header/AppHeader';
 import ShowPanel from './show-panel/ShowPanel';
 import EditIcon from './custom-icons/EditIcon';
 import Pagination from './pagination/Pagination';
+import ChipsInput from './chips-input/ChipsInput';
 import DeleteIcon from './custom-icons/DeleteIcon';
 import SimpleInput from './simple-input/SimpleInput';
 import FormButtons from './form-buttons/FormButtons';
@@ -15,6 +16,7 @@ import CustomChips from './custom-chips/CustomChips';
 import SingleDatePicker from './date-picker/DatePicker';
 import RateShowForm from './rate-show-form/RateShowForm';
 import CustomChartLegend from './chart-legend/ChartLegend';
+import AsyncChipsInput from './chips-input/AsyncChipsInput';
 import RadioButtonsGroup from './radio-buttons/RadioButtons';
 import ColorButtonsGroup from './color-buttons/ColorButtons';
 import PopoverWrapper from './popover-wrapper/PopoverWrapper';
@@ -39,6 +41,7 @@ export {
   TextInput,
   ItemsList,
   ShowPanel,
+  ChipsInput,
   DeleteIcon,
   Pagination,
   SimpleInput,
@@ -48,6 +51,7 @@ export {
   PopoverWrapper,
   SimplePieChart,
   GeneralShowInfo,
+  AsyncChipsInput,
   CreateListPopup,
   CreateBoardPopUp,
   SingleDatePicker,
