@@ -9,6 +9,7 @@ from show.models import Shows
 class ShowsList(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.TextField(null=False)
+    description = models.TextField(null=True)
     created_at = models.DateTimeField(null=True, default=datetime.now)
     shared_times = models.IntegerField(null=True, default=0)
 

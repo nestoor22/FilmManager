@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
-import { Input, FormButtons, ChipsInput, AsyncChipsInput } from 'components';
+import { Input, FormButtons, TextInput, AsyncChipsInput } from 'components';
 
 import { SHOWS_BY_NAME } from 'graphql/queries/shows';
 import { CREATE_LIST } from 'graphql/mutations/lists';
@@ -19,6 +19,7 @@ import useStyles from './styles';
 
 const initialValues = {
   listName: '',
+  description: '',
   showsOnList: [],
 };
 
@@ -33,6 +34,7 @@ const CreateListPopup = ({ open, onClose, boardId, listData, refetch }) => {
       variables: {
         boardId: boardId,
         listName: listData.listName,
+        description: listData.description,
         showsOnList: listData.showsOnList.map((show) => show.showId),
       },
     }).then(() => {
@@ -58,6 +60,12 @@ const CreateListPopup = ({ open, onClose, boardId, listData, refetch }) => {
           name="listName"
           className={classes.input}
           component={Input}
+        />
+        <Field
+          label="Description"
+          name="description"
+          className={classes.input}
+          component={TextInput}
         />
         <Field
           label="Add movie/series to list"
