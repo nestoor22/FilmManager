@@ -70,6 +70,7 @@ class ShowQuery(graphene.ObjectType):
         page=graphene.Int(),
         order_by=graphene.String(),
         is_random=graphene.Boolean(),
+        start_with=graphene.String()
     )
 
     shows_ratings = graphene.List(RatesType)
@@ -85,23 +86,27 @@ class ShowQuery(graphene.ObjectType):
         show_type = kwargs.get('show_type')
         is_random = kwargs.get('is_random')
         order_by = kwargs.get('order_by', 'show_id')
+        start_with = kwargs.get('start_with', None)
 
         if show_id:
             return Shows.objects.filter(show_id=show_id)
 
+        elif start_with is not None:
+            return Shows.objects.filter(title__istartswith=start_with).order_by('?')[:11]
+
         elif show_type and is_random:
             return Shows.objects.filter(showtype=show_type).order_by('?')[
-                offset : offset + number_of_returned_values
+                offset:offset + number_of_returned_values
             ]
 
         elif show_type:
             return Shows.objects.filter(showtype=show_type).order_by(order_by)[
-                offset : offset + number_of_returned_values
+                offset:offset + number_of_returned_values
             ]
 
         else:
             return Shows.objects.all().order_by(order_by)[
-                offset : offset + number_of_returned_values
+                offset:offset + number_of_returned_values
             ]
 
     @staticmethod
