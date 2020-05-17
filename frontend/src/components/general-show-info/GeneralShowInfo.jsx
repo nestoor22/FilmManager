@@ -98,31 +98,33 @@ function GeneralShowInfo({ showId }) {
                     {show.usersRating ? show.usersRating : 'No info'}
                   </ListItem>
                 </div>
-                <div className={classes.ratingBlock}>
-                  <ListSubheader className={classes.subheader}>
-                    Your rating
-                  </ListSubheader>
-                  <ListItem className={classes.description}>
-                    {show.currentUserRating ? (
-                      <div style={{ display: 'flex' }}>
-                        <div>{show.currentUserRating}</div>
-                        <div
-                          className={classes.editIconWrapper}
+                {data.isLoggedIn && (
+                  <div className={classes.ratingBlock}>
+                    <ListSubheader className={classes.subheader}>
+                      Your rating
+                    </ListSubheader>
+                    <ListItem className={classes.description}>
+                      {show.currentUserRating ? (
+                        <div style={{ display: 'flex' }}>
+                          <div>{show.currentUserRating}</div>
+                          <div
+                            className={classes.editIconWrapper}
+                            onClick={() => setOpenRateForm(true)}
+                          >
+                            <EditIcon width={12} height={12} />
+                          </div>
+                        </div>
+                      ) : (
+                        <Typography
+                          className={classes.rateTitle}
                           onClick={() => setOpenRateForm(true)}
                         >
-                          <EditIcon width={12} height={12} />
-                        </div>
-                      </div>
-                    ) : (
-                      <Typography
-                        className={classes.rateTitle}
-                        onClick={() => setOpenRateForm(true)}
-                      >
-                        Rate now
-                      </Typography>
-                    )}
-                  </ListItem>
-                </div>
+                          Rate now
+                        </Typography>
+                      )}
+                    </ListItem>
+                  </div>
+                )}
               </div>
               {openRateForm && (
                 <RateShowForm

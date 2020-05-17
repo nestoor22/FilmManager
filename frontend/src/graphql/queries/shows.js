@@ -52,5 +52,6 @@ export const SINGLE_SHOW = gql`
         name
       }
     }
+    isLoggedIn
   }
 `;

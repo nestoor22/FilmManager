@@ -29,7 +29,7 @@ export const USER = gql`
 
 export const USER_NAME = gql`
   {
-    user {
+    userName {
       id
       firstName
       lastName
