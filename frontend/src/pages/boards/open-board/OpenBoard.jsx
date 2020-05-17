@@ -16,6 +16,7 @@ import { AppHeader, CreateListPopup, PopoverWrapper } from 'components';
 import useStyles from './styles';
 import classNames from 'classnames';
 import CardMedia from '@material-ui/core/CardMedia';
+import { connect } from 'react-redux';
 
 const OpenBoard = () => {
   const classes = useStyles();
@@ -109,6 +110,7 @@ const OpenBoard = () => {
         </Button>
         <CreateListPopup
           open={open}
+          boardId={id}
           onClose={onCloseHandler}
           refetch={refetch}
         />

@@ -12,24 +12,39 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 import { Input, FormButtons, ChipsInput, AsyncChipsInput } from 'components';
 
+import { SHOWS_BY_NAME } from 'graphql/queries/shows';
+import { CREATE_LIST } from 'graphql/mutations/lists';
+import validate from './validate';
+
 import useStyles from './styles';
-import { SHOWS_BY_NAME } from '../../graphql/queries/shows';
 
 const initialValues = {
-  name: '',
+  listName: '',
   showsOnList: [],
   invitedFriends: [],
 };
 
 const CreateListPopup = ({ open, onClose, boardId, listData, refetch }) => {
   const classes = useStyles();
-  console.log(listData);
+
+  const [createList] = useMutation(CREATE_LIST);
   const { enqueueSnackbar } = useSnackbar();
 
-  React.useEffect(() => {
-    refetch();
-  });
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    createList({
+      variables: {
+        boardId: boardId,
+        listName: listData.listName,
+        showsOnList: listData.showsOnList.map((show) => show.showId),
+      },
+    }).then(() => {
+      enqueueSnackbar('List successfully created !', {
+        variant: 'success',
+      });
+      onClose();
+      refetch();
+    });
+  };
 
   return (
     <Dialog open={open} classes={{ paper: classes.creationPopUp }}>
@@ -42,7 +57,7 @@ const CreateListPopup = ({ open, onClose, boardId, listData, refetch }) => {
       <div className={classes.formWrapper}>
         <Field
           label="List name"
-          name="name"
+          name="listName"
           className={classes.input}
           component={Input}
         />

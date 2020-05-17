@@ -25,7 +25,6 @@ const AsyncChipsInput = ({
   query,
   queryName,
   optionLabel,
-  remove,
   meta: { touched, error },
 }) => {
   const classes = useStyles();
