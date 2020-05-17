@@ -1,5 +1,5 @@
 import React from 'react';
-
+import classNames from 'classnames';
 import { useSnackbar } from 'notistack';
 import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import Button from '@material-ui/core/Button';
 import ShareIcon from '@material-ui/icons/Share';
+import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
@@ -14,9 +15,6 @@ import { BOARD } from 'graphql/queries/boards';
 import { AppHeader, CreateListPopup, PopoverWrapper } from 'components';
 
 import useStyles from './styles';
-import classNames from 'classnames';
-import CardMedia from '@material-ui/core/CardMedia';
-import { connect } from 'react-redux';
 
 const OpenBoard = () => {
   const classes = useStyles();

@@ -14,7 +14,6 @@ import { Input, FormButtons, ChipsInput, AsyncChipsInput } from 'components';
 
 import { SHOWS_BY_NAME } from 'graphql/queries/shows';
 import { CREATE_LIST } from 'graphql/mutations/lists';
-import validate from './validate';
 
 import useStyles from './styles';
 
