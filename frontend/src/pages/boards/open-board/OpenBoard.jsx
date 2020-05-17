@@ -71,9 +71,9 @@ const OpenBoard = () => {
                   </Typography>
                 </div>
                 <div className={classes.listItemsWrapper}>
-                  {list.showsOnList.map((showOnList) => {
+                  {list.showsOnList.map((showOnList, index) => {
                     return (
-                      <div className={classNames(classes.showRow)}>
+                      <div key={index} className={classNames(classes.showRow)}>
                         <CardMedia
                           className={classes.poster}
                           component="img"

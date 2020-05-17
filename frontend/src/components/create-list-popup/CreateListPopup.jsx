@@ -20,7 +20,6 @@ import useStyles from './styles';
 const initialValues = {
   listName: '',
   showsOnList: [],
-  invitedFriends: [],
 };
 
 const CreateListPopup = ({ open, onClose, boardId, listData, refetch }) => {
@@ -61,13 +60,6 @@ const CreateListPopup = ({ open, onClose, boardId, listData, refetch }) => {
           component={Input}
         />
         <Field
-          label="Invite friends"
-          name="invitedFriends"
-          placeholder="Add emails. Hit Enter to add"
-          className={classes.input}
-          component={ChipsInput}
-        />
-        <Field
           label="Add movie/series to list"
           name="showsOnList"
           query={SHOWS_BY_NAME}
@@ -80,7 +72,7 @@ const CreateListPopup = ({ open, onClose, boardId, listData, refetch }) => {
       </div>
       <FormButtons
         actionLabel="Save"
-        cancelPath={`boards/${boardId}`}
+        cancelPath={`${boardId}`}
         setOpenPopup={onClose}
         onSubmitHandler={onSubmit}
       />

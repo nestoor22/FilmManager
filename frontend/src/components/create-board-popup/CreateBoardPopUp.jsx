@@ -15,6 +15,7 @@ import {
   FormButtons,
   ColorButtonsGroup,
   RadioButtonsGroup,
+  ChipsInput,
 } from 'components';
 
 import { CREATE_BOARD } from 'graphql/mutations/boards';
@@ -26,6 +27,7 @@ const initialValues = {
   name: '',
   color: '',
   type: 'Private',
+  invitedFriends: [],
   team: '',
 };
 const CreateBoardPopUp = ({
@@ -39,14 +41,12 @@ const CreateBoardPopUp = ({
   const [createBoard] = useMutation(CREATE_BOARD);
   const { enqueueSnackbar } = useSnackbar();
 
-  React.useEffect(() => {
-    refetch();
-  });
   const onSubmit = () => {
     const preparedData = getPreparedBoardDataForCreation(boardData);
     createBoard({ variables: { board: { ...preparedData } } }).then(() => {
       onClose(false);
       enqueueSnackbar('Your board created !', { variant: 'success' });
+      refetch();
     });
   };
 
@@ -72,6 +72,15 @@ const CreateBoardPopUp = ({
           className={classes.input}
           component={RadioButtonsGroup}
         />
+        {!isTeamBoard && (
+          <Field
+            label="Invite friends"
+            name="invitedFriends"
+            placeholder="Add emails. Hit Enter to add"
+            className={classes.input}
+            component={ChipsInput}
+          />
+        )}
         {isTeamBoard && (
           <Field
             label="Team name"
