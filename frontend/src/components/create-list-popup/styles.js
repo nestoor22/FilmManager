@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     padding: '30px',
   },
   input: {
-    width: '80%',
+    width: '100%',
     marginBottom: '30px',
   },
   radioGroupRootClass: {

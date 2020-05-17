@@ -55,3 +55,14 @@ export const SINGLE_SHOW = gql`
     isLoggedIn
   }
 `;
+
+export const SHOWS_BY_NAME = gql`
+  query shows($startWith: String) {
+    shows(startWith: $startWith) {
+      showId
+      title
+      posterUrl
+      releaseDate
+    }
+  }
+`;

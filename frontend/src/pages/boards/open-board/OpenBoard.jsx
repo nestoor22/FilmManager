@@ -96,7 +96,10 @@ const OpenBoard = () => {
               </div>
             );
           })}
-        <Button onClick={setOpen} classes={{ root: classes.createNewButton }}>
+        <Button
+          onClick={() => setOpen(true)}
+          classes={{ root: classes.createNewButton }}
+        >
           <div className={classes.addNewCard}>
             <AddCircleOutlineIcon className={classes.addNewIcon} />
             <Typography className={classes.createNewButtonText}>
