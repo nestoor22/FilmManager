@@ -28,6 +28,7 @@ class UserQuery(graphene.ObjectType):
     user = Field(UserType)
     users = List(UserType)
     user_name = Field(UserType)
+    is_logged_in = graphene.Boolean()
 
     @staticmethod
     def resolve_user(parent, info):
@@ -47,6 +48,10 @@ class UserQuery(graphene.ObjectType):
             return None
 
         return User.objects.get(id=user_id)
+
+    @staticmethod
+    def resolve_is_logged_in(parent, info):
+        return True if info.context.session.get('_auth_user_id') else False
 
 
 class CreateUser(graphene.Mutation):
