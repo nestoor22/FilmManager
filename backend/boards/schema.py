@@ -81,6 +81,8 @@ class BoardsQuery(graphene.ObjectType):
     @staticmethod
     def resolve_boards(parent, info):
         user_id = info.context.session.get('_auth_user_id')
+        if not user_id:
+            raise Exception('User is not logged in')
         return Board.objects.filter(owner_id=user_id).order_by('created_at')
 
     @staticmethod

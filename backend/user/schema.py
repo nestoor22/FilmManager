@@ -27,17 +27,26 @@ class UserInput(graphene.InputObjectType):
 class UserQuery(graphene.ObjectType):
     user = Field(UserType)
     users = List(UserType)
+    user_name = Field(UserType)
 
     @staticmethod
     def resolve_user(parent, info):
         user_id = info.context.session.get('_auth_user_id')
         if not user_id:
-            return None
+            raise Exception('User is not logged in')
         return User.objects.get(id=user_id)
 
     @staticmethod
     def resolve_users(parent, info):
         return User.objects.all()
+
+    @staticmethod
+    def resolve_user_name(parent, info):
+        user_id = info.context.session.get('_auth_user_id')
+        if not user_id:
+            return None
+
+        return User.objects.get(id=user_id)
 
 
 class CreateUser(graphene.Mutation):
