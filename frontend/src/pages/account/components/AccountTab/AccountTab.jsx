@@ -19,7 +19,10 @@ import useStyles from './styles';
 const AccountTab = () => {
   const classes = useStyles();
 
-  const { data, refetch } = useQuery(USER);
+  const { data, refetch } = useQuery(USER, {
+    fetchPolicy: 'no-cache',
+    notifyOnNetworkStatusChange: true,
+  });
 
   return (
     <div className={classes.accountTab}>

@@ -69,7 +69,7 @@ export default function AppHeader({ className }) {
           <MenuLink to="/lists" label="Lists" />
           <MenuLink to="/#" label="Communities" />
           <MenuLink to="/#" label="Messages" />
-          {data && data.user && (
+          {data && data.userName && (
             <div>
               <Button
                 ref={anchorRef}
@@ -78,7 +78,7 @@ export default function AppHeader({ className }) {
                 onClick={handleToggle}
                 classes={{ root: classes.button }}
               >
-                {data.user.firstName} {data.user.lastName}
+                {data.userName.firstName} {data.userName.lastName}
               </Button>
               <Popper
                 open={open}
@@ -134,7 +134,7 @@ export default function AppHeader({ className }) {
               </Popper>
             </div>
           )}
-          {data && !data.user && <MenuLink to="/login" label="Login" />}
+          {data && !data.userName && <MenuLink to="/login" label="Login" />}
         </ul>
       </nav>
     </AppBar>
