@@ -54,7 +54,7 @@ class CreateBoardMutation(graphene.Mutation):
 
         board_info['owner_id'] = info.context.session.get('_auth_user_id')
 
-        board = BoardLogic.create_board(board_info)
+        board = BoardLogic(board_info).create_board()
 
         return CreateBoardMutation(id=board.id)
 

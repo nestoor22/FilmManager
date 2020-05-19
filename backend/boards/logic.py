@@ -20,7 +20,7 @@ class BoardLogic(object):
     def add_members_to_board(board_id, members_list):
         for member_email in members_list:
             try:
-                user = User.objects.get(email=member_email)
+                user = User.objects.get(email=member_email.strip())
             except User.DoesNotExist:
                 continue
 

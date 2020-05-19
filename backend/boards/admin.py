@@ -1,8 +1,7 @@
 from django.contrib import admin
 
-from .models import Board, BoardLists
+from .models import Board, BoardLists, BoardMembers
 
 admin.site.register(Board)
 admin.site.register(BoardLists)
-
-# Register your models here.
+admin.site.register(BoardMembers)
