@@ -34,3 +34,15 @@ class BoardLists(models.Model):
 
     def __str__(self):
         return f'Board-{self.board.id} List-{self.list.id}'
+
+
+class BoardMembers(models.Model):
+    board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'board_members'
+        verbose_name = 'Board member'
+
+    def __str__(self):
+        return f'Board-{self.board.id} has member-{self.user.id}'

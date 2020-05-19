@@ -4,7 +4,13 @@ from graphene_django import DjangoObjectType
 
 from lists.models import ShowsList
 from lists.schema import ShowsListType
-from .models import Board, BoardLists
+from .logic import BoardLogic
+from .models import Board, BoardLists, BoardMembers
+
+
+class BoardMemberType(DjangoObjectType):
+    class Meta:
+        model = BoardMembers
 
 
 class BoardType(DjangoObjectType):
@@ -12,10 +18,15 @@ class BoardType(DjangoObjectType):
         model = Board
 
     lists = graphene.List(ShowsListType)
+    members = graphene.List(BoardMemberType)
 
     @staticmethod
     def resolve_lists(parent, info):
         return ShowsList.objects.filter(boardlists__board__id=parent.id)
+
+    @staticmethod
+    def resolve_members(parent, info):
+        return BoardMembers.objects.filter(board_id=parent.id)
 
 
 class BoardListType(DjangoObjectType):
@@ -28,6 +39,7 @@ class BoardInputType(graphene.InputObjectType):
     background_color = graphene.String()
     is_open = graphene.Boolean()
     is_private = graphene.Boolean()
+    invited_members = graphene.List(graphene.String)
 
 
 class CreateBoardMutation(graphene.Mutation):
@@ -42,7 +54,7 @@ class CreateBoardMutation(graphene.Mutation):
 
         board_info['owner_id'] = info.context.session.get('_auth_user_id')
 
-        board = Board.objects.create(**board_info)
+        board = BoardLogic.create_board(board_info)
 
         return CreateBoardMutation(id=board.id)
 
