@@ -34,7 +34,7 @@ const useStyles = makeStyles({
     height: 'fit-content',
     backgroundColor: '#cfdfea',
     margin: '10px',
-    borderRadius: '3px'
+    borderRadius: '3px',
   },
   listTitleWrapper: {
     height: '24px',
@@ -95,6 +95,46 @@ const useStyles = makeStyles({
       outline: 'none',
     },
   },
+  membersAvatarsList: {
+    height: '100%',
+    display: 'flex',
+    paddingLeft: '100px',
+    alignItems: 'center',
+  },
+  avatarImage: {
+    height: '30px',
+    width: '30px',
+    fontSize: '15px',
+    '&:not(:first-child)': {
+      marginLeft: -13,
+    },
+    '&:hover': {
+      transform: 'scale(1.05, 1.05)',
+      cursor: 'pointer',
+      zIndex: 999,
+    },
+  },
+  addNewMember: {
+    marginLeft: '20px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  numberIcon: {
+    display: 'flex',
+    alignItems: 'center',
+    height: '30px',
+    width: '30px',
+  },
+  menuButton: {
+    '&:focus': {
+      outline: 'none',
+    },
+  },
+  menu: {
+    position: 'absolute',
+    right: '40px'
+  }
 });
 
 export default useStyles;

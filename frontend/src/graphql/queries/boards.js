@@ -30,6 +30,19 @@ export const BOARD = gql`
       isOpen
       name
       createdAt
+      owner {
+        id
+        firstName
+        lastName
+        email
+        photo
+      }
+      members {
+        firstName
+        lastName
+        email
+        photo
+      }
       lists {
         id
         name
