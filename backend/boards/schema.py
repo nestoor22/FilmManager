@@ -4,6 +4,7 @@ from graphene_django import DjangoObjectType
 
 from lists.models import ShowsList
 from lists.schema import ShowsListType
+from user.schema import UserType, User
 from .logic import BoardLogic
 from .models import Board, BoardLists, BoardMembers
 
@@ -18,7 +19,7 @@ class BoardType(DjangoObjectType):
         model = Board
 
     lists = graphene.List(ShowsListType)
-    members = graphene.List(BoardMemberType)
+    members = graphene.List(UserType)
 
     @staticmethod
     def resolve_lists(parent, info):
@@ -26,7 +27,7 @@ class BoardType(DjangoObjectType):
 
     @staticmethod
     def resolve_members(parent, info):
-        return BoardMembers.objects.filter(board_id=parent.id)
+        return User.objects.filter(boardmembers__board_id=parent.id)
 
 
 class BoardListType(DjangoObjectType):

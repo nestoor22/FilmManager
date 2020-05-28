@@ -12,6 +12,9 @@ class BoardLogic(object):
         invited_members = self.data.pop('invited_members', [])
 
         board = Board.objects.create(**self.data)
+
+        invited_members.append(board.owner.email)
+
         self.add_members_to_board(board.id, invited_members)
 
         return board
