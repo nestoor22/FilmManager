@@ -1,4 +1,4 @@
-import { isRequired, isEmail } from '../../../utils/validators';
+import { isRequired, isEmail } from '../../../../utils/validators';
 
 const validate = (values) => {
   const errors = {};

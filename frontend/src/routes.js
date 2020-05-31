@@ -13,11 +13,11 @@ function Routes() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/login">
+        <Route exact path="/signIn">
           <LoginPage />
         </Route>
 
-        <Route exact path="/register">
+        <Route exact path="/signUp">
           <RegisterPage />
         </Route>
 

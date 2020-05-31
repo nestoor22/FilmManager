@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '14px',
     fontSize: '15px',
     color: '#073947 !important',
+    justifyContent: 'center !important',
     backgroundColor: '#E9F0F2',
     marginBottom: theme.spacing(3),
     '&:hover': {
@@ -80,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
   loginWithSubheader: {
     fontSize: '24px',
     color: '#073947',
+    marginLeft: '35px'
   },
   createNewAccount: {
     textAlign: 'center',

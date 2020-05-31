@@ -1,35 +1,30 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
-  registerFormWrapper: {
-    width: '100%',
+const useStyles = makeStyles((theme) => ({
+  root: {
     display: 'flex',
-    justifyContent: 'center',
-    marginTop: '100px',
+    flexDirection: 'column',
+    width: '100%',
+    height: '100vh',
   },
-  registerForm: {
-    width: '600px',
-    backgroundColor: '#fff',
-  },
-  showIcon: {
-    '&:focus': {
-      outline: 'none',
-    },
-  },
-  inputIndent: {
-    marginBottom: '20px',
-  },
-  title: {
-    color: '#fff',
-  },
-  registerFormHeader: {
+  registerFormWrapper: {
+    width: '480px',
     display: 'flex',
     alignItems: 'center',
-    backgroundColor: '#335267',
-    width: '100%',
-    height: '48px',
-    marginBottom: '20px',
-    paddingLeft: '20px',
+    flexDirection: 'column',
+    backgroundColor: '#E9F0F2',
+    height: '100%',
+    position: 'absolute',
+    right: 0,
+    padding: theme.spacing(3),
+  },
+  registerFormHeader: {
+    color: '#073947',
+    width: '400px',
+    height: '43px',
+    fontSize: '36px',
+    textAlign: 'center',
+    marginBottom: '55px',
   },
   registerFormFieldsWrapper: {
     padding: '0px 20px',
@@ -43,6 +38,6 @@ const useStyles = makeStyles({
   nameField: {
     width: '255px',
   },
-});
+}));
 
 export default useStyles;

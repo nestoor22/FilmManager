@@ -6,11 +6,14 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 
-import RegisterForm from './form/RegisterForm';
-import { Loader, AppHeader } from 'components';
+import Typography from '@material-ui/core/Typography';
+
+import MainInfoForm from './components/main-info-form/MainInfoForm';
+import background from 'assets/background.jpg';
 import { CREATE_USER } from 'graphql/mutations/auth';
 
 import useStyles from './styles';
+import AdditionalInfoForm from './components/additional-info-form/AdditionalInfoForm';
 
 const RegisterPage = () => {
   const classes = useStyles();
@@ -19,9 +22,26 @@ const RegisterPage = () => {
 
   const { enqueueSnackbar } = useSnackbar();
 
+  const [activeTab, setActiveTab] = React.useState(1);
   const [loading, setLoading] = React.useState(false);
   const [createUser] = useMutation(CREATE_USER);
 
+  document.body.style.background = `url(${background})`;
+  document.body.style.backgroundSize = `cover`;
+  const tabs = [
+    {
+      tabIndex: 0,
+      formName: 'mainInfoForm',
+      component: <MainInfoForm onSubmit={() => setActiveTab(activeTab + 1)} />,
+    },
+    {
+      tabIndex: 1,
+      formName: 'additionalInfoForm',
+      component: (
+        <AdditionalInfoForm onSubmit={() => setActiveTab(activeTab + 1)} />
+      ),
+    },
+  ];
   const handleSubmit = (values) => {
     delete values.confirmPassword;
     setLoading(true);
@@ -42,14 +62,9 @@ const RegisterPage = () => {
 
   return (
     <div className={classes.root}>
-      <AppHeader />
-      <Loader isLoading={loading} />
       <div className={classes.registerFormWrapper}>
-        <RegisterForm
-          onSubmit={(values) => {
-            handleSubmit(values);
-          }}
-        />
+        <Typography className={classes.registerFormHeader}>Sign Up</Typography>
+        {tabs[activeTab].component}
       </div>
     </div>
   );
@@ -57,7 +72,7 @@ const RegisterPage = () => {
 
 const mapStateToProps = (state) => {
   return {
-    registerForm: state.form.registerForm,
+    mainInfoForm: state.form.mainInfoForm,
   };
 };
 export default connect(mapStateToProps)(RegisterPage);

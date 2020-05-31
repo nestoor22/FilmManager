@@ -7,13 +7,12 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import CropOriginalIcon from '@material-ui/icons/CropOriginal';
 import EditIcon from '@material-ui/icons/Edit';
 
-import { CircularLoader } from 'components';
+import { Loader } from 'components';
 
 import { useStyles } from './styles';
 
 const DndUploadImage = ({
   input,
-  label,
   className,
   meta: { touched, error },
 }) => {
@@ -122,10 +121,6 @@ const DndUploadImage = ({
 
   return (
     <div className={className}>
-      <Typography className={classes.label} variant="h3">
-        {label}
-      </Typography>
-
       <div
         className={classNames(
           classes.defaultZone,
@@ -136,7 +131,7 @@ const DndUploadImage = ({
         )}
         ref={dropRef}
       >
-        <CircularLoader
+        <Loader
           isLoading={isLoading}
           className={classes.loaderWrapper}
         />

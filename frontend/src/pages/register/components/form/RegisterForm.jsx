@@ -16,7 +16,7 @@ import {
 
 import validate from './validate';
 
-import useStyles from '../styles';
+import useStyles from './styles';
 
 const initialValues = {
   firstName: '',

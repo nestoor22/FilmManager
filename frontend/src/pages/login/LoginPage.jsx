@@ -3,6 +3,8 @@ import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
+
 import { useSnackbar } from 'notistack';
 
 import { useField, useForm } from 'hooks';
@@ -165,7 +167,7 @@ const SignIn = () => {
           cookiePolicy={'single_host_origin'}
         />
         <Typography
-          onClick={() => history.push('/register')}
+          onClick={() => history.push('/signUp')}
           className={classes.createNewAccount}
         >
           Don't have an account ? Create new !

@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { useHistory } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
@@ -11,6 +12,9 @@ const FormButtons = ({
   cancelPath,
   actionLabel,
   form,
+  actionBtnClass,
+  cancelBtnClass,
+  buttonWrapperClass,
   onSubmitHandler,
   setOpenPopup,
 }) => {
@@ -34,13 +38,13 @@ const FormButtons = ({
   };
 
   return (
-    <div className={classes.wrapper}>
+    <div className={classNames(classes.wrapper, buttonWrapperClass)}>
       {cancelPath && (
         <Button
           variant="outlined"
           onClick={onCancelHandler}
           classes={{
-            root: classes.cancelBtnRoot,
+            root: classNames(classes.cancelBtnRoot, cancelBtnClass),
           }}
         >
           Cancel
@@ -50,7 +54,7 @@ const FormButtons = ({
         type="submit"
         variant="contained"
         classes={{
-          root: classes.actionBtnRoot,
+          root: classNames(classes.actionBtnRoot, actionBtnClass),
         }}
         onClick={onSubmitHandler}
         form={form}
