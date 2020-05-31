@@ -1,8 +1,19 @@
 import gql from 'graphql-tag';
 
-export const SIGNIN_MUTATION = gql`
+export const SIGN_IN_MUTATION = gql`
   mutation signIn($email: String!, $password: String!) {
     signIn(email: $email, password: $password) {
+      id
+      email
+      firstName
+      lastName
+    }
+  }
+`;
+
+export const SIGN_IN_WITH_GOOGLE_MUTATION = gql`
+  mutation signInWithGoogle($accessToken: String!, $user: UserInput!) {
+    signInWithGoogle(accessToken: $accessToken, user: $user) {
       id
       email
       firstName

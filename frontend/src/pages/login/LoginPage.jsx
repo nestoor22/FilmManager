@@ -100,8 +100,10 @@ const SignIn = () => {
     );
   };
 
-  const failedGoogleAuth = () => {
-    enqueueSnackbar('Authentication failed', { variant: 'error' });
+  const failedGoogleAuth = (response) => {
+    if (response.error !== 'popup_closed_by_user') {
+      enqueueSnackbar('Authentication failed', { variant: 'error' });
+    }
   };
 
   return (
@@ -155,6 +157,7 @@ const SignIn = () => {
         </form>
         <Typography className={classes.loginWithSubheader}>or</Typography>
         <GoogleLogin
+          className={classes.googleButton}
           clientId="171613792112-qcfqh6ct9pnvte3a6tve9gsgasbvjp1a.apps.googleusercontent.com"
           buttonText="Sign In with Google"
           onFailure={failedGoogleAuth}

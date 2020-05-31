@@ -49,7 +49,22 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(3),
     '&:hover': {
       backgroundColor: '#5F8792',
-    }
+    },
+  },
+  googleButton: {
+    width: '302px',
+    marginLeft: '35px',
+    marginTop: '14px',
+    fontSize: '15px',
+    color: '#073947 !important',
+    backgroundColor: '#E9F0F2',
+    marginBottom: theme.spacing(3),
+    '&:hover': {
+      backgroundColor: '#5F8792',
+    },
+    '&:focus': {
+      outline: 'none',
+    },
   },
   inputIndent: {
     width: '302px',
