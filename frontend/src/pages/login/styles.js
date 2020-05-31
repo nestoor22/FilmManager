@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    height: '100%',
+    height: '100vh',
   },
   loginFormWrapper: {
     marginTop: '200px',
@@ -18,27 +18,53 @@ const useStyles = makeStyles((theme) => ({
     height: '350px',
   },
   loginForm: {
+    position: 'absolute',
+    right: 0,
     padding: theme.spacing(3),
-    width: '600px',
-    height: '350px',
-    backgroundColor: '#FFFFFF',
+    width: '500px',
+    height: '100%',
+    backgroundColor: '#E9F0F2',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   title: {
-    marginBottom: 30,
+    fontSize: '36px',
+    height: '43px',
+    width: '302px',
+    color: '#073947',
+    marginBottom: 54,
+    marginTop: 78,
+    textAlign: 'center',
   },
   descriptionText: {
     textAlign: 'center',
   },
   button: {
-    width: '100%',
-    marginTop: 36,
+    width: '302px',
+    marginLeft: '35px',
+    fontSize: '15px',
+    color: '#E9F0F2',
+    backgroundColor: '#165061',
     marginBottom: theme.spacing(3),
+    '&:hover': {
+      backgroundColor: '#5F8792',
+    }
   },
   inputIndent: {
+    width: '302px',
+  },
+  inputIndentWrapper: {
+    display: 'flex',
+    alignItems: 'center',
     marginBottom: theme.spacing(3),
   },
   passwordIcon: {
     fontSize: 18,
+  },
+  loginWithSubheader: {
+    fontSize: '24px',
+    color: '#073947',
   },
   createNewAccount: {
     textAlign: 'center',

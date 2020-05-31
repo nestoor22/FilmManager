@@ -15,14 +15,14 @@ export const useStyles = makeStyles({
   },
   inputRoot: {
     borderRadius: 3,
-    border: '1px solid #BECEDA',
+    border: '1px solid #012934',
     '&:hover': {
-      border: '1px solid #41B7D7',
+      border: '1px solid #5F8792',
     },
   },
   inputRootFocused: {
-    boxShadow: '0 0 3px 3px rgba(65, 183, 215, 0.35)',
-    border: '1px solid #41B7D7',
+    boxShadow: '0 0 3px 3px rgba(186, 199, 203, 0.35)',
+    border: '1px solid #012934',
   },
   error: {
     boxShadow: 'none',

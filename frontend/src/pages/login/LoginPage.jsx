@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
+import { useField, useForm } from 'hooks';
 import {
   Typography,
   Button,
@@ -11,13 +12,14 @@ import {
 
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import CardMedia from '@material-ui/core/CardMedia';
 
-import logo from 'assets/logo.png';
-import { useField, useForm } from 'hooks';
-import { SimpleInput, AppHeader } from 'components';
+import { SimpleInput } from 'components';
 import { SIGNIN_MUTATION } from 'graphql/mutations/auth';
 import { isRequired, isEmail, isValidPassword } from 'utils/validators';
+
+import background from 'assets/background.jpg';
+import emailIcon from 'assets/icons/email.svg';
+import passwordIcon from 'assets/icons/password.svg';
 
 import useStyles from './styles';
 
@@ -27,7 +29,8 @@ const SignIn = () => {
   const history = useHistory();
 
   const [signIn] = useMutation(SIGNIN_MUTATION);
-  document.body.style.backgroundColor = '#254052';
+  document.body.style.background = `url(${background})`;
+  document.body.style.backgroundSize = `cover`;
   const loginForm = useForm({
     onSubmit: (formData, formValid) => {
       if (!formValid) return;
@@ -73,29 +76,28 @@ const SignIn = () => {
 
   return (
     <div className={classes.root}>
-      <AppHeader />
-      <div className={classes.loginFormWrapper}>
-        <div className={classes.imageWrapper}>
-          <CardMedia component="img" alt="Logo" height="350" image={logo} />
-        </div>
-        <div className={classes.loginForm}>
-          <Typography className={classes.title} variant="h1">
-            Login
-          </Typography>
-          <form onSubmit={loginForm.handleSubmit}>
+      <div className={classes.loginForm}>
+        <Typography className={classes.title} variant="h1">
+          Sign In
+        </Typography>
+        <form onSubmit={loginForm.handleSubmit}>
+          <div className={classes.inputIndentWrapper}>
+            <img alt="" src={emailIcon} style={{ marginRight: '15px' }} />
             <SimpleInput
               placeholder="Email"
               className={classes.inputIndent}
-              label="Email"
               value={emailField.value}
               onChange={emailField.onChange}
               errors={emailField.errors}
               errorText={emailField.errors[0]}
             />
+          </div>
+          <div className={classes.inputIndentWrapper}>
+            <img alt="" src={passwordIcon} style={{ marginRight: '15px' }} />
             <SimpleInput
               type={showPassword ? 'text' : 'password'}
               placeholder="Password"
-              label="Password"
+              className={classes.inputIndent}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -116,22 +118,18 @@ const SignIn = () => {
               errorText={passwordField.errors[0]}
               autoComplete="new-password"
             />
-            <Button
-              type="submit"
-              className={classes.button}
-              variant="contained"
-              color="primary"
-            >
-              Login
-            </Button>
-          </form>
-          <Typography
-            onClick={() => history.push('/register')}
-            className={classes.createNewAccount}
-          >
-            Don't have an account ? Create new !
-          </Typography>
-        </div>
+          </div>
+          <Button type="submit" className={classes.button} variant="contained">
+            Login
+          </Button>
+        </form>
+        <Typography className={classes.loginWithSubheader}>or</Typography>
+        <Typography
+          onClick={() => history.push('/register')}
+          className={classes.createNewAccount}
+        >
+          Don't have an account ? Create new !
+        </Typography>
       </div>
     </div>
   );
