@@ -1,6 +1,6 @@
 import graphene
 
-from user.schema import SignIn, UserQuery, CreateUser, LogOut
+from user.schema import SignIn, UserQuery, CreateUser, LogOut, GoogleSignIn
 from show.schema import ShowQuery, SetShowRate, DeleteShowRate
 from lists.schema import AddShowToList, CreateList, ShowsListsQuery
 from boards.schema import BoardsQuery, CreateBoardMutation, SetLastVisitedBoard
@@ -12,6 +12,7 @@ class Query(ShowsListsQuery, BoardsQuery, ShowQuery, UserQuery):
 
 class Mutation(graphene.ObjectType):
     sign_in = SignIn.Field()
+    sign_in_with_google = GoogleSignIn.Field()
     log_out = LogOut.Field()
     create_user = CreateUser.Field()
     create_board = CreateBoardMutation.Field()

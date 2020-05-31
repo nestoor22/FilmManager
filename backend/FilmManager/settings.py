@@ -133,7 +133,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+GOOGLE_CLIENT_ID = '171613792112-qcfqh6ct9pnvte3a6tve9gsgasbvjp1a.apps.googleusercontent.com'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 

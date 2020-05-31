@@ -13,6 +13,8 @@ graphene = "*"
 graphene-django = "*"
 mysqlclient = "*"
 graphene-file-upload = "*"
+google-auth = "*"
+requests = "*"
 
 [requires]
 python_version = "3.6"

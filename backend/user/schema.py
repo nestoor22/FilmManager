@@ -1,9 +1,11 @@
 import graphene
-
+from google.oauth2 import id_token
+from google.auth.transport import requests
 from django.contrib.auth import authenticate, login, logout
 from graphene_django import DjangoObjectType
 from graphene.types import Field, List
 
+from FilmManager.settings import GOOGLE_CLIENT_ID
 from .models import User
 
 
@@ -95,6 +97,40 @@ class SignIn(graphene.Mutation):
             first_name=user.first_name,
             last_name=user.last_name,
             email=user.email,
+        )
+
+
+class GoogleSignIn(graphene.Mutation):
+    id = graphene.Int()
+    first_name = graphene.String()
+    last_name = graphene.String()
+    email = graphene.String()
+
+    class Arguments:
+        access_token = graphene.String(required=True)
+        user = UserInput(required=True)
+
+    @staticmethod
+    def mutate(parent, info, **kwargs):
+        id_info = id_token.verify_oauth2_token(kwargs['access_token'], requests.Request(), GOOGLE_CLIENT_ID)
+
+        if id_info['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+            raise ValueError('Wrong issuer.')
+
+        user_info = kwargs['user']
+
+        try:
+            user_instance = User.objects.get(email=user_info['email'])
+        except User.DoesNotExist:
+            user_instance = User.objects.create(**user_info)
+
+        login(info.context, user_instance, backend='django.contrib.auth.backends.ModelBackend')
+
+        return GoogleSignIn(
+            id=user_instance.id,
+            first_name=user_instance.first_name,
+            last_name=user_instance.last_name,
+            email=user_instance.email,
         )
 
 
