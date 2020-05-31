@@ -1,27 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-  showIcon: {
-    '&:focus': {
-      outline: 'none',
-    },
-  },
-  inputIndent: {
-    marginBottom: '20px',
-  },
-  title: {
-    marginBottom: '20px',
-  },
-  inlineFieldsWrapper: {
+  registerForm: {
     width: '100%',
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginBottom: '20px',
-  },
-  nameField: {
-    width: '220px',
   },
   buttonWrapper: {
+    marginTop: '40px',
     justifyContent: 'center',
   },
   actionBtnClass: {
@@ -34,9 +18,9 @@ const useStyles = makeStyles({
       backgroundColor: '#5F8792',
     },
   },
-  registerForm: {
-    width: '100%',
-  },
+  inputIndent: {
+    marginBottom: '30px'
+  }
 });
 
 export default useStyles;

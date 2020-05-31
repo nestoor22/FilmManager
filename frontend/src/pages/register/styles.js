@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   registerFormWrapper: {
-    width: '480px',
+    width: '500px',
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
@@ -38,6 +38,12 @@ const useStyles = makeStyles((theme) => ({
   nameField: {
     width: '255px',
   },
+  finishInfo: {
+    textAlign: 'center',
+    fontSize: '15px',
+    color: '#073947',
+    marginTop: '30%'
+  }
 }));
 
 export default useStyles;

@@ -14,6 +14,7 @@ import { CREATE_USER } from 'graphql/mutations/auth';
 
 import useStyles from './styles';
 import AdditionalInfoForm from './components/additional-info-form/AdditionalInfoForm';
+import InterestsInfoForm from './components/interests-info-form/InterestsInfoForm';
 
 const RegisterPage = () => {
   const classes = useStyles();
@@ -22,7 +23,7 @@ const RegisterPage = () => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const [activeTab, setActiveTab] = React.useState(1);
+  const [activeTab, setActiveTab] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
   const [createUser] = useMutation(CREATE_USER);
 
@@ -39,6 +40,23 @@ const RegisterPage = () => {
       formName: 'additionalInfoForm',
       component: (
         <AdditionalInfoForm onSubmit={() => setActiveTab(activeTab + 1)} />
+      ),
+    },
+    {
+      tabIndex: 2,
+      formName: 'interestsInfoForm',
+      component: (
+        <InterestsInfoForm onSubmit={() => setActiveTab(activeTab + 1)} />
+      ),
+    },
+    {
+      tabIndex: 3,
+      component: (
+        <div className={classes.finishInfo}>
+          We sent you email with confirmation link for your registration. Follow
+          this link to activate your account and login. Please, note: this link
+          will expire in 24 hours.
+        </div>
       ),
     },
   ];
@@ -63,7 +81,9 @@ const RegisterPage = () => {
   return (
     <div className={classes.root}>
       <div className={classes.registerFormWrapper}>
-        <Typography className={classes.registerFormHeader}>Sign Up</Typography>
+        <Typography className={classes.registerFormHeader}>
+          {activeTab !== 3 ? 'Sign Up' : 'Thank You !'}
+        </Typography>
         {tabs[activeTab].component}
       </div>
     </div>
