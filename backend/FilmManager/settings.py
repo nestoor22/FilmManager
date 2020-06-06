@@ -138,3 +138,4 @@ GOOGLE_CLIENT_ID = '171613792112-qcfqh6ct9pnvte3a6tve9gsgasbvjp1a.apps.googleuse
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'

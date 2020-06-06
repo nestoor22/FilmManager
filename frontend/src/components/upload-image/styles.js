@@ -50,6 +50,7 @@ export const useStyles = makeStyles({
     alignItems: 'flex-end',
     width: '100%',
     height: '100%',
+    borderRadius: '50%',
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',

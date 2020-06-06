@@ -41,6 +41,8 @@ function MainPage() {
   const classes = useStyles();
   const [value, setValue] = React.useState(1);
   const [year, setYear] = React.useState([]);
+
+  document.body.style.backgroundImage = 'none';
   document.body.style.backgroundColor = '#254052';
 
   const handleYearChange = (event) => {
@@ -96,95 +98,6 @@ function MainPage() {
         </div>
       </div>
       <div className={classes.contentRoot}>
-        <List className={classes.filterListRoot}>
-          <ListSubheader style={{ lineHeight: '12px', color: '#fff' }}>
-            Release years
-          </ListSubheader>
-          <ListItem
-            style={{ justifyContent: 'center', paddingBottom: '50px' }}
-            alignItems="center"
-          >
-            <Select
-              labelId="demo-mutiple-chip-label"
-              id="demo-mutiple-chip"
-              multiple
-              value={year}
-              className={classes.select}
-              onChange={handleYearChange}
-              input={
-                <Input className={classes.input} id="select-multiple-chip" />
-              }
-              MenuProps={MenuProps}
-              renderValue={(selected) => (
-                <div className={classes.chips}>
-                  {selected.map((value) => (
-                    <Chip key={value} label={value} className={classes.chip} />
-                  ))}
-                </div>
-              )}
-            >
-              {years.map((year, index) => (
-                <MenuItem key={index} value={year}>
-                  {year}
-                </MenuItem>
-              ))}
-            </Select>
-          </ListItem>
-          <ListSubheader style={{ lineHeight: '12px', color: '#fff' }}>
-            Genres
-          </ListSubheader>
-          <ListItem
-            style={{ justifyContent: 'center', paddingBottom: '50px' }}
-            alignItems="center"
-          >
-            <Select
-              labelId="demo-mutiple-chip-label"
-              id="demo-mutiple-chip"
-              multiple
-              value={[]}
-              className={classes.select}
-              onChange={handleYearChange}
-              input={
-                <Input className={classes.input} id="select-multiple-chip" />
-              }
-              MenuProps={MenuProps}
-              renderValue={(selected) => (
-                <div className={classes.chips}>
-                  {selected.map((value) => (
-                    <Chip key={value} label={value} className={classes.chip} />
-                  ))}
-                </div>
-              )}
-            />
-          </ListItem>
-          <ListSubheader style={{ lineHeight: '12px', color: '#fff' }}>
-            Actors
-          </ListSubheader>
-          <ListItem
-            style={{ justifyContent: 'center', paddingBottom: '0px' }}
-            alignItems="center"
-          >
-            <Select
-              labelId="demo-mutiple-chip-label"
-              id="demo-mutiple-chip"
-              multiple
-              value={[]}
-              className={classes.select}
-              onChange={handleYearChange}
-              input={
-                <Input className={classes.input} id="select-multiple-chip" />
-              }
-              MenuProps={MenuProps}
-              renderValue={(selected) => (
-                <div className={classes.chips}>
-                  {selected.map((value) => (
-                    <Chip key={value} label={value} className={classes.chip} />
-                  ))}
-                </div>
-              )}
-            />
-          </ListItem>
-        </List>
         <div className={classes.tabsRoot}>
           <TabPanel
             className={classes.tabContentWrapper}
