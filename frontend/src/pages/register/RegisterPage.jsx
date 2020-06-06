@@ -9,16 +9,20 @@ import { useMutation } from '@apollo/react-hooks';
 import Typography from '@material-ui/core/Typography';
 
 import MainInfoForm from './components/main-info-form/MainInfoForm';
-import background from 'assets/background.jpg';
-import { CREATE_USER } from 'graphql/mutations/auth';
-
-import useStyles from './styles';
 import AdditionalInfoForm from './components/additional-info-form/AdditionalInfoForm';
 import InterestsInfoForm from './components/interests-info-form/InterestsInfoForm';
+import background from 'assets/background.jpg';
+import { CREATE_USER } from 'graphql/mutations/auth';
+import { prepareUserData } from 'utils/prepareUserData';
 
-const RegisterPage = () => {
+import useStyles from './styles';
+
+const RegisterPage = ({
+  mainInfoForm,
+  additionalInfoForm,
+  interestsInfoForm,
+}) => {
   const classes = useStyles();
-
   const history = useHistory();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -46,7 +50,26 @@ const RegisterPage = () => {
       tabIndex: 2,
       formName: 'interestsInfoForm',
       component: (
-        <InterestsInfoForm onSubmit={() => setActiveTab(activeTab + 1)} />
+        <InterestsInfoForm
+          onSubmit={() => {
+            const data = prepareUserData(
+              mainInfoForm,
+              interestsInfoForm,
+              additionalInfoForm
+            );
+
+            createUser({ variables: { ...data } }).then(() => {
+              setLoading(false);
+              enqueueSnackbar(
+                'You create account ! Check your email to confirm !',
+                {
+                  variant: 'success',
+                }
+              );
+              history.push('/');
+            });
+          }}
+        />
       ),
     },
     {
@@ -60,21 +83,6 @@ const RegisterPage = () => {
       ),
     },
   ];
-  const handleSubmit = (values) => {
-    delete values.confirmPassword;
-    setLoading(true);
-    values.birthday = values.birthday
-      ? moment(values.birthday).format('YYYY-MM-DD')
-      : null;
-
-    createUser({ variables: { user: { ...values } } }).then(() => {
-      setLoading(false);
-      enqueueSnackbar('You create account ! Check your email to confirm !', {
-        variant: 'success',
-      });
-      history.push('/');
-    });
-  };
 
   document.body.style.backgroundColor = '#254052';
 
@@ -93,6 +101,8 @@ const RegisterPage = () => {
 const mapStateToProps = (state) => {
   return {
     mainInfoForm: state.form.mainInfoForm,
+    interestsInfoForm: state.form.interestsInfoForm,
+    additionalInfoForm: state.form.additionalInfoForm,
   };
 };
 export default connect(mapStateToProps)(RegisterPage);

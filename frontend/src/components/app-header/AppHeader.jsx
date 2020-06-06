@@ -33,7 +33,7 @@ export default function AppHeader({ className }) {
 
   const handleLogOut = () => {
     logOut().then(() => {});
-    history.push('/login');
+    history.push('/signIn');
   };
 
   const handleClose = (event) => {
@@ -134,7 +134,7 @@ export default function AppHeader({ className }) {
               </Popper>
             </div>
           )}
-          {data && !data.userName && <MenuLink to="/login" label="Login" />}
+          {data && !data.userName && <MenuLink to="/signIn" label="Sign In" />}
         </ul>
       </nav>
     </AppBar>

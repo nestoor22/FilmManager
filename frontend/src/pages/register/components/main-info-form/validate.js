@@ -1,4 +1,4 @@
-import { isRequired, isEmail } from '../../../../utils/validators';
+import { isRequired, isEmail, isValidPassword } from 'utils/validators';
 
 const validate = (values) => {
   const errors = {};
@@ -10,6 +10,11 @@ const validate = (values) => {
 
   if (isRequired(values.password || '', true)) {
     errors.password = 'Password is required';
+  }
+
+  if (isValidPassword(values.password || '', true)) {
+    errors.password =
+      'The password must include at least 8 characters with 1 symbol, 1 digit, 1 uppercase letter, 1 lowercase letter';
   }
   if (isRequired(values.firstName || '', true)) {
     errors.firstName = 'First name is required';

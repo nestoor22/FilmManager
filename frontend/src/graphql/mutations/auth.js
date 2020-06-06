@@ -23,8 +23,8 @@ export const SIGN_IN_WITH_GOOGLE_MUTATION = gql`
 `;
 
 export const CREATE_USER = gql`
-  mutation createUser($user: UserInput!) {
-    createUser(user: $user) {
+  mutation createUser($user: UserInput!, $photo: Upload) {
+    createUser(user: $user, photo: $photo) {
       id
     }
   }

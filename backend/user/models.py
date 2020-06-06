@@ -7,10 +7,10 @@ class User(AbstractUser):
     username = None
 
     email = models.EmailField('Email', unique=True)
-    photo = models.FileField('Photo', null=True)
+    photo = models.FileField('Photo', null=True, upload_to='media/')
     favorite_show = models.TextField('Favorite show', null=True)
-    first_name = models.TextField('First name', max_length=255)
-    last_name = models.TextField('Last name', max_length=255)
+    first_name = models.TextField('First name')
+    last_name = models.TextField('Last name')
     bio = models.TextField('Biography', null=True)
     city = models.TextField('City', null=True)
     country = models.TextField('Country', null=True)

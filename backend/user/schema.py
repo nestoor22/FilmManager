@@ -3,6 +3,7 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 from django.contrib.auth import authenticate, login, logout
 from graphene_django import DjangoObjectType
+from graphene_file_upload.scalars import Upload
 from graphene.types import Field, List
 
 from FilmManager.settings import GOOGLE_CLIENT_ID
@@ -61,14 +62,21 @@ class CreateUser(graphene.Mutation):
 
     class Arguments:
         user = UserInput(required=True)
+        photo = Upload()
 
     @staticmethod
     def mutate(parent, info, **kwargs):
         user_info = kwargs.get('user')
+        user_info['photo'] = kwargs.get('photo')
         password = user_info.pop('password')
+
         user = User.objects.create(**user_info)
+
         user.set_password(password)
         user.save()
+
+        login(info.context, user, backend='django.contrib.auth.backends.ModelBackend')
+
         return CreateUser(id=user.id)
 
 
@@ -91,7 +99,7 @@ class SignIn(graphene.Mutation):
         if not user:
             raise Exception('Incorrect credentials')
 
-        login(info.context, user)
+        login(info.context, user, backend='django.contrib.auth.backends.ModelBackend')
         return SignIn(
             id=user.id,
             first_name=user.first_name,

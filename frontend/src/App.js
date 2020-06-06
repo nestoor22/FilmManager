@@ -31,7 +31,7 @@ const client = new ApolloClient({
             `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
           );
           if (message === 'User is not logged in') {
-            window.location = `/login`;
+            window.location = `/signIn`;
           }
         });
       if (networkError) console.log(`[Network error]: ${networkError}`);
