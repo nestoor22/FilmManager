@@ -28,9 +28,13 @@ function ItemCard({ showInfo }) {
   };
 
   const title =
-    showInfo.title.length < 22
+    showInfo.title.length < 18
       ? showInfo.title
-      : showInfo.title.slice(0, 22) + '...';
+      : showInfo.title.slice(0, 18) + '...';
+
+  const genres = showInfo.genres.map((item) => {
+    return item.genreName.toLowerCase();
+  });
 
   return (
     <Card
@@ -44,7 +48,7 @@ function ItemCard({ showInfo }) {
         <CardMedia
           component="img"
           alt="Poster"
-          height="250"
+          height="265"
           width="185"
           image={showInfo.posterUrl}
           title="Poster"
@@ -58,25 +62,14 @@ function ItemCard({ showInfo }) {
           >
             {title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {showInfo.releaseDate}
+          <Typography className={classes.subtitle}>
+            {showInfo.releaseDate} {genres.slice(0, 2).join(', ')}
           </Typography>
         </CardContent>
       </div>
       <CardActions className={classes.actionsContent}>
         <Button className={classes.button} size="small" color="primary">
           Add to list
-        </Button>
-        <Button
-          size="small"
-          color="primary"
-          onClick={(e) => {
-            e.stopPropagation();
-            openInfoDialog(showInfo);
-          }}
-          className={classes.button}
-        >
-          More
         </Button>
       </CardActions>
       <ShowDetailsDialog

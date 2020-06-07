@@ -10,17 +10,22 @@ const useStyles = makeStyles({
     color: '#335267 !important',
   },
   title: {
+    color: '#E9F0F2',
     margin: 0,
-    fontSize: '15px',
+    fontSize: '18px',
+  },
+  subtitle: {
+    fontSize: '13px',
+    color: '#E9F0F2',
   },
   content: {
+    height: 86,
     padding: 0,
+    paddingLeft:5,
     '&:focus': {
       outline: 'none',
     },
-    '&:last-child': {
-      padding: 0,
-    },
+    backgroundColor: '#073947'
   },
   actionsContent: {
     padding: 0,

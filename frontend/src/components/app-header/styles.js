@@ -5,16 +5,20 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'row',
     height: 52,
-    backgroundColor: '#fff',
-    boxShadow: '0px 1px 0px #E2EBF6',
-    justifyContent: 'flex-end',
+    backgroundColor: '#073947',
+    alignItems: 'center',
+    boxShadow: '0px 1px 0px #073947',
   },
   logo: {
     width: 115,
   },
+  search: {
+    width: '280px',
+  },
   navigation: {
     display: 'flex',
-    paddingRight: '20px',
+    position: 'absolute',
+    right: '20px',
   },
   navigationItems: {
     padding: '0',
@@ -23,8 +27,34 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
   },
+  inputRoot: {
+    borderRadius: 5,
+    color: '#073947',
+    width: '100%',
+    backgroundColor: '#E9F0F2',
+  },
+  input: {
+    padding: '9px 10px',
+    fontSize: 13,
+    lineHeight: 18,
+    color: '#073947',
+    textAlign: 'end',
+  },
+  iconWrapper: {
+    height: '100% !important',
+    width: '30px',
+    padding: '8px',
+    display: 'flex',
+    justifyContent: 'center',
+    paddingRight: '8px',
+    borderRight: '2px solid #073947',
+  },
+  inputRootFocused: {
+    boxShadow: 'none',
+    border: 'none',
+  },
   navigationItem: {
-    fontSize: '13px',
+    fontSize: '15px',
     cursor: 'pointer',
     '&:not(:last-child)': {
       marginRight: 25,
@@ -32,14 +62,14 @@ const useStyles = makeStyles({
   },
   navigationItemLink: {
     display: 'inline-block',
-    color: '#335267',
+    color: '#E9F0F2',
     '&:hover': {
-      color: '#071B27',
+      color: '#5F8792',
       textDecoration: 'none',
     },
   },
   activeNavigationLink: {
-    color: '#071B27',
+    color: '#E9F0F2',
     fontWeight: 'bold',
   },
   button: {

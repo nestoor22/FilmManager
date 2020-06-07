@@ -5,6 +5,9 @@ import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import { AccountCircle } from '@material-ui/icons';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import Grow from '@material-ui/core/Grow';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Popper from '@material-ui/core/Popper';
@@ -12,6 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import MenuList from '@material-ui/core/MenuList';
 
+import SearchIcon from 'assets/icons/search.svg';
 import { LOG_OUT } from 'graphql/mutations/auth';
 import { USER_NAME } from 'graphql/queries/user';
 
@@ -63,12 +67,30 @@ export default function AppHeader({ className }) {
 
   return (
     <AppBar className={classNames(classes.header, className)} position="static">
+      <div className={classes.logo}>LOGO</div>
+      <div className={classes.search}>
+        <Input
+          disableUnderline={true}
+          id="input-with-icon-adornment"
+          placeholder="Search..."
+          classes={{
+            root: classes.inputRoot,
+            focused: classes.inputRootFocused,
+            input: classes.input,
+            disabled: classes.disabledInput,
+          }}
+          startAdornment={
+            <InputAdornment className={classes.iconWrapper} position="center">
+              <img alt="" src={SearchIcon} />
+            </InputAdornment>
+          }
+        />
+      </div>
       <nav className={classes.navigation}>
         <ul className={classes.navigationItems}>
           <MenuLink activeOnlyWhenExact={true} to="/boards" label="Boards" />
-          <MenuLink to="/lists" label="Lists" />
           <MenuLink to="/#" label="Communities" />
-          <MenuLink to="/#" label="Messages" />
+          <MenuLink to="/#" label="About" />
           {data && data.userName && (
             <div>
               <Button
