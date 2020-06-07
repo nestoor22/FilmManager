@@ -98,7 +98,10 @@ class ShowQuery(graphene.ObjectType):
             return Shows.objects.filter(showtype=show_type).order_by('?')[
                 offset:offset + number_of_returned_values
             ]
-
+        elif is_random:
+            return Shows.objects.all().order_by('?')[
+                offset:offset + number_of_returned_values
+            ]
         elif show_type:
             return Shows.objects.filter(showtype=show_type).order_by(order_by)[
                 offset:offset + number_of_returned_values
