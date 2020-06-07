@@ -64,8 +64,19 @@ const useStyles = makeStyles({
   },
   contentRoot: {
     display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     paddingTop: '50px',
+    justifyContent: 'center',
     width: '100%',
+  },
+  sliderWrapper: {
+    width: '90%',
+    marginBottom: '40px'
+  },
+  sliderTitle: {
+    fontSize: '36px',
+    color: '#073947'
   },
   filterListRoot: {
     width: '250px',

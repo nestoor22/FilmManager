@@ -2,8 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 185,
-    maxHeight: 350,
+    maxWidth: 220,
+    maxHeight: 390,
     margin: 20,
   },
   menuItem: {

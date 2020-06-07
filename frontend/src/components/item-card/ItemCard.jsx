@@ -30,9 +30,9 @@ function ItemCard({ showInfo }) {
   };
 
   const title =
-    showInfo.title.length < 18
+    showInfo.title.length < 22
       ? showInfo.title
-      : showInfo.title.slice(0, 18) + '...';
+      : showInfo.title.slice(0, 22) + '...';
 
   const genres = showInfo.genres.map((item) => {
     return item.genreName.toLowerCase();
@@ -50,8 +50,8 @@ function ItemCard({ showInfo }) {
         <CardMedia
           component="img"
           alt="Poster"
-          height="265"
-          width="185"
+          height="300"
+          width="220"
           image={showInfo.posterUrl}
           title="Poster"
         />
