@@ -8,6 +8,7 @@ import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItem from '@material-ui/core/ListItem';
+import Typography from '@material-ui/core/Typography';
 import ListSubheader from '@material-ui/core/ListSubheader';
 
 import { AppHeader, TabPanel, ItemsList } from 'components';
@@ -25,6 +26,9 @@ function MainPage() {
     <div className={classes.root}>
       <AppHeader />
       <div className={classes.contentRoot}>
+        <div className={classes.sliderWrapper}>
+          <Typography>Recommended</Typography>
+        </div>
         <div className={classes.tabsRoot}>
           <ItemsList query={SHOWS} showType="film" />
         </div>

@@ -73,12 +73,11 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
   },
   button: {
-    color: '#335267 !important',
+    color: '#E9F0F2 !important',
     '&:focus': {
       outline: 'none',
     },
     '&:hover': {
-      backgroundColor: '#fff !important',
       textDecoration: 'none',
     },
   },

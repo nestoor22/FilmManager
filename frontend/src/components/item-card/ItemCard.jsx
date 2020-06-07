@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import RatingMark from 'assets/icons/rating-mark.svg';
 
 import { ShowDetailsDialog } from 'components';
 
@@ -45,7 +46,7 @@ function ItemCard({ showInfo }) {
       }}
       className={classes.root}
     >
-      <div style={{ cursor: 'pointer' }}>
+      <div style={{ cursor: 'pointer', position: 'relative' }}>
         <CardMedia
           component="img"
           alt="Poster"
@@ -76,6 +77,25 @@ function ItemCard({ showInfo }) {
             add to list
           </Button>
         </CardActions>
+        <div style={{ position: 'absolute', right: 0, top: 0 }}>
+          <img
+            src={RatingMark}
+            style={{ position: 'absolute', right: 0, top: 0 }}
+            alt={''}
+          />
+          <Typography
+            style={{
+              position: 'absolute',
+              right: 5,
+              top: 10,
+              fontSize: '18px',
+              color: '#BAC7CB',
+              fontWeight: 'bold'
+            }}
+          >
+            {showInfo.usersRating}
+          </Typography>
+        </div>
       </div>
       <ShowDetailsDialog
         show={showContent}
