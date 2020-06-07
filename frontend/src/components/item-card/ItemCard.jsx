@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Card from '@material-ui/core/Card';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -66,12 +67,16 @@ function ItemCard({ showInfo }) {
             {showInfo.releaseDate} {genres.slice(0, 2).join(', ')}
           </Typography>
         </CardContent>
+        <CardActions className={classes.actionsContent}>
+          <Button className={classes.button} size="small">
+            <AddCircleOutlineIcon
+              style={{ marginRight: '5px', fontSize: '15px' }}
+              fill={'#BAC7CB'}
+            />
+            add to list
+          </Button>
+        </CardActions>
       </div>
-      <CardActions className={classes.actionsContent}>
-        <Button className={classes.button} size="small" color="primary">
-          Add to list
-        </Button>
-      </CardActions>
       <ShowDetailsDialog
         show={showContent}
         open={openDialog}
