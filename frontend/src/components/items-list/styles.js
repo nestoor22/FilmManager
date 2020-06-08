@@ -4,8 +4,9 @@ const useStyles = makeStyles({
   itemsRoot: {
     display: 'flex',
     flexWrap: 'wrap',
-    width: '85%',
-    marginLeft: '80px',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '90%',
     height: '100%',
   },
 });

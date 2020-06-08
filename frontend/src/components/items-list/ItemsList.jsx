@@ -11,6 +11,7 @@ function ItemsList({ query, showType }) {
 
   const pageHandler = (event, value) => {
     setPage(value);
+    window.scrollTo(0, 0);
   };
 
   const { data } = useQuery(query, {
