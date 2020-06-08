@@ -78,6 +78,15 @@ const useStyles = makeStyles({
     fontSize: '36px',
     color: '#073947'
   },
+  redirectSliderTitle: {
+    fontSize: '36px',
+    width: 'fit-content',
+    color: '#073947',
+    borderBottom: '1px solid #012934',
+    '&:hover': {
+      cursor: 'pointer'
+    },
+  },
   filterListRoot: {
     width: '250px',
     height: 'fit-content',

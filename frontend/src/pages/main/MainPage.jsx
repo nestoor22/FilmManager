@@ -2,18 +2,20 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import React from 'react';
-
+import { useHistory } from 'react-router-dom';
+import { useQuery } from '@apollo/react-hooks';
 import Slider from 'react-slick';
+
 import Typography from '@material-ui/core/Typography';
 
 import { AppHeader, ItemCard } from 'components';
 import { SHOWS } from 'graphql/queries/shows';
 
 import useStyles from './styles';
-import { useQuery } from '@apollo/react-hooks';
 
 function MainPage() {
   const classes = useStyles();
+  const history = useHistory();
 
   const { data: recommendedData } = useQuery(SHOWS, {
     variables: {
@@ -101,7 +103,14 @@ function MainPage() {
             </Slider>
           </div>
           <div className={classes.sliderWrapper}>
-            <Typography className={classes.sliderTitle}>Movies</Typography>
+            <Typography
+              onClick={() => {
+                history.push('/data/movies');
+              }}
+              className={classes.redirectSliderTitle}
+            >
+              Movies
+            </Typography>
             <Slider {...settings}>
               {moviesData.shows.map((showInfo, index) => {
                 return <ItemCard key={index} showInfo={showInfo} />;
@@ -109,7 +118,14 @@ function MainPage() {
             </Slider>
           </div>
           <div className={classes.sliderWrapper}>
-            <Typography className={classes.sliderTitle}>Series</Typography>
+            <Typography
+              onClick={() => {
+                history.push('/data/series');
+              }}
+              className={classes.redirectSliderTitle}
+            >
+              Series
+            </Typography>
             <Slider {...settings}>
               {seriesData.shows.map((showInfo, index) => {
                 return <ItemCard key={index} showInfo={showInfo} />;

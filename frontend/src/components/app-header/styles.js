@@ -73,6 +73,7 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
   },
   button: {
+    fontSize: '15px',
     color: '#E9F0F2 !important',
     '&:focus': {
       outline: 'none',
