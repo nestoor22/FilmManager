@@ -1,6 +1,5 @@
 import React from 'react';
 
-import moment from 'moment';
 import { useSnackbar } from 'notistack';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -28,7 +27,6 @@ const RegisterPage = ({
   const { enqueueSnackbar } = useSnackbar();
 
   const [activeTab, setActiveTab] = React.useState(0);
-  const [loading, setLoading] = React.useState(false);
   const [createUser] = useMutation(CREATE_USER);
 
   document.body.style.background = `url(${background})`;
@@ -59,7 +57,6 @@ const RegisterPage = ({
             );
 
             createUser({ variables: { ...data } }).then(() => {
-              setLoading(false);
               enqueueSnackbar(
                 'You create account ! Check your email to confirm !',
                 {

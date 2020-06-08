@@ -6,11 +6,8 @@ import {
   CustomCityPicker,
   CustomCountryPicker,
   FormButtons,
-  Input,
   TextInput,
 } from 'components';
-
-import validate from './validate';
 
 import useStyles from './styles';
 import DndUploadImage from 'components/upload-image/UploadImage';
@@ -79,5 +76,4 @@ export default reduxForm({
   forceUnregisterOnUnmount: false,
   touchOnBlur: false,
   initialValues,
-  validate,
 })(AdditionalInfoForm);

@@ -6,7 +6,6 @@ import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
-import { AccountCircle } from '@material-ui/icons';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Grow from '@material-ui/core/Grow';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';

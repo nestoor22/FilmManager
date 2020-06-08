@@ -3,7 +3,6 @@ import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
 
 import { useSnackbar } from 'notistack';
 

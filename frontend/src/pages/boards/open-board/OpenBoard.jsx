@@ -17,7 +17,6 @@ import { BOARD } from 'graphql/queries/boards';
 import { AppHeader, CreateListPopup, PopoverWrapper } from 'components';
 
 import useStyles from './styles';
-import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import Popper from '@material-ui/core/Popper';

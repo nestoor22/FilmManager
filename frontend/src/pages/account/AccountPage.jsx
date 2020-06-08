@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { useHistory } from 'react-router-dom';
-
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -23,9 +21,7 @@ function verticalTabProps(index) {
 
 const AccountPage = () => {
   const classes = useStyles();
-  const history = useHistory();
 
-  const [loading, setLoading] = React.useState(false);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
