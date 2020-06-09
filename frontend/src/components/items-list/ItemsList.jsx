@@ -5,7 +5,7 @@ import { ItemCard, Pagination } from 'components';
 
 import useStyles from './styles';
 
-function ItemsList({ query, showType }) {
+function ItemsList({ query, showType, orderBy, order }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(1);
 
@@ -14,10 +14,13 @@ function ItemsList({ query, showType }) {
     window.scrollTo(0, 0);
   };
 
+  const orderParam = order === 'desc' ? `-${orderBy}` : orderBy
+
   const { data } = useQuery(query, {
     variables: {
       showType: showType,
       page: page - 1,
+      orderBy: orderParam
     },
   });
 
