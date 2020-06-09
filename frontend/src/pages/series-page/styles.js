@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     borderRadius: '1px',
     marginTop: '60px',
     marginBottom: '30px',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   sortByTitle: {
     color: '#BAC7CB',
@@ -28,41 +28,60 @@ const useStyles = makeStyles({
   sortingTitle: {
     color: '#BAC7CB',
     fontSize: '13px',
+    marginRight: '5px',
   },
   defaultSortingWrapper: {
     width: '70px',
     display: 'flex',
     alignItems: 'center',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   nameSortingWrapper: {
     width: '50px',
     display: 'flex',
     alignItems: 'center',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   imdbSortingWrapper: {
-    width: '80px',
+    width: '90px',
     display: 'flex',
     alignItems: 'center',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   ratingSortingWrapper: {
     width: '50px',
     display: 'flex',
     alignItems: 'center',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   dateSortingWrapper: {
     width: '40px',
     display: 'flex',
     alignItems: 'center',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   popularitySortingWrapper: {
     width: '110px',
     display: 'flex',
     alignItems: 'center',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   contentRoot: {
     display: 'flex',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });
 
 export default useStyles;
