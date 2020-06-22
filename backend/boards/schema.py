@@ -20,6 +20,7 @@ class BoardType(DjangoObjectType):
 
     lists = graphene.List(ShowsListType)
     members = graphene.List(UserType)
+    tags = graphene.List(graphene.String)
 
     @staticmethod
     def resolve_lists(parent, info):
@@ -28,6 +29,10 @@ class BoardType(DjangoObjectType):
     @staticmethod
     def resolve_members(parent, info):
         return User.objects.filter(boardmembers__board_id=parent.id)
+
+    @staticmethod
+    def resolve_tags(parent, info):
+        return parent.tags.split(',')
 
 
 class BoardListType(DjangoObjectType):
@@ -38,6 +43,8 @@ class BoardListType(DjangoObjectType):
 class BoardInputType(graphene.InputObjectType):
     name = graphene.String()
     background_color = graphene.String()
+    description = graphene.String()
+    tags = graphene.List(graphene.String)
     is_open = graphene.Boolean()
     is_private = graphene.Boolean()
     invited_members = graphene.List(graphene.String)
@@ -54,6 +61,7 @@ class CreateBoardMutation(graphene.Mutation):
         board_info = kwargs.get('board')
 
         board_info['owner_id'] = info.context.session.get('_auth_user_id')
+        board_info['tags'] = ','.join(kwargs.pop('tags', []))
 
         board = BoardLogic(board_info).create_board()
 

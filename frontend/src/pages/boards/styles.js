@@ -5,84 +5,36 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    height: '100%',
+    minHeight: '100vh',
   },
-  content: {
+  filtersSidebar: {
+    height: 'calc(100vh - 52px)',
+    paddingTop: '28px',
+    paddingLeft: '10px',
+    width: '466px',
+    backgroundColor: '#5F8792',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
+  },
+  contentWrapper: {
+    display: 'flex',
+    height: '100%',
     width: '100%',
-    height: '100%',
   },
-  verticalTabs: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '420px',
-    borderRight: '1px solid #fff',
-  },
-  boardsCardsWrapper: {
-    padding: '30px',
-    display: 'flex',
-    width: '100%',
-    height: '100%',
-    flexDirection: 'column',
-  },
-  addNewCard: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '200px',
-    height: '100px',
-  },
-  createNewButton: {
-    width: '200px',
-    height: '100px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    '&:focus': {
-      outline: 'none',
-    },
-  },
-  createNewButtonText: {
-    color: '#fff',
-    fontSize: '15px',
-  },
-  boardsBlockTitle: {
+  filterHeader: {
+    color: '#E9F0F2',
     fontSize: '18px',
-    fontWeight: 'bold',
-    color: '#fff',
-    paddingBottom: '30px',
   },
-  boardCard: {
-    width: '200px',
-    height: '100px',
-    marginBottom: '30px',
-    borderRadius: '3px',
-    transition: '0.3s',
-    '&:hover': {
-      transform: 'scale(1.05, 1.05)',
-      cursor: 'pointer',
-    },
-    '&:not(:last-child)': {
-      marginRight: 25,
-    },
+  inputChips: {
+    width: '426px',
+    height: '33px',
   },
-  boardsRow: {
+  sliderField: {
+    width: '426px',
+    color: '#012934',
+  },
+  checkboxFiltersWrapper: {
     display: 'flex',
-    flexFlow: 'wrap',
-    alignItems: 'flex-start',
-    width: '100%',
-    flexDirection: 'row',
-    marginBottom: '20px',
-  },
-  boardTitle: {
-    paddingLeft: '15px',
-    paddingTop: '10px',
-    fontWeight: 'bold',
-    fontSize: '15px',
-    color: '#000',
   },
 });
 

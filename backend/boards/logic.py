@@ -15,16 +15,19 @@ class BoardLogic(object):
 
         invited_members.append(board.owner.email)
 
-        self.add_members_to_board(board.id, invited_members)
+        self.add_members_to_board(board, invited_members)
 
         return board
 
     @staticmethod
-    def add_members_to_board(board_id, members_list):
+    def add_members_to_board(board, members_list):
         for member_email in members_list:
             try:
                 user = User.objects.get(email=member_email.strip())
             except User.DoesNotExist:
                 continue
 
-            BoardMembers.objects.create(board_id=board_id, user_id=user.id)
+            BoardMembers.objects.create(board_id=board.id, user_id=user.id)
+
+        board.members = BoardMembers.objects.filter(board_id=board.id).count()
+        board.save()

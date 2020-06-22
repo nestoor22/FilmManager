@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-
+import classNames from 'classnames';
 import { withStyles } from '@material-ui/core';
 import Slider from '@material-ui/core/Slider';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -26,10 +26,11 @@ ValueLabelComponent.propTypes = {
 
 const PrettoSlider = withStyles({
   root: {
-    color: '#52af77',
+    color: '#012934',
     height: 8,
   },
   thumb: {
+    color: '#012934',
     height: 24,
     width: 24,
     backgroundColor: '#fff',
@@ -45,6 +46,7 @@ const PrettoSlider = withStyles({
     left: 'calc(-50% + 4px)',
   },
   track: {
+    color: '#012934',
     height: 8,
     borderRadius: 4,
   },
@@ -54,19 +56,35 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-const CustomSliderField = ({value, onChange}) => {
+const CustomSliderField = ({
+  input,
+  value,
+  onChange,
+  ariaLabelledBy,
+  classStyle,
+}) => {
   const classes = useStyles();
+  const [min, setMin] = React.useState(
+    ariaLabelledBy ? Math.min(...input.value) : 0
+  );
+  const [max, setMax] = React.useState(
+    ariaLabelledBy ? Math.max(...input.value) : 10
+  );
+  const handleInputChange = (newValue) => {
+    input.onChange(newValue);
+  };
 
   return (
-    <div className={classes.sliderWrapper}>
+    <div className={classNames(classes.sliderWrapper, classStyle)}>
       <Slider
-        onChange={onChange}
+        color="secondary"
+        onChange={value ? onChange : (event, value) => handleInputChange(value)}
         ValueLabelComponent={ValueLabelComponent}
-        value={value}
-        aria-labelledby="input-slider"
-        min={0}
-        step={0.1}
-        max={10}
+        value={value ? value : input.value}
+        aria-labelledby={ariaLabelledBy ? ariaLabelledBy : 'input-slider'}
+        min={min}
+        step={ariaLabelledBy ? 1 : 0.1}
+        max={max}
       />
     </div>
   );

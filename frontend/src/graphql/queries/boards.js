@@ -6,6 +6,8 @@ export const BOARDS = gql`
       id
       sharedTimes
       backgroundColor
+      description
+      tags
       isOpen
       name
       createdAt
