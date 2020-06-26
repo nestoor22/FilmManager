@@ -22,6 +22,7 @@ import { SET_LAST_VISITED_BOARD } from 'graphql/mutations/boards';
 
 import useStyles from './styles';
 import CustomCheckBoxField from '../../components/custom-checkbox-fields/CustomCheckBoxField';
+import BoardCard from '../../components/board-card/BoardCard';
 
 const initialValues = {
   tags: [],
@@ -125,6 +126,12 @@ const Boards = () => {
               />
             </div>
           </div>
+        </div>
+        <div className={classes.boardTilesWrapper}>
+          <BoardCard />
+          <BoardCard />
+          <BoardCard />
+          <BoardCard />
         </div>
       </div>
       <CreateBoardPopUp

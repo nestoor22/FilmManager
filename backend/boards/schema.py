@@ -32,7 +32,7 @@ class BoardType(DjangoObjectType):
 
     @staticmethod
     def resolve_tags(parent, info):
-        return parent.tags.split(',')
+        return parent.tags.split(',') if parent.tags else []
 
 
 class BoardListType(DjangoObjectType):

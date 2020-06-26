@@ -11,6 +11,7 @@ const useStyles = makeStyles({
     height: 'calc(100vh - 52px)',
     paddingTop: '28px',
     paddingLeft: '10px',
+    paddingRight: '10px',
     width: '466px',
     backgroundColor: '#5F8792',
     display: 'flex',
@@ -35,6 +36,13 @@ const useStyles = makeStyles({
   },
   checkboxFiltersWrapper: {
     display: 'flex',
+  },
+  boardTilesWrapper: {
+    paddingTop: '20px',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 });
 
