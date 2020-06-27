@@ -110,7 +110,7 @@ class SetLastVisitedBoard(graphene.Mutation):
 
 class BoardsQuery(graphene.ObjectType):
     board = graphene.Field(BoardType, board_id=graphene.Int(required=True))
-    boards = graphene.List(BoardType, open_boards=graphene.Boolean(required=True), filters=graphene.Argument(FiltersType))
+    boards = graphene.List(BoardType, user_boards=graphene.Boolean(), filters=graphene.Argument(FiltersType))
     last_visited_boards = graphene.List(BoardType)
 
     @staticmethod
@@ -118,19 +118,23 @@ class BoardsQuery(graphene.ObjectType):
         return Board.objects.get(id=board_id)
 
     @staticmethod
-    def resolve_boards(parent, info, open_boards, filters=None):
+    def resolve_boards(parent, info, user_boards=False, filters=None):
         user_id = info.context.session.get('_auth_user_id')
-        if not user_id and not open_boards:
-            raise Exception('User is not logged in')
 
-        if not open_boards:
+        if user_boards and not filters:
+            if not user_id:
+                raise Exception('User is not logged in')
+
             return Board.objects.filter(
                 owner_id=user_id,
-                is_open=open_boards
             ).order_by('created_at')
 
-        return Board.objects.filter(is_open=open_boards).order_by('created_at') \
-            if not filters else BoardLogic().get_filtered_boards(filters=filters)
+        return Board.objects.all().order_by('created_at') \
+            if not filters else BoardLogic().get_filtered_boards(
+            user_boards=user_boards,
+            user_id=user_id,
+            filters=filters
+        )
 
     @staticmethod
     def resolve_last_visited_boards(parent, info):

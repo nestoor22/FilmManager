@@ -62,14 +62,11 @@ const CustomSliderField = ({
   onChange,
   ariaLabelledBy,
   classStyle,
+  step,
 }) => {
   const classes = useStyles();
-  const [min, setMin] = React.useState(
-    ariaLabelledBy ? Math.min(...input.value) : 0
-  );
-  const [max, setMax] = React.useState(
-    ariaLabelledBy ? Math.max(...input.value) : 10
-  );
+  const [min] = React.useState(ariaLabelledBy ? Math.min(...input.value) : 0);
+  const [max] = React.useState(ariaLabelledBy ? Math.max(...input.value) : 10);
   const handleInputChange = (newValue) => {
     input.onChange(newValue);
   };
@@ -83,7 +80,7 @@ const CustomSliderField = ({
         value={value ? value : input.value}
         aria-labelledby={ariaLabelledBy ? ariaLabelledBy : 'input-slider'}
         min={min}
-        step={ariaLabelledBy ? 1 : 0.1}
+        step={step}
         max={max}
       />
     </div>

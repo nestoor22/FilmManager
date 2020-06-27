@@ -79,7 +79,7 @@ export default function AppHeader({ className }) {
             disabled: classes.disabledInput,
           }}
           startAdornment={
-            <InputAdornment className={classes.iconWrapper} position="center">
+            <InputAdornment className={classes.iconWrapper}>
               <img alt="" src={SearchIcon} />
             </InputAdornment>
           }

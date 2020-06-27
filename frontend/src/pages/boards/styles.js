@@ -38,11 +38,46 @@ const useStyles = makeStyles({
     display: 'flex',
   },
   boardTilesWrapper: {
-    paddingTop: '20px',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  filterBtn: {
+    marginTop: '20px',
+    boxShadow: 'none',
+    borderRadius: '3px',
+    backgroundColor: '#012934',
+    color: '#FFFFFF',
+    fontSize: '13px',
+    lineHeight: '18px',
+    fontWeight: 500,
+    padding: '8px 15px',
+    minWidth: '80px',
+    '&:hover': {
+      backgroundColor: '#012934',
+      color: '#FFFFFF',
+    },
+    '&:focus': {
+      outline: 'none',
+    },
+  },
+  tabSwitcher: {
+    marginBottom: '40px',
+    boxShadow: 'none',
+    backgroundColor: 'none',
+  },
+  tabs: {
+    fontSize: '18px',
+    color: '#012934',
+    boxShadow: 'none',
+    backgroundColor: '#BAC7CB',
+    '&:focus': {
+      outline: 'none',
+    },
+  },
+  indicator: {
+    color: '#012934',
   },
 });
 

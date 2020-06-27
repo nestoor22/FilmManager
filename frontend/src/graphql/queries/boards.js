@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const BOARDS = gql`
-  query boards($openBoards: Boolean!, $filters: FiltersType) {
-    boards(openBoards: $openBoards, filters: $filters) {
+  query boards($userBoards: Boolean!, $filters: FiltersType) {
+    boards(userBoards: $userBoards, filters: $filters) {
       id
       sharedTimes
       backgroundColor

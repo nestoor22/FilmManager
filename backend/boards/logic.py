@@ -84,7 +84,7 @@ class BoardLogic(object):
         board_lists = BoardLists.objects.filter(board_id=board_id)
         return Shows.objects.filter(listshowrelation__list__boardlists__in=board_lists).count()
 
-    def get_filtered_boards(self, filters):
+    def get_filtered_boards(self, user_boards, user_id, filters):
         filter_query = Q()
         result = []
 
@@ -100,8 +100,11 @@ class BoardLogic(object):
         min_followers = min(followers)
         max_followers = max(followers)
 
+        if user_boards and user_id:
+            filter_query &= Q(owner_id=user_id)
+
         if len(filters.get('board_type', [])) == 1:
-            filter_query = Q(is_open=filters.get('board_type') == 'open')
+            filter_query &= Q(is_open=filters.get('board_type')[0] == 'open')
 
         if filters.get('tags'):
             for tag in filters.get('tags'):

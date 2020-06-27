@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import useStyles from './styles';
@@ -13,6 +12,12 @@ const CustomCheckBoxField = ({ input, values }) => {
 
     if (!previousValues.includes(newValue)) {
       input.onChange([newValue, ...previousValues]);
+    } else {
+      input.onChange(
+        input.value.filter((item) => {
+          return item !== newValue;
+        })
+      );
     }
   };
 
@@ -21,8 +26,9 @@ const CustomCheckBoxField = ({ input, values }) => {
       {values.map((item, index) => {
         return (
           <FormControlLabel
+            key={index}
             classes={{
-              label: classes.label
+              label: classes.label,
             }}
             control={
               <Checkbox

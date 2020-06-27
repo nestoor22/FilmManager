@@ -21,6 +21,9 @@ import BoardCard from '../../components/board-card/BoardCard';
 
 import useStyles from './styles';
 import Button from '@material-ui/core/Button';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 const initialValues = {
   tags: [],
@@ -29,6 +32,13 @@ const initialValues = {
   showsNumber: [0, 999],
   boardType: [],
 };
+
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
+  };
+}
 
 const Boards = ({ boardFilter }) => {
   const classes = useStyles();
@@ -39,9 +49,15 @@ const Boards = ({ boardFilter }) => {
   const [openCreationPopup, setOpenCreationPopup] = React.useState(false);
   const [isTeamBoard] = React.useState(false);
 
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   const { data, refetch } = useQuery(BOARDS, {
     variables: {
-      openBoards: true,
+      userBoards: value === 1,
     },
   });
 
@@ -51,9 +67,17 @@ const Boards = ({ boardFilter }) => {
 
   const handleSubmitFilters = () => {
     refetch({
+      userBoards: value === 1,
       filters: boardFilter,
     });
   };
+
+  React.useEffect(() => {
+    refetch({
+      userBoards: value === 1,
+      filters: boardFilter,
+    });
+  }, [value]);
 
   return (
     <div className={classes.root}>
@@ -132,6 +156,38 @@ const Boards = ({ boardFilter }) => {
           </Button>
         </div>
         <div className={classes.boardTilesWrapper}>
+          <AppBar
+            position="static"
+            color="default"
+            className={classes.tabSwitcher}
+          >
+            <Tabs
+              classes={{
+                root: classes.tabs,
+                indicator: classes.indicator,
+              }}
+              className={classes.tabs}
+              value={value}
+              onChange={handleChange}
+              variant="fullWidth"
+              aria-label="full width tabs example"
+            >
+              <Tab
+                classes={{
+                  root: classes.tabs,
+                }}
+                label="All boards"
+                {...a11yProps(0)}
+              />
+              <Tab
+                classes={{
+                  root: classes.tabs,
+                }}
+                label="Following boards"
+                {...a11yProps(1)}
+              />
+            </Tabs>
+          </AppBar>
           {data &&
             data?.boards.map((boardInfo, index) => {
               return <BoardCard key={index} boardInfo={boardInfo} />;
