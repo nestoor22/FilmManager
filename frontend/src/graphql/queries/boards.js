@@ -1,11 +1,21 @@
 import gql from 'graphql-tag';
 
 export const BOARDS = gql`
-  query boards {
-    boards {
+  query boards($openBoards: Boolean!) {
+    boards(openBoards: $openBoards) {
       id
       sharedTimes
       backgroundColor
+      backgroundImage
+      followers
+      averageShowRating
+      showsNumber
+      members {
+        firstName
+        lastName
+        email
+        photo
+      }
       description
       tags
       isOpen

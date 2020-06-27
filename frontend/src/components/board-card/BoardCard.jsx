@@ -3,12 +3,12 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
 import InfoIcon from 'assets/icons/info.svg';
-import useStyles from './styles';
 import Chip from '@material-ui/core/Chip';
-import classNames from 'classnames';
-import Button from '@material-ui/core/Button';
 
-const BoardCard = () => {
+import { PopoverWrapper } from 'components';
+import useStyles from './styles';
+
+const BoardCard = ({ boardInfo }) => {
   const classes = useStyles();
   return (
     <div
@@ -23,38 +23,38 @@ const BoardCard = () => {
       <div className={classes.boardTileContent}>
         <div className={classes.boardHeaderWrapper}>
           <Typography className={classes.boardName}>
-            Best Family shows by year
+            {boardInfo.name}
           </Typography>
-          <img alt="" className={classes.infoIcon} src={InfoIcon} />
+          <div className={classes.infoIcon}>
+            <PopoverWrapper
+              text={boardInfo.description}
+              children={<img alt="" src={InfoIcon} />}
+            />
+          </div>
         </div>
         <div>
-          <Chip
-            label="Family"
-            className={classes.customChip}
-            variant="outlined"
-          />
-          <Chip
-            label="Year sorted"
-            className={classes.customChip}
-            variant="outlined"
-          />
-          <Chip
-            label="Marvel"
-            className={classes.customChip}
-            variant="outlined"
-          />
-          <Chip label="Old" className={classes.customChip} variant="outlined" />
+          {boardInfo.tags.map((tag) => {
+            return (
+              <Chip
+                label={tag}
+                className={classes.customChip}
+                variant="outlined"
+              />
+            );
+          })}
         </div>
         <div className={classes.marksWrapper}>
-          <Typography className={classes.markText}>Followers: 234</Typography>
           <Typography className={classes.markText}>
-            Average rating: 8,7
+            Followers: {boardInfo.followers}
+          </Typography>
+          <Typography className={classes.markText}>
+            Average show rating: {boardInfo.averageShowRating}
           </Typography>
           <Typography className={classes.markText}>
             Rating place: 2134
           </Typography>
           <Typography className={classes.markText}>
-            Movies/series on board: 89
+            Movies/series on board: {boardInfo.showsNumber}
           </Typography>
         </div>
         <div className={classes.cardFooter}>

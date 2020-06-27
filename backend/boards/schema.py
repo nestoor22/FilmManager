@@ -21,6 +21,8 @@ class BoardType(DjangoObjectType):
     lists = graphene.List(ShowsListType)
     members = graphene.List(UserType)
     tags = graphene.List(graphene.String)
+    average_show_rating = graphene.Float()
+    shows_number = graphene.Int()
 
     @staticmethod
     def resolve_lists(parent, info):
@@ -33,6 +35,14 @@ class BoardType(DjangoObjectType):
     @staticmethod
     def resolve_tags(parent, info):
         return parent.tags.split(',') if parent.tags else []
+
+    @staticmethod
+    def resolve_average_show_rating(parent, info):
+        return BoardLogic.compute_average_show_rating(parent.id)
+
+    @staticmethod
+    def resolve_shows_number(parent, info):
+        return BoardLogic.get_shows_number_on_board(parent.id)
 
 
 class BoardListType(DjangoObjectType):
@@ -92,7 +102,7 @@ class SetLastVisitedBoard(graphene.Mutation):
 
 class BoardsQuery(graphene.ObjectType):
     board = graphene.Field(BoardType, board_id=graphene.Int(required=True))
-    boards = graphene.List(BoardType)
+    boards = graphene.List(BoardType, open_boards=graphene.Boolean(required=True))
     last_visited_boards = graphene.List(BoardType)
 
     @staticmethod
@@ -100,11 +110,18 @@ class BoardsQuery(graphene.ObjectType):
         return Board.objects.get(id=board_id)
 
     @staticmethod
-    def resolve_boards(parent, info):
+    def resolve_boards(parent, info, open_boards):
         user_id = info.context.session.get('_auth_user_id')
-        if not user_id:
+        if not user_id and not open_boards:
             raise Exception('User is not logged in')
-        return Board.objects.filter(owner_id=user_id).order_by('created_at')
+
+        if not open_boards:
+            return Board.objects.filter(
+                owner_id=user_id,
+                is_open=open_boards
+            ).order_by('created_at')
+
+        return Board.objects.filter(is_open=open_boards).order_by('created_at')
 
     @staticmethod
     def resolve_last_visited_boards(parent, info):

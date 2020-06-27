@@ -1,28 +1,25 @@
 import React from 'react';
 
 import { useHistory } from 'react-router-dom';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 
 import {
   AppHeader,
   ChipsInput,
   CreateBoardPopUp,
   CustomSliderField,
-  Input,
 } from 'components';
 
 import { BOARDS } from 'graphql/queries/boards';
-import { SET_LAST_VISITED_BOARD } from 'graphql/mutations/boards';
 
-import useStyles from './styles';
 import CustomCheckBoxField from '../../components/custom-checkbox-fields/CustomCheckBoxField';
 import BoardCard from '../../components/board-card/BoardCard';
+
+import useStyles from './styles';
 
 const initialValues = {
   tags: [],
@@ -38,11 +35,15 @@ const Boards = () => {
   document.body.style.backgroundColor = '#BAC7CB';
 
   const history = useHistory();
+
   const [openCreationPopup, setOpenCreationPopup] = React.useState(false);
   const [isTeamBoard, setIsTeamBoard] = React.useState(false);
-  const [setLastVisitedBoard] = useMutation(SET_LAST_VISITED_BOARD);
 
-  const { data, refetch } = useQuery(BOARDS);
+  const { data, refetch } = useQuery(BOARDS, {
+    variables: {
+      openBoards: true,
+    },
+  });
 
   const handleClosePopup = () => {
     setOpenCreationPopup(false);
@@ -90,7 +91,7 @@ const Boards = () => {
             style={{ marginTop: '40px' }}
             className={classes.filterHeader}
           >
-            Movies/series number range:
+            Movies/series number range: {}
           </Typography>
           <Field
             name="showsNumbers"
@@ -128,10 +129,10 @@ const Boards = () => {
           </div>
         </div>
         <div className={classes.boardTilesWrapper}>
-          <BoardCard />
-          <BoardCard />
-          <BoardCard />
-          <BoardCard />
+          {data &&
+            data?.boards.map((boardInfo) => {
+              return <BoardCard boardInfo={boardInfo} />;
+            })}
         </div>
       </div>
       <CreateBoardPopUp

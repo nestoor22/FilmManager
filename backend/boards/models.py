@@ -14,7 +14,7 @@ class Board(models.Model):
     created_at = models.DateTimeField(null=True, default=datetime.now)
     description = models.TextField(null=True)
     tags = models.TextField(null=True)
-    members = models.IntegerField(null=True, default=0)
+    followers = models.IntegerField(null=True, default=1)
     shared_times = models.IntegerField(null=True, default=0)
     is_open = models.BooleanField(default=False)
     is_private = models.BooleanField(default=False)
@@ -49,3 +49,17 @@ class BoardMembers(models.Model):
 
     def __str__(self):
         return f'Board-{self.board.id} has member-{self.user.id}'
+
+
+class BoardFollowers(models.Model):
+    board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_admin = models.BooleanField(default=False, null=True)
+
+    class Meta:
+        db_table = 'board_followers'
+        verbose_name = 'Board follower'
+
+    def __str__(self):
+        return f'Board-{self.board.id} has follower-{self.user.id}'
+
