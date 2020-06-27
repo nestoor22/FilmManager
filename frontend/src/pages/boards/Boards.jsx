@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, reset } from 'redux-form';
 import { connect } from 'react-redux';
 
 import Typography from '@material-ui/core/Typography';
@@ -40,7 +40,7 @@ function a11yProps(index) {
   };
 }
 
-const Boards = ({ boardFilter }) => {
+const Boards = ({ boardFilter, reset }) => {
   const classes = useStyles();
   document.body.style.backgroundColor = '#BAC7CB';
 
@@ -53,6 +53,7 @@ const Boards = ({ boardFilter }) => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    reset('boardFilter');
   };
 
   const { data, refetch } = useQuery(BOARDS, {
@@ -216,4 +217,4 @@ export default reduxForm({
   forceUnregisterOnUnmount: false,
   touchOnBlur: false,
   initialValues,
-})(connect(mapStateToProps, null)(Boards));
+})(connect(mapStateToProps, { reset })(Boards));
