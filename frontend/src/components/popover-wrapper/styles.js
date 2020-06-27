@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(1),
-    maxWidth: '500px',
+    maxWidth: '300px',
   },
   children: {
     display: 'flex',
