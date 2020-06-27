@@ -20,24 +20,24 @@ import CustomCheckBoxField from '../../components/custom-checkbox-fields/CustomC
 import BoardCard from '../../components/board-card/BoardCard';
 
 import useStyles from './styles';
+import Button from '@material-ui/core/Button';
 
 const initialValues = {
   tags: [],
-  followers: [0, 999999],
+  followers: [0, 9999],
   rating: [0, 10],
-  showsNumbers: [0, 9999999],
-  showTypes: [],
-  ownerTypes: [],
+  showsNumber: [0, 999],
+  boardType: [],
 };
 
-const Boards = () => {
+const Boards = ({ boardFilter }) => {
   const classes = useStyles();
   document.body.style.backgroundColor = '#BAC7CB';
 
   const history = useHistory();
 
   const [openCreationPopup, setOpenCreationPopup] = React.useState(false);
-  const [isTeamBoard, setIsTeamBoard] = React.useState(false);
+  const [isTeamBoard] = React.useState(false);
 
   const { data, refetch } = useQuery(BOARDS, {
     variables: {
@@ -47,6 +47,12 @@ const Boards = () => {
 
   const handleClosePopup = () => {
     setOpenCreationPopup(false);
+  };
+
+  const handleSubmitFilters = () => {
+    refetch({
+      filters: boardFilter,
+    });
   };
 
   return (
@@ -74,6 +80,7 @@ const Boards = () => {
             classStyle={classes.sliderField}
             ariaLabelledBy="range-slider"
             component={CustomSliderField}
+            step={100}
           />
           <Typography
             style={{ marginTop: '40px' }}
@@ -85,16 +92,18 @@ const Boards = () => {
             name="rating"
             classStyle={classes.sliderField}
             ariaLabelledBy="range-slider"
+            step={0.1}
             component={CustomSliderField}
           />
           <Typography
             style={{ marginTop: '40px' }}
             className={classes.filterHeader}
           >
-            Movies/series number range: {}
+            Movies/series number range:
           </Typography>
           <Field
-            name="showsNumbers"
+            name="showsNumber"
+            step={10}
             classStyle={classes.sliderField}
             ariaLabelledBy="range-slider"
             component={CustomSliderField}
@@ -108,30 +117,24 @@ const Boards = () => {
                 Board type:
               </Typography>
               <Field
-                name="showTypes"
+                name="boardType"
                 values={['open', 'private']}
                 component={CustomCheckBoxField}
               />
             </div>
-            <div>
-              <Typography
-                style={{ marginTop: '40px' }}
-                className={classes.filterHeader}
-              >
-                Owner type:
-              </Typography>
-              <Field
-                name="ownerTypes"
-                values={['personal', 'community', 'random']}
-                component={CustomCheckBoxField}
-              />
-            </div>
           </div>
+          <Button
+            variant="contained"
+            className={classes.filterBtn}
+            onClick={handleSubmitFilters}
+          >
+            Apply Filter
+          </Button>
         </div>
         <div className={classes.boardTilesWrapper}>
           {data &&
-            data?.boards.map((boardInfo) => {
-              return <BoardCard boardInfo={boardInfo} />;
+            data?.boards.map((boardInfo, index) => {
+              return <BoardCard key={index} boardInfo={boardInfo} />;
             })}
         </div>
       </div>

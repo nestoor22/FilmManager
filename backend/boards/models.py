@@ -17,7 +17,6 @@ class Board(models.Model):
     followers = models.IntegerField(null=True, default=1)
     shared_times = models.IntegerField(null=True, default=0)
     is_open = models.BooleanField(default=False)
-    is_private = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'boards'

@@ -14,6 +14,14 @@ class BoardMemberType(DjangoObjectType):
         model = BoardMembers
 
 
+class FiltersType(graphene.InputObjectType):
+    rating = graphene.List(graphene.Float)
+    followers = graphene.List(graphene.Int)
+    shows_number = graphene.List(graphene.Int)
+    board_type = graphene.List(graphene.String)
+    tags = graphene.List(graphene.String)
+
+
 class BoardType(DjangoObjectType):
     class Meta:
         model = Board
@@ -102,7 +110,7 @@ class SetLastVisitedBoard(graphene.Mutation):
 
 class BoardsQuery(graphene.ObjectType):
     board = graphene.Field(BoardType, board_id=graphene.Int(required=True))
-    boards = graphene.List(BoardType, open_boards=graphene.Boolean(required=True))
+    boards = graphene.List(BoardType, open_boards=graphene.Boolean(required=True), filters=graphene.Argument(FiltersType))
     last_visited_boards = graphene.List(BoardType)
 
     @staticmethod
@@ -110,7 +118,7 @@ class BoardsQuery(graphene.ObjectType):
         return Board.objects.get(id=board_id)
 
     @staticmethod
-    def resolve_boards(parent, info, open_boards):
+    def resolve_boards(parent, info, open_boards, filters=None):
         user_id = info.context.session.get('_auth_user_id')
         if not user_id and not open_boards:
             raise Exception('User is not logged in')
@@ -121,7 +129,8 @@ class BoardsQuery(graphene.ObjectType):
                 is_open=open_boards
             ).order_by('created_at')
 
-        return Board.objects.filter(is_open=open_boards).order_by('created_at')
+        return Board.objects.filter(is_open=open_boards).order_by('created_at') \
+            if not filters else BoardLogic().get_filtered_boards(filters=filters)
 
     @staticmethod
     def resolve_last_visited_boards(parent, info):

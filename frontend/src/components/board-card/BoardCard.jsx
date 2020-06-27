@@ -33,9 +33,10 @@ const BoardCard = ({ boardInfo }) => {
           </div>
         </div>
         <div>
-          {boardInfo.tags.map((tag) => {
+          {boardInfo.tags.map((tag, index) => {
             return (
               <Chip
+                key={index}
                 label={tag}
                 className={classes.customChip}
                 variant="outlined"

@@ -1,4 +1,4 @@
-from django.db.models import Avg
+from django.db.models import Avg, Q
 
 from user.models import User
 from .models import Board, BoardMembers, BoardFollowers, ShowsList, BoardLists
@@ -7,7 +7,7 @@ from show.models import Shows, ShowRates
 
 class BoardLogic(object):
 
-    def __init__(self, data):
+    def __init__(self, data=None):
         self.data = data
 
     def create_board(self):
@@ -84,3 +84,37 @@ class BoardLogic(object):
         board_lists = BoardLists.objects.filter(board_id=board_id)
         return Shows.objects.filter(listshowrelation__list__boardlists__in=board_lists).count()
 
+    def get_filtered_boards(self, filters):
+        filter_query = Q()
+        result = []
+
+        shows_number = filters.get('shows_number', [0, 999])
+        min_shows_number = min(shows_number)
+        max_shows_number = max(shows_number)
+
+        rating = filters.get('rating', [0, 10])
+        min_rating = min(rating)
+        max_rating = max(rating)
+
+        followers = filters.get('followers')
+        min_followers = min(followers)
+        max_followers = max(followers)
+
+        if len(filters.get('board_type', [])) == 1:
+            filter_query = Q(is_open=filters.get('board_type') == 'open')
+
+        if filters.get('tags'):
+            for tag in filters.get('tags'):
+                filter_query |= Q(tags__icontains=tag)
+
+        if filters.get('followers'):
+            filter_query &= Q(followers__lte=max_followers, followers__gte=min_followers)
+
+        filtered_boards = Board.objects.filter(filter_query).order_by('created_at')
+
+        for board in filtered_boards:
+            if max_rating >= self.compute_average_show_rating(board.id) >= min_rating:
+                if max_shows_number >= self.get_shows_number_on_board(board.id) >= min_shows_number:
+                    result.append(board)
+
+        return result
