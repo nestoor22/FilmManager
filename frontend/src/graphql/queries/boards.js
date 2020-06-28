@@ -9,6 +9,7 @@ export const BOARDS = gql`
       backgroundImage
       followers
       averageShowRating
+      isFollowed
       showsNumber
       members {
         firstName

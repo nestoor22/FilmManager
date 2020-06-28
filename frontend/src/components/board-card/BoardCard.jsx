@@ -1,15 +1,27 @@
 import React from 'react';
+import { useSnackbar } from 'notistack';
+import { useMutation } from '@apollo/react-hooks';
 
 import Typography from '@material-ui/core/Typography';
-
-import InfoIcon from 'assets/icons/info.svg';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 
 import { PopoverWrapper } from 'components';
+import InfoIcon from 'assets/icons/info.svg';
+import { FOLLOW_BOARD } from 'graphql/mutations/boards';
+
 import useStyles from './styles';
 
 const BoardCard = ({ boardInfo }) => {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
+  const [followBoard] = useMutation(FOLLOW_BOARD);
+
+  const [changeFollowedStatus, setChangeFollowedStatus] = React.useState(false);
+
+  React.useState(() => {}, [changeFollowedStatus]);
+
   return (
     <div
       className={classes.boardTile}
@@ -59,12 +71,81 @@ const BoardCard = ({ boardInfo }) => {
           </Typography>
         </div>
         <div className={classes.cardFooter}>
-          <Typography className={classes.markText}>Owners</Typography>
+          <Typography
+            style={{ marginRight: 0, width: '100px' }}
+            className={classes.markText}
+          >
+            Owners:
+          </Typography>
+          {boardInfo.members &&
+            boardInfo.members.length < 8 &&
+            boardInfo.members.map((member, index) => {
+              return member.photo ? (
+                <Avatar
+                  key={index}
+                  className={classes.avatarImage}
+                  src={member.photo}
+                />
+              ) : (
+                <Avatar key={index} className={classes.avatarImage}>
+                  {member.firstName[0] + member.lastName[0]}
+                </Avatar>
+              );
+            })}
+          {boardInfo.members &&
+            boardInfo.members.length >= 8 &&
+            boardInfo.members.slice(0, 8).map((member) => {
+              return member.photo ? (
+                <Avatar className={classes.avatarImage} src={member.photo} />
+              ) : (
+                <Avatar className={classes.avatarImage}>
+                  {member.firstName[0] + member.lastName[0]}
+                </Avatar>
+              );
+            })}
+          {boardInfo.members && boardInfo.members.length >= 8 && (
+            <div className={classes.numberIcon}>
+              <Typography>...</Typography>
+              <Avatar
+                style={{ marginLeft: '5px' }}
+                className={classes.avatarImage}
+              >
+                +{boardInfo.members.length - 8}
+              </Avatar>
+            </div>
+          )}
           <div className={classes.actionsBtns}>
-            <Typography className={classes.actionBtnText}>Follow</Typography>
-            <Typography className={classes.actionBtnText}>
+            <Button
+              onClick={() => {
+                followBoard({
+                  variables: {
+                    boardId: boardInfo.id,
+                  },
+                }).then(() => {
+                  enqueueSnackbar('Followed!', {
+                    variant: 'success',
+                  });
+                  boardInfo.isFollowed = true;
+                  setChangeFollowedStatus(!changeFollowedStatus);
+                });
+              }}
+              disabled={!boardInfo.isOpen}
+              classes={{
+                root: classes.actionBtnText,
+                disabled: classes.disabled,
+              }}
+            >
+              {boardInfo.isFollowed ? 'Unfollow' : 'Follow'}
+            </Button>
+            <Button
+              disabled={boardInfo.isOpen}
+              classes={{
+                root: classes.actionBtnText,
+                disabled: classes.disabled,
+              }}
+            >
               Ask to join
-            </Typography>
+            </Button>
           </div>
         </div>
       </div>

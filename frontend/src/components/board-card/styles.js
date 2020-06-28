@@ -18,10 +18,16 @@ const useStyles = makeStyles({
     paddingRight: '10px',
     backgroundColor: '#073947',
     position: 'relative',
+    '&:hover': {
+      cursor: 'default',
+    },
   },
   boardName: {
     fontSize: '32px',
     color: '#E9F0F2',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   boardHeaderWrapper: {
     display: 'flex',
@@ -64,9 +70,36 @@ const useStyles = makeStyles({
     display: 'flex',
   },
   actionBtnText: {
-    width: '80px',
+    width: '100px',
     fontSize: '15px',
     color: '#E9F0F2',
+    '&:focus': {
+      outline: 'none',
+    },
+  },
+  disabled: {
+    color: '#295E6D !important'
+  },
+  avatarImage: {
+    height: '30px',
+    width: '30px',
+    color: '#073947',
+    backgroundColor: '#E9F0F2',
+    fontSize: '15px',
+    '&:not(:first-child)': {
+      marginLeft: -13,
+    },
+    '&:hover': {
+      transform: 'scale(1.05, 1.05)',
+      cursor: 'pointer',
+      zIndex: 999,
+    },
+  },
+  numberIcon: {
+    display: 'flex',
+    alignItems: 'center',
+    height: '30px',
+    width: '30px',
   },
 });
 

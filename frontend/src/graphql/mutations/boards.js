@@ -8,6 +8,14 @@ export const CREATE_BOARD = gql`
   }
 `;
 
+export const FOLLOW_BOARD = gql`
+  mutation followBoard($boardId: ID!) {
+    followBoard(boardId: $boardId) {
+      ok
+    }
+  }
+`;
+
 export const SET_LAST_VISITED_BOARD = gql`
   mutation setLastVisitedBoard($lastVisitedBoardId: Int) {
     setLastVisitedBoard(lastVisitedBoardId: $lastVisitedBoardId) {
