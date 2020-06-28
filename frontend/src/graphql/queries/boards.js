@@ -42,6 +42,7 @@ export const BOARD = gql`
       backgroundColor
       isOpen
       name
+      description
       createdAt
       owner {
         id

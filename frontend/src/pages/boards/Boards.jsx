@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { Field, reduxForm, reset } from 'redux-form';
 import { connect } from 'react-redux';
@@ -44,8 +43,6 @@ const Boards = ({ boardFilter, reset }) => {
   const classes = useStyles();
   document.body.style.backgroundColor = '#BAC7CB';
 
-  const history = useHistory();
-
   const [openCreationPopup, setOpenCreationPopup] = React.useState(false);
   const [isTeamBoard] = React.useState(false);
 
@@ -78,7 +75,7 @@ const Boards = ({ boardFilter, reset }) => {
       userBoards: value === 1,
       filters: boardFilter,
     });
-  }, [value]);
+  }, [value, refetch, boardFilter]);
 
   return (
     <div className={classes.root}>
@@ -191,7 +188,13 @@ const Boards = ({ boardFilter, reset }) => {
           </AppBar>
           {data &&
             data?.boards.map((boardInfo, index) => {
-              return <BoardCard key={index} boardInfo={boardInfo} />;
+              return (
+                <BoardCard
+                  refetch={refetch}
+                  key={index}
+                  boardInfo={boardInfo}
+                />
+              );
             })}
         </div>
       </div>

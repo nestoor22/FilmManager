@@ -27,7 +27,7 @@ function Routes() {
         <PrivateRoute exact path="/data/movies" component={MoviesPage} />
         <PrivateRoute exact path="/data/series" component={SeriesPage} />
         <PrivateRoute exact path="/boards" component={Boards} />
-        <PrivateRoute exact path="/boards/:id" component={OpenBoard} />
+        <PrivateRoute exact path="/boards/:id/view" component={OpenBoard} />
         <PrivateRoute exact path="/account" component={AccountPage} />
       </Switch>
     </Router>

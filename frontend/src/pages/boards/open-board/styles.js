@@ -2,108 +2,65 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
-    width: '100%',
-    height: '100%',
-  },
-  content: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'white',
-  },
-  subHeader: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: '36px',
-    background: 'rgba(172,171,171,0.6)',
-  },
-  boardName: {
-    paddingLeft: '20px',
-    paddingRight: '20px',
-    fontSize: '15px',
-    fontWeight: 'bold',
-  },
-  lists: {
+    flexDirection: 'column',
     width: '100%',
-    padding: '20px',
-    display: 'flex',
-    flexDirection: 'row',
+    minHeight: '100vh',
   },
-  list: {
-    width: '250px',
-    height: 'fit-content',
-    backgroundColor: '#cfdfea',
-    margin: '10px',
-    borderRadius: '3px',
-  },
-  listTitleWrapper: {
-    height: '24px',
-    display: 'flex',
-    alignItems: 'center',
-    width: '100%',
-  },
-  listItemsWrapper: {
-    padding: '5px',
-  },
-  listTitle: {
-    fontSize: '18px',
-    paddingLeft: '20px',
-    fontWeight: 'bold',
-  },
-  showRow: {
-    height: '30px',
-    position: 'relative',
-    width: '100%',
-    borderRadius: '3px',
+  infoSidebar: {
+    height: 'calc(100vh - 52px)',
+    paddingTop: '28px',
+    paddingLeft: '10px',
     paddingRight: '10px',
-    marginBottom: '5px',
+    minWidth: '466px',
+    backgroundColor: '#5F8792',
     display: 'flex',
-    alignItems: 'center',
-    backgroundColor: '#0a2b5c',
+    flexDirection: 'column',
   },
-  poster: {
-    borderTopLeftRadius: '3px',
-    borderBottomLeftRadius: '3px',
-    height: '30px',
+  contentWrapper: {
+    display: 'flex',
+    height: '100%',
+    width: '100%',
+  },
+  shareIcon: {
+    color: '#E9F0F2',
     width: '20px',
   },
-  showTitle: {
-    paddingLeft: '20px',
-    width: '200px',
-    fontSize: '15px',
-    color: '#fff',
-  },
-  releaseYear: {
-    paddingLeft: '20px',
-    color: '#fff',
-  },
-  addNewCard: {
+  headerWrapper: {
     display: 'flex',
-  },
-  addNewIcon: {
-    fill: '#717171',
-    fontSize: '20px',
-  },
-  createNewButtonText: {
-    paddingLeft: '15px',
-  },
-  createNewButton: {
-    margin: '10px',
-    height: '30px',
-    background: 'rgba(0,0,0,.16)',
-    '&:focus': {
-      outline: 'none',
-    },
-  },
-  membersAvatarsList: {
-    height: '100%',
-    display: 'flex',
-    paddingLeft: '100px',
     alignItems: 'center',
+  },
+  header: {
+    fontSize: '32px',
+    color: '#E9F0F2',
+    width: '100%',
+    textAlign: 'center',
+  },
+  description: {
+    marginTop: '10px',
+    fontSize: '13px',
+    color: '#E9F0F2',
+    width: '100%',
+    textAlign: 'center',
+  },
+  ownersBlockWrapper: {
+    marginTop: '30px',
+  },
+  subheader: {
+    color: '#E9F0F2',
+    fontSize: '18px',
+  },
+  avatarsWrapper: {
+    display: 'flex',
+    width: '240px',
+    marginLeft: '50px',
+    marginTop: '10px',
   },
   avatarImage: {
     height: '30px',
     width: '30px',
+    color: '#073947',
+    backgroundColor: '#E9F0F2',
     fontSize: '15px',
     '&:not(:first-child)': {
       marginLeft: -13,
@@ -114,27 +71,51 @@ const useStyles = makeStyles({
       zIndex: 999,
     },
   },
-  addNewMember: {
-    marginLeft: '20px',
-    '&:hover': {
-      cursor: 'pointer',
-    },
+  listsBlockWrapper: {
+    marginTop: '30px',
   },
-  numberIcon: {
+  listsNamesWrapper: {
+    width: '240px',
+    marginLeft: '50px',
+    marginTop: '10px',
+  },
+  listName: {
     display: 'flex',
     alignItems: 'center',
-    height: '30px',
-    width: '30px',
+    marginBottom: '5px',
   },
-  menuButton: {
-    '&:focus': {
-      outline: 'none',
+  listNameTitle: {
+    fontSize: '15px',
+    color: '#E9F0F2',
+    marginLeft: '10px',
+  },
+  list: {
+    width: '360px',
+    height: '700px',
+    backgroundColor: '#E9F0F2',
+    marginRight: '80px',
+    '&:last-child': {
+      marginRight: 0,
     },
   },
-  menu: {
-    position: 'absolute',
-    right: '40px'
-  }
+  listsContent: {
+    display: 'flex',
+    padding: '20px',
+    width: '100%',
+    justifyContent: 'center',
+  },
+  listTitle: {
+    height: '45px',
+    display: 'flex',
+    alignItems: 'center',
+    backgroundColor: '#073947',
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+  },
+  itemsListHeader: {
+    fontSize: '24px',
+    marginLeft: '17px',
+    color: '#E9F0F2',
+  },
 });
 
 export default useStyles;

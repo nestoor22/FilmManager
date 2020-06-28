@@ -102,7 +102,7 @@ class BoardLogic(object):
         max_followers = max(followers)
 
         if user_boards and user_id:
-            filter_query &= Q(owner_id=user_id)
+            filter_query &= Q(boardfollowers__user_id=user_id)
 
         if len(filters.get('board_type', [])) == 1:
             filter_query &= Q(is_open=filters.get('board_type')[0] == 'open')

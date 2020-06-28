@@ -102,11 +102,17 @@ class FollowBoardMutation(graphene.Mutation):
 
     class Arguments:
         board_id = graphene.ID(required=True)
+        unfollow = graphene.Boolean()
 
     @staticmethod
-    def mutate(parent, info, board_id):
+    def mutate(parent, info, board_id, unfollow=False):
         user_id = info.context.session.get('_auth_user_id')
-        success = BoardLogic.add_follower(board_id=board_id, user_id=user_id)
+
+        if not unfollow:
+            success = BoardLogic.add_follower(board_id=board_id, user_id=user_id)
+        else:
+            BoardFollowers.objects.filter(board_id=board_id, user_id=user_id).delete()
+            success = True
 
         return FollowBoardMutation(ok=success)
 
@@ -149,10 +155,8 @@ class BoardsQuery(graphene.ObjectType):
         if user_boards and not filters:
             if not user_id:
                 raise Exception('User is not logged in')
-
             return Board.objects.filter(
-                owner_id=user_id,
-            ).order_by('created_at')
+                boardfollowers__user_id=user_id)
 
         return Board.objects.all().order_by('created_at') \
             if not filters else BoardLogic().get_filtered_boards(

@@ -9,8 +9,8 @@ export const CREATE_BOARD = gql`
 `;
 
 export const FOLLOW_BOARD = gql`
-  mutation followBoard($boardId: ID!) {
-    followBoard(boardId: $boardId) {
+  mutation followBoard($boardId: ID!, $unfollow: Boolean) {
+    followBoard(boardId: $boardId, unfollow: $unfollow) {
       ok
     }
   }

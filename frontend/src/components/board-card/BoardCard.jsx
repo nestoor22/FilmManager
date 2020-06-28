@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSnackbar } from 'notistack';
 import { useMutation } from '@apollo/react-hooks';
+import { useHistory } from 'react-router-dom';
 
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
@@ -13,9 +14,11 @@ import { FOLLOW_BOARD } from 'graphql/mutations/boards';
 
 import useStyles from './styles';
 
-const BoardCard = ({ boardInfo }) => {
+const BoardCard = ({ refetch, boardInfo }) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
+
   const [followBoard] = useMutation(FOLLOW_BOARD);
 
   const [changeFollowedStatus, setChangeFollowedStatus] = React.useState(false);
@@ -25,6 +28,9 @@ const BoardCard = ({ boardInfo }) => {
   return (
     <div
       className={classes.boardTile}
+      onClick={() => {
+        history.push(`/boards/${boardInfo.id}/view`);
+      }}
       style={{
         backgroundImage: `url('${require('./milky-way-2695569_960_720.jpg')}')`,
         backgroundPosition: 'center',
@@ -120,12 +126,19 @@ const BoardCard = ({ boardInfo }) => {
                 followBoard({
                   variables: {
                     boardId: boardInfo.id,
+                    unfollow: boardInfo.isFollowed,
                   },
                 }).then(() => {
-                  enqueueSnackbar('Followed!', {
-                    variant: 'success',
-                  });
-                  boardInfo.isFollowed = true;
+                  enqueueSnackbar(
+                    boardInfo.isFollowed ? 'Unfollow !' : 'Followed!',
+                    {
+                      variant: 'success',
+                    }
+                  );
+                  if (boardInfo.isFollowed) {
+                    refetch();
+                  }
+                  boardInfo.isFollowed = !boardInfo.isFollowed;
                   setChangeFollowedStatus(!changeFollowedStatus);
                 });
               }}
