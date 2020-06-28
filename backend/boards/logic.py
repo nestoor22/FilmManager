@@ -14,6 +14,7 @@ class BoardLogic(object):
 
         invited_members = self.data.pop('invited_members', [])
 
+        print(self.data)
         board = Board.objects.create(**self.data)
 
         invited_members.append(board.owner.email)
@@ -24,7 +25,7 @@ class BoardLogic(object):
 
     @staticmethod
     def add_members_to_board(board, members_list):
-        for member_email in members_list:
+        for member_email in set(members_list):
             try:
                 user = User.objects.get(email=member_email.strip())
             except User.DoesNotExist:

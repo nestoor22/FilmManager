@@ -6,7 +6,7 @@ from lists.models import ShowsList
 from lists.schema import ShowsListType
 from user.schema import UserType, User
 from .logic import BoardLogic
-from .models import Board, BoardLists, BoardMembers
+from .models import Board, BoardLists, BoardMembers, BoardFollowers
 
 
 class BoardMemberType(DjangoObjectType):
@@ -27,6 +27,7 @@ class BoardType(DjangoObjectType):
         model = Board
 
     lists = graphene.List(ShowsListType)
+    is_followed = graphene.Boolean()
     members = graphene.List(UserType)
     tags = graphene.List(graphene.String)
     average_show_rating = graphene.Float()
@@ -51,6 +52,16 @@ class BoardType(DjangoObjectType):
     @staticmethod
     def resolve_shows_number(parent, info):
         return BoardLogic.get_shows_number_on_board(parent.id)
+
+    @staticmethod
+    def resolve_is_followed(parent, info):
+        user_id = info.context.session.get('_auth_user_id')
+
+        try:
+            BoardFollowers.objects.get(board_id=parent.id, user_id=user_id)
+            return True
+        except BoardFollowers.DoesNotExist:
+            return False
 
 
 class BoardListType(DjangoObjectType):
@@ -79,11 +90,25 @@ class CreateBoardMutation(graphene.Mutation):
         board_info = kwargs.get('board')
 
         board_info['owner_id'] = info.context.session.get('_auth_user_id')
-        board_info['tags'] = ','.join(kwargs.pop('tags', []))
+        board_info['tags'] = ','.join(board_info.pop('tags', []))
 
         board = BoardLogic(board_info).create_board()
 
         return CreateBoardMutation(id=board.id)
+
+
+class FollowBoardMutation(graphene.Mutation):
+    ok = graphene.Boolean()
+
+    class Arguments:
+        board_id = graphene.ID(required=True)
+
+    @staticmethod
+    def mutate(parent, info, board_id):
+        user_id = info.context.session.get('_auth_user_id')
+        success = BoardLogic.add_follower(board_id=board_id, user_id=user_id)
+
+        return FollowBoardMutation(ok=success)
 
 
 class SetLastVisitedBoard(graphene.Mutation):

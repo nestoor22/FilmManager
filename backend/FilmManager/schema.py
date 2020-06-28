@@ -3,7 +3,7 @@ import graphene
 from user.schema import SignIn, UserQuery, CreateUser, LogOut, GoogleSignIn
 from show.schema import ShowQuery, SetShowRate, DeleteShowRate
 from lists.schema import AddShowToList, CreateList, ShowsListsQuery
-from boards.schema import BoardsQuery, CreateBoardMutation, SetLastVisitedBoard
+from boards.schema import BoardsQuery, CreateBoardMutation, SetLastVisitedBoard, FollowBoardMutation
 
 
 class Query(ShowsListsQuery, BoardsQuery, ShowQuery, UserQuery):
@@ -16,6 +16,7 @@ class Mutation(graphene.ObjectType):
     log_out = LogOut.Field()
     create_user = CreateUser.Field()
     create_board = CreateBoardMutation.Field()
+    follow_board = FollowBoardMutation.Field()
     set_last_visited_board = SetLastVisitedBoard.Field()
     set_show_rate = SetShowRate.Field()
     delete_show_rate = DeleteShowRate.Field()
