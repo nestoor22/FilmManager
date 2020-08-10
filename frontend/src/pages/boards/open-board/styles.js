@@ -91,12 +91,14 @@ const useStyles = makeStyles({
   },
   list: {
     width: '360px',
-    height: '700px',
+    height: 'fit-content',
+    minHeight: '400px',
     backgroundColor: '#E9F0F2',
     marginRight: '80px',
     '&:last-child': {
       marginRight: 0,
     },
+    position: 'relative',
   },
   listsContent: {
     display: 'flex',
@@ -109,12 +111,57 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     backgroundColor: '#073947',
+    marginBottom: '10px',
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
   },
   itemsListHeader: {
     fontSize: '24px',
     marginLeft: '17px',
     color: '#E9F0F2',
+  },
+  showInfo: {
+    height: '50px',
+    width: '100%',
+    backgroundColor: '#073947',
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: '10px',
+  },
+  poster: {
+    borderTopLeftRadius: '3px',
+    borderBottomLeftRadius: '3px',
+    height: '50px',
+    width: '40px',
+  },
+  showTitle: {
+    paddingLeft: '20px',
+    fontSize: '15px',
+    width: '80%',
+    color: '#E9F0F2',
+  },
+  iconWrapper: {
+    padding: '5px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+    '&:focus': {
+      outline: 'none',
+    },
+  },
+  button: {
+    '&:hover': {
+      cursor: 'pointer',
+    },
+    '&:focus': {
+      outline: 'none',
+    },
+  },
+  addNewItemBtn: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: '5px',
   },
 });
 
