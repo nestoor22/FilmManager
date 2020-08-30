@@ -8,9 +8,9 @@ class Shows(models.Model):
     title = models.CharField(max_length=100)
     showtype = models.CharField(max_length=100)
     poster_url = models.CharField(max_length=500, blank=True, null=True)
-
+    countries = models.CharField(max_length=500, blank=True, null=True)
     imdb_rating = models.FloatField(blank=True, null=True)
-    release_date = models.IntegerField()
+    release_date = models.IntegerField(blank=True, null=True)
     plot = models.TextField()
 
     class Meta:
