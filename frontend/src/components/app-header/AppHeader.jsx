@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/react-hooks';
 import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -17,8 +17,14 @@ import MenuList from '@material-ui/core/MenuList';
 import SearchIcon from 'assets/icons/search.svg';
 import { LOG_OUT } from 'graphql/mutations/auth';
 import { USER_NAME } from 'graphql/queries/user';
+import { SHOWS } from 'graphql/queries/shows';
 
 import useStyles from './styles';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import { ShowDetailsDialog } from '../index';
+
+let timer;
 
 export default function AppHeader({ className }) {
   const classes = useStyles();
@@ -28,8 +34,14 @@ export default function AppHeader({ className }) {
   const [logOut] = useMutation(LOG_OUT);
   const anchorRef = React.useRef(null);
   const [open, setOpen] = React.useState(false);
+  const [hideShowsDropdown, setHideShowsDropdown] = React.useState(false);
+  const [openDialog, setOpenDialog] = React.useState();
+  const [showContent, setShowContent] = React.useState({});
+  const [search, setSearch] = React.useState('');
+  const [focused, setFocused] = React.useState(false);
   const prevOpen = React.useRef(open);
 
+  const [getShows, { data: showsData, loading }] = useLazyQuery(SHOWS);
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -43,7 +55,6 @@ export default function AppHeader({ className }) {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
     setOpen(false);
   };
 
@@ -58,10 +69,21 @@ export default function AppHeader({ className }) {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
-
     prevOpen.current = open;
   }, [open]);
 
+  const handleChange = (e) => {
+    const searchValue = e?.target.value;
+    setSearch(e?.target.value);
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      getShows({
+        variables: {
+          startWith: searchValue,
+        },
+      });
+    }, 1500);
+  };
   React.useEffect(() => {}, [data]);
 
   return (
@@ -70,6 +92,9 @@ export default function AppHeader({ className }) {
       <div className={classes.search}>
         <Input
           disableUnderline={true}
+          value={search}
+          onBlur={() => setFocused(!focused)}
+          onChange={handleChange}
           id="input-with-icon-adornment"
           placeholder="Search..."
           classes={{
@@ -84,6 +109,47 @@ export default function AppHeader({ className }) {
             </InputAdornment>
           }
         />
+        {search &&
+          !hideShowsDropdown &&
+          showsData &&
+          showsData.shows?.length !== 0 && (
+            <div className={classes.showsPopup}>
+              {showsData?.shows?.map((showInfo) => {
+                return (
+                  <>
+                    <div
+                      onClick={() => {
+                        setShowContent(showInfo);
+                        setOpenDialog(true);
+                      }}
+                      className={classes.showRow}
+                    >
+                      <CardMedia
+                        className={classes.poster}
+                        component="img"
+                        alt="Poster"
+                        height="80"
+                        width="60"
+                        image={showInfo.posterUrl}
+                        title="Poster"
+                        classes={{
+                          root: classes.rootMedia,
+                        }}
+                      />
+                      <div>
+                        <Typography className={classes.showTitle}>
+                          {showInfo.title}
+                        </Typography>
+                        <Typography className={classes.showTitle}>
+                          {showInfo.releaseDate}
+                        </Typography>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
+            </div>
+          )}
       </div>
       <nav className={classes.navigation}>
         <ul className={classes.navigationItems}>
@@ -158,6 +224,13 @@ export default function AppHeader({ className }) {
           {data && !data.userName && <MenuLink to="/signIn" label="Sign In" />}
         </ul>
       </nav>
+      <ShowDetailsDialog
+        show={showContent}
+        open={openDialog}
+        onClose={() => {
+          setOpenDialog(false);
+        }}
+      />
     </AppBar>
   );
 }

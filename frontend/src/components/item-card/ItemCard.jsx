@@ -90,10 +90,10 @@ function ItemCard({ showInfo }) {
               top: 10,
               fontSize: '18px',
               color: '#BAC7CB',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
             }}
           >
-            {showInfo.usersRating}
+            {showInfo.imdbRating}
           </Typography>
         </div>
       </div>

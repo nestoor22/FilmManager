@@ -10,6 +10,7 @@ import OpenBoard from './pages/boards/open-board/OpenBoard';
 import RegisterPage from './pages/register/RegisterPage';
 import AccountPage from './pages/account/AccountPage';
 import PrivateRoute from './components/private-route/PrivateRoute';
+import CartoonsPage from './pages/cartoons-page/CartoonsPage';
 
 function Routes() {
   return (
@@ -23,9 +24,11 @@ function Routes() {
           <RegisterPage />
         </Route>
 
-        <PrivateRoute exact path="/" component={MainPage} />
-        <PrivateRoute exact path="/data/movies" component={MoviesPage} />
-        <PrivateRoute exact path="/data/series" component={SeriesPage} />
+        <Route exact path="/" component={MainPage} />
+        <Route exact path="/data/movies" component={MoviesPage} />
+        <Route exact path="/data/series" component={SeriesPage} />
+        <Route exact path="/data/cartoons" component={CartoonsPage} />
+
         <PrivateRoute exact path="/boards" component={Boards} />
         <PrivateRoute exact path="/boards/:id/view" component={OpenBoard} />
         <PrivateRoute exact path="/account" component={AccountPage} />

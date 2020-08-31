@@ -9,7 +9,7 @@ import { SHOWS } from 'graphql/queries/shows';
 
 import useStyles from './styles';
 
-const MoviesPage = () => {
+const CartoonsPage = () => {
   const classes = useStyles();
 
   const [ascendingOrder, setAscendingOrder] = React.useState(false);
@@ -111,11 +111,11 @@ const MoviesPage = () => {
           query={SHOWS}
           order={ascendingOrder ? 'asc' : 'desc'}
           orderBy={orderBy}
-          showType={'movie'}
+          showType={'cartoon'}
         />
       </div>
     </div>
   );
 };
 
-export default MoviesPage;
+export default CartoonsPage;

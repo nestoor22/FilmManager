@@ -24,10 +24,18 @@ function MainPage() {
   });
   const { data: moviesData } = useQuery(SHOWS, {
     variables: {
-      showType: 'film',
+      showType: 'movie',
       isRandom: true,
     },
   });
+
+  const { data: cartoonsData } = useQuery(SHOWS, {
+    variables: {
+      showType: 'cartoon',
+      isRandom: true,
+    },
+  });
+
   const { data: seriesData } = useQuery(SHOWS, {
     variables: {
       showType: 'serie',
@@ -92,7 +100,7 @@ function MainPage() {
   return (
     <div className={classes.root}>
       <AppHeader />
-      {recommendedData && seriesData && moviesData && (
+      {recommendedData && seriesData && moviesData && cartoonsData && (
         <div className={classes.contentRoot}>
           <div className={classes.sliderWrapper}>
             <Typography className={classes.sliderTitle}>Recommended</Typography>
@@ -128,6 +136,21 @@ function MainPage() {
             </Typography>
             <Slider {...settings}>
               {seriesData.shows.map((showInfo, index) => {
+                return <ItemCard key={index} showInfo={showInfo} />;
+              })}
+            </Slider>
+          </div>
+          <div className={classes.sliderWrapper}>
+            <Typography
+              onClick={() => {
+                history.push('/data/cartoons');
+              }}
+              className={classes.redirectSliderTitle}
+            >
+              Cartoons
+            </Typography>
+            <Slider {...settings}>
+              {cartoonsData.shows.map((showInfo, index) => {
                 return <ItemCard key={index} showInfo={showInfo} />;
               })}
             </Slider>

@@ -6,12 +6,14 @@ export const SHOWS = gql`
     $isRandom: Boolean
     $orderBy: String
     $page: Int
+    $startWith: String
   ) {
     shows(
       showType: $showType
       isRandom: $isRandom
       orderBy: $orderBy
       page: $page
+      startWith: $startWith
     ) {
       showId
       title
