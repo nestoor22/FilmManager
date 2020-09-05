@@ -30,6 +30,7 @@ const useStyles = makeStyles({
     backgroundColor: '#073947',
   },
   showsPopup: {
+    zIndex: 9999,
     width: '100%',
     maxHeight: '350px',
     height: 'fit-content',

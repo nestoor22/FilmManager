@@ -32,6 +32,7 @@ class BoardType(DjangoObjectType):
     tags = graphene.List(graphene.String)
     average_show_rating = graphene.Float()
     shows_number = graphene.Int()
+    can_edit = graphene.Boolean()
 
     @staticmethod
     def resolve_lists(parent, info):
@@ -43,7 +44,7 @@ class BoardType(DjangoObjectType):
 
     @staticmethod
     def resolve_tags(parent, info):
-        return parent.tags.split(',') if parent.tags else []
+        return parent.tags.split(",") if parent.tags else []
 
     @staticmethod
     def resolve_average_show_rating(parent, info):
@@ -55,11 +56,26 @@ class BoardType(DjangoObjectType):
 
     @staticmethod
     def resolve_is_followed(parent, info):
-        user_id = info.context.session.get('_auth_user_id')
+        user_id = info.context.session.get("_auth_user_id")
 
         try:
             BoardFollowers.objects.get(board_id=parent.id, user_id=user_id)
             return True
+        except BoardFollowers.DoesNotExist:
+            return False
+
+    @staticmethod
+    def resolve_can_edit(parent, info):
+        user_id = info.context.session.get("_auth_user_id")
+
+        if int(parent.owner_id) == int(user_id):
+            return True
+
+        try:
+            return BoardFollowers.objects.get(
+                board_id=parent.id, user_id=user_id
+            ).is_admin
+
         except BoardFollowers.DoesNotExist:
             return False
 
@@ -75,7 +91,6 @@ class BoardInputType(graphene.InputObjectType):
     description = graphene.String()
     tags = graphene.List(graphene.String)
     is_open = graphene.Boolean()
-    is_private = graphene.Boolean()
     invited_members = graphene.List(graphene.String)
 
 
@@ -87,10 +102,10 @@ class CreateBoardMutation(graphene.Mutation):
 
     @staticmethod
     def mutate(parent, info, **kwargs):
-        board_info = kwargs.get('board')
+        board_info = kwargs.get("board")
 
-        board_info['owner_id'] = info.context.session.get('_auth_user_id')
-        board_info['tags'] = ','.join(board_info.pop('tags', []))
+        board_info["owner_id"] = info.context.session.get("_auth_user_id")
+        board_info["tags"] = ",".join(board_info.pop("tags", []))
 
         board = BoardLogic(board_info).create_board()
 
@@ -106,12 +121,16 @@ class FollowBoardMutation(graphene.Mutation):
 
     @staticmethod
     def mutate(parent, info, board_id, unfollow=False):
-        user_id = info.context.session.get('_auth_user_id')
+        user_id = info.context.session.get("_auth_user_id")
 
         if not unfollow:
-            success = BoardLogic.add_follower(board_id=board_id, user_id=user_id)
+            success = BoardLogic.add_follower(
+                board_id=board_id, user_id=user_id
+            )
         else:
-            BoardFollowers.objects.filter(board_id=board_id, user_id=user_id).delete()
+            BoardFollowers.objects.filter(
+                board_id=board_id, user_id=user_id
+            ).delete()
             success = True
 
         return FollowBoardMutation(ok=success)
@@ -125,12 +144,12 @@ class SetLastVisitedBoard(graphene.Mutation):
 
     @staticmethod
     def mutate(parent, info, last_visited_board_id):
-        last_visited_boards = info.context.session.get('last_boards', [])
+        last_visited_boards = info.context.session.get("last_boards", [])
 
         if last_visited_board_id in last_visited_boards:
             last_visited_boards.remove(last_visited_board_id)
 
-        info.context.session['last_boards'] = (
+        info.context.session["last_boards"] = (
             [last_visited_board_id] + last_visited_boards[:2]
             if len(last_visited_boards) == 4
             else [last_visited_board_id] + last_visited_boards
@@ -141,7 +160,12 @@ class SetLastVisitedBoard(graphene.Mutation):
 
 class BoardsQuery(graphene.ObjectType):
     board = graphene.Field(BoardType, board_id=graphene.Int(required=True))
-    boards = graphene.List(BoardType, user_boards=graphene.Boolean(), filters=graphene.Argument(FiltersType))
+    boards = graphene.List(
+        BoardType,
+        user_followed_boards=graphene.Boolean(),
+        user_boards=graphene.Boolean(),
+        filters=graphene.Argument(FiltersType),
+    )
     last_visited_boards = graphene.List(BoardType)
 
     @staticmethod
@@ -149,22 +173,35 @@ class BoardsQuery(graphene.ObjectType):
         return Board.objects.get(id=board_id)
 
     @staticmethod
-    def resolve_boards(parent, info, user_boards=False, filters=None):
-        user_id = info.context.session.get('_auth_user_id')
+    def resolve_boards(
+        parent,
+        info,
+        user_boards=False,
+        user_followed_boards=None,
+        filters=None,
+    ):
+        user_id = info.context.session.get("_auth_user_id")
 
-        if user_boards and not filters:
+        if user_followed_boards and not filters:
             if not user_id:
-                raise Exception('User is not logged in')
-            return Board.objects.filter(
-                boardfollowers__user_id=user_id)
+                raise Exception("User is not logged in")
+            return Board.objects.filter(boardfollowers__user_id=user_id)
 
-        return Board.objects.all().order_by('created_at') \
-            if not filters else BoardLogic().get_filtered_boards(
-            user_boards=user_boards,
-            user_id=user_id,
-            filters=filters
+        if user_boards:
+            if not user_id:
+                raise Exception("User is not logged in")
+            return Board.objects.filter(owner_id=user_id)
+
+        return (
+            Board.objects.all().order_by("created_at")
+            if not filters
+            else BoardLogic().get_filtered_boards(
+                user_boards=user_boards, user_id=user_id, filters=filters
+            )
         )
 
     @staticmethod
     def resolve_last_visited_boards(parent, info):
-        return Board.objects.filter(id__in=info.context.session.get('last_boards', []))
+        return Board.objects.filter(
+            id__in=info.context.session.get("last_boards", [])
+        )

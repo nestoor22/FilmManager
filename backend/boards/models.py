@@ -10,7 +10,9 @@ class Board(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.TextField(null=False)
     background_color = models.CharField(null=True, default=None, max_length=40)
-    background_image = models.FileField(upload_to='images/', null=True, default=None)
+    background_image = models.FileField(
+        upload_to="images/", null=True, default=None
+    )
     created_at = models.DateTimeField(null=True, default=datetime.now)
     description = models.TextField(null=True)
     tags = models.TextField(null=True)
@@ -19,11 +21,11 @@ class Board(models.Model):
     is_open = models.BooleanField(default=False)
 
     class Meta:
-        db_table = 'boards'
-        verbose_name = 'Board'
+        db_table = "boards"
+        verbose_name = "Board"
 
     def __str__(self):
-        return f'Board-{self.id}'
+        return f"Board-{self.id}"
 
 
 class BoardLists(models.Model):
@@ -31,11 +33,11 @@ class BoardLists(models.Model):
     list = models.ForeignKey(ShowsList, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'board_lists'
-        verbose_name = 'Board list'
+        db_table = "board_lists"
+        verbose_name = "Board list"
 
     def __str__(self):
-        return f'Board-{self.board.id} List-{self.list.id}'
+        return f"Board-{self.board.id} List-{self.list.id}"
 
 
 class BoardMembers(models.Model):
@@ -43,11 +45,11 @@ class BoardMembers(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'board_members'
-        verbose_name = 'Board member'
+        db_table = "board_members"
+        verbose_name = "Board member"
 
     def __str__(self):
-        return f'Board-{self.board.id} has member-{self.user.id}'
+        return f"Board-{self.board.id} has member-{self.user.id}"
 
 
 class BoardFollowers(models.Model):
@@ -56,9 +58,8 @@ class BoardFollowers(models.Model):
     is_admin = models.BooleanField(default=False, null=True)
 
     class Meta:
-        db_table = 'board_followers'
-        verbose_name = 'Board follower'
+        db_table = "board_followers"
+        verbose_name = "Board follower"
 
     def __str__(self):
-        return f'Board-{self.board.id} has follower-{self.user.id}'
-
+        return f"Board-{self.board.id} has follower-{self.user.id}"

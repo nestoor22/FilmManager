@@ -17,7 +17,7 @@ export const AddItemToListSearch = ({ addItemToList }) => {
   const [search, setSearch] = React.useState('');
   const [focused, setFocused] = React.useState(false);
 
-  const [getShows, { data: showsData, loading }] = useLazyQuery(SHOWS);
+  const [getShows, { data: showsData }] = useLazyQuery(SHOWS);
 
   const handleChange = (e) => {
     const searchValue = e?.target.value;

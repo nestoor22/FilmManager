@@ -5,6 +5,10 @@ import { Field, reduxForm, reset } from 'redux-form';
 import { connect } from 'react-redux';
 
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 import {
   AppHeader,
@@ -14,15 +18,11 @@ import {
 } from 'components';
 
 import { BOARDS } from 'graphql/queries/boards';
-
+import NoBoardsImage from 'assets/no-boards.svg';
 import CustomCheckBoxField from '../../components/custom-checkbox-fields/CustomCheckBoxField';
 import BoardCard from '../../components/board-card/BoardCard';
 
 import useStyles from './styles';
-import Button from '@material-ui/core/Button';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 
 const initialValues = {
   tags: [],
@@ -44,7 +44,6 @@ const Boards = ({ boardFilter, reset }) => {
   document.body.style.backgroundColor = '#BAC7CB';
 
   const [openCreationPopup, setOpenCreationPopup] = React.useState(false);
-  const [isTeamBoard] = React.useState(false);
 
   const [value, setValue] = React.useState(0);
 
@@ -55,7 +54,8 @@ const Boards = ({ boardFilter, reset }) => {
 
   const { data, refetch } = useQuery(BOARDS, {
     variables: {
-      userBoards: value === 1,
+      userBoards: value === 2,
+      userFollowedBoards: value === 1,
     },
   });
 
@@ -65,94 +65,97 @@ const Boards = ({ boardFilter, reset }) => {
 
   const handleSubmitFilters = () => {
     refetch({
-      userBoards: value === 1,
+      userFollowedBoards: value === 1,
+      userBoards: value === 2,
       filters: boardFilter,
     });
   };
 
   React.useEffect(() => {
     refetch({
-      userBoards: value === 1,
-      filters: boardFilter,
+      userFollowedBoards: value === 1,
+      userBoards: value === 2,
     });
-  }, [value, refetch, boardFilter]);
+  }, [value]);
 
   return (
     <div className={classes.root}>
       <AppHeader />
       <div className={classes.contentWrapper}>
-        <div className={classes.filtersSidebar}>
-          <Typography className={classes.filterHeader}>
-            Search by tags:
-          </Typography>
-          <Field
-            name="tags"
-            className={classes.inputChips}
-            placeholder="Enter tag and hit Enter"
-            component={ChipsInput}
-          />
-          <Typography
-            style={{ marginTop: '40px' }}
-            className={classes.filterHeader}
-          >
-            Followers range:
-          </Typography>
-          <Field
-            name="followers"
-            classStyle={classes.sliderField}
-            ariaLabelledBy="range-slider"
-            component={CustomSliderField}
-            step={100}
-          />
-          <Typography
-            style={{ marginTop: '40px' }}
-            className={classes.filterHeader}
-          >
-            Rating range:
-          </Typography>
-          <Field
-            name="rating"
-            classStyle={classes.sliderField}
-            ariaLabelledBy="range-slider"
-            step={0.1}
-            component={CustomSliderField}
-          />
-          <Typography
-            style={{ marginTop: '40px' }}
-            className={classes.filterHeader}
-          >
-            Movies/series number range:
-          </Typography>
-          <Field
-            name="showsNumber"
-            step={10}
-            classStyle={classes.sliderField}
-            ariaLabelledBy="range-slider"
-            component={CustomSliderField}
-          />
-          <div className={classes.checkboxFiltersWrapper}>
-            <div style={{ marginRight: '140px' }}>
-              <Typography
-                style={{ marginTop: '40px' }}
-                className={classes.filterHeader}
-              >
-                Board type:
-              </Typography>
-              <Field
-                name="boardType"
-                values={['open', 'private']}
-                component={CustomCheckBoxField}
-              />
+        {value !== 2 && (
+          <div className={classes.filtersSidebar}>
+            <Typography className={classes.filterHeader}>
+              Search by tags:
+            </Typography>
+            <Field
+              name="tags"
+              className={classes.inputChips}
+              placeholder="Enter tag and hit Enter"
+              component={ChipsInput}
+            />
+            <Typography
+              style={{ marginTop: '40px' }}
+              className={classes.filterHeader}
+            >
+              Followers range:
+            </Typography>
+            <Field
+              name="followers"
+              classStyle={classes.sliderField}
+              ariaLabelledBy="range-slider"
+              component={CustomSliderField}
+              step={100}
+            />
+            <Typography
+              style={{ marginTop: '40px' }}
+              className={classes.filterHeader}
+            >
+              Rating range:
+            </Typography>
+            <Field
+              name="rating"
+              classStyle={classes.sliderField}
+              ariaLabelledBy="range-slider"
+              step={0.1}
+              component={CustomSliderField}
+            />
+            <Typography
+              style={{ marginTop: '40px' }}
+              className={classes.filterHeader}
+            >
+              Movies/series number range:
+            </Typography>
+            <Field
+              name="showsNumber"
+              step={10}
+              classStyle={classes.sliderField}
+              ariaLabelledBy="range-slider"
+              component={CustomSliderField}
+            />
+            <div className={classes.checkboxFiltersWrapper}>
+              <div style={{ marginRight: '140px' }}>
+                <Typography
+                  style={{ marginTop: '40px' }}
+                  className={classes.filterHeader}
+                >
+                  Board type:
+                </Typography>
+                <Field
+                  name="boardType"
+                  values={['open', 'private']}
+                  component={CustomCheckBoxField}
+                />
+              </div>
             </div>
+            <Button
+              variant="contained"
+              className={classes.filterBtn}
+              onClick={handleSubmitFilters}
+            >
+              Apply Filter
+            </Button>
           </div>
-          <Button
-            variant="contained"
-            className={classes.filterBtn}
-            onClick={handleSubmitFilters}
-          >
-            Apply Filter
-          </Button>
-        </div>
+        )}
         <div className={classes.boardTilesWrapper}>
           <AppBar
             position="static"
@@ -184,8 +187,41 @@ const Boards = ({ boardFilter, reset }) => {
                 label="Following boards"
                 {...a11yProps(1)}
               />
+              <Tab
+                classes={{
+                  root: classes.tabs,
+                }}
+                label="Your boards"
+                {...a11yProps(2)}
+              />
             </Tabs>
           </AppBar>
+          {value === 2 && (
+            <h6
+              className={classes.createNowText}
+              onClick={() => setOpenCreationPopup(!openCreationPopup)}
+            >
+              Create new board
+            </h6>
+          )}
+          {data?.boards.length === 0 && (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+              }}
+            >
+              <img src={NoBoardsImage} alt={''} />
+              <h6
+                className={classes.createNowText}
+                onClick={() => setOpenCreationPopup(!openCreationPopup)}
+              >
+                Create now
+              </h6>
+            </div>
+          )}
           {data &&
             data?.boards.map((boardInfo, index) => {
               return (
@@ -198,12 +234,13 @@ const Boards = ({ boardFilter, reset }) => {
             })}
         </div>
       </div>
-      <CreateBoardPopUp
-        open={openCreationPopup}
-        onClose={handleClosePopup}
-        isTeamBoard={isTeamBoard}
-        refetch={refetch}
-      />
+      {openCreationPopup && (
+        <CreateBoardPopUp
+          open={openCreationPopup}
+          onClose={handleClosePopup}
+          refetch={refetch}
+        />
+      )}
     </div>
   );
 };

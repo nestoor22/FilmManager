@@ -90,6 +90,23 @@ const useStyles = makeStyles({
     position: 'absolute',
     bottom: '5px',
   },
+  inputRoot: {
+    borderRadius: 5,
+    color: '#E9F0F2',
+    width: '100%',
+    backgroundColor: '#073947',
+  },
+  input: {
+    padding: '9px 10px',
+    fontSize: 13,
+    lineHeight: 18,
+    color: '#E9F0F2',
+    textAlign: 'start',
+  },
+  inputRootFocused: {
+    boxShadow: 'none',
+    border: 'none',
+  },
 });
 
 export default useStyles;

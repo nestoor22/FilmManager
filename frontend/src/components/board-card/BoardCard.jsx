@@ -73,7 +73,7 @@ const BoardCard = ({ refetch, boardInfo }) => {
             Rating place: 2134
           </Typography>
           <Typography className={classes.markText}>
-            Movies/series on board: {boardInfo.showsNumber}
+            Items on board: {boardInfo.showsNumber}
           </Typography>
         </div>
         <div className={classes.cardFooter}>

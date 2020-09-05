@@ -163,6 +163,20 @@ const useStyles = makeStyles({
     position: 'absolute',
     bottom: '5px',
   },
+  addNewListBtn: {
+    border: '1px solid #E9F0F2',
+    borderRadius: '3px',
+    fontSize: '13px',
+    lineHeight: '18px',
+    fontWeight: 500,
+    color: '#E9F0F2',
+    padding: '8px 15px',
+    minWidth: '80px',
+    marginTop: '40px',
+    '&:focus': {
+      outline: 'none',
+    },
+  },
 });
 
 export default useStyles;

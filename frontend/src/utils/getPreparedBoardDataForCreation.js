@@ -4,6 +4,7 @@ export const getPreparedBoardDataForCreation = (data) => {
     backgroundColor: data.color,
     invitedMembers: data.invitedFriends,
     isOpen: data.type === 'Public',
-    isPrivate: data.type === 'Private',
+    tags: data.tags,
+    description: data.description,
   };
 };

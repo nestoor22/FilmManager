@@ -1,8 +1,16 @@
 import gql from 'graphql-tag';
 
 export const BOARDS = gql`
-  query boards($userBoards: Boolean!, $filters: FiltersType) {
-    boards(userBoards: $userBoards, filters: $filters) {
+  query boards(
+    $userFollowedBoards: Boolean!
+    $userBoards: Boolean
+    $filters: FiltersType
+  ) {
+    boards(
+      userFollowedBoards: $userFollowedBoards
+      userBoards: $userBoards
+      filters: $filters
+    ) {
       id
       sharedTimes
       backgroundColor
@@ -44,6 +52,7 @@ export const BOARD = gql`
       name
       description
       createdAt
+      canEdit
       owner {
         id
         firstName

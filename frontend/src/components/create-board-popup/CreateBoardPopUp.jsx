@@ -16,6 +16,7 @@ import {
   ColorButtonsGroup,
   RadioButtonsGroup,
   ChipsInput,
+  TextInput,
 } from 'components';
 
 import { CREATE_BOARD } from 'graphql/mutations/boards';
@@ -29,14 +30,10 @@ const initialValues = {
   type: 'Private',
   invitedFriends: [],
   team: '',
+  tags: [],
+  description: '',
 };
-const CreateBoardPopUp = ({
-  open,
-  onClose,
-  boardData,
-  isTeamBoard,
-  refetch,
-}) => {
+const CreateBoardPopUp = ({ open, onClose, boardData, refetch }) => {
   const classes = useStyles();
   const [createBoard] = useMutation(CREATE_BOARD);
   const { enqueueSnackbar } = useSnackbar();
@@ -72,23 +69,27 @@ const CreateBoardPopUp = ({
           className={classes.input}
           component={RadioButtonsGroup}
         />
-        {!isTeamBoard && (
-          <Field
-            label="Invite friends"
-            name="invitedFriends"
-            placeholder="Add emails. Hit Enter to add"
-            className={classes.input}
-            component={ChipsInput}
-          />
-        )}
-        {isTeamBoard && (
-          <Field
-            label="Team name"
-            name="team"
-            className={classes.input}
-            component={Input}
-          />
-        )}
+        <Field
+          label="Invite friends"
+          name="invitedFriends"
+          placeholder="Add emails. Hit Enter to add"
+          className={classes.input}
+          component={ChipsInput}
+        />
+        <Field
+          label="Tags"
+          name="tags"
+          placeholder="Add tags. Hit Enter to add"
+          className={classes.input}
+          component={ChipsInput}
+        />
+        <Field
+          label="Description"
+          name="description"
+          placeholder="Tell something about this board..."
+          className={classes.input}
+          component={TextInput}
+        />
         <Field
           label="Background color"
           name="color"
@@ -131,8 +132,8 @@ const mapStateToProps = (state) => {
 
 export default reduxForm({
   form: 'boardForm',
-  destroyOnUnmount: false,
-  forceUnregisterOnUnmount: false,
+  destroyOnUnmount: true,
+  forceUnregisterOnUnmount: true,
   touchOnBlur: false,
   initialValues,
 })(connect(mapStateToProps, null)(CreateBoardPopUp));

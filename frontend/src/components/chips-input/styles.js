@@ -50,7 +50,7 @@ export const autocompleteStyles = makeStyles({
     height: '28px',
     border: 'none',
     borderRadius: '3px',
-    backgroundColor: '#005a81',
+    backgroundColor: '#073947',
     fontSize: '13px',
     lineHeight: '18px',
     color: '#FFF',
@@ -108,7 +108,7 @@ export const useStyles = makeStyles({
     paddingRight: '10px',
     display: 'flex',
     alignItems: 'center',
-    backgroundColor: '#0a2b5c',
+    backgroundColor: '#073947',
   },
   poster: {
     borderTopLeftRadius: '3px',

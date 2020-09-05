@@ -66,6 +66,7 @@ const useStyles = makeStyles({
     marginBottom: '40px',
     boxShadow: 'none',
     backgroundColor: 'none',
+    zIndex: 1
   },
   tabs: {
     fontSize: '18px',
@@ -78,6 +79,13 @@ const useStyles = makeStyles({
   },
   indicator: {
     color: '#012934',
+  },
+
+  createNowText: {
+    color: '#073943',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
 });
 
