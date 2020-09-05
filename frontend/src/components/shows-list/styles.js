@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   list: {
     width: '360px',
     height: 'fit-content',
-    minHeight: '400px',
+    minHeight: 'fit-content',
     backgroundColor: '#E9F0F2',
     marginRight: '80px',
     '&:last-child': {
@@ -87,7 +87,6 @@ const useStyles = makeStyles({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    position: 'absolute',
     bottom: '5px',
   },
   inputRoot: {
@@ -106,6 +105,13 @@ const useStyles = makeStyles({
   inputRootFocused: {
     boxShadow: 'none',
     border: 'none',
+  },
+  visibilityBtn: {
+    position: 'absolute',
+    right: '5px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
 });
 

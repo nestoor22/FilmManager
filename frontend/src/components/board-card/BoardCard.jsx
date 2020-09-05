@@ -29,6 +29,9 @@ const BoardCard = ({ refetch, boardInfo }) => {
     <div
       className={classes.boardTile}
       onDoubleClick={() => {
+        if (!boardInfo.isOpen && !boardInfo.isFollowed){
+          return
+        }
         history.push(`/boards/${boardInfo.id}/view`);
       }}
       style={{

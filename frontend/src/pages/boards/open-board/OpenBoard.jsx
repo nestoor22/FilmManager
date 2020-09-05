@@ -7,14 +7,15 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Avatar from '@material-ui/core/Avatar';
 import ShareIcon from '@material-ui/icons/Share';
 import Typography from '@material-ui/core/Typography';
+import { Button } from '@material-ui/core';
+
 
 import { BOARD } from 'graphql/queries/boards';
 import { AppHeader, PopoverWrapper } from 'components';
 import ListMark from 'assets/icons/list-dot-mark.svg';
+import ShowsList from '../../../components/shows-list/ShowsList';
 
 import useStyles from './styles';
-import ShowsList from '../../../components/shows-list/ShowsList';
-import { Button } from '@material-ui/core';
 
 const OpenBoard = () => {
   const classes = useStyles();

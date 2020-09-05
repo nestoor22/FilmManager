@@ -29,7 +29,6 @@ class CreateList(graphene.Mutation):
         list_name = graphene.String()
         shows_on_list = graphene.List(graphene.Int)
         board_id = graphene.Int()
-        description = graphene.String()
 
     @staticmethod
     def mutate(parent, info, **kwargs):
@@ -38,10 +37,9 @@ class CreateList(graphene.Mutation):
         board_id = kwargs["board_id"]
         list_name = kwargs["list_name"]
         shows_on_list = kwargs["shows_on_list"]
-        description = kwargs["description"]
 
         list_instance = ShowsList.objects.create(
-            name=list_name, owner_id=user_id, description=description
+            name=list_name, owner_id=user_id
         )
         BoardLists.objects.create(board_id=board_id, list_id=list_instance.id)
 

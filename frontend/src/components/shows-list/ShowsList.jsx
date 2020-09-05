@@ -12,6 +12,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import { DeleteIcon, AddItemToListSearch } from 'components';
 import { ADD_SHOW_TO_LIST, CREATE_LIST } from 'graphql/mutations/lists';
 import DoneIcon from 'assets/icons/done-mark.svg';
+import ShowIcon from 'assets/icons/show.svg';
+import HideIcon from 'assets/icons/hide.svg';
 
 import useStyles from './styles';
 
@@ -24,6 +26,7 @@ const ShowsList = ({ boardId, list, index, refetch, canAddItems }) => {
   const [showAddItem, setShowAddItem] = React.useState(false);
   const [showsOnList, setShowsOnList] = React.useState(list?.showsOnList || []);
   const [newListTitle, setNewListTitle] = React.useState('');
+  const [hideItemsOnList, setHideItemsOnList] = React.useState(false);
 
   const handleAddItemToList = (item) => {
     addShowToList({
@@ -78,8 +81,17 @@ const ShowsList = ({ boardId, list, index, refetch, canAddItems }) => {
             {list.name}
           </Typography>
         )}
+        {!list?.newlyCreated && (
+          <img
+            className={classes.visibilityBtn}
+            onClick={() => setHideItemsOnList(!hideItemsOnList)}
+            src={hideItemsOnList ? ShowIcon : HideIcon}
+            alt=""
+          />
+        )}
       </div>
       {!list?.newlyCreated &&
+        !hideItemsOnList &&
         showsOnList?.map((showOnList) => {
           return (
             <div className={classes.showInfo}>
@@ -113,7 +125,7 @@ const ShowsList = ({ boardId, list, index, refetch, canAddItems }) => {
       {showAddItem && (
         <AddItemToListSearch addItemToList={handleAddItemToList} />
       )}
-      {canAddItems && !list.newlyCreated && (
+      {canAddItems && !hideItemsOnList && !list.newlyCreated && (
         <div className={classes.addNewItemBtn}>
           <Button
             onClick={() => setShowAddItem(!showAddItem)}

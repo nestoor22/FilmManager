@@ -170,7 +170,13 @@ class BoardsQuery(graphene.ObjectType):
 
     @staticmethod
     def resolve_board(parent, info, board_id):
-        return Board.objects.get(id=board_id)
+        user_id = info.context.session.get("_auth_user_id")
+        try:
+            return Board.objects.get(
+                id=board_id, boardfollowers__user__id=user_id
+            )
+        except Board.DoesNotExist:
+            return None
 
     @staticmethod
     def resolve_boards(
