@@ -30,6 +30,7 @@ import CustomCountryPicker from './custom-country-picker/CustomCountryPicker';
 import BoardsStatisticsTab from './boards-statistics-tabs/BoardsStatisticsTab';
 import CustomSliderField from './custom-slider-field/CustomSliderField';
 import CreateListPopup from './create-list-popup/CreateListPopup';
+import { AddItemToListSearch } from './add-item-to-list-search/AddItemToListSearch';
 
 export {
   Input,
@@ -64,4 +65,5 @@ export {
   ConfirmationDialog,
   BoardsStatisticsTab,
   CustomCountryPicker,
+  AddItemToListSearch,
 };

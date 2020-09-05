@@ -28,7 +28,7 @@ const BoardCard = ({ refetch, boardInfo }) => {
   return (
     <div
       className={classes.boardTile}
-      onClick={() => {
+      onDoubleClick={() => {
         history.push(`/boards/${boardInfo.id}/view`);
       }}
       style={{
@@ -122,7 +122,7 @@ const BoardCard = ({ refetch, boardInfo }) => {
           )}
           <div className={classes.actionsBtns}>
             <Button
-              onClick={() => {
+              onClick={(e) => {
                 followBoard({
                   variables: {
                     boardId: boardInfo.id,

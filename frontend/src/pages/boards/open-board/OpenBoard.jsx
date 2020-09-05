@@ -23,6 +23,7 @@ import {
 import ListMark from 'assets/icons/list-dot-mark.svg';
 
 import useStyles from './styles';
+import ShowsList from '../../../components/shows-list/ShowsList';
 
 const OpenBoard = () => {
   const classes = useStyles();
@@ -103,59 +104,7 @@ const OpenBoard = () => {
         <div className={classes.listsContent}>
           {data?.board.lists &&
             data.board.lists.map((list, index) => {
-              return (
-                <div key={index} className={classes.list}>
-                  <div className={classes.listTitle}>
-                    <Typography className={classes.itemsListHeader}>
-                      {list.name}
-                    </Typography>
-                  </div>
-                  {list.showsOnList.map((showOnList) => {
-                    return (
-                      <div className={classes.showInfo}>
-                        <CardMedia
-                          className={classes.poster}
-                          component="img"
-                          alt="Poster"
-                          height="80"
-                          width="60"
-                          image={showOnList.show.posterUrl}
-                          title="Poster"
-                        />
-                        <Typography className={classes.showTitle}>
-                          {showOnList.show.title}
-                        </Typography>
-                        <IconButton
-                          onClick={(e) => {
-                            e.stopPropagation();
-                          }}
-                          className={classes.iconWrapper}
-                          disableTouchRipple={true}
-                          disableFocusRipple={true}
-                        >
-                          <DeleteIcon fill={'#E9F0F2'} />
-                        </IconButton>
-                      </div>
-                    );
-                  })}
-                  {index === listIndexToShowAddBlock && (
-                    'SDDFSDFSDFSDFSDF'
-                  )}
-                  <div className={classes.addNewItemBtn}>
-                    <Button
-                      onClick={() => setListIndexToShowAddBlock(index)}
-                      className={classes.button}
-                      size="small"
-                    >
-                      <AddCircleOutlineIcon
-                        style={{ marginRight: '5px', fontSize: '15px' }}
-                        fill={'#BAC7CB'}
-                      />
-                      Add new item
-                    </Button>
-                  </div>
-                </div>
-              );
+              return <ShowsList list={list} index={index} />;
             })}
         </div>
       </div>

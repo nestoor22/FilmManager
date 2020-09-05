@@ -158,6 +158,7 @@ const SignIn = () => {
         </form>
         <Typography className={classes.loginWithSubheader}>or</Typography>
         <GoogleLogin
+          disabled={false}
           className={classes.googleButton}
           clientId="171613792112-qcfqh6ct9pnvte3a6tve9gsgasbvjp1a.apps.googleusercontent.com"
           buttonText="Sign In with Google"

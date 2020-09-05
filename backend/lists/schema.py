@@ -33,18 +33,22 @@ class CreateList(graphene.Mutation):
 
     @staticmethod
     def mutate(parent, info, **kwargs):
-        user_id = info.context.session.get('_auth_user_id')
+        user_id = info.context.session.get("_auth_user_id")
 
-        board_id = kwargs['board_id']
-        list_name = kwargs['list_name']
-        shows_on_list = kwargs['shows_on_list']
-        description = kwargs['description']
+        board_id = kwargs["board_id"]
+        list_name = kwargs["list_name"]
+        shows_on_list = kwargs["shows_on_list"]
+        description = kwargs["description"]
 
-        list_instance = ShowsList.objects.create(name=list_name, owner_id=user_id, description=description)
+        list_instance = ShowsList.objects.create(
+            name=list_name, owner_id=user_id, description=description
+        )
         BoardLists.objects.create(board_id=board_id, list_id=list_instance.id)
 
         for show_id in shows_on_list:
-            ListShowRelation.objects.create(show_id=show_id, list_id=list_instance.id)
+            ListShowRelation.objects.create(
+                show_id=show_id, list_id=list_instance.id
+            )
 
         return CreateList(id=list_instance.id)
 
@@ -69,5 +73,5 @@ class ShowsListsQuery(graphene.ObjectType):
 
     @staticmethod
     def resolve_shows_list(parent, info):
-        user_id = info.context.session.get('_auth_user_id')
+        user_id = info.context.session.get("_auth_user_id")
         return ShowsList.objects.filter(owner_id=user_id)
