@@ -7,7 +7,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import { TabPanel, CustomChips, GeneralShowInfo } from 'components';
+import {
+  TabPanel,
+  CustomChips,
+  GeneralShowInfo,
+  ReviewsBlock,
+} from 'components';
 
 import useStyles from './styles';
 
@@ -31,7 +36,13 @@ const ShowDetailsDialog = ({ open, show, onClose }) => {
 
   return (
     <Dialog open={open} classes={{ paper: classes.paper }}>
-      <IconButton className={classes.closeBtn} onClick={onClose}>
+      <IconButton
+        className={classes.closeBtn}
+        onClick={() => {
+          setValue(1);
+          onClose();
+        }}
+      >
         <HighlightOffIcon className={classes.closeIcon} />
       </IconButton>
       {show && (
@@ -119,7 +130,7 @@ const ShowDetailsDialog = ({ open, show, onClose }) => {
                 value={value}
                 index={2}
               >
-                Reviews
+                <ReviewsBlock />
               </TabPanel>
               <TabPanel
                 className={classes.tabContentWrapper}
