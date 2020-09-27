@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     paddingLeft: '10px',
     paddingRight: '10px',
     width: '466px',
-    backgroundColor: '#5F8792',
+    background: 'none',
     display: 'flex',
     flexDirection: 'column',
   },
@@ -65,14 +65,13 @@ const useStyles = makeStyles({
   tabSwitcher: {
     marginBottom: '40px',
     boxShadow: 'none',
-    backgroundColor: 'none',
+    background: 'none',
     zIndex: 1
   },
   tabs: {
     fontSize: '18px',
     color: '#012934',
     boxShadow: 'none',
-    backgroundColor: '#BAC7CB',
     '&:focus': {
       outline: 'none',
     },

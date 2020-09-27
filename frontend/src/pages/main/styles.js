@@ -76,12 +76,12 @@ const useStyles = makeStyles({
   },
   sliderTitle: {
     fontSize: '36px',
-    color: '#073947'
+    color: '#E9F0F2'
   },
   redirectSliderTitle: {
     fontSize: '36px',
     width: 'fit-content',
-    color: '#073947',
+    color: '#E9F0F2',
     borderBottom: '1px solid #012934',
     '&:hover': {
       cursor: 'pointer'

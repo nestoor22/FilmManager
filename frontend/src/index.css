@@ -5,7 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #254052;
+  background: rgb(7, 57, 71);
+  background: linear-gradient(
+    45deg,
+    rgba(7, 57, 71, 1) 0%,
+    rgba(41, 94, 109, 1) 30%,
+    rgba(186, 199, 203, 1) 100%
+  );
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -16,11 +22,11 @@ body::-webkit-scrollbar {
   height: 6px;
 }
 body::-webkit-scrollbar-track {
-  background: #c2c2c2;
+  background: #E9F0F2;
   border-radius: 2px;
 }
 body::-webkit-scrollbar-thumb {
-  background-color: #335267;
+  background-color: #073947;
   opacity: 0.48;
   border-radius: 2px;
 }

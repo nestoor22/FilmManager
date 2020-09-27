@@ -27,7 +27,7 @@ const OpenBoard = () => {
   const [copied, setCopied] = React.useState(false);
   const [lists, setLists] = React.useState([]);
 
-  document.body.style.backgroundColor =
+  document.body.style.background =
     data?.board?.backgroundColor || '#E9F0F2';
 
   React.useEffect(() => {

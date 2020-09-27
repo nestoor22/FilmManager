@@ -40,7 +40,7 @@ const useStyles = makeStyles({
     textTransform: 'capitalize',
     margin: '5px',
     border: '1px solid #E2EBF6',
-    color: '#fff',
+    color: '#E9F0F2',
     backgroundColor: '#073947',
   },
   editIconWrapper: {

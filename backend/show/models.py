@@ -1,5 +1,5 @@
 from django.db import models
-
+from mptt.models import MPTTModel, TreeForeignKey
 from user.models import User
 
 
@@ -79,3 +79,39 @@ class ShowRates(models.Model):
 
     def __str__(self):
         return f"Show-{self.show} rating-{self.rating}"
+
+
+class ShowReview(models.Model):
+    show = models.ForeignKey(Shows, models.CASCADE)
+    author = models.ForeignKey(User, models.CASCADE)
+
+    content = models.TextField()
+
+    class Meta:
+        db_table = 'show_review'
+
+    def __str__(self):
+        return f"Show-{self.show} review-{self.id} author-{self.author_id}"
+
+
+class ReviewComments(MPTTModel):
+    review = models.ForeignKey(ShowReview, models.CASCADE)
+    parent = TreeForeignKey(
+        'self',
+        null=True,
+        blank=True,
+        related_name='children',
+        db_index=True,
+        on_delete=models.CASCADE
+    )
+
+    author = models.ForeignKey(User, models.CASCADE)
+    likes = models.IntegerField(default=0)
+    content = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'show_review_comments'
+
+    def __str__(self):
+        return f"Review-{self.review_id} author-{self.author_id}"
