@@ -20,6 +20,7 @@ import useStyles from './styles';
 const OpenBoard = () => {
   const classes = useStyles();
   const { id } = useParams();
+
   const { enqueueSnackbar } = useSnackbar();
   const { data, refetch } = useQuery(BOARD, { variables: { boardId: id } });
 
@@ -27,7 +28,7 @@ const OpenBoard = () => {
   const [lists, setLists] = React.useState([]);
 
   document.body.style.backgroundColor =
-    data?.board.backgroundColor || '#E9F0F2';
+    data?.board?.backgroundColor || '#E9F0F2';
 
   React.useEffect(() => {
     if (copied) {

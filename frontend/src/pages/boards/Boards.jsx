@@ -53,6 +53,7 @@ const Boards = ({ boardFilter, reset }) => {
   };
 
   const { data, refetch } = useQuery(BOARDS, {
+    fetchPolicy: 'no-cache',
     variables: {
       userBoards: value === 2,
       userFollowedBoards: value === 1,

@@ -31,6 +31,7 @@ import BoardsStatisticsTab from './boards-statistics-tabs/BoardsStatisticsTab';
 import CustomSliderField from './custom-slider-field/CustomSliderField';
 import CreateListPopup from './create-list-popup/CreateListPopup';
 import { AddItemToListSearch } from './add-item-to-list-search/AddItemToListSearch';
+import AddItemToListModal from './add-item-to-existing-list-modal/AddItemToListModal';
 
 export {
   Input,
@@ -63,6 +64,7 @@ export {
   RadioButtonsGroup,
   CustomChartLegend,
   ConfirmationDialog,
+  AddItemToListModal,
   BoardsStatisticsTab,
   CustomCountryPicker,
   AddItemToListSearch,

@@ -16,6 +16,7 @@ graphene-file-upload = "~=1.2"
 google-auth = "~=1.21"
 requests = "~=2.24"
 django-environ = "~=0.4"
+yapf = "*"
 
 [requires]
 python_version = "3.6"

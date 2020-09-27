@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const BOARDS = gql`
   query boards(
-    $userFollowedBoards: Boolean!
+    $userFollowedBoards: Boolean
     $userBoards: Boolean
     $filters: FiltersType
   ) {
@@ -19,6 +19,19 @@ export const BOARDS = gql`
       averageShowRating
       isFollowed
       showsNumber
+      lists {
+        id
+        name
+        showsOnList {
+          id
+          show {
+            showId
+            posterUrl
+            title
+            releaseDate
+          }
+        }
+      }
       members {
         firstName
         lastName

@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
   },
   itemRoot: {
-    border: '1px solid #E2EBF6',
+    border: '1px solid #005a81',
     fontSize: '13px',
     minWidth: '30px',
     height: '30px',
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     '&:focus': {
       outline: 'none !important',
     },
-    backgroundColor: '#0E8BB4 !important',
+    backgroundColor: '#005a81 !important',
   },
 });
 

@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import RatingMark from 'assets/icons/rating-mark.svg';
 
-import { ShowDetailsDialog } from 'components';
+import { ShowDetailsDialog, AddItemToListModal } from 'components';
 
 import useStyles from './styles';
 
@@ -17,16 +17,26 @@ function ItemCard({ showInfo }) {
   const classes = useStyles();
 
   const [showContent, setShowContent] = React.useState({});
-
-  const [openDialog, setOpenDialog] = React.useState(false);
+  const [selectedShowId, setSelectedShowId] = React.useState('');
+  const [openShowInfoDialog, setShowInfoDialog] = React.useState(false);
+  const [openAddToListDialog, setOpenAddToListDialog] = React.useState(false);
 
   const openInfoDialog = (show) => {
-    setOpenDialog(true);
+    setShowInfoDialog(true);
     setShowContent(show);
   };
 
-  const onCloseDialog = () => {
-    setOpenDialog(false);
+  const onCloseInfoDialog = () => {
+    setShowInfoDialog(false);
+  };
+
+  const onCloseAddToListDialog = () => {
+    setOpenAddToListDialog(false);
+  };
+
+  const onOpenAddToListDialog = (show) => {
+    setSelectedShowId(show.showId);
+    setOpenAddToListDialog(true);
   };
 
   const title =
@@ -69,7 +79,11 @@ function ItemCard({ showInfo }) {
           </Typography>
         </CardContent>
         <CardActions className={classes.actionsContent}>
-          <Button className={classes.button} size="small">
+          <Button
+            className={classes.button}
+            onClick={() => onOpenAddToListDialog(showInfo)}
+            size="small"
+          >
             <AddCircleOutlineIcon
               style={{ marginRight: '5px', fontSize: '15px' }}
               fill={'#BAC7CB'}
@@ -99,9 +113,16 @@ function ItemCard({ showInfo }) {
       </div>
       <ShowDetailsDialog
         show={showContent}
-        open={openDialog}
-        onClose={onCloseDialog}
+        open={openShowInfoDialog}
+        onClose={onCloseInfoDialog}
       />
+      {openAddToListDialog && (
+        <AddItemToListModal
+          showId={selectedShowId}
+          open={openAddToListDialog}
+          onClose={onCloseAddToListDialog}
+        />
+      )}
     </Card>
   );
 }
