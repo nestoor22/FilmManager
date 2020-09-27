@@ -32,8 +32,8 @@ const useStyles = makeStyles({
     '&:hover': {
       transform: 'scale(1.1, 1.1)',
     },
-    color: '#fff',
-    backgroundColor: '#005a81',
+    color: '#E9F0F2',
+    backgroundColor: '#073947',
   },
 });
 

@@ -82,8 +82,18 @@ const ShowDetailsDialog = ({ open, show, onClose }) => {
                       selected: classes.selected,
                       textColorInherit: classes.textColorInheritCustom,
                     }}
-                    label="Watch here"
+                    label="Reviews"
                     {...verticalTabProps(2)}
+                  />
+                  <Tab
+                    classes={{
+                      root: classes.customTabRoot,
+                      wrapper: classes.customTabWrapper,
+                      selected: classes.selected,
+                      textColorInherit: classes.textColorInheritCustom,
+                    }}
+                    label="Watch here"
+                    {...verticalTabProps(3)}
                   />
                 </Tabs>
               </div>
@@ -103,10 +113,18 @@ const ShowDetailsDialog = ({ open, show, onClose }) => {
               >
                 <GeneralShowInfo showId={show.showId} />
               </TabPanel>
+
               <TabPanel
                 className={classes.tabContentWrapper}
                 value={value}
                 index={2}
+              >
+                Reviews
+              </TabPanel>
+              <TabPanel
+                className={classes.tabContentWrapper}
+                value={value}
+                index={3}
               >
                 WHERE TO WATCH
               </TabPanel>

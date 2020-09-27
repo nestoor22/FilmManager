@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     '&:focus': {
       outline: 'none !important',
     },
-    backgroundColor: '#005a81 !important',
+    backgroundColor: '#073947 !important',
   },
 });
 

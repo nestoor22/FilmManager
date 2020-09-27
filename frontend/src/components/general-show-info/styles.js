@@ -41,7 +41,7 @@ const useStyles = makeStyles({
     margin: '5px',
     border: '1px solid #E2EBF6',
     color: '#fff',
-    backgroundColor: '#005a81',
+    backgroundColor: '#073947',
   },
   editIconWrapper: {
     marginLeft: '10px',
