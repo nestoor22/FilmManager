@@ -155,6 +155,8 @@ export default function AppHeader({ className }) {
         <ul className={classes.navigationItems}>
           <MenuLink activeOnlyWhenExact={true} to="/boards" label="Boards" />
           <MenuLink to="/#" label="Communities" />
+          <MenuLink to="/#" label="People" />
+          <MenuLink to="/#" label="Events" />
           <MenuLink to="/#" label="About" />
           {data && data.userName && (
             <div>
