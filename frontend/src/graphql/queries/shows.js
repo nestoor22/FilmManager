@@ -68,3 +68,13 @@ export const SHOWS_BY_NAME = gql`
     }
   }
 `;
+
+export const SHORT_SHOW_REVIEWS = gql`
+  query showReviews($showId: Int) {
+    showReviews(showId: $showId) {
+      author
+      shortVariant
+      likes
+    }
+  }
+`;

@@ -130,7 +130,7 @@ const ShowDetailsDialog = ({ open, show, onClose }) => {
                 value={value}
                 index={2}
               >
-                <ReviewsBlock />
+                <ReviewsBlock showId={show.showId} />
               </TabPanel>
               <TabPanel
                 className={classes.tabContentWrapper}

@@ -8,6 +8,13 @@ const useStyles = makeStyles({
     padding: '0px 20px',
     position: 'relative',
   },
+  reviewsBlock: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  reviewItem: {
+    marginBottom: '20px',
+  },
   addNewReviewBtn: {
     width: '90%',
     position: 'absolute',

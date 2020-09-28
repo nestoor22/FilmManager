@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
   sliderField: {
     width: '426px',
-    color: '#012934',
+    color: '#073947',
   },
   checkboxFiltersWrapper: {
     display: 'flex',
@@ -47,7 +47,7 @@ const useStyles = makeStyles({
     marginTop: '20px',
     boxShadow: 'none',
     borderRadius: '3px',
-    backgroundColor: '#012934',
+    backgroundColor: '#073947',
     color: '#FFFFFF',
     fontSize: '13px',
     lineHeight: '18px',
@@ -55,7 +55,7 @@ const useStyles = makeStyles({
     padding: '8px 15px',
     minWidth: '80px',
     '&:hover': {
-      backgroundColor: '#012934',
+      backgroundColor: '#073947',
       color: '#FFFFFF',
     },
     '&:focus': {
@@ -70,14 +70,14 @@ const useStyles = makeStyles({
   },
   tabs: {
     fontSize: '18px',
-    color: '#012934',
+    color: '#073947',
     boxShadow: 'none',
     '&:focus': {
       outline: 'none',
     },
   },
   indicator: {
-    color: '#012934',
+    color: '#073947',
   },
 
   createNowText: {

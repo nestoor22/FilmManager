@@ -7,3 +7,11 @@ export const SET_RATING = gql`
     }
   }
 `;
+
+export const ADD_REVIEW = gql`
+  mutation addReview($showId: Int, $content: String) {
+    addReview(showId: $showId, content: $content) {
+      ok
+    }
+  }
+`;
