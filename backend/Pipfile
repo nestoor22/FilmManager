@@ -18,6 +18,7 @@ requests = "~=2.24"
 django-environ = "~=0.4"
 yapf = "*"
 django-mptt = "*"
+bs4 = "*"
 
 [requires]
 python_version = "3.6"

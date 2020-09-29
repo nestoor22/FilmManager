@@ -86,6 +86,8 @@ class ShowReview(models.Model):
     author = models.ForeignKey(User, models.CASCADE)
 
     content = models.TextField()
+    likes = models.IntegerField(default=0)
+    date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'show_review'

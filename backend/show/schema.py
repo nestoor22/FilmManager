@@ -2,9 +2,10 @@ from math import ceil
 
 import graphene
 from graphene_django import DjangoObjectType
+from bs4 import BeautifulSoup
 
 from .logic import ShowsLogic
-from .models import Shows, Actors, Genres, ShowRates
+from .models import Shows, Actors, Genres, ShowRates, ShowReview
 
 
 class ActorsType(DjangoObjectType):
@@ -20,6 +21,25 @@ class GenresType(DjangoObjectType):
 class RatesType(DjangoObjectType):
     class Meta:
         model = ShowRates
+
+
+class ShowReviewType(DjangoObjectType):
+    short_variant = graphene.String()
+    author = graphene.String()
+
+    class Meta:
+        model = ShowReview
+
+    @staticmethod
+    def resolve_short_variant(parent, info):
+        beautiful_soup_obj = BeautifulSoup(
+            parent.content, features='html.parser'
+        )
+        return beautiful_soup_obj.text[:150]
+
+    @staticmethod
+    def resolve_author(parent, info):
+        return f'{parent.author.first_name} {parent.author.last_name}'
 
 
 class ShowsType(DjangoObjectType):
@@ -73,6 +93,7 @@ class ShowQuery(graphene.ObjectType):
         start_with=graphene.String(),
     )
 
+    show_reviews = graphene.List(ShowReviewType, show_id=graphene.Int())
     shows_ratings = graphene.List(RatesType)
     actors = graphene.List(ActorsType, Ra=graphene.Int())
     shows_number_of_pages = graphene.Int(show_type=graphene.String())
@@ -138,6 +159,10 @@ class ShowQuery(graphene.ObjectType):
         user_id = info.context.session.get("_auth_user_id")
         return ShowRates.objects.filter(user_id=user_id)
 
+    @staticmethod
+    def resolve_show_reviews(parent, info, show_id):
+        return ShowReview.objects.filter(show_id=show_id)
+
 
 class SetShowRate(graphene.Mutation):
     id = graphene.Int()
@@ -166,3 +191,22 @@ class DeleteShowRate(graphene.Mutation):
         ok = ShowsLogic.delete_show_rate(show_id=show_rate_id, user_id=user_id)
 
         return DeleteShowRate(ok=ok)
+
+
+class AddReview(graphene.Mutation):
+    ok = graphene.Boolean()
+
+    class Arguments:
+        content = graphene.String()
+        show_id = graphene.Int()
+
+    @staticmethod
+    def mutate(parent, info, content, show_id):
+        user_id = info.context.session.get("_auth_user_id")
+
+        ShowReview.objects.create(
+            author_id=user_id, content=content, show_id=show_id
+        )
+
+        return AddReview(ok=True)
+
