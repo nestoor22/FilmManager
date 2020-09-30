@@ -74,6 +74,7 @@ export const SHORT_SHOW_REVIEWS = gql`
     showReviews(showId: $showId) {
       author
       shortVariant
+      content
       likes
     }
   }

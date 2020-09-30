@@ -9,17 +9,55 @@ const useStyles = makeStyles({
     position: 'relative',
   },
   reviewsBlock: {
+    marginTop: '40px',
     display: 'flex',
     flexDirection: 'column',
   },
   reviewItem: {
-    marginBottom: '20px',
+    marginTop: '10px',
+    maxHeight: '120px',
+    overflow: 'hidden',
+  },
+  reviewHeader: {
+    display: 'flex',
+    position: 'relative',
+    marginBottom: '5px',
+    backgroundColor: '#E2EBF6',
+    borderRadius: '5px',
+    padding: '5px',
+  },
+  reviewContent: {
+    maxHeight: '120px',
+    boxShadow: 'inset 0px -18px 5px 2px rgba(226,235,246,0.28)',
+  },
+  author: {
+    color: '#5F8792',
+    '&:hover': {
+      color: '#073947',
+      cursor: 'pointer',
+    },
+  },
+  fullVersionBtn: {
+    textAlign: 'end',
+    paddingRight: '5px',
+    color: '#5F8792',
+    '&:hover': {
+      color: '#073947',
+      cursor: 'pointer',
+    },
+  },
+  likesBlock: {
+    display: 'flex',
+    position: 'absolute',
+    right: '20px',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   addNewReviewBtn: {
     width: '90%',
     position: 'absolute',
     display: 'flex',
-    bottom: '10px',
+    top: '10px',
     alignItems: 'center',
     textTransform: 'initial',
     color: '#5F8792',

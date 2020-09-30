@@ -8,6 +8,7 @@ import NothingFound from 'assets/icons8-nothing-found-80.png';
 import { ADD_REVIEW } from 'graphql/mutations/shows';
 import { SHORT_SHOW_REVIEWS } from 'graphql/queries/shows';
 import { Loader } from 'components';
+import LikesIcon from 'assets/icons/like-icon.svg';
 
 import useStyles from './styles';
 
@@ -85,9 +86,42 @@ const ReviewsBlock = ({ showId }) => {
       )}
       <div className={classes.reviewsBlock}>
         {!showReviewForm &&
-          data?.showReviews.map((review) => {
+          data?.showReviews.map((review, index) => {
             return (
-              <div className={classes.reviewItem}>{review.shortVariant}</div>
+              <div>
+                <div key={index} className={classes.reviewItem}>
+                  <div className={classes.reviewHeader}>
+                    <Typography className={classes.author}>
+                      {review.author}
+                    </Typography>
+                    <div className={classes.likesBlock}>
+                      <Typography
+                        style={{
+                          marginRight: '5px',
+                          fontSize: '15px',
+                          color: '#073947',
+                        }}
+                      >
+                        {review.likes}
+                      </Typography>
+                      <img
+                        height="15px"
+                        width="15px"
+                        style={{ fill: '#073947' }}
+                        src={LikesIcon}
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className={classes.reviewContent}
+                    dangerouslySetInnerHTML={{ __html: review.content }}
+                  />
+                </div>
+                <Typography className={classes.fullVersionBtn}>
+                  Full version
+                </Typography>
+              </div>
             );
           })}
       </div>
