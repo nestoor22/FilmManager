@@ -15,6 +15,8 @@ class User(AbstractUser):
     city = models.TextField('City', null=True)
     country = models.TextField('Country', null=True)
     birthday = models.DateField('Birthday', null=True)
+    followed = models.IntegerField('Followed', default=0)
+    followers = models.IntegerField('Followers', default=0)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

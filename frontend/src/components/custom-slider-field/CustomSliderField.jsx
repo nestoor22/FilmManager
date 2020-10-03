@@ -74,7 +74,6 @@ const CustomSliderField = ({
   return (
     <div className={classNames(classes.sliderWrapper, classStyle)}>
       <Slider
-        color="secondary"
         onChange={value ? onChange : (event, value) => handleInputChange(value)}
         ValueLabelComponent={ValueLabelComponent}
         value={value ? value : input.value}

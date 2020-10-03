@@ -1,6 +1,7 @@
 import graphene
 
-from user.schema import SignIn, UserQuery, CreateUser, LogOut, GoogleSignIn
+from user.graphQL.queries import UserQuery
+from user.graphQL.mutations import SignIn, GoogleSignIn, LogOut, CreateUser
 from show.schema import ShowQuery, SetShowRate, DeleteShowRate, AddReview
 from lists.schema import AddShowToList, CreateList, ShowsListsQuery
 from boards.schema import (

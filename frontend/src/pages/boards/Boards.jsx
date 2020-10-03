@@ -41,7 +41,6 @@ function a11yProps(index) {
 
 const Boards = ({ boardFilter, reset }) => {
   const classes = useStyles();
-  document.body.style.backgroundColor = '#BAC7CB';
 
   const [openCreationPopup, setOpenCreationPopup] = React.useState(false);
 
@@ -168,6 +167,7 @@ const Boards = ({ boardFilter, reset }) => {
                 root: classes.tabs,
                 indicator: classes.indicator,
               }}
+              indicatorColor={'primary'}
               className={classes.tabs}
               value={value}
               onChange={handleChange}
@@ -205,7 +205,7 @@ const Boards = ({ boardFilter, reset }) => {
               Create new board
             </h6>
           )}
-          {data?.boards.length === 0 && (
+          {data?.boards.length === 0 && value === 2 && (
             <div
               style={{
                 display: 'flex',

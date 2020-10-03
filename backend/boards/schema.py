@@ -4,7 +4,7 @@ from graphene_django import DjangoObjectType
 
 from lists.models import ShowsList
 from lists.schema import ShowsListType
-from user.schema import UserType, User
+from user.graphQL.types import UserType, User
 from .logic import BoardLogic
 from .models import Board, BoardLists, BoardMembers, BoardFollowers
 
