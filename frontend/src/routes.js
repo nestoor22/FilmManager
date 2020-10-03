@@ -11,6 +11,7 @@ import RegisterPage from './pages/register/RegisterPage';
 import AccountPage from './pages/account/AccountPage';
 import PrivateRoute from './components/private-route/PrivateRoute';
 import CartoonsPage from './pages/cartoons-page/CartoonsPage';
+import PeoplePage from './pages/peoples/Peoples';
 
 function Routes() {
   return (
@@ -23,7 +24,7 @@ function Routes() {
         <Route exact path="/signUp">
           <RegisterPage />
         </Route>
-
+        <Route exact path="/people" component={PeoplePage} />
         <Route exact path="/" component={MainPage} />
         <Route exact path="/data/movies" component={MoviesPage} />
         <Route exact path="/data/series" component={SeriesPage} />

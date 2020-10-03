@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
   },
   itemRoot: {
-    border: '1px solid #005a81',
+    border: '2px solid #E9F0F2',
     fontSize: '13px',
     minWidth: '30px',
     height: '30px',
@@ -34,6 +34,9 @@ const useStyles = makeStyles({
       outline: 'none !important',
     },
     backgroundColor: '#073947 !important',
+  },
+  icon: {
+    color: '#E9F0F2',
   },
 });
 

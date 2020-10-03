@@ -40,13 +40,16 @@ export const USER_NAME = gql`
 export const USERS = gql`
   query users($search: String, $offset: Int, $limit: Int) {
     users(search: $search, offset: $offset, limit: $limit) {
-      id
-      firstName
-      lastName
-      email
-      city
-      country
-      birthday
+      pages
+      data {
+        id
+        firstName
+        lastName
+        email
+        city
+        country
+        birthday
+      }
     }
   }
 `;

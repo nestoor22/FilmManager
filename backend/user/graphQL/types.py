@@ -9,6 +9,11 @@ class UserType(DjangoObjectType):
         model = User
 
 
+class UsersType(graphene.ObjectType):
+    pages = graphene.Int()
+    data = graphene.List(UserType)
+
+
 class UserInput(graphene.InputObjectType):
     first_name = graphene.String()
     last_name = graphene.String()

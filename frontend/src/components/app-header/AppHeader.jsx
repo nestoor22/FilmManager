@@ -34,14 +34,13 @@ export default function AppHeader({ className }) {
   const [logOut] = useMutation(LOG_OUT);
   const anchorRef = React.useRef(null);
   const [open, setOpen] = React.useState(false);
-  const [hideShowsDropdown, setHideShowsDropdown] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState();
   const [showContent, setShowContent] = React.useState({});
   const [search, setSearch] = React.useState('');
   const [focused, setFocused] = React.useState(false);
   const prevOpen = React.useRef(open);
 
-  const [getShows, { data: showsData, loading }] = useLazyQuery(SHOWS);
+  const [getShows, { data: showsData }] = useLazyQuery(SHOWS);
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -109,53 +108,50 @@ export default function AppHeader({ className }) {
             </InputAdornment>
           }
         />
-        {search &&
-          !hideShowsDropdown &&
-          showsData &&
-          showsData.shows?.length !== 0 && (
-            <div className={classes.showsPopup}>
-              {showsData?.shows?.map((showInfo) => {
-                return (
-                  <>
-                    <div
-                      onClick={() => {
-                        setShowContent(showInfo);
-                        setOpenDialog(true);
+        {search && showsData && showsData.shows?.length !== 0 && (
+          <div className={classes.showsPopup}>
+            {showsData?.shows?.map((showInfo) => {
+              return (
+                <>
+                  <div
+                    onClick={() => {
+                      setShowContent(showInfo);
+                      setOpenDialog(true);
+                    }}
+                    className={classes.showRow}
+                  >
+                    <CardMedia
+                      className={classes.poster}
+                      component="img"
+                      alt="Poster"
+                      height="80"
+                      width="60"
+                      image={showInfo.posterUrl}
+                      title="Poster"
+                      classes={{
+                        root: classes.rootMedia,
                       }}
-                      className={classes.showRow}
-                    >
-                      <CardMedia
-                        className={classes.poster}
-                        component="img"
-                        alt="Poster"
-                        height="80"
-                        width="60"
-                        image={showInfo.posterUrl}
-                        title="Poster"
-                        classes={{
-                          root: classes.rootMedia,
-                        }}
-                      />
-                      <div>
-                        <Typography className={classes.showTitle}>
-                          {showInfo.title}
-                        </Typography>
-                        <Typography className={classes.showTitle}>
-                          {showInfo.releaseDate}
-                        </Typography>
-                      </div>
+                    />
+                    <div>
+                      <Typography className={classes.showTitle}>
+                        {showInfo.title}
+                      </Typography>
+                      <Typography className={classes.showTitle}>
+                        {showInfo.releaseDate}
+                      </Typography>
                     </div>
-                  </>
-                );
-              })}
-            </div>
-          )}
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        )}
       </div>
       <nav className={classes.navigation}>
         <ul className={classes.navigationItems}>
           <MenuLink activeOnlyWhenExact={true} to="/boards" label="Boards" />
           <MenuLink to="/#" label="Communities" />
-          <MenuLink to="/#" label="People" />
+          <MenuLink to="/people" label="People" />
           <MenuLink to="/#" label="Events" />
           <MenuLink to="/#" label="About" />
           {data && data.userName && (

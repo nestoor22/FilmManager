@@ -21,6 +21,7 @@ const Pagination = ({ total, ...props }) => {
                 root: classes.itemRoot,
                 ellipsis: classes.itemEllipsis,
                 selected: classes.itemSelected,
+                icon: classes.icon,
               }}
               {...item}
             />

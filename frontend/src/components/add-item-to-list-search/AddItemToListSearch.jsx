@@ -13,7 +13,6 @@ let timer;
 export const AddItemToListSearch = ({ addItemToList }) => {
   const classes = useStyles();
 
-  const [hideShowsDropdown, setHideShowsDropdown] = React.useState(false);
   const [search, setSearch] = React.useState('');
   const [focused, setFocused] = React.useState(false);
 
@@ -48,47 +47,44 @@ export const AddItemToListSearch = ({ addItemToList }) => {
           disabled: classes.disabledInput,
         }}
       />
-      {search &&
-        !hideShowsDropdown &&
-        showsData &&
-        showsData.shows?.length !== 0 && (
-          <div className={classes.showsPopup}>
-            {showsData?.shows?.map((showInfo) => {
-              return (
-                <>
-                  <div
-                    className={classes.showRow}
-                    onClick={() => {
-                      addItemToList(showInfo);
-                      setSearch('');
+      {search && showsData && showsData.shows?.length !== 0 && (
+        <div className={classes.showsPopup}>
+          {showsData?.shows?.map((showInfo) => {
+            return (
+              <>
+                <div
+                  className={classes.showRow}
+                  onClick={() => {
+                    addItemToList(showInfo);
+                    setSearch('');
+                  }}
+                >
+                  <CardMedia
+                    className={classes.poster}
+                    component="img"
+                    alt="Poster"
+                    height="80"
+                    width="60"
+                    image={showInfo.posterUrl}
+                    title="Poster"
+                    classes={{
+                      root: classes.rootMedia,
                     }}
-                  >
-                    <CardMedia
-                      className={classes.poster}
-                      component="img"
-                      alt="Poster"
-                      height="80"
-                      width="60"
-                      image={showInfo.posterUrl}
-                      title="Poster"
-                      classes={{
-                        root: classes.rootMedia,
-                      }}
-                    />
-                    <div>
-                      <Typography className={classes.showTitle}>
-                        {showInfo.title}
-                      </Typography>
-                      <Typography className={classes.showTitle}>
-                        {showInfo.releaseDate}
-                      </Typography>
-                    </div>
+                  />
+                  <div>
+                    <Typography className={classes.showTitle}>
+                      {showInfo.title}
+                    </Typography>
+                    <Typography className={classes.showTitle}>
+                      {showInfo.releaseDate}
+                    </Typography>
                   </div>
-                </>
-              );
-            })}
-          </div>
-        )}
+                </div>
+              </>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

@@ -31,7 +31,7 @@ const AddItemToListModal = ({ open, showId, onClose }) => {
       userBoards: true,
     },
   });
-  console.log(showId);
+
   const [addShowToList] = useMutation(ADD_SHOW_TO_LIST);
 
   const handleAddItem = (listId) => {
@@ -85,6 +85,8 @@ const AddItemToListModal = ({ open, showId, onClose }) => {
                   </AccordionDetails>
                 </Accordion>
               );
+            } else {
+              return;
             }
           })}
       </div>
