@@ -9,6 +9,7 @@ const useStyles = makeStyles({
   },
   content: {
     display: 'flex',
+    justifyContent: 'center',
     height: '100%',
     width: '100%',
   },
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
   peopleBlocksWrapper: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
+    width: '65%',
     padding: '10px 20px',
   },
   inputRoot: {

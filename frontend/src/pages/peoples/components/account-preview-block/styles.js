@@ -15,17 +15,29 @@ const useStyles = makeStyles({
     height: '150px',
     fontSize: '60px',
     marginRight: '30px',
+    '&:hover': {
+      transform: 'scale(1.05, 1.05)',
+      cursor: 'pointer',
+      border: '1px solid #073947',
+    },
   },
   generalInfo: {
     paddingTop: '10px',
     width: '100%',
   },
   userName: {
+    width: 'fit-content',
     fontSize: '23px',
+    height: '30px',
     marginBottom: '10px',
+    '&:hover': {
+      cursor: 'pointer',
+      borderBottom: '1px solid #073947',
+      color: '#5F8792',
+    },
   },
   textInput: {
-    fontSize: '15px',
+    fontSize: '18px',
   },
   infoRow: {
     display: 'flex',
@@ -33,8 +45,9 @@ const useStyles = makeStyles({
   },
   info: {
     display: 'flex',
-    alignItems: 'flex-end',
-    width: '250px',
+    alignItems: 'center',
+    maxWidth: '350px',
+    minWidth: '200px',
   },
   accountTabIcon: {
     marginRight: '10px',
@@ -42,7 +55,8 @@ const useStyles = makeStyles({
     fill: '#073947',
   },
   followersInfo: {
-    fontSize: '15px',
+    fontSize: '18px',
+    fontWeight: 600,
     marginRight: '10px',
   },
   followBtn: {

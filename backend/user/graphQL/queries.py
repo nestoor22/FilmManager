@@ -1,8 +1,8 @@
 from math import ceil
 
 import graphene
-
 from django.db.models import Q
+
 from .types import UserType, User, UsersType
 
 
@@ -31,7 +31,7 @@ class UserQuery(graphene.ObjectType):
 
         found_users = User.objects.filter(
             Q(first_name__icontains=search) | Q(last_name__icontains=search)
-        )
+        ).exclude(id=info.context.session.get('_auth_user_id'))
 
         return {
             'pages': ceil(len(found_users) / number_of_items_per_page),

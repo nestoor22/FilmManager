@@ -64,13 +64,12 @@ const PeoplePage = () => {
 
   React.useEffect(() => {
     getUsers();
-  }, [getUsers]);
+  }, []);
 
   return (
     <div className={classes.root}>
       <AppHeader />
       <div className={classes.content}>
-        {!loading && <div className={classes.filtersBlock}>sdfsddf</div>}
         {loading ? (
           <Loader isLoading={true} />
         ) : (

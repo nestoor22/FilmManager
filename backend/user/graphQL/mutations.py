@@ -4,7 +4,7 @@ from google.auth.transport import requests
 from django.contrib.auth import authenticate, login, logout
 from graphene_file_upload.scalars import Upload
 
-from .types import UserInput, User
+from .types import UserInput, User, Followers
 from FilmManager.settings import GOOGLE_CLIENT_ID
 
 
@@ -111,3 +111,33 @@ class LogOut(graphene.Mutation):
     def mutate(parent, info):
         logout(info.context)
         return LogOut(ok=True)
+
+
+class SubscribeUser(graphene.Mutation):
+    ok = graphene.Boolean()
+
+    class Arguments:
+        followed_user_id = graphene.Int()
+
+    @staticmethod
+    def mutate(parent, info, followed_user_id):
+        Followers.objects.create(
+            follower_id=info.context.user.id, followed_id=followed_user_id
+        )
+
+        return SubscribeUser(ok=True)
+
+
+class UnsubscribeUser(graphene.Mutation):
+    ok = graphene.Boolean()
+
+    class Arguments:
+        followed_user_id = graphene.Int(required=True)
+
+    @staticmethod
+    def mutate(parent, info, followed_user_id):
+        Followers.objects.filter(
+            follower_id=info.context.user.id, followed_id=followed_user_id
+        ).delete()
+
+        return UnsubscribeUser(ok=True)

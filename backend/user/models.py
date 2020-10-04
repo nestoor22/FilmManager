@@ -29,3 +29,20 @@ class User(AbstractUser):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+
+class Followers(models.Model):
+    follower = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='follower_user'
+    )
+
+    followed = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='following_user'
+    )
+
+    class Meta:
+        db_table = 'followers_relations'
+        verbose_name = 'Followers'
+
+    def __str__(self):
+        return f'{self.follower.email} following {self.follower.email}'

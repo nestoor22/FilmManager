@@ -48,7 +48,10 @@ export const USERS = gql`
         email
         city
         country
+        followers
+        followed
         birthday
+        isFollowedByCurrentUser
       }
     }
   }

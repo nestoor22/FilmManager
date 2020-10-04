@@ -30,7 +30,9 @@ export default function AppHeader({ className }) {
   const classes = useStyles();
 
   const history = useHistory();
-  const { data } = useQuery(USER_NAME);
+  const { data } = useQuery(USER_NAME, {
+    fetchPolicy: 'no-cache',
+  });
   const [logOut] = useMutation(LOG_OUT);
   const anchorRef = React.useRef(null);
   const [open, setOpen] = React.useState(false);

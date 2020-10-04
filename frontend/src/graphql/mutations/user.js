@@ -7,3 +7,19 @@ export const DELETE_RATING = gql`
     }
   }
 `;
+
+export const FOLLOW_USER = gql`
+  mutation followUser($followedUserId: Int!) {
+    followUser(followedUserId: $followedUserId) {
+      ok
+    }
+  }
+`;
+
+export const UNFOLLOW_USER = gql`
+  mutation unfollowUser($followedUserId: Int!) {
+    unfollowUser(followedUserId: $followedUserId) {
+      ok
+    }
+  }
+`;
