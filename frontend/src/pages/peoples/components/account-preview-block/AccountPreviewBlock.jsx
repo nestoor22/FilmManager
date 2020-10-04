@@ -11,7 +11,7 @@ import { FOLLOW_USER, UNFOLLOW_USER } from 'graphql/mutations/user';
 
 import useStyles from './styles';
 
-const AccountPreviewBlock = ({ userInfo }) => {
+const AccountPreviewBlock = ({ handleOpenAccount, userInfo }) => {
   const classes = useStyles();
 
   const [followUser] = useMutation(FOLLOW_USER);
@@ -42,15 +42,25 @@ const AccountPreviewBlock = ({ userInfo }) => {
   return (
     <div className={classes.root}>
       {userInfo.photo && (
-        <Avatar className={classes.avatarImage} src={userInfo.photo} />
+        <Avatar
+          onClick={() => handleOpenAccount(userInfo.id)}
+          className={classes.avatarImage}
+          src={userInfo.photo}
+        />
       )}
       {!userInfo.photo && (
-        <Avatar className={classes.avatarImage}>
+        <Avatar
+          onClick={() => handleOpenAccount(userInfo.id)}
+          className={classes.avatarImage}
+        >
           {userInfo.firstName[0] + userInfo.lastName[0]}
         </Avatar>
       )}
       <div className={classes.generalInfo}>
-        <Typography className={classes.userName}>
+        <Typography
+          onClick={() => handleOpenAccount(userInfo.id)}
+          className={classes.userName}
+        >
           {userInfo.firstName} {userInfo.lastName}
         </Typography>
         <div style={{ marginBottom: 25 }} className={classes.infoRow}>

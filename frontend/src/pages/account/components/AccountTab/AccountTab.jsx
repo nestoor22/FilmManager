@@ -11,34 +11,34 @@ import CakeRoundedIcon from '@material-ui/icons/CakeRounded';
 import EmailRoundedIcon from '@material-ui/icons/EmailRounded';
 import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 
-import { ShowPanel } from 'components';
-import { USER } from 'graphql/queries/user';
+import { ShowPanel, Loader } from 'components';
 
 import useStyles from './styles';
 
-const AccountTab = () => {
+const AccountTab = ({ userInfo, loading, refetch }) => {
   const classes = useStyles();
 
-  const { data, refetch } = useQuery(USER, {
-    fetchPolicy: 'no-cache',
-    notifyOnNetworkStatusChange: true,
-  });
-
+  if (loading) {
+    return <Loader isLoading={true} />;
+  }
   return (
     <div className={classes.accountTab}>
-      {data && data.user && data.showsRatings && (
+      {userInfo && userInfo.user && userInfo.showsRatings && (
         <div className={classes.generalInfo}>
           <div className={classes.avatarWrapper}>
-            {data.user.photo && (
-              <Avatar className={classes.avatarImage} src={data.user.photo} />
+            {userInfo.user.photo && (
+              <Avatar
+                className={classes.avatarImage}
+                src={userInfo.user.photo}
+              />
             )}
-            {!data.user.photo && (
+            {!userInfo.user.photo && (
               <Avatar className={classes.avatarImage}>
-                {data.user.firstName[0] + data.user.lastName[0]}
+                {userInfo.user.firstName[0] + userInfo.user.lastName[0]}
               </Avatar>
             )}
             <Typography className={classes.nameInput}>
-              {data.user.firstName} {data.user.lastName}
+              {userInfo.user.firstName} {userInfo.user.lastName}
             </Typography>
           </div>
           <div className={classes.textInfo}>
@@ -46,14 +46,14 @@ const AccountTab = () => {
               <div className={classes.info}>
                 <EmailRoundedIcon className={classes.accountTabIcon} />
                 <Typography className={classes.textInput}>
-                  {data.user.email}
+                  {userInfo.user.email}
                 </Typography>
               </div>
               <div className={classes.info}>
                 <HomeRoundedIcon className={classes.accountTabIcon} />
                 <Typography className={classes.textInput}>
-                  {data.user.country ? `${data.user.country}, ` : ''}{' '}
-                  {data.user.city ? data.user.city : ''}
+                  {userInfo.user.country ? `${userInfo.user.country}, ` : ''}{' '}
+                  {userInfo.user.city ? userInfo.user.city : ''}
                 </Typography>
               </div>
             </div>
@@ -61,15 +61,15 @@ const AccountTab = () => {
               <div className={classes.info}>
                 <CakeRoundedIcon className={classes.accountTabIcon} />
                 <Typography className={classes.textInput}>
-                  {data.user.birthday
-                    ? moment(data.user.birthday).format('YYYY-MM-DD')
+                  {userInfo.user.birthday
+                    ? moment(userInfo.user.birthday).format('YYYY-MM-DD')
                     : ''}
                 </Typography>
               </div>
               <div className={classes.info}>
                 <FavoriteRoundedIcon className={classes.accountTabIcon} />
                 <Typography className={classes.textInput}>
-                  {data.user.favoriteShow ? data.user.favoriteShow : ''}
+                  {userInfo.user.favoriteShow ? userInfo.user.favoriteShow : ''}
                 </Typography>
               </div>
             </div>
@@ -89,7 +89,7 @@ const AccountTab = () => {
               <Typography className={classes.blockTitle}>
                 Given ratings
               </Typography>
-              <ShowPanel refetch={refetch} showsInfo={data.showsRatings} />
+              <ShowPanel refetch={refetch} showsInfo={userInfo.showsRatings} />
             </div>
           </div>
         </div>

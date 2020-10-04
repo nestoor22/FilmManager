@@ -38,7 +38,7 @@ const useStyles = makeStyles({
     width: '80px!important',
   },
   icon: {
-    fill: '#0a2b5c',
+    fill: '#073947',
     fontSize: '30px',
   },
 });

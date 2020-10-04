@@ -32,7 +32,7 @@ function Routes() {
 
         <PrivateRoute exact path="/boards" component={Boards} />
         <PrivateRoute exact path="/boards/:id/view" component={OpenBoard} />
-        <PrivateRoute exact path="/account" component={AccountPage} />
+        <PrivateRoute path="/account/:id?" component={AccountPage} />
       </Switch>
     </Router>
   );

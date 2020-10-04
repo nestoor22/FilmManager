@@ -1,4 +1,6 @@
 import React from 'react';
+
+import { useHistory } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/react-hooks';
 
 import Input from '@material-ui/core/Input';
@@ -17,6 +19,7 @@ let timer;
 
 const PeoplePage = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   const [getUsers, { data, loading }] = useLazyQuery(USERS, {
     variables: {
@@ -33,6 +36,9 @@ const PeoplePage = () => {
   const [focused, setFocused] = React.useState(false);
   const [search, setSearch] = React.useState('');
 
+  const handleOpenAccount = (userId) => {
+    history.push(`/account/${userId}`)
+  }
   const handleChange = (e) => {
     const searchValue = e?.target.value;
     setSearch(e?.target.value);
@@ -94,7 +100,7 @@ const PeoplePage = () => {
               }
             />
             {data?.users?.data.map((user) => {
-              return <AccountPreviewBlock userInfo={user} />;
+              return <AccountPreviewBlock handleOpenAccount={handleOpenAccount} userInfo={user} />;
             })}
             <Pagination
               page={page}

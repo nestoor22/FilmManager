@@ -6,7 +6,7 @@ const useStyles = makeStyles({
     width: '100%',
     height: '100%',
     minHeight: '600px',
-    backgroundColor: '#fff',
+    backgroundColor: '#E9F0F2',
   },
   generalInfo: {
     display: 'flex',
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   nameInput: {
     fontSize: '32px',
     paddingBottom: '20px',
-    color: '#0a2b5c',
+    color: '#073947',
   },
   textInput: {
     fontSize: '15px',
@@ -53,14 +53,14 @@ const useStyles = makeStyles({
   accountTabIcon: {
     marginRight: '10px',
     fontSize: '20px',
-    fill: '#0a2b5c',
+    fill: '#073947',
   },
   customChip: {
     textTransform: 'capitalize',
     margin: '5px',
     border: '1px solid #E2EBF6',
-    color: '#fff',
-    backgroundColor: '#0a2b5c',
+    color: '#E9F0F2',
+    backgroundColor: '#073947',
   },
   preferencesInfo: {
     marginTop: '20px',
@@ -71,7 +71,7 @@ const useStyles = makeStyles({
   blockTitle: {
     fontSize: '15px',
     fontWeight: 'bold',
-    color: '#0a2b5c',
+    color: '#073947',
     paddingBottom: '10px',
   },
 });
