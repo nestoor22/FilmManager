@@ -7,7 +7,7 @@ from .types import UserType, User, UsersType
 
 
 class UserQuery(graphene.ObjectType):
-    user = graphene.Field(UserType)
+    user = graphene.Field(UserType, user_id=graphene.Int())
     users = graphene.Field(
         UsersType,
         search=graphene.String(),
@@ -19,10 +19,12 @@ class UserQuery(graphene.ObjectType):
     is_logged_in = graphene.Boolean()
 
     @staticmethod
-    def resolve_user(parent, info):
-        user_id = info.context.session.get('_auth_user_id')
+    def resolve_user(parent, info, user_id=''):
         if not user_id:
-            raise Exception('User is not logged in')
+            session_user_id = info.context.session.get('_auth_user_id')
+            if not session_user_id:
+                raise Exception('User is not logged in')
+
         return User.objects.get(id=user_id)
 
     @staticmethod
