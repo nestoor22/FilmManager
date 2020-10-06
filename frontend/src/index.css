@@ -22,7 +22,7 @@ body::-webkit-scrollbar {
   height: 6px;
 }
 body::-webkit-scrollbar-track {
-  background: #E9F0F2;
+  background: #e9f0f2;
   border-radius: 2px;
 }
 body::-webkit-scrollbar-thumb {

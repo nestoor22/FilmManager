@@ -8,6 +8,10 @@ const useStyles = makeStyles({
     minHeight: '600px',
     backgroundColor: '#E9F0F2',
   },
+  sliderWrapper: {
+    width: '50%',
+    marginBottom: '40px',
+  },
   generalInfo: {
     display: 'flex',
     paddingTop: '20px',

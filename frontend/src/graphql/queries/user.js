@@ -24,6 +24,21 @@ export const USER = gql`
         currentUserRating
       }
     }
+    boards {
+      id
+      sharedTimes
+      backgroundColor
+      backgroundImage
+      followers
+      averageShowRating
+      isFollowed
+      showsNumber
+      description
+      tags
+      isOpen
+      name
+      createdAt
+    }
   }
 `;
 

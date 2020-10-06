@@ -1,13 +1,17 @@
 import graphene
 from graphene_django import DjangoObjectType
+from django.db.models import Q
+
 
 from user.models import User, Followers
+from boards.models import Board
 
 
 class UserType(DjangoObjectType):
     followers = graphene.Int()
     followed = graphene.Int()
     is_followed_by_current_user = graphene.Boolean()
+    boards = graphene.List('boards.schema.BoardType')
 
     class Meta:
         model = User
@@ -29,6 +33,14 @@ class UserType(DjangoObjectType):
             return True
         except Followers.DoesNotExist:
             return False
+
+    @staticmethod
+    def resolve_boards(parent, info):
+        return Board.objects.filter(
+            Q(owner_id=parent.id) |
+            Q(boardmembers__user_id=parent.id) |
+            Q(boardfollowers__user_id=parent.id)
+        )
 
 
 class UsersType(graphene.ObjectType):

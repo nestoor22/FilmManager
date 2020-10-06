@@ -14,6 +14,7 @@ import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 import { ShowPanel, Loader } from 'components';
 
 import useStyles from './styles';
+import BoardsMembershipCarousel from './BoardsMembershipCarousel';
 
 const AccountTab = ({ userInfo, loading, refetch }) => {
   const classes = useStyles();
@@ -87,9 +88,9 @@ const AccountTab = ({ userInfo, loading, refetch }) => {
             </div>
             <div className={classes.ratingsInfo}>
               <Typography className={classes.blockTitle}>
-                Given ratings
+                Boards membership
               </Typography>
-              <ShowPanel refetch={refetch} showsInfo={userInfo.showsRatings} />
+              <BoardsMembershipCarousel refetch={refetch} boards={userInfo.boards} />
             </div>
           </div>
         </div>
