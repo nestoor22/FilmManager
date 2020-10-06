@@ -1,25 +1,7 @@
 import graphene
 
-from graphene_django import DjangoObjectType
-
-from .models import ShowsList, ListShowRelation
+from ..models import ShowsList, ListShowRelation
 from boards.models import BoardLists
-
-
-class ShowsListRelationType(DjangoObjectType):
-    class Meta:
-        model = ListShowRelation
-
-
-class ShowsListType(DjangoObjectType):
-    class Meta:
-        model = ShowsList
-
-    shows_on_list = graphene.List(ShowsListRelationType)
-
-    @staticmethod
-    def resolve_shows_on_list(parent, info):
-        return ListShowRelation.objects.filter(list_id=parent.id)
 
 
 class CreateList(graphene.Mutation):
@@ -64,12 +46,3 @@ class AddShowToList(graphene.Mutation):
             list_id=list_id, show_id=show_id
         )
         return AddShowToList(id=show_on_list_instance.id)
-
-
-class ShowsListsQuery(graphene.ObjectType):
-    shows_list = graphene.List(ShowsListType)
-
-    @staticmethod
-    def resolve_shows_list(parent, info):
-        user_id = info.context.session.get("_auth_user_id")
-        return ShowsList.objects.filter(owner_id=user_id)

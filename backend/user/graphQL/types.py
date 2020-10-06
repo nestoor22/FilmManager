@@ -11,7 +11,7 @@ class UserType(DjangoObjectType):
     followers = graphene.Int()
     followed = graphene.Int()
     is_followed_by_current_user = graphene.Boolean()
-    boards = graphene.List('boards.schema.BoardType')
+    boards = graphene.List('boards.graphQL.types.BoardType')
 
     class Meta:
         model = User

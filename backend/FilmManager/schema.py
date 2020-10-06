@@ -1,9 +1,11 @@
 import graphene
 
 from user.graphQL.queries import UserQuery
-from show.schema import ShowQuery, SetShowRate, DeleteShowRate, AddReview
-from lists.schema import AddShowToList, CreateList, ShowsListsQuery
-
+from show.graphQL.queries import ShowQuery
+from boards.graphQL.queries import BoardsQuery
+from lists.graphQL.queries import ShowsListsQuery
+from lists.graphQL.mutations import AddShowToList, CreateList
+from show.graphQL.mutations import SetShowRate, DeleteShowRate, AddReview
 from user.graphQL.mutations import (
     SignIn,
     GoogleSignIn,
@@ -12,11 +14,8 @@ from user.graphQL.mutations import (
     SubscribeUser,
     UnsubscribeUser
 )
-from boards.schema import (
-    BoardsQuery,
-    CreateBoardMutation,
-    SetLastVisitedBoard,
-    FollowBoardMutation
+from boards.graphQL.mutations import (
+    SetLastVisitedBoard, CreateBoardMutation, FollowBoardMutation
 )
 
 
