@@ -33,6 +33,7 @@ import CreateListPopup from './create-list-popup/CreateListPopup';
 import { AddItemToListSearch } from './add-item-to-list-search/AddItemToListSearch';
 import AddItemToListModal from './add-item-to-existing-list-modal/AddItemToListModal';
 import ReviewsBlock from './reviews-block/ReviewsBlock';
+import ReviewBlockForAccountTab from './review-block-for-account-tab/ReviewBlockForAccountTab';
 
 export {
   Input,
@@ -69,5 +70,6 @@ export {
   BoardsStatisticsTab,
   CustomCountryPicker,
   AddItemToListSearch,
-  ReviewsBlock
+  ReviewsBlock,
+  ReviewBlockForAccountTab,
 };

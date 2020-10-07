@@ -15,6 +15,8 @@ import { ShowPanel, Loader } from 'components';
 
 import useStyles from './styles';
 import BoardsMembershipCarousel from './BoardsMembershipCarousel';
+import ErrorBox from '../../../../components/error-box/ErrorBox';
+import ReviewsCarousel from './ReviewsCarousel';
 
 const AccountTab = ({ userInfo, loading, refetch }) => {
   const classes = useStyles();
@@ -90,7 +92,26 @@ const AccountTab = ({ userInfo, loading, refetch }) => {
               <Typography className={classes.blockTitle}>
                 Boards membership
               </Typography>
-              <BoardsMembershipCarousel refetch={refetch} boards={userInfo.boards} />
+              {userInfo.user.boards.length === 0 && (
+                <Typography style={{ fontSize: '18px' }}>
+                  User is not following any board yet.
+                </Typography>
+              )}
+              <BoardsMembershipCarousel
+                refetch={refetch}
+                boards={userInfo.user.boards}
+              />
+            </div>
+            <div className={classes.ratingsInfo}>
+              <Typography className={classes.blockTitle}>
+                User reviews
+              </Typography>
+              {userInfo.user.reviews.length === 0 && (
+                <Typography style={{ fontSize: '18px' }}>
+                  User is not following any board yet.
+                </Typography>
+              )}
+              <ReviewsCarousel reviews={userInfo.user.reviews} />
             </div>
           </div>
         </div>

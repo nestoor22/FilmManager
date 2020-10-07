@@ -6,7 +6,7 @@ import Slider from 'react-slick';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
-import BoardCard from '../../../../components/board-card/BoardCard';
+import { ReviewBlockForAccountTab } from 'components';
 
 import useStyles from './styles';
 
@@ -64,7 +64,7 @@ function NextArrow(props) {
   );
 }
 
-const BoardsMembershipCarousel = ({ boards, refetch }) => {
+const ReviewsCarousel = ({ reviews }) => {
   const classes = useStyles();
 
   const settings = {
@@ -91,14 +91,12 @@ const BoardsMembershipCarousel = ({ boards, refetch }) => {
   return (
     <div className={classes.sliderWrapper}>
       <Slider className={classes.listLick} {...settings}>
-        {boards.map((boardInfo, index) => {
-          return (
-            <BoardCard refetch={refetch} key={index} boardInfo={boardInfo} />
-          );
+        {reviews.map((review, index) => {
+          return <ReviewBlockForAccountTab key={index} reviewInfo={review} />;
         })}
       </Slider>
     </div>
   );
 };
 
-export default BoardsMembershipCarousel;
+export default ReviewsCarousel;

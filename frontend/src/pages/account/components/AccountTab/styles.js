@@ -6,6 +6,7 @@ const useStyles = makeStyles({
     width: '100%',
     height: '100%',
     minHeight: '600px',
+    justifyContent: 'center',
     backgroundColor: '#E9F0F2',
   },
   sliderWrapper: {
@@ -15,8 +16,6 @@ const useStyles = makeStyles({
   generalInfo: {
     display: 'flex',
     paddingTop: '20px',
-    width: '100%',
-    paddingLeft: '110px',
   },
   avatarImage: {
     width: '200px',

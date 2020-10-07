@@ -13,6 +13,37 @@ export const USER = gql`
       city
       country
       birthday
+      boards {
+        id
+        sharedTimes
+        backgroundColor
+        backgroundImage
+        followers
+        averageShowRating
+        isFollowed
+        showsNumber
+        description
+        tags
+        isOpen
+        name
+        createdAt
+      }
+      reviews {
+        author
+        shortVariant
+        content
+        likes
+        show {
+          showId
+          title
+          posterUrl
+          releaseDate
+          imdbRating
+          genres {
+            genreName
+          }
+        }
+      }
     }
     showsRatings {
       id
@@ -23,21 +54,6 @@ export const USER = gql`
         releaseDate
         currentUserRating
       }
-    }
-    boards {
-      id
-      sharedTimes
-      backgroundColor
-      backgroundImage
-      followers
-      averageShowRating
-      isFollowed
-      showsNumber
-      description
-      tags
-      isOpen
-      name
-      createdAt
     }
   }
 `;

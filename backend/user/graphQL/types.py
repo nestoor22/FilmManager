@@ -5,6 +5,7 @@ from django.db.models import Q
 
 from user.models import User, Followers
 from boards.models import Board
+from show.graphQL.types import ShowReviewType, ShowReview
 
 
 class UserType(DjangoObjectType):
@@ -12,6 +13,7 @@ class UserType(DjangoObjectType):
     followed = graphene.Int()
     is_followed_by_current_user = graphene.Boolean()
     boards = graphene.List('boards.graphQL.types.BoardType')
+    reviews = graphene.List(ShowReviewType)
 
     class Meta:
         model = User
@@ -41,6 +43,10 @@ class UserType(DjangoObjectType):
             Q(boardmembers__user_id=parent.id) |
             Q(boardfollowers__user_id=parent.id)
         )
+
+    @staticmethod
+    def resolve_reviews(parent, info):
+        return ShowReview.objects.filter(author_id=parent.id)
 
 
 class UsersType(graphene.ObjectType):
