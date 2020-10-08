@@ -25,6 +25,8 @@ class UserQuery(graphene.ObjectType):
             if not session_user_id:
                 raise Exception('User is not logged in')
 
+            user_id = session_user_id
+
         return User.objects.get(id=user_id)
 
     @staticmethod
