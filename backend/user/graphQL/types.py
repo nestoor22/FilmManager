@@ -14,6 +14,7 @@ class UserType(DjangoObjectType):
     is_followed_by_current_user = graphene.Boolean()
     boards = graphene.List('boards.graphQL.types.BoardType')
     reviews = graphene.List(ShowReviewType)
+    is_logged_in = graphene.Boolean()
 
     class Meta:
         model = User
@@ -47,6 +48,10 @@ class UserType(DjangoObjectType):
     @staticmethod
     def resolve_reviews(parent, info):
         return ShowReview.objects.filter(author_id=parent.id)
+
+    @staticmethod
+    def resolve_is_logged_in(parent, info):
+        return info.context.session.get('_auth_user_id') == str(parent.id)
 
 
 class UsersType(graphene.ObjectType):
