@@ -35,13 +35,14 @@ import AddItemToListModal from './add-item-to-existing-list-modal/AddItemToListM
 import ReviewsBlock from './reviews-block/ReviewsBlock';
 import ReviewBlockForAccountTab from './review-block-for-account-tab/ReviewBlockForAccountTab';
 import AccountPreviewBlock from './account-preview-block/AccountPreviewBlock';
-
+import ErrorBox from './error-box/ErrorBox';
 export {
   Input,
   Loader,
   ItemCard,
   TabPanel,
   EditIcon,
+  ErrorBox,
   AppHeader,
   TextInput,
   ItemsList,

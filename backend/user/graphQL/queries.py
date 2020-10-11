@@ -3,7 +3,7 @@ from math import ceil
 import graphene
 from django.db.models import Q
 
-from .types import UserType, User, UsersType
+from .types import UserType, User, UsersType, Followers
 
 
 class UserQuery(graphene.ObjectType):
@@ -11,6 +11,20 @@ class UserQuery(graphene.ObjectType):
     users = graphene.Field(
         UsersType,
         search=graphene.String(),
+        limit=graphene.Int(),
+        offset=graphene.Int()
+    )
+
+    followers = graphene.List(
+        UserType,
+        user_id=graphene.Int(),
+        limit=graphene.Int(),
+        offset=graphene.Int()
+    )
+
+    followed = graphene.List(
+        UserType,
+        user_id=graphene.Int(),
         limit=graphene.Int(),
         offset=graphene.Int()
     )
@@ -53,3 +67,24 @@ class UserQuery(graphene.ObjectType):
     @staticmethod
     def resolve_is_logged_in(parent, info):
         return True if info.context.session.get('_auth_user_id') else False
+
+    @staticmethod
+    def resolve_followers(parent, info, user_id=None, offset=0, limit=20):
+        if not user_id:
+            user_id = info.context.session.get('_auth_user_id')
+
+        followers_id = Followers.objects.filter(
+            followed_id=user_id).values_list('follower_id', flat=True
+        )
+        return User.objects.filter(id__in=list(followers_id))[offset:limit]
+
+    @staticmethod
+    def resolve_followed(parent, info, user_id=None, offset=0, limit=20):
+        if not user_id:
+            user_id = info.context.session.get('_auth_user_id')
+
+        followed_ids = Followers.objects.filter(
+            follower_id=user_id).values_list('followed_id', flat=True
+        )
+        return User.objects.filter(id__in=list(followed_ids))[offset:limit]
+    

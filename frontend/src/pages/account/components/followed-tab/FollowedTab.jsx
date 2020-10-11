@@ -1,21 +1,21 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
+
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import { Button } from '@material-ui/core';
-
 import { Loader, AccountPreviewBlock, ErrorBox } from 'components';
-import { FOLLOWERS } from 'graphql/queries/user';
+import { FOLLOWED } from 'graphql/queries/user';
 
 import useStyles from './styles';
+import { Button } from '@material-ui/core';
 
-const FollowersTab = ({ userId, isLoggedIn }) => {
+const FollowedTab = ({ userId, isLoggedIn }) => {
   const classes = useStyles();
   const [offset, setOffset] = React.useState(0);
   const [limit, setLimit] = React.useState(20);
   const [users, setUsers] = React.useState([]);
 
-  const { data, loading, refetch } = useQuery(FOLLOWERS, {
+  const { data, loading, refetch } = useQuery(FOLLOWED, {
     variables: {
       userId: userId,
       limit: 20,
@@ -24,8 +24,8 @@ const FollowersTab = ({ userId, isLoggedIn }) => {
   });
 
   React.useEffect(() => {
-    if (!loading && data?.followers) {
-      setUsers(users.concat(data.followers));
+    if (!loading && data?.followed) {
+      setUsers(users.concat(data.followed));
     }
   }, [loading]);
 
@@ -51,8 +51,8 @@ const FollowersTab = ({ userId, isLoggedIn }) => {
         <ErrorBox
           text={
             isLoggedIn
-              ? 'You have not any follower yet'
-              : "User hasn't any follower yet"
+              ? 'You are not following any user yet'
+              : "User isn't following any user yet"
           }
         />
       ) : (
@@ -60,7 +60,7 @@ const FollowersTab = ({ userId, isLoggedIn }) => {
           <InfiniteScroll
             dataLength={users?.length || 0}
             next={handleScroll}
-            hasMore={!!data?.followers?.length}
+            hasMore={!!data?.followed?.length}
             loader={<Loader />}
             scrollThreshold={0.9}
           >
@@ -80,4 +80,4 @@ const FollowersTab = ({ userId, isLoggedIn }) => {
   );
 };
 
-export default FollowersTab;
+export default FollowedTab;

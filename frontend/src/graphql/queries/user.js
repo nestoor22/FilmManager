@@ -90,3 +90,37 @@ export const USERS = gql`
     }
   }
 `;
+
+export const FOLLOWERS = gql`
+  query followers($userId: Int, $offset: Int, $limit: Int) {
+    followers(userId: $userId, offset: $offset, limit: $limit) {
+      id
+      firstName
+      lastName
+      email
+      city
+      country
+      followers
+      followed
+      birthday
+      isFollowedByCurrentUser
+    }
+  }
+`;
+
+export const FOLLOWED = gql`
+  query followed($userId: Int, $offset: Int, $limit: Int) {
+    followed(userId: $userId, offset: $offset, limit: $limit) {
+      id
+      firstName
+      lastName
+      email
+      city
+      country
+      followers
+      followed
+      birthday
+      isFollowedByCurrentUser
+    }
+  }
+`;

@@ -17,6 +17,7 @@ import FollowingIcon from 'assets/icons/following-icon.svg';
 import { USER } from 'graphql/queries/user';
 
 import useStyles from './styles';
+import FollowedTab from './components/followed-tab/FollowedTab';
 
 function verticalTabProps(index) {
   return {
@@ -50,84 +51,82 @@ const AccountPage = () => {
       <AppHeader />
       {data?.user && (
         <div className={classes.content}>
-          {data.user.isLoggedIn && (
-            <div className={classes.sidebar}>
-              <Tabs
-                orientation="vertical"
-                variant="scrollable"
-                indicatorColor={'primary'}
-                value={value}
-                onChange={handleChange}
-                aria-label="Vertical tabs example"
-                className={classes.tabs}
-              >
-                <Tab
-                  style={{ minWidth: '80px' }}
-                  {...verticalTabProps(0)}
-                  classes={{
-                    root: classes.customTabRoot,
-                    wrapper: classes.customTabWrapper,
-                    selected: classes.selected,
-                    textColorInherit: classes.textColorInheritCustom,
-                  }}
-                  label={
-                    <div className={classes.iconWrapper}>
-                      <AccountCircleIcon className={classes.icon} />
-                      <Typography>Account</Typography>
-                    </div>
-                  }
-                />
-                <Tab
-                  style={{ minWidth: '80px' }}
-                  {...verticalTabProps(1)}
-                  classes={{
-                    root: classes.customTabRoot,
-                    wrapper: classes.customTabWrapper,
-                    selected: classes.selected,
-                    textColorInherit: classes.textColorInheritCustom,
-                  }}
-                  label={
-                    <div className={classes.iconWrapper}>
-                      <img height="30px" alt="" src={FollowersIcon} />
-                      <Typography>{data.user.followers} Followers</Typography>
-                    </div>
-                  }
-                />
-                <Tab
-                  style={{ minWidth: '80px' }}
-                  {...verticalTabProps(2)}
-                  classes={{
-                    root: classes.customTabRoot,
-                    wrapper: classes.customTabWrapper,
-                    selected: classes.selected,
-                    textColorInherit: classes.textColorInheritCustom,
-                  }}
-                  label={
-                    <div className={classes.iconWrapper}>
-                      <img height="30px" alt="" src={FollowingIcon} />
-                      <Typography>{data.user.followed} Followed</Typography>
-                    </div>
-                  }
-                />
-                <Tab
-                  style={{ minWidth: '80px' }}
-                  {...verticalTabProps(3)}
-                  classes={{
-                    root: classes.customTabRoot,
-                    wrapper: classes.customTabWrapper,
-                    selected: classes.selected,
-                    textColorInherit: classes.textColorInheritCustom,
-                  }}
-                  label={
-                    <div className={classes.iconWrapper}>
-                      <SettingsIcon className={classes.icon} />
-                      <Typography>Settings</Typography>
-                    </div>
-                  }
-                />
-              </Tabs>
-            </div>
-          )}
+          <div className={classes.sidebar}>
+            <Tabs
+              orientation="vertical"
+              variant="scrollable"
+              indicatorColor={'primary'}
+              value={value}
+              onChange={handleChange}
+              aria-label="Vertical tabs example"
+              className={classes.tabs}
+            >
+              <Tab
+                style={{ minWidth: '80px' }}
+                {...verticalTabProps(0)}
+                classes={{
+                  root: classes.customTabRoot,
+                  wrapper: classes.customTabWrapper,
+                  selected: classes.selected,
+                  textColorInherit: classes.textColorInheritCustom,
+                }}
+                label={
+                  <div className={classes.iconWrapper}>
+                    <AccountCircleIcon className={classes.icon} />
+                    <Typography>Account</Typography>
+                  </div>
+                }
+              />
+              <Tab
+                style={{ minWidth: '80px' }}
+                {...verticalTabProps(1)}
+                classes={{
+                  root: classes.customTabRoot,
+                  wrapper: classes.customTabWrapper,
+                  selected: classes.selected,
+                  textColorInherit: classes.textColorInheritCustom,
+                }}
+                label={
+                  <div className={classes.iconWrapper}>
+                    <img height="30px" alt="" src={FollowersIcon} />
+                    <Typography>{data.user.followers} Followers</Typography>
+                  </div>
+                }
+              />
+              <Tab
+                style={{ minWidth: '80px' }}
+                {...verticalTabProps(2)}
+                classes={{
+                  root: classes.customTabRoot,
+                  wrapper: classes.customTabWrapper,
+                  selected: classes.selected,
+                  textColorInherit: classes.textColorInheritCustom,
+                }}
+                label={
+                  <div className={classes.iconWrapper}>
+                    <img height="30px" alt="" src={FollowingIcon} />
+                    <Typography>{data.user.followed} Followed</Typography>
+                  </div>
+                }
+              />
+              <Tab
+                style={{ minWidth: '80px' }}
+                {...verticalTabProps(3)}
+                classes={{
+                  root: classes.customTabRoot,
+                  wrapper: classes.customTabWrapper,
+                  selected: classes.selected,
+                  textColorInherit: classes.textColorInheritCustom,
+                }}
+                label={
+                  <div className={classes.iconWrapper}>
+                    <SettingsIcon className={classes.icon} />
+                    <Typography>Settings</Typography>
+                  </div>
+                }
+              />
+            </Tabs>
+          </div>
           <div className={classes.tabsRoot}>
             <TabPanel
               className={classes.tabContentWrapper}
@@ -141,22 +140,24 @@ const AccountPage = () => {
               value={value}
               index={1}
             >
-              <FollowersTab />
+              <FollowersTab isLoggedIn={data.user.isLoggedIn} userId={id} />
             </TabPanel>
             <TabPanel
               className={classes.tabContentWrapper}
               value={value}
               index={2}
             >
-              Contacts
+              <FollowedTab isLoggedIn={data.user.isLoggedIn} userId={id} />
             </TabPanel>
-            <TabPanel
-              className={classes.tabContentWrapper}
-              value={value}
-              index={3}
-            >
-              Settings
-            </TabPanel>
+            {data.user.isLoggedIn && (
+              <TabPanel
+                className={classes.tabContentWrapper}
+                value={value}
+                index={3}
+              >
+                Settings
+              </TabPanel>
+            )}
           </div>
         </div>
       )}

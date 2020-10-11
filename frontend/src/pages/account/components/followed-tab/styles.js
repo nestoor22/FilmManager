@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     color: '#E9F0F2',
     position: 'fixed',
     bottom: '20px',
-    right: '20px',
+    right: '40px',
     '&:focus': {
       outline: 'none',
     },
