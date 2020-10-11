@@ -15,7 +15,6 @@ import { ShowPanel, Loader } from 'components';
 
 import useStyles from './styles';
 import BoardsMembershipCarousel from './BoardsMembershipCarousel';
-import ErrorBox from '../../../../components/error-box/ErrorBox';
 import ReviewsCarousel from './ReviewsCarousel';
 
 const AccountTab = ({ userInfo, loading, refetch }) => {

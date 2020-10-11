@@ -5,6 +5,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flex: '1 0 100%',
     width: '100%',
+    height: '100vh'
   },
   sidebar: {
     width: '80px',

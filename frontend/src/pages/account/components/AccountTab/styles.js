@@ -4,7 +4,7 @@ const useStyles = makeStyles({
   accountTab: {
     display: 'flex',
     width: '100%',
-    height: '100%',
+    height: '100vh',
     minHeight: '600px',
     justifyContent: 'center',
     backgroundColor: '#E9F0F2',

@@ -12,6 +12,8 @@ import SettingsIcon from '@material-ui/icons/Settings';
 
 import { AppHeader, TabPanel } from 'components';
 import AccountTab from './components/AccountTab/AccountTab';
+import FollowersIcon from 'assets/icons/followers-icon.svg';
+import FollowingIcon from 'assets/icons/following-icon.svg';
 import { USER } from 'graphql/queries/user';
 
 import useStyles from './styles';
@@ -48,66 +50,84 @@ const AccountPage = () => {
       <AppHeader />
       {data?.user && (
         <div className={classes.content}>
-          <div className={classes.sidebar}>
-            <Tabs
-              orientation="vertical"
-              variant="scrollable"
-              indicatorColor={'primary'}
-              value={value}
-              onChange={handleChange}
-              aria-label="Vertical tabs example"
-              className={classes.tabs}
-            >
-              <Tab
-                style={{ minWidth: '80px' }}
-                {...verticalTabProps(0)}
-                classes={{
-                  root: classes.customTabRoot,
-                  wrapper: classes.customTabWrapper,
-                  selected: classes.selected,
-                  textColorInherit: classes.textColorInheritCustom,
-                }}
-                label={
-                  <div className={classes.iconWrapper}>
-                    <AccountCircleIcon className={classes.icon} />
-                    <Typography>Account</Typography>
-                  </div>
-                }
-              />
-              <Tab
-                style={{ minWidth: '80px' }}
-                {...verticalTabProps(1)}
-                classes={{
-                  root: classes.customTabRoot,
-                  wrapper: classes.customTabWrapper,
-                  selected: classes.selected,
-                  textColorInherit: classes.textColorInheritCustom,
-                }}
-                label={
-                  <div className={classes.iconWrapper}>
-                    <ContactsIcon className={classes.icon} />
-                    <Typography>Contacts</Typography>
-                  </div>
-                }
-              />
-              <Tab
-                style={{ minWidth: '80px' }}
-                {...verticalTabProps(2)}
-                classes={{
-                  root: classes.customTabRoot,
-                  wrapper: classes.customTabWrapper,
-                  selected: classes.selected,
-                  textColorInherit: classes.textColorInheritCustom,
-                }}
-                label={
-                  <div className={classes.iconWrapper}>
-                    <SettingsIcon className={classes.icon} />
-                    <Typography>Settings</Typography>
-                  </div>
-                }
-              />
-            </Tabs>
-          </div>
+          {data.user.isLoggedIn && (
+            <div className={classes.sidebar}>
+              <Tabs
+                orientation="vertical"
+                variant="scrollable"
+                indicatorColor={'primary'}
+                value={value}
+                onChange={handleChange}
+                aria-label="Vertical tabs example"
+                className={classes.tabs}
+              >
+                <Tab
+                  style={{ minWidth: '80px' }}
+                  {...verticalTabProps(0)}
+                  classes={{
+                    root: classes.customTabRoot,
+                    wrapper: classes.customTabWrapper,
+                    selected: classes.selected,
+                    textColorInherit: classes.textColorInheritCustom,
+                  }}
+                  label={
+                    <div className={classes.iconWrapper}>
+                      <AccountCircleIcon className={classes.icon} />
+                      <Typography>Account</Typography>
+                    </div>
+                  }
+                />
+                <Tab
+                  style={{ minWidth: '80px' }}
+                  {...verticalTabProps(1)}
+                  classes={{
+                    root: classes.customTabRoot,
+                    wrapper: classes.customTabWrapper,
+                    selected: classes.selected,
+                    textColorInherit: classes.textColorInheritCustom,
+                  }}
+                  label={
+                    <div className={classes.iconWrapper}>
+                      <img height="30px" alt="" src={FollowersIcon} />
+                      <Typography>{data.user.followers} Followers</Typography>
+                    </div>
+                  }
+                />
+                <Tab
+                  style={{ minWidth: '80px' }}
+                  {...verticalTabProps(2)}
+                  classes={{
+                    root: classes.customTabRoot,
+                    wrapper: classes.customTabWrapper,
+                    selected: classes.selected,
+                    textColorInherit: classes.textColorInheritCustom,
+                  }}
+                  label={
+                    <div className={classes.iconWrapper}>
+                      <img height="30px" alt="" src={FollowingIcon} />
+                      <Typography>{data.user.followed} Followed</Typography>
+                    </div>
+                  }
+                />
+                <Tab
+                  style={{ minWidth: '80px' }}
+                  {...verticalTabProps(3)}
+                  classes={{
+                    root: classes.customTabRoot,
+                    wrapper: classes.customTabWrapper,
+                    selected: classes.selected,
+                    textColorInherit: classes.textColorInheritCustom,
+                  }}
+                  label={
+                    <div className={classes.iconWrapper}>
+                      <SettingsIcon className={classes.icon} />
+                      <Typography>Settings</Typography>
+                    </div>
+                  }
+                />
+              </Tabs>
+            </div>
+          )}
           <div className={classes.tabsRoot}>
             <TabPanel
               className={classes.tabContentWrapper}

@@ -13,6 +13,9 @@ export const USER = gql`
       city
       country
       birthday
+      followers
+      followed
+      isLoggedIn
       boards {
         id
         sharedTimes
