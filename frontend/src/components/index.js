@@ -34,6 +34,7 @@ import { AddItemToListSearch } from './add-item-to-list-search/AddItemToListSear
 import AddItemToListModal from './add-item-to-existing-list-modal/AddItemToListModal';
 import ReviewsBlock from './reviews-block/ReviewsBlock';
 import ReviewBlockForAccountTab from './review-block-for-account-tab/ReviewBlockForAccountTab';
+import AccountPreviewBlock from './account-preview-block/AccountPreviewBlock';
 
 export {
   Input,
@@ -71,5 +72,6 @@ export {
   CustomCountryPicker,
   AddItemToListSearch,
   ReviewsBlock,
+  AccountPreviewBlock,
   ReviewBlockForAccountTab,
 };

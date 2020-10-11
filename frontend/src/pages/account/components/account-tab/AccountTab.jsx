@@ -1,7 +1,6 @@
 import React from 'react';
 
 import moment from 'moment';
-import { useQuery } from '@apollo/react-hooks';
 
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
@@ -11,11 +10,11 @@ import CakeRoundedIcon from '@material-ui/icons/CakeRounded';
 import EmailRoundedIcon from '@material-ui/icons/EmailRounded';
 import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 
-import { ShowPanel, Loader } from 'components';
-
-import useStyles from './styles';
+import { Loader } from 'components';
 import BoardsMembershipCarousel from './BoardsMembershipCarousel';
 import ReviewsCarousel from './ReviewsCarousel';
+
+import useStyles from './styles';
 
 const AccountTab = ({ userInfo, loading, refetch }) => {
   const classes = useStyles();

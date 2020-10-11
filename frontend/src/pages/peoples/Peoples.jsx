@@ -6,10 +6,9 @@ import { useLazyQuery } from '@apollo/react-hooks';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
-import { AppHeader, Loader, Pagination } from 'components';
+import { AppHeader, Loader, Pagination, AccountPreviewBlock } from 'components';
 import SearchIcon from 'assets/icons/search.svg';
 import { USERS } from 'graphql/queries/user';
-import AccountPreviewBlock from './components/account-preview-block/AccountPreviewBlock';
 
 import useStyles from './styles';
 
@@ -37,8 +36,8 @@ const PeoplePage = () => {
   const [search, setSearch] = React.useState('');
 
   const handleOpenAccount = (userId) => {
-    history.push(`/account/${userId}`)
-  }
+    history.push(`/account/${userId}`);
+  };
   const handleChange = (e) => {
     const searchValue = e?.target.value;
     setSearch(e?.target.value);
@@ -100,7 +99,12 @@ const PeoplePage = () => {
               }
             />
             {data?.users?.data.map((user) => {
-              return <AccountPreviewBlock handleOpenAccount={handleOpenAccount} userInfo={user} />;
+              return (
+                <AccountPreviewBlock
+                  handleOpenAccount={handleOpenAccount}
+                  userInfo={user}
+                />
+              );
             })}
             <Pagination
               page={page}

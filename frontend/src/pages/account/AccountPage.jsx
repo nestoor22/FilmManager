@@ -7,11 +7,11 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
-import ContactsIcon from '@material-ui/icons/Contacts';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 import { AppHeader, TabPanel } from 'components';
-import AccountTab from './components/AccountTab/AccountTab';
+import AccountTab from './components/account-tab/AccountTab';
+import FollowersTab from './components/followers-tab/FollowersTab';
 import FollowersIcon from 'assets/icons/followers-icon.svg';
 import FollowingIcon from 'assets/icons/following-icon.svg';
 import { USER } from 'graphql/queries/user';
@@ -141,12 +141,19 @@ const AccountPage = () => {
               value={value}
               index={1}
             >
-              Contacts
+              <FollowersTab />
             </TabPanel>
             <TabPanel
               className={classes.tabContentWrapper}
               value={value}
               index={2}
+            >
+              Contacts
+            </TabPanel>
+            <TabPanel
+              className={classes.tabContentWrapper}
+              value={value}
+              index={3}
             >
               Settings
             </TabPanel>

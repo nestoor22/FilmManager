@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     },
   },
   textInput: {
-    fontSize: '18px',
+    fontSize: '15px',
   },
   infoRow: {
     display: 'flex',
@@ -55,7 +55,7 @@ const useStyles = makeStyles({
     fill: '#073947',
   },
   followersInfo: {
-    fontSize: '18px',
+    fontSize: '15px',
     fontWeight: 600,
     marginRight: '10px',
   },

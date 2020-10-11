@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
   },
   tabPanel: {
+    minHeight: '100vh',
     flex: 1,
   },
 }));
