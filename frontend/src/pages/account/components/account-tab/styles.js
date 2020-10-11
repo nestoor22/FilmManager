@@ -77,6 +77,23 @@ const useStyles = makeStyles({
     color: '#073947',
     paddingBottom: '10px',
   },
+  messageBtn: {
+    boxShadow: 'none',
+    borderRadius: '3px',
+    backgroundColor: '#073947',
+    color: '#FFFFFF',
+    fontSize: '18px',
+    lineHeight: '18px',
+    fontWeight: 500,
+    minWidth: '80px',
+    '&:hover': {
+      backgroundColor: '#073947',
+      color: '#FFFFFF',
+    },
+    '&:focus': {
+      outline: 'none',
+    },
+  },
 });
 
 export default useStyles;

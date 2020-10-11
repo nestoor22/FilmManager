@@ -87,4 +87,3 @@ class UserQuery(graphene.ObjectType):
             follower_id=user_id).values_list('followed_id', flat=True
         )
         return User.objects.filter(id__in=list(followed_ids))[offset:limit]
-    

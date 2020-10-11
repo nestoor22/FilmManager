@@ -15,6 +15,7 @@ import BoardsMembershipCarousel from './BoardsMembershipCarousel';
 import ReviewsCarousel from './ReviewsCarousel';
 
 import useStyles from './styles';
+import { Button } from '@material-ui/core';
 
 const AccountTab = ({ userInfo, loading, refetch }) => {
   const classes = useStyles();
@@ -41,6 +42,9 @@ const AccountTab = ({ userInfo, loading, refetch }) => {
             <Typography className={classes.nameInput}>
               {userInfo.user.firstName} {userInfo.user.lastName}
             </Typography>
+            <Button variant={'contained'} className={classes.messageBtn}>
+              Message
+            </Button>
           </div>
           <div className={classes.textInfo}>
             <div className={classes.infoRow}>
