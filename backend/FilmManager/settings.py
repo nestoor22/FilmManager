@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "graphene_django",
+    "channels",
     "user",
     "show",
     "boards",
@@ -80,6 +81,7 @@ TEMPLATES = [
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 WSGI_APPLICATION = "FilmManager.wsgi.application"
+ASGI_APPLICATION = 'FilmManager.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -94,7 +96,14 @@ DATABASES = {
         "PASSWORD": env("DB_PASSWORD"),
     }
 }
-
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 AUTH_USER_MODEL = "user.User"
 
 AUTHENTICATION_BACKENDS = (

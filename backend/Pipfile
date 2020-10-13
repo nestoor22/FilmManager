@@ -19,6 +19,8 @@ django-environ = "~=0.4"
 yapf = "*"
 django-mptt = "*"
 bs4 = "*"
+channels = "*"
+channels-redis = "==2.4.2"
 
 [requires]
 python_version = "3.6"
