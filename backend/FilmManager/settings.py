@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "boards",
     "lists",
     "communities",
+    "chat"
 ]
 
 MIDDLEWARE = [
