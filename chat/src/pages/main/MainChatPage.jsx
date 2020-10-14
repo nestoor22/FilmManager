@@ -1,7 +1,7 @@
 import React from "react";
 
 import useStyles from "./styles";
-import Header from "components";
+import {Header, Sidebar} from "components";
 
 const MainChatPage = () => {
   const classes = useStyles();
@@ -15,6 +15,9 @@ const MainChatPage = () => {
     <div className={classes.root}>
       <div className={classes.content}>
         <Header />
+        <div className={classes.chatsWrapper}>
+          <Sidebar />
+        </div>
       </div>
     </div>
   );

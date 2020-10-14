@@ -4,20 +4,27 @@ const useStyles = makeStyles({
   root: {
     width: "100%",
     height: "42px",
-    backgroundColor: "#073947",
+    background:
+      "linear-gradient(45deg, rgba(6,124,157,1) 0%, rgba(9,151,182,1) 56%, rgba(210,235,242,1) 100%)",
     display: "flex",
     alignItems: "center",
   },
   menuWrapper: {
-    width: "20%",
+    width: "30%",
     display: "flex",
     justifyContent: "center",
-    borderRight: "1px solid #E9F0F2",
+    borderRight: "1px solid #BAC7CB",
   },
   menuBtn: {
     color: "#E9F0F2",
     textTransform: "initial",
     width: "100%",
+  },
+  menuItem: {
+    color: "#067C9D",
+    "&:hover": {
+      backgroundColor: "#D2EBF2",
+    },
   },
 });
 

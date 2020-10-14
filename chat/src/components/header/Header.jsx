@@ -65,12 +65,20 @@ const Header = () => {
           PaperProps={{
             style: {
               width: buttonWidth,
+              borderRadius: 0,
+              boxShadow: "-2px 2px 5px 0px rgba(95,135,146,1)",
             },
           }}
         >
-          <MenuItem onClick={handleClose}>Test</MenuItem>
-          <MenuItem onClick={handleClose}>Test</MenuItem>
-          <MenuItem onClick={handleClose}>TEst</MenuItem>
+          <MenuItem className={classes.menuItem} onClick={handleClose}>
+            Test
+          </MenuItem>
+          <MenuItem className={classes.menuItem} onClick={handleClose}>
+            Test
+          </MenuItem>
+          <MenuItem className={classes.menuItem} onClick={handleClose}>
+            TEst
+          </MenuItem>
         </Menu>
       </div>
     </div>
