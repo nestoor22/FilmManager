@@ -1,4 +1,5 @@
 import React from "react";
+import Cookies from "js-cookie";
 
 import { Avatar, Typography } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
@@ -9,6 +10,16 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 
 const Sidebar = () => {
   const classes = useStyles();
+  React.useEffect(() => {
+    const headers = new Headers();
+    headers.append("X-CSRFToken", Cookies.get("csrftoken"));
+    fetch("http://localhost:8000/chats/", {
+      method: "GET",
+      headers: headers,
+      credentials: "include",
+    }).then();
+  }, []);
+
 
   return (
     <div className={classes.root}>
