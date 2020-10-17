@@ -5,6 +5,7 @@ from django.db import models
 from django.db.models.fields.files import FieldFile
 
 from .base import BaseCustomSerializer
+from chat.models import Chat
 
 
 class CustomSerializer(BaseCustomSerializer):
@@ -18,6 +19,9 @@ class CustomSerializer(BaseCustomSerializer):
 
     def start_object(self, obj):
         self._current = {}
+        
+        if isinstance(obj, Chat) and not self._current.get('chatName'):
+            self.set_chat_name(obj)
 
     def end_object(self, obj):
         if not self.first:
@@ -46,7 +50,6 @@ class CustomSerializer(BaseCustomSerializer):
 
     def handle_field_value(self, obj, field):
         camel_style_field_name = self.convert_field_to_camel_style(field)
-
         self._current[camel_style_field_name] = \
             self._value_from_field(obj, field)
 

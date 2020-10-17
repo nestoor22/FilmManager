@@ -8,7 +8,7 @@ import Input from "@material-ui/core/Input";
 import useStyles from "./styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
-const Sidebar = () => {
+const Sidebar = ({ userId }) => {
   const classes = useStyles();
   const [chatsPreview, setChatsPreview] = React.useState([]);
 
@@ -26,6 +26,17 @@ const Sidebar = () => {
       .then((data) => setChatsPreview(data));
   }, []);
 
+  const getAvatarLetters = (chatInfo) => {
+    const member = chatInfo.members.find(
+      (member) => parseInt(member.id) !== parseInt(userId)
+    );
+
+    return member
+      ? member.firstName && member.lastName
+        ? `${member.firstName[0]}${member.lastName[0]}`
+        : member.firstName[0]
+      : "";
+  };
   return (
     <div className={classes.root}>
       <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
@@ -46,13 +57,25 @@ const Sidebar = () => {
           }
         />
       </div>
-      <div className={classes.chatItemWrapper}>
-        <Avatar className={classes.avatar}>YN</Avatar>
-        <div className={classes.chatInfo}>
-          <Typography className={classes.title}>Yaroslav Nestor</Typography>
-          <Typography className={classes.lastMessage}>Teest</Typography>
-        </div>
-      </div>
+      {chatsPreview.map((chatInfo) => {
+        return (
+          <div className={classes.chatItemWrapper}>
+            {!chatInfo.isGroup && (
+              <Avatar className={classes.avatar}>
+                {getAvatarLetters(chatInfo)}
+              </Avatar>
+            )}
+            <div className={classes.chatInfo}>
+              <Typography className={classes.title}>
+                {chatInfo.chatName}
+              </Typography>
+              <Typography className={classes.lastMessage}>
+                {chatInfo.lastMessage}
+              </Typography>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
