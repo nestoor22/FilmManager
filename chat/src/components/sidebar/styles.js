@@ -75,7 +75,7 @@ const useStyles = makeStyles({
   },
   lastMessage: {
     width: "100%",
-    height: "15px",
+    height: "18px",
     fontSize: "12px",
     overflow: "hidden",
     color: "#073947",

@@ -1,12 +1,18 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
+
 import { Header, Sidebar } from "components";
 
 import useStyles from "./styles";
 
 const MainChatPage = () => {
   const classes = useStyles();
+  const history = useHistory();
+
   const [user, setUser] = React.useState({});
+  const [loading, setLoading] = React.useState(true);
+
   const chatSocket = new WebSocket("ws://localhost:8000/ws/chat/test/");
   chatSocket.onmessage = function (e) {
     const data = JSON.parse(e.data);
@@ -24,7 +30,14 @@ const MainChatPage = () => {
       .then((r) => {
         return r.json();
       })
-      .then((data) => setUser(data));
+      .then((data) => {
+        if (data.length !== 0) {
+          setUser(data[0]);
+        } else {
+          history.push("signIn/");
+        }
+        setLoading(false);
+      });
   }, []);
 
   //
@@ -41,12 +54,14 @@ const MainChatPage = () => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.content}>
-        <Header />
-        <div className={classes.chatsWrapper}>
-          <Sidebar />
+      {!loading && (
+        <div className={classes.content}>
+          <Header />
+          <div className={classes.chatsWrapper}>
+            <Sidebar userId={user?.id} />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
