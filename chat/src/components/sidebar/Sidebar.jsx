@@ -8,7 +8,7 @@ import Input from "@material-ui/core/Input";
 import useStyles from "./styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
-const Sidebar = ({ userId }) => {
+const Sidebar = ({ userId, handleSelectChat }) => {
   const classes = useStyles();
   const [chatsPreview, setChatsPreview] = React.useState([]);
 
@@ -57,9 +57,13 @@ const Sidebar = ({ userId }) => {
           }
         />
       </div>
-      {chatsPreview.map((chatInfo) => {
+      {chatsPreview.map((chatInfo, index) => {
         return (
-          <div className={classes.chatItemWrapper}>
+          <div
+            key={index}
+            onClick={() => handleSelectChat(chatInfo.chatId)}
+            className={classes.chatItemWrapper}
+          >
             {!chatInfo.isGroup && (
               <Avatar className={classes.avatar}>
                 {getAvatarLetters(chatInfo)}
