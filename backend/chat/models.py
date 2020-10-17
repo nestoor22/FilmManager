@@ -30,8 +30,11 @@ class Chat(models.Model):
 
     @cached_property
     def members(self):
-        chat_members = apps.get_model('chat', 'ChatMembers')
-        return chat_members.objects.filter(chat_id=self.chat_id)
+        chat_members_model = apps.get_model('chat', 'ChatMembers')
+        members_ids = chat_members_model.objects.filter(
+            chat_id=self.chat_id).values_list('member', flat=True)
+
+        return User.objects.filter(id__in=members_ids)
 
     def chat_name_for_requested_user(self, user_id):
         if self.is_group:

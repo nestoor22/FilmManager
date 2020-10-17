@@ -1,15 +1,15 @@
 import json
 
-from django.core import serializers
 from django.shortcuts import HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 
 from .models import Chat, ChatMembers
+from .serializers.customSerializer import CustomSerializer
 
 
-@require_http_methods(["POST"])
 @login_required
+@require_http_methods(["POST"])
 def create_chat(request):
     request_body_obj = json.loads(request.body.decode('utf-8'))
     new_chat = Chat.objects.create()
@@ -31,10 +31,20 @@ def room(request, room_name):
     return HttpResponse(content=room_name)
 
 
-@require_http_methods(['GET'])
 @login_required
+@require_http_methods(['GET'])
 def get_chats(request):
     user_chats = Chat.objects.filter(chatmembers__member_id=request.user.id)
 
-    return HttpResponse(
-        content=serializers.serialize('json', user_chats), status=200)
+    response_data = CustomSerializer(request.user.id).serialize(user_chats)
+
+    return HttpResponse(content=response_data, status=200)
+
+
+@login_required
+@require_http_methods(['GET'])
+def get_user(request):
+    response_data = CustomSerializer(
+        request.user.id).serialize([request.user])
+
+    return HttpResponse(content=response_data, status=200)

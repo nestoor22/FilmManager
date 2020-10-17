@@ -10,6 +10,8 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 
 const Sidebar = () => {
   const classes = useStyles();
+  const [chatsPreview, setChatsPreview] = React.useState([]);
+
   React.useEffect(() => {
     const headers = new Headers();
     headers.append("X-CSRFToken", Cookies.get("csrftoken"));
@@ -17,9 +19,12 @@ const Sidebar = () => {
       method: "GET",
       headers: headers,
       credentials: "include",
-    }).then();
+    })
+      .then((r) => {
+        return r.json();
+      })
+      .then((data) => setChatsPreview(data));
   }, []);
-
 
   return (
     <div className={classes.root}>
