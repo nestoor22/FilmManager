@@ -23,6 +23,10 @@ const MainChatPage = () => {
       credentials: "include",
     })
       .then((r) => {
+        if (!r.ok) {
+          window.location.replace('http://localhost:8000/admin/')
+          return;
+        }
         return r.json();
       })
       .then((data) => {
