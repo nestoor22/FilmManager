@@ -89,6 +89,12 @@ const useStyles = makeStyles({
     fontWeight: 600,
     marginBottom: "5px",
   },
+  startNewChatBtn: {
+    width: "100%",
+    marginTop: "250px",
+    color: "#073947",
+    textTransform: "initial",
+  },
 });
 
 export default useStyles;

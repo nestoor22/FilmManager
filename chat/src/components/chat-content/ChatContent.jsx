@@ -16,7 +16,15 @@ const ChatContent = () => {
     document.querySelector("").value += data.message + "\n";
   };
 
-  return <div>ijohybjhnk</div>;
+  return (
+    <div className={classes.root}>
+      {!chatId && (
+        <div className={classes.noSelectedChatBlock}>
+          Please, select chat to start conversation
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default ChatContent;

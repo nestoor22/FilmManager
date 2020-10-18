@@ -5,8 +5,9 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import useStyles from "./styles";
+import Typography from "@material-ui/core/Typography";
 
-const Header = () => {
+const Header = ({ chatHeader }) => {
   const classes = useStyles();
   const [buttonWidth, setButtonWidth] = React.useState(0);
   const [windowWidth, setWindowWidth] = React.useState(0);
@@ -80,6 +81,9 @@ const Header = () => {
             TEst
           </MenuItem>
         </Menu>
+      </div>
+      <div className={classes.headerActionsWrapper}>
+        <Button className={classes.headerBtn}>{chatHeader}</Button>
       </div>
     </div>
   );

@@ -15,10 +15,23 @@ const useStyles = makeStyles({
     justifyContent: "center",
     borderRight: "1px solid #BAC7CB",
   },
+  headerActionsWrapper: {
+    width: "70%",
+    display: "flex",
+    alignItems: "center",
+  },
   menuBtn: {
     color: "#E9F0F2",
     textTransform: "initial",
     width: "100%",
+  },
+  headerBtn: {
+    color: "#E9F0F2",
+    width: "70%",
+    justifyContent: "start",
+    textTransform: "initial",
+    paddingLeft: "40px",
+    fontWeight: 600,
   },
   menuItem: {
     color: "#067C9D",

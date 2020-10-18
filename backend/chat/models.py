@@ -3,14 +3,18 @@ from datetime import datetime
 from django.db import models
 from django.utils.functional import cached_property
 from django.apps import apps
+
 from user.models import User
 
 
 class Chat(models.Model):
-    chat_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
+    chat_id = models.CharField(max_length=155, default='')
     name = models.CharField(max_length=155, default='')
     descripion = models.CharField(max_length=512, default='')
+    identifier = models.CharField(max_length=155, default='')
     is_group = models.BooleanField(default=False)
+    created_at = models.DateTimeField(default=datetime.now)
 
     class Meta:
         db_table = 'chats'
@@ -32,7 +36,7 @@ class Chat(models.Model):
     def members(self):
         chat_members_model = apps.get_model('chat', 'ChatMembers')
         members_ids = chat_members_model.objects.filter(
-            chat_id=self.chat_id).values_list('member', flat=True)
+            chat_id=self.id).values_list('member', flat=True)
 
         return User.objects.filter(id__in=members_ids)
 
@@ -42,7 +46,7 @@ class Chat(models.Model):
         else:
             chat_members = apps.get_model('chat', 'ChatMembers')
             member = chat_members.objects.filter(
-                chat_id=self.chat_id).exclude(member_id=user_id)
+                chat_id=self.id).exclude(member_id=user_id)
             if member:
                 member_instance = member.first().member
                 return f'{member_instance.first_name} ' \

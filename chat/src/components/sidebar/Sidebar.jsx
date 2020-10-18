@@ -1,15 +1,22 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import { Avatar, Typography } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 
 import useStyles from "./styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
 
 const Sidebar = ({ userId, handleSelectChat }) => {
   const classes = useStyles();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const chatId = params.get("id");
+
+  const [loading, setLoading] = React.useState(true);
   const [chatsPreview, setChatsPreview] = React.useState([]);
 
   React.useEffect(() => {
@@ -23,8 +30,19 @@ const Sidebar = ({ userId, handleSelectChat }) => {
       .then((r) => {
         return r.json();
       })
-      .then((data) => setChatsPreview(data));
+      .then((data) => {
+        setChatsPreview(data);
+        setLoading(false);
+      });
   }, []);
+
+  React.useEffect(() => {
+    if (chatId && chatsPreview.length) {
+      handleSelectChat(
+        chatsPreview.find((chatInfo) => chatInfo.chatId === chatId)
+      );
+    }
+  }, [chatId, chatsPreview.length]);
 
   const getAvatarLetters = (chatInfo) => {
     const member = chatInfo.members.find(
@@ -57,12 +75,21 @@ const Sidebar = ({ userId, handleSelectChat }) => {
           }
         />
       </div>
+      {!loading && chatsPreview.length === 0 && (
+        <Button onClick={() => {}} className={classes.startNewChatBtn}>
+          You don't have any chat yet. Click to start new
+        </Button>
+      )}
+
       {chatsPreview.map((chatInfo, index) => {
         return (
           <div
             key={index}
-            onClick={() => handleSelectChat(chatInfo.chatId)}
+            onClick={() => handleSelectChat(chatInfo)}
             className={classes.chatItemWrapper}
+            style={{
+              background: chatInfo.chatId === chatId ? "#BEE5F1" : "none",
+            }}
           >
             {!chatInfo.isGroup && (
               <Avatar className={classes.avatar}>

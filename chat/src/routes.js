@@ -7,7 +7,7 @@ function Routes() {
   return (
     <Router>
       <Switch>
-        <Route path="/chat/:id?" component={MainChatPage} />
+        <Route path="/" component={MainChatPage} />
       </Switch>
     </Router>
   );

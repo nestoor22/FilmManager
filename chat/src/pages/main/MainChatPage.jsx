@@ -11,6 +11,7 @@ const MainChatPage = () => {
   const history = useHistory();
 
   const [user, setUser] = React.useState({});
+  const [selectedChat, setSelectedChat] = React.useState("");
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
@@ -34,15 +35,19 @@ const MainChatPage = () => {
       });
   }, []);
 
-  const handleSelectChat = (chatId) => {
-    history.push({ pathName: `chat/`, search: `?id=${chatId}` });
+  const handleSelectChat = (chatInfo) => {
+    if (!chatInfo) {
+      return;
+    }
+    setSelectedChat(chatInfo.chatName);
+    history.push({ pathName: `/`, search: `?id=${chatInfo.chatId}` });
   };
 
   return (
     <div className={classes.root}>
       {!loading && (
         <div className={classes.content}>
-          <Header />
+          <Header chatHeader={selectedChat} />
           <div className={classes.chatsWrapper}>
             <Sidebar handleSelectChat={handleSelectChat} userId={user?.id} />
             <ChatContent />
