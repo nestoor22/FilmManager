@@ -3,9 +3,10 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ReplyIcon from '@material-ui/icons/Reply';
 
 import useStyles from "./styles";
-import Typography from "@material-ui/core/Typography";
 
 const Header = ({ chatHeader }) => {
   const classes = useStyles();
@@ -84,6 +85,15 @@ const Header = ({ chatHeader }) => {
       </div>
       <div className={classes.headerActionsWrapper}>
         <Button className={classes.headerBtn}>{chatHeader}</Button>
+        <Button>
+          <ReplyIcon style={{ fill: "#073947" }} />
+          To website
+        </Button>
+        <Button>
+          <ExitToAppIcon style={{ fill: "#073947" }} />
+          Logout
+        </Button>
+
       </div>
     </div>
   );
