@@ -4,9 +4,10 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import ReplyIcon from '@material-ui/icons/Reply';
+import ReplyIcon from "@material-ui/icons/Reply";
 
 import useStyles from "./styles";
+import Cookies from "js-cookie";
 
 const Header = ({ chatHeader }) => {
   const classes = useStyles();
@@ -27,6 +28,17 @@ const Header = ({ chatHeader }) => {
     setWindowWidth(window.innerWidth);
   };
 
+  const handleLogout = () => {
+    const headers = new Headers();
+    headers.append("X-CSRFToken", Cookies.get("csrftoken"));
+    fetch("http://localhost:8000/logOut/", {
+      method: "GET",
+      headers: headers,
+      credentials: "include",
+    }).then(() => {
+      window.location.replace("http://localhost:8000/admin/");
+    });
+  };
   React.useEffect(() => {
     window.addEventListener("resize", updateDimensions);
     return () => window.removeEventListener("resize", updateDimensions);
@@ -85,15 +97,22 @@ const Header = ({ chatHeader }) => {
       </div>
       <div className={classes.headerActionsWrapper}>
         <Button className={classes.headerBtn}>{chatHeader}</Button>
-        <Button>
-          <ReplyIcon style={{ fill: "#073947" }} />
+        <Button
+          onClick={() => {
+            window.location.replace("https://google.com");
+          }}
+          className={classes.headerActionBtn}
+        >
+          <ReplyIcon style={{ fill: "#073947", marginRight: "5px" }} />
           To website
         </Button>
-        <Button>
-          <ExitToAppIcon style={{ fill: "#073947" }} />
+        <Button
+          onClick={() => handleLogout()}
+          className={classes.headerActionBtn}
+        >
+          <ExitToAppIcon style={{ fill: "#073947", marginRight: "5px" }} />
           Logout
         </Button>
-
       </div>
     </div>
   );

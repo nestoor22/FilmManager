@@ -20,6 +20,12 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
   },
+  headerActionBtn: {
+    fontSize: "12px",
+    marginLeft: "10px",
+    padding: "2px",
+    textTransform: "none",
+  },
   menuBtn: {
     color: "#E9F0F2",
     textTransform: "initial",

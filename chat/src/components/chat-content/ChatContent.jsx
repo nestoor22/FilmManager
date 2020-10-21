@@ -2,9 +2,9 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 
 import TextField from "@material-ui/core/TextField";
-import Input from "@material-ui/core/Input";
-import useStyles from "./styles";
 import Button from "@material-ui/core/Button";
+
+import useStyles from "./styles";
 
 const ChatContent = () => {
   const classes = useStyles();
