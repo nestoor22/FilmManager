@@ -67,7 +67,7 @@ class ChatMembers(models.Model):
 
 class ChatMessages(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.DO_NOTHING)
-    sender_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(default='')
     media = models.FileField(upload_to='messages_media/', null=True)
     is_read = models.BooleanField(default=False)

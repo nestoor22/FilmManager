@@ -1,4 +1,5 @@
 import React from "react";
+import Cookies from "js-cookie";
 
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -7,7 +8,6 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ReplyIcon from "@material-ui/icons/Reply";
 
 import useStyles from "./styles";
-import Cookies from "js-cookie";
 
 const Header = ({ chatHeader }) => {
   const classes = useStyles();

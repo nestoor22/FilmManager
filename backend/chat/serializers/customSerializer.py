@@ -35,6 +35,9 @@ class CustomSerializer(BaseCustomSerializer):
         value = getattr(obj, field, '')
         if isinstance(value, models.QuerySet):
             value = json.loads(CustomSerializer(self.user_id).serialize(value))
+        elif isinstance(value, models.Model):
+            value = json.loads(CustomSerializer(self.user_id).serialize([value]))
+
 
         if isinstance(value, datetime.datetime):
             value = value.strftime("%Y/%m/%d %H:%M")
@@ -44,6 +47,8 @@ class CustomSerializer(BaseCustomSerializer):
             try:
                 value = value.instance.photo.path.url
             except ValueError:
+                value = ''
+            except AttributeError:
                 value = ''
 
         return value
