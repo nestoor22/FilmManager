@@ -20,10 +20,10 @@ const ChatContent = () => {
       );
       chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
-        document.querySelector("").value += data.message + "\n";
+        console.log(data);
       };
     }
-  }, []);
+  }, [chatId]);
 
   return (
     <div className={classes.root}>
