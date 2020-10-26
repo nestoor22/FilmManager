@@ -1,12 +1,19 @@
+import "react-toastify/dist/ReactToastify.css";
+
 import React from "react";
+import Cookies from "js-cookie";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
+import MessageBlock from "./components/message-block/MessageBlock";
+import { Notification } from "./components/notification/Notification";
+
 import useStyles from "./styles";
-import { Avatar, Typography } from "@material-ui/core";
-import Cookies from "js-cookie";
+
+toast.configure();
 
 const ChatContent = ({ userId }) => {
   const classes = useStyles();
@@ -21,14 +28,6 @@ const ChatContent = ({ userId }) => {
   const chatId = params.get("id");
 
   const chatsRef = React.useRef(null);
-
-  const getAvatarLetters = (sender) => {
-    return sender
-      ? sender.firstName && sender.lastName
-        ? `${sender.firstName[0]}${sender.lastName[0]}`
-        : sender.firstName[0]
-      : "";
-  };
 
   React.useEffect(() => {
     if (chatsRef.current) {
@@ -49,7 +48,13 @@ const ChatContent = ({ userId }) => {
   if (socket) {
     socket.onmessage = function (e) {
       const data = JSON.parse(e.data);
-      setMessagesList(messagesList.concat(JSON.parse(data.message)));
+      const messageObj = JSON.parse(data.message);
+      setMessagesList(messagesList.concat(messageObj));
+      if (messageObj.length !== 0) {
+        if (messageObj[0].sender[0].id !== userId) {
+          toast(messageObj[0].text);
+        }
+      }
     };
   }
 
@@ -113,48 +118,20 @@ const ChatContent = ({ userId }) => {
           </div>
           <div className={classes.messagesBlocks}>
             {messagesList?.map((messageObj, index) => {
-              const sender = messageObj.sender[0];
-              const contentAlign =
-                sender.id === userId ? "flex-end" : "flex-start";
               return (
-                <div
+                <MessageBlock
                   key={index}
-                  style={{
-                    width: "95%",
-                    display: "flex",
-                    justifyContent: contentAlign,
-                    alignItems: "flex-end",
-                    marginTop: "10px",
-                  }}
-                >
-                  {sender.id !== userId && (
-                    <Avatar
-                      style={{ marginRight: "10px" }}
-                      className={classes.avatar}
-                    >
-                      {getAvatarLetters(sender)}
-                    </Avatar>
-                  )}
-                  <div className={classes.messageTextWrapper}>
-                    <Typography className={classes.messageText}>
-                      {messageObj.text}
-                    </Typography>
-                  </div>
-                  {sender.id === userId && (
-                    <Avatar
-                      style={{ marginLeft: "10px" }}
-                      className={classes.avatar}
-                    >
-                      {getAvatarLetters(sender)}
-                    </Avatar>
-                  )}
-                </div>
+                  sender={messageObj.sender[0]}
+                  text={messageObj.text}
+                  userId={userId}
+                />
               );
             })}
             <div ref={chatsRef} />
           </div>
         </div>
       )}
+      <Notification />
     </div>
   );
 };
