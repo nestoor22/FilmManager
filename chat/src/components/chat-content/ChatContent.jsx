@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 import useStyles from "./styles";
-import { Typography } from "@material-ui/core";
+import { Avatar, Typography } from "@material-ui/core";
 import Cookies from "js-cookie";
 
 const ChatContent = ({ userId }) => {
@@ -22,8 +22,18 @@ const ChatContent = ({ userId }) => {
 
   const chatsRef = React.useRef(null);
 
+  const getAvatarLetters = (sender) => {
+    return sender
+      ? sender.firstName && sender.lastName
+        ? `${sender.firstName[0]}${sender.lastName[0]}`
+        : sender.firstName[0]
+      : "";
+  };
+
   React.useEffect(() => {
-    chatsRef.current.scrollIntoView({ behavior: "smooth" });
+    if (chatsRef.current) {
+      chatsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   });
 
   const sendMessage = () => {
@@ -51,20 +61,22 @@ const ChatContent = ({ userId }) => {
   });
 
   React.useEffect(() => {
-    const headers = new Headers();
-    headers.append("X-CSRFToken", Cookies.get("csrftoken"));
-    fetch(`http://localhost:8000/messages/?id=${chatId}`, {
-      method: "GET",
-      headers: headers,
-      credentials: "include",
-    })
-      .then((r) => {
-        return r.json();
+    if (chatId) {
+      const headers = new Headers();
+      headers.append("X-CSRFToken", Cookies.get("csrftoken"));
+      fetch(`http://localhost:8000/messages/?id=${chatId}`, {
+        method: "GET",
+        headers: headers,
+        credentials: "include",
       })
-      .then((data) => {
-        setMessagesList(messagesList.concat(data));
-      });
-  }, []);
+        .then((r) => {
+          return r.json();
+        })
+        .then((data) => {
+          setMessagesList(messagesList.concat(data));
+        });
+    }
+  }, [chatId]);
 
   return (
     <div className={classes.root}>
@@ -108,16 +120,34 @@ const ChatContent = ({ userId }) => {
                 <div
                   key={index}
                   style={{
-                    width: "90%",
+                    width: "95%",
                     display: "flex",
                     justifyContent: contentAlign,
+                    alignItems: "flex-end",
+                    marginTop: "10px",
                   }}
                 >
+                  {sender.id !== userId && (
+                    <Avatar
+                      style={{ marginRight: "10px" }}
+                      className={classes.avatar}
+                    >
+                      {getAvatarLetters(sender)}
+                    </Avatar>
+                  )}
                   <div className={classes.messageTextWrapper}>
                     <Typography className={classes.messageText}>
                       {messageObj.text}
                     </Typography>
                   </div>
+                  {sender.id === userId && (
+                    <Avatar
+                      style={{ marginLeft: "10px" }}
+                      className={classes.avatar}
+                    >
+                      {getAvatarLetters(sender)}
+                    </Avatar>
+                  )}
                 </div>
               );
             })}

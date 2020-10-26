@@ -56,11 +56,11 @@ const useStyles = makeStyles({
   },
   messageTextWrapper: {
     maxWidth: "50%",
+    minWidth: "20%",
     width: "fit-content",
     height: "fit-content",
-    padding: "10px",
+    padding: "5px",
     backgroundColor: "rgb(159,220,241)",
-    marginTop: "10px",
     borderRadius: "5px",
   },
   messageText: {
@@ -94,6 +94,11 @@ const useStyles = makeStyles({
     "&:hover": {
       backgroundColor: "rgb(9 151 182)",
     },
+  },
+  avatar: {
+    width: "25px",
+    height: "25px",
+    fontSize: "15px",
   },
 });
 
