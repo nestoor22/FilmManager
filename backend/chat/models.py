@@ -26,9 +26,11 @@ class Chat(models.Model):
     @cached_property
     def last_message(self):
         chat_messages_model = apps.get_model('chat', 'ChatMessages')
-        last_message_instance = chat_messages_model.objects.last()
+        last_message_instance = chat_messages_model.objects.filter(
+            chat=self).last()
+
         if last_message_instance:
-            return last_message_instance.content
+            return last_message_instance.text
         else:
             return 'No messages'
 

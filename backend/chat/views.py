@@ -4,7 +4,7 @@ from django.shortcuts import HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 
-from .models import Chat, ChatMembers
+from .models import Chat, ChatMembers, ChatMessages
 from .tokens import ChatIdGenerator
 from .serializers.customSerializer import CustomSerializer
 
@@ -28,7 +28,6 @@ def create_chat(request):
     )
 
     new_chat.chat_id = ChatIdGenerator().make_token(new_chat)
-    print(new_chat.chat_id)
     new_chat.save()
 
     return HttpResponse(content={}, status=200)
@@ -54,4 +53,17 @@ def get_user(request):
     response_data = CustomSerializer(
         request.user.id).serialize([request.user])
 
+    return HttpResponse(content=response_data, status=200)
+
+
+@login_required
+@require_http_methods(["GET"])
+def get_messages(request):
+    offset = request.GET.get('offset', 0)
+    limit = request.GET.get('limit', 40)
+    messages = ChatMessages.objects.filter(
+        chat__chat_id=request.GET.get('id', '')
+    )[offset:limit]
+
+    response_data = CustomSerializer(request.user.id).serialize(messages)
     return HttpResponse(content=response_data, status=200)
