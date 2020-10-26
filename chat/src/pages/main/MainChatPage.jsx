@@ -24,7 +24,7 @@ const MainChatPage = () => {
     })
       .then((r) => {
         if (!r.ok) {
-          window.location.replace('http://localhost:8000/admin/')
+          window.location.replace("http://localhost:8000/admin/");
           return;
         }
         return r.json();
@@ -54,7 +54,7 @@ const MainChatPage = () => {
           <Header chatHeader={selectedChat} />
           <div className={classes.chatsWrapper}>
             <Sidebar handleSelectChat={handleSelectChat} userId={user?.id} />
-            <ChatContent />
+            <ChatContent userId={user?.id} />
           </div>
         </div>
       )}
