@@ -51,7 +51,7 @@ const MainChatPage = () => {
     <div className={classes.root}>
       {!loading && (
         <div className={classes.content}>
-          <Header chatHeader={selectedChat} />
+          <Header userInfo={user} chatHeader={selectedChat} />
           <div className={classes.chatsWrapper}>
             <Sidebar handleSelectChat={handleSelectChat} userId={user?.id} />
             <ChatContent userId={user?.id} />

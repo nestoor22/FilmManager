@@ -19,14 +19,16 @@ from graphene_file_upload.django import FileUploadGraphQLView
 from FilmManager import schema
 from django.views.decorators.csrf import csrf_exempt
 from chat.urls import urlpatterns as chat_app_url
-from user.views import log_out_user
+from user.views import log_out_user, get_user
 
 urlpatterns = [
     *chat_app_url,
     path('logOut/', log_out_user),
+    path('user/', get_user, name='user'),
     path('admin/', admin.site.urls),
     path(
         'graphql/',
-        csrf_exempt(FileUploadGraphQLView.as_view(graphiql=True, schema=schema.schema)),
+        csrf_exempt(FileUploadGraphQLView.as_view(
+            graphiql=True, schema=schema.schema)),
     ),
 ]

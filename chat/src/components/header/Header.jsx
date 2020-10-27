@@ -6,15 +6,23 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ReplyIcon from "@material-ui/icons/Reply";
+import SettingsIcon from "@material-ui/icons/Settings";
+import ChatIcon from "@material-ui/icons/Chat";
+import ContactsIcon from "@material-ui/icons/Contacts";
+import InfoIcon from "@material-ui/icons/Info";
+
+import { AccountInfoModal } from "components";
 
 import useStyles from "./styles";
 
-const Header = ({ chatHeader }) => {
+const Header = ({ chatHeader, userInfo }) => {
   const classes = useStyles();
+  const componentRef = React.useRef();
+
   const [buttonWidth, setButtonWidth] = React.useState(0);
   const [windowWidth, setWindowWidth] = React.useState(0);
-  const componentRef = React.useRef();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [openAccountInfo, setOpenAccountInfo] = React.useState(false);
 
   React.useEffect(() => {
     setButtonWidth(componentRef?.current?.offsetWidth);
@@ -45,6 +53,14 @@ const Header = ({ chatHeader }) => {
   }, []);
 
   const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleSelectItem = (e) => {
+    const value = e.target.value;
+    if (value === 2) {
+      setOpenAccountInfo(true);
+    }
     setAnchorEl(null);
   };
 
@@ -84,14 +100,37 @@ const Header = ({ chatHeader }) => {
             },
           }}
         >
-          <MenuItem className={classes.menuItem} onClick={handleClose}>
-            Test
+          <MenuItem
+            value={0}
+            className={classes.menuItem}
+            onClick={handleSelectItem}
+          >
+            <ChatIcon className={classes.icon} />
+            New chat
           </MenuItem>
-          <MenuItem className={classes.menuItem} onClick={handleClose}>
-            Test
+          <MenuItem
+            value={1}
+            className={classes.menuItem}
+            onClick={handleSelectItem}
+          >
+            <ContactsIcon className={classes.icon} />
+            Contacts
           </MenuItem>
-          <MenuItem className={classes.menuItem} onClick={handleClose}>
-            TEst
+          <MenuItem
+            value={2}
+            className={classes.menuItem}
+            onClick={handleSelectItem}
+          >
+            <SettingsIcon className={classes.icon} />
+            Settings
+          </MenuItem>
+          <MenuItem
+            value={3}
+            className={classes.menuItem}
+            onClick={handleSelectItem}
+          >
+            <InfoIcon className={classes.icon} />
+            About
           </MenuItem>
         </Menu>
       </div>
@@ -114,6 +153,13 @@ const Header = ({ chatHeader }) => {
           Logout
         </Button>
       </div>
+      {openAccountInfo && (
+        <AccountInfoModal
+          open={openAccountInfo}
+          setOpen={setOpenAccountInfo}
+          userInfo={userInfo}
+        />
+      )}
     </div>
   );
 };

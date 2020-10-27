@@ -81,3 +81,11 @@ class ChatMessages(models.Model):
 
     def __str__(self):
         return f'Chat-{self.chat_id}/User-{self.sender_id}'
+
+
+class ChatSettings(models.Model):
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
+    notifications_enabled = models.BooleanField(default=True)
+    notifications_sound = models.FileField(
+        upload_to='chat_notifications/', null=True)
+    popups_enabled = models.BooleanField(default=True)

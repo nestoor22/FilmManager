@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Chat, ChatMembers, ChatMessages
 from .tokens import ChatIdGenerator
-from .serializers.customSerializer import CustomSerializer
+from serializers.customSerializer import CustomSerializer
 
 
 @login_required
@@ -43,15 +43,6 @@ def get_chats(request):
     user_chats = Chat.objects.filter(chatmembers__member_id=request.user.id)
 
     response_data = CustomSerializer(request.user.id).serialize(user_chats)
-
-    return HttpResponse(content=response_data, status=200)
-
-
-@login_required
-@require_http_methods(['GET'])
-def get_user(request):
-    response_data = CustomSerializer(
-        request.user.id).serialize([request.user])
 
     return HttpResponse(content=response_data, status=200)
 

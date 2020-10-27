@@ -41,9 +41,16 @@ const useStyles = makeStyles({
   },
   menuItem: {
     color: "#067C9D",
+    display: "flex",
+    alignItems: "center",
+    fontSize: "13px",
     "&:hover": {
       backgroundColor: "#D2EBF2",
     },
+  },
+  icon: {
+    fill: "#067C9D",
+    marginRight: "40px",
   },
 });
 
