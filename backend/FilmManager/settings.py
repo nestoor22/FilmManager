@@ -88,7 +88,7 @@ ASGI_APPLICATION = 'FilmManager.routing.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": env("DB_NAME"),
         "HOST": env("DB_HOST"),
         "PORT": env("DB_PORT"),
