@@ -151,10 +151,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-GOOGLE_CLIENT_ID = (
-    "171613792112-qcfqh6ct9p"
-    "nvte3a6tve9gsgasbvjp1a.apps.googleusercontent.com"
-)
+GOOGLE_CLIENT_ID = env("GOOGLE_CLIENT_ID")
+OMDB_API_KEY = env("OMDB_API_KEY")
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
