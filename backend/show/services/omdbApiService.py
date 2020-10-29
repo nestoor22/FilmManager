@@ -1,45 +1,54 @@
 import requests
 
-from show.models import Shows
+from ..strategy import ShowStrategy
 from .showTransformer import ShowResponseToModelTransformer
 from FilmManager.settings import OMDB_API_KEY
 
 
+class OMDBServiceException(Exception):
+    pass
+
+
 class OMDBApiService(object):
     api_url = f'http://www.omdbapi.com/?i=tt3896198&apikey={OMDB_API_KEY}'
-    model = Shows
+    strategy = ShowStrategy
 
     def __init__(self):
-        self.existing_names = self.model.objects.all().values_list(
-            'title', flat=True)
+        self.existing_names = list(self.strategy.get_objects().values_list(
+            'title', flat=True))
 
     def _get_response(self, params):
-        response = requests.get(self.api_url, params=params)
+        try:
+            response = requests.get(self.api_url, params=params)
+        except OMDBServiceException:
+            return {}
 
         return {
             'success': response.status_code == 200,
             'data': response.json()
         }
 
-    def _search_item(self, search_item=''):
+    def _search_item(self, search_item='') -> dict:
         response = self._get_response({'s': search_item, 'page': 1})
         if response['success']:
+            if response['data'].get('Error'):
+                return {}
             return response['data']
         else:
-            return None
+            return {}
 
-    def _get_item_details(self, title, release_year):
+    def _get_item_details(self, title, release_year) -> dict:
         response = self._get_response(
             params={'t': title, 'y': release_year, 'plot': 'full'})
 
         if response['success']:
             return response['data']
         else:
-            return None
+            return {}
 
-    def _filter_found_results(self, found_results):
+    def _filter_found_results(self, found_results: list):
         return [item for item in found_results
-                if item['title'] not in self.existing_names]
+                if item['Title'] not in self.existing_names]
 
     def add_new_items(self):
         characters = [chr(i) for i in range(ord('a'), ord('z') + 1)]
@@ -54,21 +63,26 @@ class OMDBApiService(object):
 
         for search_item in available_search_items:
             found_results = self._search_item(search_item=search_item)
-            new_items = self._filter_found_results(found_results['Search'])
-            if new_items:
-                self._save_results(new_items)
+            print(search_item)
+            if found_results:
+                new_items = self._filter_found_results(
+                    found_results['Search'])
 
-    def _save_results(self, items):
-        items_to_save = []
+                if new_items:
+                    self._save_results(new_items)
 
+    def _save_results(self, items: list):
         for item in items:
             show_full_info = self._get_item_details(
-                title=item['Title'], release_year=[item['Released']]
+                title=item['Title'], release_year=[item['Year']]
             )
             if show_full_info:
-                items_to_save.append(
-                    ShowResponseToModelTransformer(
-                        show_full_info
-                    ).transform_general_info())
-
-        self.model.objects.bulk_create(items_to_save)
+                transformer_obj = ShowResponseToModelTransformer(
+                    show_full_info)
+                print(transformer_obj.get_title())
+                self.existing_names.append(transformer_obj.get_title())
+                self.strategy().create(
+                    show_info=transformer_obj.get_general_info(),
+                    actors_info=transformer_obj.get_actors_list(),
+                    genres_info=transformer_obj.get_genres_list()
+                )

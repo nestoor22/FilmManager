@@ -1,7 +1,7 @@
 
 class ShowResponseToModelTransformer(object):
 
-    def __init__(self, show_info):
+    def __init__(self, show_info: dict):
         self.data = show_info
 
     def get_title(self):
@@ -14,10 +14,21 @@ class ShowResponseToModelTransformer(object):
         return self.data.get('Poster', None)
 
     def get_plot(self):
-        return self.data.get('Plot', None)
+        return self.data.get('Plot', '')
 
     def get_imdb_rating(self):
-        return self.data.get('imdbRating', '')
+        imdb_rating = self.data.get('imdbRating', '')
+        if imdb_rating.isnumeric():
+            return imdb_rating
+
+        return None
+
+    def get_release_date(self):
+        year_info = self.data.get('Year', '')
+        if '–' in year_info:
+            return year_info.split('–')[0]
+
+        return None if not year_info else year_info
 
     def get_countries(self):
         return self.data.get('Country', '')
@@ -34,12 +45,13 @@ class ShowResponseToModelTransformer(object):
             self.data.get('Genre', '').split(',')
         ]
 
-    def transform_general_info(self):
+    def get_general_info(self):
         return {
             'title': self.get_title(),
             'showtype': self.get_show_type(),
             'poster_url': self.get_poster(),
             'plot': self.get_plot(),
             'imdb_rating': self.get_imdb_rating(),
-            'countries': self.get_countries()
+            'countries': self.get_countries(),
+            'release_date': self.get_release_date()
         }
