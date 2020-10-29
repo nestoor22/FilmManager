@@ -26,7 +26,11 @@ class CreateUser(graphene.Mutation):
         user.set_password(password)
         user.save()
 
-        login(info.context, user, backend='django.contrib.auth.backends.ModelBackend')
+        login(
+            info.context,
+            user,
+            backend='django.contrib.auth.backends.ModelBackend'
+        )
 
         return CreateUser(id=user.id)
 

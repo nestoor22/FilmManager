@@ -153,6 +153,10 @@ USE_TZ = True
 
 GOOGLE_CLIENT_ID = env("GOOGLE_CLIENT_ID")
 OMDB_API_KEY = env("OMDB_API_KEY")
+SEND_GRID_API_KEY = env("SEND_GRID_API_KEY")
+
+
+EMAIL_SENDER = env("EMAIL_SENDER")
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 

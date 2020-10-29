@@ -63,7 +63,6 @@ class OMDBApiService(object):
 
         for search_item in available_search_items:
             found_results = self._search_item(search_item=search_item)
-            print(search_item)
             if found_results:
                 new_items = self._filter_found_results(
                     found_results['Search'])
@@ -79,7 +78,6 @@ class OMDBApiService(object):
             if show_full_info:
                 transformer_obj = ShowResponseToModelTransformer(
                     show_full_info)
-                print(transformer_obj.get_title())
                 self.existing_names.append(transformer_obj.get_title())
                 self.strategy().create(
                     show_info=transformer_obj.get_general_info(),

@@ -17,6 +17,7 @@ class User(AbstractUser):
     birthday = models.DateField('Birthday', null=True)
     followed = models.IntegerField('Followed', default=0)
     followers = models.IntegerField('Followers', default=0)
+    is_active = models.BooleanField('Is Active', default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
