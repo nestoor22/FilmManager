@@ -169,3 +169,5 @@ CRONJOBS = [
     ('0 0 * * THU', 'show.cronjobs.search_new_shows',
      f'>> {BASE_DIR}/file.log')
 ]
+
+PASSWORD_RESET_TIMEOUT_SECONDS = env('PASSWORD_RESET_TIMEOUT_SECONDS')
