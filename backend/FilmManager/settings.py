@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "graphene_django",
+    'django_crontab',
     "channels",
     "user",
     "show",
@@ -162,3 +163,9 @@ EMAIL_SENDER = env("EMAIL_SENDER")
 
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
+
+
+CRONJOBS = [
+    ('0 0 * * THU', 'show.cronjobs.search_new_shows',
+     f'>> {BASE_DIR}/file.log')
+]

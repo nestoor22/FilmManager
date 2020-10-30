@@ -40,7 +40,8 @@ class ShowStrategy(object):
         ShowGenre.objects.bulk_create(objects_to_create)
 
     def create(self, show_info, actors_info, genres_info):
-        show_obj = self.model.objects.create(**show_info)
-        self.show_id = show_obj.show_id
-        self.create_show_actor_relation(actors_info)
-        self.create_show_genre_relation(genres_info)
+        if show_info['title']:
+            show_obj = self.model.objects.create(**show_info)
+            self.show_id = show_obj.show_id
+            self.create_show_actor_relation(actors_info)
+            self.create_show_genre_relation(genres_info)

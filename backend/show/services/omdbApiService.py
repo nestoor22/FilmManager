@@ -20,13 +20,14 @@ class OMDBApiService(object):
     def _get_response(self, params):
         try:
             response = requests.get(self.api_url, params=params)
-        except OMDBServiceException:
-            return {}
 
-        return {
-            'success': response.status_code == 200,
-            'data': response.json()
-        }
+            return {
+                'success': response.status_code == 200,
+                'data': response.json()
+            }
+
+        except OMDBServiceException:
+            return {'success': False, 'data': {}}
 
     def _search_item(self, search_item='') -> dict:
         response = self._get_response({'s': search_item, 'page': 1})
