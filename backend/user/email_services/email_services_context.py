@@ -14,5 +14,4 @@ class EmailServicesContext(object):
             subject, to_emails)
 
     def send(self):
-        print(self.strategy)
         return self.strategy.send()

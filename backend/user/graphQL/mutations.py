@@ -4,7 +4,9 @@ from google.auth.transport import requests
 from django.contrib.auth import authenticate, login, logout
 from graphene_file_upload.scalars import Upload
 
+from ..tasks import async_email
 from .types import UserInput, User, Followers
+from ..tokens import confirm_registration_token
 from FilmManager.settings import GOOGLE_CLIENT_ID
 
 
@@ -22,15 +24,10 @@ class CreateUser(graphene.Mutation):
         password = user_info.pop('password')
 
         user = User.objects.create(**user_info)
-
         user.set_password(password)
         user.save()
 
-        login(
-            info.context,
-            user,
-            backend='django.contrib.auth.backends.ModelBackend'
-        )
+        async_email.delay('registration', [user.email])
 
         return CreateUser(id=user.id)
 
@@ -145,3 +142,22 @@ class UnsubscribeUser(graphene.Mutation):
         ).delete()
 
         return UnsubscribeUser(ok=True)
+
+
+class ActivateUser(graphene.Mutation):
+    success = graphene.Boolean()
+
+    class Arguments:
+        token = graphene.String(required=True)
+
+    @staticmethod
+    def mutate(parent, info, token):
+        user_obj = confirm_registration_token.check_token(None, token)
+        if user_obj:
+            login(
+                info.context,
+                user_obj,
+                backend='django.contrib.auth.backends.ModelBackend'
+            )
+
+            return ActivateUser(success=True)
