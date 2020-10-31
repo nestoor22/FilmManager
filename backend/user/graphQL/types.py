@@ -53,6 +53,10 @@ class UserType(DjangoObjectType):
     def resolve_is_logged_in(parent, info):
         return info.context.session.get('_auth_user_id') == str(parent.id)
 
+    @staticmethod
+    def resolve_password(parent, info):
+        return ''
+
 
 class UsersType(graphene.ObjectType):
     pages = graphene.Int()

@@ -64,6 +64,7 @@ class OMDBApiService(object):
 
         for search_item in available_search_items:
             found_results = self._search_item(search_item=search_item)
+            print(search_item)
             if found_results:
                 new_items = self._filter_found_results(
                     found_results['Search'])

@@ -31,3 +31,9 @@ class UserModelTest(TestCase):
 
         self.assertEquals(user.first_name, activated_user.first_name)
         self.assertEquals(activated_user.is_active, True)
+
+    def test_token_format(self):
+        user = User.objects.get(email='test_token_activate_user@test.com')
+        token = confirm_registration_token.make_token(user)
+
+        self.assertEquals(len(token.split('-')), 3)
