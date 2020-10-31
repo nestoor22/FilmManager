@@ -150,7 +150,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 GOOGLE_CLIENT_ID = env("GOOGLE_CLIENT_ID")
 OMDB_API_KEY = env("OMDB_API_KEY")
