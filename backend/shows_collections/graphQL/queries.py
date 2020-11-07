@@ -1,17 +1,27 @@
 import graphene
 
-from ..logic import BoardLogic
-from .types import Board, BoardType, FiltersType
+from ..models import Board
+from .types import CollectionType, FiltersType, ShowsListType, List
 
-class BoardsQuery(graphene.ObjectType):
-    board = graphene.Field(BoardType, board_id=graphene.Int(required=True))
-    boards = graphene.List(
-        BoardType,
+
+class ShowsListsQuery(graphene.ObjectType):
+    shows_list = graphene.List(ShowsListType)
+
+    @staticmethod
+    def resolve_shows_list(parent, info):
+        user_id = info.context.session.get("_auth_user_id")
+        return List.objects.filter(owner_id=user_id)
+
+
+class CollectionsQuery(graphene.ObjectType):
+    board = graphene.Field(CollectionType, board_id=graphene.Int(required=True))
+    collections = graphene.List(
+        CollectionType,
         user_followed_boards=graphene.Boolean(),
         user_boards=graphene.Boolean(),
         filters=graphene.Argument(FiltersType),
     )
-    last_visited_boards = graphene.List(BoardType)
+    last_visited_boards = graphene.List(CollectionType)
 
     @staticmethod
     def resolve_board(parent, info, board_id):
@@ -21,7 +31,7 @@ class BoardsQuery(graphene.ObjectType):
             return None
 
     @staticmethod
-    def resolve_boards(
+    def resolve_collections(
         parent,
         info,
         user_boards=False,
@@ -42,10 +52,6 @@ class BoardsQuery(graphene.ObjectType):
 
         return (
             Board.objects.all().order_by("created_at")
-            if not filters
-            else BoardLogic().get_filtered_boards(
-                user_boards=user_boards, user_id=user_id, filters=filters
-            )
         )
 
     @staticmethod

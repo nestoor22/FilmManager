@@ -19,7 +19,7 @@ import {
   TextInput,
 } from 'components';
 
-import { CREATE_BOARD } from 'graphql/mutations/boards';
+import { CREATE_COLLECTION } from 'graphql/mutations/boards';
 import { getPreparedBoardDataForCreation } from 'utils/getPreparedBoardDataForCreation';
 
 import useStyles from './styles';
@@ -32,7 +32,7 @@ const initialValues = {
   tags: [],
   description: '',
 };
-const CreateBoardPopUp = ({
+const CreateCollectionPopUp = ({
   open,
   onClose,
   boardData,
@@ -40,14 +40,21 @@ const CreateBoardPopUp = ({
   listCreation,
 }) => {
   const classes = useStyles();
-  const [createBoard] = useMutation(CREATE_BOARD);
+  const [createCollection] = useMutation(CREATE_COLLECTION);
   const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = () => {
     const preparedData = getPreparedBoardDataForCreation(boardData);
-    createBoard({ variables: { board: { ...preparedData } } }).then(() => {
+    createCollection({
+      variables: {
+        collection: {
+          ...preparedData,
+          collectionType: listCreation ? 'list' : 'board',
+        },
+      },
+    }).then(() => {
       onClose(false);
-      enqueueSnackbar('Your board created !', { variant: 'success' });
+      enqueueSnackbar('Your collection created !', { variant: 'success' });
       refetch();
     });
   };
@@ -122,4 +129,4 @@ export default reduxForm({
   forceUnregisterOnUnmount: true,
   touchOnBlur: false,
   initialValues,
-})(connect(mapStateToProps, null)(CreateBoardPopUp));
+})(connect(mapStateToProps, null)(CreateCollectionPopUp));

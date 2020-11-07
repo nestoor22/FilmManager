@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { Button } from '@material-ui/core';
 
 
-import { BOARD } from 'graphql/queries/boards';
+import { BOARD } from 'graphql/queries/collections';
 import { AppHeader, PopoverWrapper } from 'components';
 import ListMark from 'assets/icons/list-dot-mark.svg';
 import ShowsList from '../../../components/shows-list/ShowsList';

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-export const CREATE_BOARD = gql`
-  mutation createBoard($board: BoardInputType!) {
-    createBoard(board: $board) {
+export const CREATE_COLLECTION = gql`
+  mutation createCollection($collection: CollectionInputType!) {
+    createCollection(collection: $collection) {
       id
     }
   }
@@ -11,14 +11,6 @@ export const CREATE_BOARD = gql`
 export const FOLLOW_BOARD = gql`
   mutation followBoard($boardId: ID!, $unfollow: Boolean) {
     followBoard(boardId: $boardId, unfollow: $unfollow) {
-      ok
-    }
-  }
-`;
-
-export const SET_LAST_VISITED_BOARD = gql`
-  mutation setLastVisitedBoard($lastVisitedBoardId: Int) {
-    setLastVisitedBoard(lastVisitedBoardId: $lastVisitedBoardId) {
       ok
     }
   }

@@ -22,7 +22,7 @@ import ColorButtonsGroup from './color-buttons/ColorButtons';
 import PopoverWrapper from './popover-wrapper/PopoverWrapper';
 import SimplePieChart from './simple-pie-chart/SimplePieChart';
 import GeneralShowInfo from './general-show-info/GeneralShowInfo';
-import CreateBoardPopUp from './create-board-popup/CreateBoardPopUp';
+import CreateBoardPopUp from './create-collection-popup/CreateCollectionPopUp';
 import CustomCityPicker from './custom-city-picker/CustomCityPicker';
 import ConfirmationDialog from './confirmation-popup/ConfirmationPopup';
 import ShowDetailsDialog from './show-details-dialog/ShowDetailsDialog';

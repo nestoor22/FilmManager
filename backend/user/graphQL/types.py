@@ -4,7 +4,7 @@ from django.db.models import Q
 
 
 from user.models import User, Followers
-from boards.models import Board
+from shows_collections.models import Board
 from show.graphQL.types import ShowReviewType, ShowReview
 
 
@@ -12,7 +12,7 @@ class UserType(DjangoObjectType):
     followers = graphene.Int()
     followed = graphene.Int()
     is_followed_by_current_user = graphene.Boolean()
-    boards = graphene.List('boards.graphQL.types.BoardType')
+    boards = graphene.List('shows_collections.graphQL.types.CollectionType')
     reviews = graphene.List(ShowReviewType)
     is_logged_in = graphene.Boolean()
 

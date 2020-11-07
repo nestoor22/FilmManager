@@ -29,8 +29,8 @@ const BoardCard = ({ refetch, boardInfo }) => {
     <div
       className={classes.boardTile}
       onDoubleClick={() => {
-        if (!boardInfo.isOpen && !boardInfo.isFollowed){
-          return
+        if (!boardInfo.isOpen && !boardInfo.isFollowed) {
+          return;
         }
         history.push(`/boards/${boardInfo.id}/view`);
       }}
@@ -80,89 +80,48 @@ const BoardCard = ({ refetch, boardInfo }) => {
           </Typography>
         </div>
         <div className={classes.cardFooter}>
-          <Typography
-            style={{ marginRight: 0, width: '100px' }}
-            className={classes.markText}
-          >
-            Owners:
-          </Typography>
-          {boardInfo.members &&
-            boardInfo.members.length < 8 &&
-            boardInfo.members.map((member, index) => {
-              return member.photo ? (
-                <Avatar
-                  key={index}
-                  className={classes.avatarImage}
-                  src={member.photo}
-                />
-              ) : (
-                <Avatar key={index} className={classes.avatarImage}>
-                  {member.firstName[0] + member.lastName[0]}
-                </Avatar>
-              );
-            })}
-          {boardInfo.members &&
-            boardInfo.members.length >= 8 &&
-            boardInfo.members.slice(0, 8).map((member) => {
-              return member.photo ? (
-                <Avatar className={classes.avatarImage} src={member.photo} />
-              ) : (
-                <Avatar className={classes.avatarImage}>
-                  {member.firstName[0] + member.lastName[0]}
-                </Avatar>
-              );
-            })}
-          {boardInfo.members && boardInfo.members.length >= 8 && (
-            <div className={classes.numberIcon}>
-              <Typography>...</Typography>
-              <Avatar
-                style={{ marginLeft: '5px' }}
-                className={classes.avatarImage}
+          {!boardInfo.isOwner && (
+            <div className={classes.actionsBtns}>
+              <Button
+                onClick={(e) => {
+                  followBoard({
+                    variables: {
+                      boardId: boardInfo.id,
+                      unfollow: boardInfo.isFollowed,
+                    },
+                  }).then(() => {
+                    enqueueSnackbar(
+                      boardInfo.isFollowed ? 'Unfollow !' : 'Followed!',
+                      {
+                        variant: 'success',
+                      }
+                    );
+                    if (boardInfo.isFollowed) {
+                      refetch();
+                    }
+                    boardInfo.isFollowed = !boardInfo.isFollowed;
+                    setChangeFollowedStatus(!changeFollowedStatus);
+                  });
+                }}
+                disabled={!boardInfo.isOpen}
+                classes={{
+                  root: classes.actionBtnText,
+                  disabled: classes.disabled,
+                }}
               >
-                +{boardInfo.members.length - 8}
-              </Avatar>
+                {boardInfo.isFollowed ? 'Unfollow' : 'Follow'}
+              </Button>
+              <Button
+                disabled={boardInfo.isOpen}
+                classes={{
+                  root: classes.actionBtnText,
+                  disabled: classes.disabled,
+                }}
+              >
+                Ask to join
+              </Button>
             </div>
           )}
-          <div className={classes.actionsBtns}>
-            <Button
-              onClick={(e) => {
-                followBoard({
-                  variables: {
-                    boardId: boardInfo.id,
-                    unfollow: boardInfo.isFollowed,
-                  },
-                }).then(() => {
-                  enqueueSnackbar(
-                    boardInfo.isFollowed ? 'Unfollow !' : 'Followed!',
-                    {
-                      variant: 'success',
-                    }
-                  );
-                  if (boardInfo.isFollowed) {
-                    refetch();
-                  }
-                  boardInfo.isFollowed = !boardInfo.isFollowed;
-                  setChangeFollowedStatus(!changeFollowedStatus);
-                });
-              }}
-              disabled={!boardInfo.isOpen}
-              classes={{
-                root: classes.actionBtnText,
-                disabled: classes.disabled,
-              }}
-            >
-              {boardInfo.isFollowed ? 'Unfollow' : 'Follow'}
-            </Button>
-            <Button
-              disabled={boardInfo.isOpen}
-              classes={{
-                root: classes.actionBtnText,
-                disabled: classes.disabled,
-              }}
-            >
-              Ask to join
-            </Button>
-          </div>
         </div>
       </div>
     </div>

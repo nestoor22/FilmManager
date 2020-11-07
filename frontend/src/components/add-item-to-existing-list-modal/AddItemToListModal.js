@@ -17,7 +17,7 @@ import List from '@material-ui/core/List';
 
 import { Loader } from 'components';
 
-import { BOARDS } from 'graphql/queries/boards';
+import { COLLECTIONS } from 'graphql/queries/collections';
 import { ADD_SHOW_TO_LIST } from 'graphql/mutations/lists';
 
 import useStyles from './styles';
@@ -25,7 +25,7 @@ import useStyles from './styles';
 const AddItemToListModal = ({ open, showId, onClose }) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
-  const { data, loading } = useQuery(BOARDS, {
+  const { data, loading } = useQuery(COLLECTIONS, {
     fetchPolicy: 'no-cache',
     variables: {
       userBoards: true,

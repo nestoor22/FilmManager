@@ -1,17 +1,29 @@
 import graphene
 
 from graphene_django import DjangoObjectType
+from user.graphQL.types import UserType
+from ..models import (
+    BoardLists,
+    BoardFollowers,
+    List,
+    ListShowRelation
+)
 
-from lists.models import ShowsList
-from lists.graphQL.types import ShowsListType
-from user.graphQL.types import UserType, User
-from ..logic import BoardLogic
-from ..models import Board, BoardLists, BoardMembers, BoardFollowers
 
-
-class BoardMemberType(DjangoObjectType):
+class ShowsListRelationType(DjangoObjectType):
     class Meta:
-        model = BoardMembers
+        model = ListShowRelation
+
+
+class ShowsListType(DjangoObjectType):
+    class Meta:
+        model = List
+
+    shows_on_list = graphene.List(ShowsListRelationType)
+
+    @staticmethod
+    def resolve_shows_on_list(parent, info):
+        return ListShowRelation.objects.filter(list_id=parent.id)
 
 
 class FiltersType(graphene.InputObjectType):
@@ -22,37 +34,39 @@ class FiltersType(graphene.InputObjectType):
     tags = graphene.List(graphene.String)
 
 
-class BoardType(DjangoObjectType):
-    class Meta:
-        model = Board
-
+class CollectionType(graphene.ObjectType):
+    id = graphene.Int()
+    owner = graphene.Field(UserType)
+    name = graphene.String()
+    created_at = graphene.DateTime()
+    description = graphene.String()
+    tags = graphene.List(graphene.String)
+    followers = graphene.Int()
+    shared_times = graphene.Int()
     lists = graphene.List(ShowsListType)
     is_followed = graphene.Boolean()
-    members = graphene.List(UserType)
-    tags = graphene.List(graphene.String)
     average_show_rating = graphene.Float()
     shows_number = graphene.Int()
     can_edit = graphene.Boolean()
+    is_owner = graphene.Boolean()
+    is_open = graphene.Boolean()
 
     @staticmethod
     def resolve_lists(parent, info):
-        return ShowsList.objects.filter(boardlists__board__id=parent.id)
-
-    @staticmethod
-    def resolve_members(parent, info):
-        return User.objects.filter(boardmembers__board_id=parent.id)
-
-    @staticmethod
-    def resolve_tags(parent, info):
-        return parent.tags.split(",") if parent.tags else []
+        return List.objects.filter(boardlists__board__id=parent.id)
 
     @staticmethod
     def resolve_average_show_rating(parent, info):
-        return BoardLogic.compute_average_show_rating(parent.id)
+        return 0
+
+    @staticmethod
+    def resolve_is_owner(parent, info):
+        return int(parent.owner_id) == \
+               int(info.context.session.get("_auth_user_id"))
 
     @staticmethod
     def resolve_shows_number(parent, info):
-        return BoardLogic.get_shows_number_on_board(parent.id)
+        return 0
 
     @staticmethod
     def resolve_is_followed(parent, info):
@@ -85,9 +99,10 @@ class BoardListType(DjangoObjectType):
         model = BoardLists
 
 
-class BoardInputType(graphene.InputObjectType):
+class CollectionInputType(graphene.InputObjectType):
     name = graphene.String()
     description = graphene.String()
     tags = graphene.List(graphene.String)
     is_open = graphene.Boolean()
     invited_members = graphene.List(graphene.String)
+    collection_type = graphene.String(required=True)

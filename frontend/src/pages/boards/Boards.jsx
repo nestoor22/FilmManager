@@ -17,8 +17,7 @@ import {
   CustomSliderField,
 } from 'components';
 
-import { BOARDS } from 'graphql/queries/boards';
-import NoBoardsImage from 'assets/no-boards.svg';
+import { COLLECTIONS } from 'graphql/queries/collections';
 import CustomCheckBoxField from '../../components/custom-checkbox-fields/CustomCheckBoxField';
 import BoardCard from '../../components/board-card/BoardCard';
 
@@ -42,6 +41,11 @@ function a11yProps(index) {
 const Boards = ({ boardFilter, reset }) => {
   const classes = useStyles();
 
+  document.body.style.backgroundImage = 'none';
+  document.body.style.background = 'rgb(7,57,71)';
+  document.body.style.background =
+    'linear-gradient(45deg, rgba(7,57,71,1) 0%, rgba(41,94,109,1) 9%, rgba(186,199,203,1) 100%)';
+
   const [openCreationPopup, setOpenCreationPopup] = React.useState(false);
   const [listCreation, setListCreation] = React.useState(false);
 
@@ -52,7 +56,7 @@ const Boards = ({ boardFilter, reset }) => {
     reset('boardFilter');
   };
 
-  const { data, refetch } = useQuery(BOARDS, {
+  const { data, refetch } = useQuery(COLLECTIONS, {
     fetchPolicy: 'no-cache',
     variables: {
       userBoards: value === 2,
@@ -139,7 +143,7 @@ const Boards = ({ boardFilter, reset }) => {
                   style={{ marginTop: '40px' }}
                   className={classes.filterHeader}
                 >
-                  Board type:
+                  Collection type:
                 </Typography>
                 <Field
                   name="boardType"
@@ -179,21 +183,21 @@ const Boards = ({ boardFilter, reset }) => {
                 classes={{
                   root: classes.tabs,
                 }}
-                label="All boards"
+                label="All collections"
                 {...a11yProps(0)}
               />
               <Tab
                 classes={{
                   root: classes.tabs,
                 }}
-                label="Following boards"
+                label="Following collections"
                 {...a11yProps(1)}
               />
               <Tab
                 classes={{
                   root: classes.tabs,
                 }}
-                label="Your boards"
+                label="Your collections"
                 {...a11yProps(2)}
               />
             </Tabs>
@@ -220,7 +224,7 @@ const Boards = ({ boardFilter, reset }) => {
               </Button>
             </div>
           )}
-          {data?.boards.length === 0 && value === 2 && (
+          {data?.collections.length === 0 && value === 2 && (
             <div
               style={{
                 display: 'flex',
@@ -230,16 +234,16 @@ const Boards = ({ boardFilter, reset }) => {
                 marginTop: '200px',
               }}
             >
-              <h4>You haven't created any board or list yet.</h4>
+              <h4>You haven't created any collection yet.</h4>
             </div>
           )}
           {data &&
-            data?.boards.map((boardInfo, index) => {
+            data?.collections.map((collectionInfo, index) => {
               return (
                 <BoardCard
                   refetch={refetch}
                   key={index}
-                  boardInfo={boardInfo}
+                  boardInfo={collectionInfo}
                 />
               );
             })}

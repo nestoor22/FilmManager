@@ -44,8 +44,7 @@ INSTALLED_APPS = [
     "channels",
     "user",
     "show",
-    "boards",
-    "lists",
+    "shows_collections",
     "communities",
     "chat"
 ]

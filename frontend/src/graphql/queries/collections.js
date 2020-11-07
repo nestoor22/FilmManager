@@ -1,12 +1,12 @@
 import gql from 'graphql-tag';
 
-export const BOARDS = gql`
-  query boards(
+export const COLLECTIONS = gql`
+  query collections(
     $userFollowedBoards: Boolean
     $userBoards: Boolean
     $filters: FiltersType
   ) {
-    boards(
+    collections(
       userFollowedBoards: $userFollowedBoards
       userBoards: $userBoards
       filters: $filters
@@ -30,17 +30,12 @@ export const BOARDS = gql`
           }
         }
       }
-      members {
-        firstName
-        lastName
-        email
-        photo
-      }
       description
       tags
       isOpen
       name
       createdAt
+      isOwner
     }
     lastVisitedBoards {
       id
@@ -57,7 +52,6 @@ export const BOARD = gql`
     board(boardId: $boardId) {
       id
       sharedTimes
-      backgroundColor
       isOpen
       name
       description
@@ -65,12 +59,6 @@ export const BOARD = gql`
       canEdit
       owner {
         id
-        firstName
-        lastName
-        email
-        photo
-      }
-      members {
         firstName
         lastName
         email
