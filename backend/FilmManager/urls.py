@@ -16,15 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from graphene_file_upload.django import FileUploadGraphQLView
-from FilmManager import schema
 from django.views.decorators.csrf import csrf_exempt
+
+from FilmManager import schema
 from chat.urls import urlpatterns as chat_app_url
-from user.views import log_out_user, get_user
+from user.views import log_out_user, get_user, confirm_registration
 
 urlpatterns = [
     *chat_app_url,
     path('logOut/', log_out_user),
     path('user/', get_user, name='user'),
+    path('confirm/registration/<slug:token>/', confirm_registration),
     path('admin/', admin.site.urls),
     path(
         'graphql/',
