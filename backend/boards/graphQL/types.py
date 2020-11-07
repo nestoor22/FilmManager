@@ -87,7 +87,6 @@ class BoardListType(DjangoObjectType):
 
 class BoardInputType(graphene.InputObjectType):
     name = graphene.String()
-    background_color = graphene.String()
     description = graphene.String()
     tags = graphene.List(graphene.String)
     is_open = graphene.Boolean()

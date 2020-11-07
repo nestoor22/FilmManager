@@ -13,8 +13,6 @@ export const BOARDS = gql`
     ) {
       id
       sharedTimes
-      backgroundColor
-      backgroundImage
       followers
       averageShowRating
       isFollowed
@@ -47,7 +45,6 @@ export const BOARDS = gql`
     lastVisitedBoards {
       id
       sharedTimes
-      backgroundColor
       isOpen
       name
       createdAt

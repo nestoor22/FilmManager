@@ -66,7 +66,7 @@ const useStyles = makeStyles({
     marginBottom: '40px',
     boxShadow: 'none',
     background: 'none',
-    zIndex: 1
+    zIndex: 1,
   },
   tabs: {
     fontSize: '18px',
@@ -82,9 +82,18 @@ const useStyles = makeStyles({
 
   createNowText: {
     color: '#073943',
+    fontSize: '18px',
     '&:hover': {
       cursor: 'pointer',
     },
+    '&:focus': {
+      outline: 'none',
+    },
+  },
+  btnsWrapper: {
+    display: 'flex',
+    width: '50%',
+    justifyContent: 'space-around',
   },
 });
 

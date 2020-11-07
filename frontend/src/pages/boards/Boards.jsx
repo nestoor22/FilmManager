@@ -43,6 +43,7 @@ const Boards = ({ boardFilter, reset }) => {
   const classes = useStyles();
 
   const [openCreationPopup, setOpenCreationPopup] = React.useState(false);
+  const [listCreation, setListCreation] = React.useState(false);
 
   const [value, setValue] = React.useState(0);
 
@@ -198,12 +199,26 @@ const Boards = ({ boardFilter, reset }) => {
             </Tabs>
           </AppBar>
           {value === 2 && (
-            <h6
-              className={classes.createNowText}
-              onClick={() => setOpenCreationPopup(!openCreationPopup)}
-            >
-              Create new board
-            </h6>
+            <div className={classes.btnsWrapper}>
+              <Button
+                className={classes.createNowText}
+                onClick={() => {
+                  setListCreation(false);
+                  setOpenCreationPopup(!openCreationPopup);
+                }}
+              >
+                Create board
+              </Button>
+              <Button
+                className={classes.createNowText}
+                onClick={() => {
+                  setListCreation(true);
+                  setOpenCreationPopup(!openCreationPopup);
+                }}
+              >
+                Create simple list
+              </Button>
+            </div>
           )}
           {data?.boards.length === 0 && value === 2 && (
             <div
@@ -212,15 +227,10 @@ const Boards = ({ boardFilter, reset }) => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexDirection: 'column',
+                marginTop: '200px',
               }}
             >
-              <img src={NoBoardsImage} alt={''} />
-              <h6
-                className={classes.createNowText}
-                onClick={() => setOpenCreationPopup(!openCreationPopup)}
-              >
-                Create now
-              </h6>
+              <h4>You haven't created any board or list yet.</h4>
             </div>
           )}
           {data &&
@@ -240,6 +250,7 @@ const Boards = ({ boardFilter, reset }) => {
           open={openCreationPopup}
           onClose={handleClosePopup}
           refetch={refetch}
+          listCreation={listCreation}
         />
       )}
     </div>

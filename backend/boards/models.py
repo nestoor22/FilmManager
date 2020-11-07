@@ -9,10 +9,6 @@ from lists.models import ShowsList
 class Board(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.TextField(null=False)
-    background_color = models.CharField(null=True, default=None, max_length=40)
-    background_image = models.FileField(
-        upload_to="images/", null=True, default=None
-    )
     created_at = models.DateTimeField(null=True, default=datetime.now)
     description = models.TextField(null=True)
     tags = models.TextField(null=True)

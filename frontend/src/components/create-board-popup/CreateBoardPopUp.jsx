@@ -26,14 +26,19 @@ import useStyles from './styles';
 
 const initialValues = {
   name: '',
-  color: '',
   type: 'Private',
   invitedFriends: [],
   team: '',
   tags: [],
   description: '',
 };
-const CreateBoardPopUp = ({ open, onClose, boardData, refetch }) => {
+const CreateBoardPopUp = ({
+  open,
+  onClose,
+  boardData,
+  refetch,
+  listCreation,
+}) => {
   const classes = useStyles();
   const [createBoard] = useMutation(CREATE_BOARD);
   const { enqueueSnackbar } = useSnackbar();
@@ -53,17 +58,19 @@ const CreateBoardPopUp = ({ open, onClose, boardData, refetch }) => {
         <IconButton className={classes.closeBtn} onClick={onClose}>
           <HighlightOffIcon className={classes.closeIcon} />
         </IconButton>
-        <Typography className={classes.title}>Create new board</Typography>
+        <Typography className={classes.title}>
+          Create new {listCreation ? 'list' : 'board'}
+        </Typography>
       </div>
       <div className={classes.formWrapper}>
         <Field
-          label="Board name"
+          label={listCreation ? 'List name' : 'Board name'}
           name="name"
           className={classes.input}
           component={Input}
         />
         <Field
-          label="Board type"
+          label={listCreation ? 'List type' : 'Board type'}
           name="type"
           list={['Private', 'Public']}
           className={classes.input}
@@ -86,32 +93,11 @@ const CreateBoardPopUp = ({ open, onClose, boardData, refetch }) => {
         <Field
           label="Description"
           name="description"
-          placeholder="Tell something about this board..."
+          placeholder={`Tell something about this ${
+            listCreation ? 'list' : 'board'
+          } ...`}
           className={classes.input}
           component={TextInput}
-        />
-        <Field
-          label="Background color"
-          name="color"
-          list={[
-            '#02522a',
-            '#000',
-            '#ff551a',
-            '#f21ada',
-            '#dd4455',
-            '#dc6705',
-            '#3e2d3b',
-            '#051c92',
-            '#4c0505',
-            '#55fff3',
-            '#fdd321',
-            '#07ad7f',
-            '#4b4646',
-            '#075c9c',
-          ]}
-          className={classes.input}
-          component={ColorButtonsGroup}
-          radioGroupRootClass={classes.radioGroupRootClass}
         />
       </div>
       <FormButtons
