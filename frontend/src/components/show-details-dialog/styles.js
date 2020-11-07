@@ -73,6 +73,9 @@ const useStyles = makeStyles({
       outline: 'none',
     },
   },
+  tabContentWrapper: {
+    minHeight: '100%',
+  },
 });
 
 export default useStyles;

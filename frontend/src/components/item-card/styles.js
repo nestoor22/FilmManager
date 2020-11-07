@@ -6,6 +6,10 @@ const useStyles = makeStyles({
     maxHeight: 390,
     margin: 20,
   },
+  poster: {
+    minWidth: '220px',
+    minHeight: '300px',
+  },
   menuItem: {
     color: '#335267 !important',
   },
@@ -17,15 +21,15 @@ const useStyles = makeStyles({
   subtitle: {
     fontSize: '13px',
     color: '#E9F0F2',
-    paddingBottom: '10px'
+    paddingBottom: '10px',
   },
   content: {
     padding: 0,
-    paddingLeft:5,
+    paddingLeft: 5,
     '&:focus': {
       outline: 'none',
     },
-    backgroundColor: '#073947'
+    backgroundColor: '#073947',
   },
   actionsContent: {
     padding: 0,

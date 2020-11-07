@@ -58,6 +58,7 @@ function ItemCard({ showInfo }) {
     >
       <div style={{ cursor: 'pointer', position: 'relative' }}>
         <CardMedia
+          className={classes.poster}
           component="img"
           alt="Poster"
           height="300"
