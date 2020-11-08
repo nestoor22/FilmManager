@@ -16,7 +16,8 @@ from shows_collections.graphQL.mutations import (
     SetLastVisitedBoard,
     CreateCollectionMutation,
     FollowCollectionMutation,
-    AddShowToList
+    AddShowToList,
+    CreateListOnBoard
 )
 
 
@@ -30,6 +31,7 @@ class Mutation(graphene.ObjectType):
     log_out = LogOut.Field()
     create_user = CreateUser.Field()
     create_collection = CreateCollectionMutation.Field()
+    create_list_on_board = CreateListOnBoard.Field()
     follow_board = FollowCollectionMutation.Field()
     set_last_visited_board = SetLastVisitedBoard.Field()
     set_show_rate = SetShowRate.Field()

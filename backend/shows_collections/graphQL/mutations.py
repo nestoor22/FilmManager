@@ -77,3 +77,23 @@ class SetLastVisitedBoard(graphene.Mutation):
         )
 
         return SetLastVisitedBoard(ok=True)
+
+
+class CreateListOnBoard(graphene.Mutation):
+    id = graphene.Int()
+
+    class Arguments:
+        list_name = graphene.String()
+        shows_on_list = graphene.List(graphene.Int)
+        board_id = graphene.Int()
+
+    @staticmethod
+    def mutate(parent, info, **kwargs):
+        collection_context = CollectionsContext(
+            collection_type='board',
+            user_id=info.context.session.get("_auth_user_id")
+        )
+        list_on_board = collection_context.create_related_collection(
+            kwargs)
+
+        return CreateListOnBoard(id=list_on_board.id)

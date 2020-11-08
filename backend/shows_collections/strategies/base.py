@@ -14,7 +14,7 @@ class BaseCollectionStrategy(ABC):
         self.collection_obj = None
 
     @abstractmethod
-    def add_related_object(self, related_object_id):
+    def create_related_collection(self, collection_data):
         raise NotImplemented()
 
     @abstractmethod

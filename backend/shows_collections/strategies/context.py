@@ -19,6 +19,9 @@ class CollectionsContext(object):
     def create(self):
         self._strategy.create()
 
+    def create_related_collection(self, collection_data):
+        return self._strategy.create_related_collection(collection_data)
+
     def update(self):
         self._strategy.update()
 

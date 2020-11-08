@@ -1,7 +1,9 @@
 from django.db.models import Avg
 
 from .base import BaseCollectionStrategy
-from ..models import Board, User, BoardFollowers, BoardLists, Shows
+from ..models import (
+    Board, User, BoardFollowers, BoardLists, Shows, List, ListShowRelation
+)
 
 
 class BoardStrategy(BaseCollectionStrategy):
@@ -21,8 +23,25 @@ class BoardStrategy(BaseCollectionStrategy):
     def update(self):
         pass
 
-    def add_related_object(self, related_object_id):
-        pass
+    def create_related_collection(self, collection_data):
+        list_instance = List.objects.create(
+            name=collection_data["list_name"],
+            owner_id=self.user_id,
+            is_outside_board=False
+        )
+
+        BoardLists.objects.create(
+            board_id=collection_data["board_id"], list_id=list_instance.id)
+
+        shows_on_list = []
+        for show_id in collection_data["shows_on_list"]:
+            shows_on_list.append(
+                ListShowRelation(show_id=show_id, list_id=list_instance.id)
+            )
+
+        ListShowRelation.objects.bulk_create(shows_on_list)
+
+        return list_instance
 
     def add_members_to_collection(self, members_list):
         for member_email in set(members_list):

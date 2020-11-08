@@ -21,7 +21,7 @@ class ListStrategy(BaseCollectionStrategy):
     def update(self):
         pass
 
-    def add_related_object(self, related_object_id):
+    def create_related_collection(self, related_object_id):
         pass
 
     def add_members_to_collection(self, members_list):
