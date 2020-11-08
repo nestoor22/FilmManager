@@ -76,6 +76,8 @@ const useStyles = makeStyles({
     marginRight: '45px',
   },
   miniPoster: {
+    minHeight: '72px',
+    minWidth: '40px',
     maxHeight: '72px',
     maxWidth: '40px',
     display: 'flex',

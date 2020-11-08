@@ -42,7 +42,8 @@ const BoardCard = ({ refetch, boardInfo }) => {
               <img
                 className={classes.miniPoster}
                 src={showInfo.posterUrl}
-                alt={'Poster'}
+                alt={showInfo.title}
+                title={showInfo.title}
               />
             );
           })}
