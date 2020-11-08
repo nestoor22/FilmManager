@@ -81,5 +81,10 @@ class ListStrategy(BaseCollectionStrategy):
 
         return result
 
+    def get_all_existing_collections(self):
+        return self.model.objects.filter(
+            is_outside_board=True).order_by('-created_at')
+
     def get_followed_collections(self):
-        return self.model.objects.filter(listfollowers__user_id=self.user_id)
+        return self.model.objects.filter(
+            listfollowers__user_id=self.user_id, is_outside_board=True)

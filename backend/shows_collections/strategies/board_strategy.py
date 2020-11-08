@@ -49,6 +49,9 @@ class BoardStrategy(BaseCollectionStrategy):
 
         return round(shows_ratings["imdb_rating__avg"] or 0, 2)
 
+    def get_all_existing_collections(self):
+        return self.model.objects.all().order_by('-created_at')
+
     def get_followed_collections(self):
         return self.model.objects.filter(boardfollowers__user_id=self.user_id)
 

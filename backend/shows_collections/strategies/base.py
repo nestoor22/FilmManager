@@ -64,6 +64,8 @@ class BaseCollectionStrategy(ABC):
         if get_followed_collections and self.user_id:
             if isinstance(self.model, List):
                 filter_query &= Q(listfollowers__user_id=self.user_id)
+                filter_query &= Q(is_outside_board=self.user_id)
+
             elif isinstance(self.model, Board):
                 filter_query &= Q(boardfollowers__user_id=self.user_id)
 
@@ -86,5 +88,6 @@ class BaseCollectionStrategy(ABC):
     def get_min_max_values(values):
         return min(values), max(values)
 
+    @abstractmethod
     def get_all_existing_collections(self):
-        return self.model.objects.all().order_by('-created_at')
+        raise NotImplemented()
