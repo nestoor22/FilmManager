@@ -2,13 +2,13 @@ import gql from 'graphql-tag';
 
 export const COLLECTIONS = gql`
   query collections(
-    $userFollowedBoards: Boolean
-    $userBoards: Boolean
+    $userFollowedCollections: Boolean
+    $userCollections: Boolean
     $filters: FiltersType
   ) {
     collections(
-      userFollowedBoards: $userFollowedBoards
-      userBoards: $userBoards
+      userFollowedCollections: $userFollowedCollections
+      userCollections: $userCollections
       filters: $filters
     ) {
       id
@@ -36,13 +36,6 @@ export const COLLECTIONS = gql`
       name
       createdAt
       isOwner
-    }
-    lastVisitedBoards {
-      id
-      sharedTimes
-      isOpen
-      name
-      createdAt
     }
   }
 `;

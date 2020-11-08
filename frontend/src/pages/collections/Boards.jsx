@@ -59,8 +59,8 @@ const Boards = ({ boardFilter, reset }) => {
   const { data, refetch } = useQuery(COLLECTIONS, {
     fetchPolicy: 'no-cache',
     variables: {
-      userBoards: value === 2,
-      userFollowedBoards: value === 1,
+      userCollections: value === 2,
+      userFollowedCollections: value === 1,
     },
   });
 
@@ -70,7 +70,7 @@ const Boards = ({ boardFilter, reset }) => {
 
   const handleSubmitFilters = () => {
     refetch({
-      userFollowedBoards: value === 1,
+      userFollowedCollections: value === 1,
       userBoards: value === 2,
       filters: boardFilter,
     });
@@ -78,8 +78,8 @@ const Boards = ({ boardFilter, reset }) => {
 
   React.useEffect(() => {
     refetch({
-      userFollowedBoards: value === 1,
-      userBoards: value === 2,
+      userFollowedCollections: value === 1,
+      userCollections: value === 2,
     });
   }, [value]);
 

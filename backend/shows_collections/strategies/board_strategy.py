@@ -1,5 +1,7 @@
+from django.db.models import Avg
+
 from .base import BaseCollectionStrategy
-from ..models import Board, User, BoardFollowers
+from ..models import Board, User, BoardFollowers, BoardLists, Shows
 
 
 class BoardStrategy(BaseCollectionStrategy):
@@ -39,11 +41,46 @@ class BoardStrategy(BaseCollectionStrategy):
 
         self.collection_obj.save()
 
-    def compute_average_show_rating(self):
-        pass
+    def compute_average_show_rating(self, collection_id):
+        board_lists = BoardLists.objects.filter(board_id=collection_id)
+        shows_ratings = Shows.objects.filter(
+            listshowrelation__list__boardlists__in=board_lists
+        ).aggregate(Avg("imdb_rating"))
 
-    def get_shows_number_in_collection(self):
-        pass
+        return round(shows_ratings["imdb_rating__avg"] or 0, 2)
 
-    def get_filtered_collections(self):
-        pass
+    def get_followed_collections(self):
+        return self.model.objects.filter(boardfollowers__user_id=self.user_id)
+
+    def get_shows_number_in_collection(self, collection_id):
+        board_lists = BoardLists.objects.filter(board_id=collection_id)
+        return Shows.objects.filter(
+            listshowrelation__list__boardlists__in=board_lists
+        ).count()
+
+    def get_filtered_collections(self, user_followed_collections, filters):
+        result = []
+        filters_query = self.prepare_filtered_query(
+            filters=filters,
+            get_followed_collections=user_followed_collections,
+        )
+
+        min_shows_number, max_shows_number = self.get_min_max_values(
+            filters.get("shows_number", [0, 999]))
+
+        min_rating, max_rating = self.get_min_max_values(
+            filters.get("rating", [0, 10]))
+
+        filtered_boards = Board.objects.filter(filters_query).order_by(
+            "created_at")
+
+        for board in filtered_boards:
+            if (max_rating >= self.compute_average_show_rating(
+                board.id) >= min_rating
+            ):
+                if (max_shows_number >= self.get_shows_number_in_collection(
+                    board.id) >= min_shows_number
+                ):
+                    result.append(board)
+
+        return result

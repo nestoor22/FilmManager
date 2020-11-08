@@ -1,12 +1,16 @@
 from abc import ABC, abstractmethod
 
+from django.db.models import Q
+from ..models import List, Board
+
 
 class BaseCollectionStrategy(ABC):
 
     model = None
 
-    def __init__(self, data):
+    def __init__(self, data=None, user_id=None):
         self.collection_data = data
+        self.user_id = user_id
         self.collection_obj = None
 
     @abstractmethod
@@ -26,18 +30,61 @@ class BaseCollectionStrategy(ABC):
         raise NotImplemented()
 
     @abstractmethod
-    def compute_average_show_rating(self):
+    def compute_average_show_rating(self, collection_id):
         raise NotImplemented()
 
     @abstractmethod
-    def get_shows_number_in_collection(self):
+    def get_shows_number_in_collection(self, collection_id):
         raise NotImplemented()
 
     @abstractmethod
-    def get_filtered_collections(self):
+    def get_filtered_collections(self, user_followed_collections, filters):
         raise NotImplemented()
+
+    @abstractmethod
+    def get_followed_collections(self):
+        raise NotImplemented()
+
+    def get_user_collections(self):
+        return self.model.objects.filter(owner_id=self.user_id)
 
     def delete(self):
         return self.model.objects.filter(
             id=self.collection_data['id']
         ).delete()
+
+    def prepare_filtered_query(
+            self, filters, get_followed_collections
+    ):
+        filter_query = Q()
+
+        min_followers, max_followers = self.get_min_max_values(
+            filters.get("followers"))
+
+        if get_followed_collections and self.user_id:
+            if isinstance(self.model, List):
+                filter_query &= Q(listfollowers__user_id=self.user_id)
+            elif isinstance(self.model, Board):
+                filter_query &= Q(boardfollowers__user_id=self.user_id)
+
+        if len(filters.get("board_type", [])) == 1:
+            filter_query &= Q(is_open=filters.get("board_type")[0] == "open")
+
+        if filters.get("tags"):
+            for tag in filters.get("tags"):
+                filter_query |= Q(tags__icontains=tag)
+
+        if filters.get("followers"):
+            filter_query &= Q(
+                followers__lte=max_followers,
+                followers__gte=min_followers
+            )
+
+        return filter_query
+
+    @staticmethod
+    def get_min_max_values(values):
+        return min(values), max(values)
+
+    def get_all_existing_collections(self):
+        return self.model.objects.all().order_by('-created_at')

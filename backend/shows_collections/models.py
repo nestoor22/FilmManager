@@ -34,7 +34,7 @@ class List(models.Model):
     followers = models.IntegerField(null=True, default=1)
     shared_times = models.IntegerField(null=True, default=0)
     is_open = models.BooleanField(default=False)
-    is_outside_board = models.BooleanField(default=False)
+    is_outside_board = models.BooleanField(default=True)
 
     class Meta:
         db_table = 'shows_list'
@@ -79,3 +79,16 @@ class BoardFollowers(models.Model):
 
     def __str__(self):
         return f"Board-{self.board.id} has follower-{self.user.id}"
+
+
+class ListFollowers(models.Model):
+    list = models.ForeignKey(List, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_admin = models.BooleanField(default=False, null=True)
+
+    class Meta:
+        db_table = "list_followers"
+        verbose_name = "List follower"
+
+    def __str__(self):
+        return f"List-{self.list.id} has follower-{self.user.id}"
