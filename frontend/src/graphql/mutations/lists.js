@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-export const CREATE_LIST = gql`
-  mutation createList($boardId: Int, $showsOnList: [Int], $listName: String) {
-    createList(
+export const CREATE_LIST_ON_BOARD = gql`
+  mutation createListOnBoard($boardId: Int, $showsOnList: [Int], $listName: String) {
+    createListOnBoard(
       boardId: $boardId
       showsOnList: $showsOnList
       listName: $listName

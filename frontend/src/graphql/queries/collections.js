@@ -30,6 +30,10 @@ export const COLLECTIONS = gql`
           }
         }
       }
+      shows {
+        title
+        posterUrl
+      }
       description
       tags
       isOpen

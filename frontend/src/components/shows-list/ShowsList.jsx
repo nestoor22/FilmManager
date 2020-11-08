@@ -10,7 +10,7 @@ import { Input } from '@material-ui/core';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 import { DeleteIcon, AddItemToListSearch } from 'components';
-import { ADD_SHOW_TO_LIST, CREATE_LIST } from 'graphql/mutations/lists';
+import { ADD_SHOW_TO_LIST, CREATE_LIST_ON_BOARD } from 'graphql/mutations/lists';
 import DoneIcon from 'assets/icons/done-mark.svg';
 import ShowIcon from 'assets/icons/show.svg';
 import HideIcon from 'assets/icons/hide.svg';
@@ -21,7 +21,7 @@ const ShowsList = ({ boardId, list, index, refetch, canAddItems }) => {
   const classes = useStyles();
 
   const [addShowToList] = useMutation(ADD_SHOW_TO_LIST);
-  const [createList] = useMutation(CREATE_LIST);
+  const [createListOnBoard] = useMutation(CREATE_LIST_ON_BOARD);
 
   const [showAddItem, setShowAddItem] = React.useState(false);
   const [showsOnList, setShowsOnList] = React.useState(list?.showsOnList || []);
@@ -39,7 +39,7 @@ const ShowsList = ({ boardId, list, index, refetch, canAddItems }) => {
   };
 
   const submitCreateList = () => {
-    createList({
+    createListOnBoard({
       variables: {
         listName: newListTitle,
         showsOnList: [],

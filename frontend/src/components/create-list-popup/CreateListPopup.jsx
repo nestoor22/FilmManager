@@ -13,7 +13,7 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { Input, FormButtons, TextInput, AsyncChipsInput } from 'components';
 
 import { SHOWS_BY_NAME } from 'graphql/queries/shows';
-import { CREATE_LIST } from 'graphql/mutations/lists';
+import { CREATE_LIST_ON_BOARD } from 'graphql/mutations/lists';
 
 import useStyles from './styles';
 
@@ -26,7 +26,7 @@ const initialValues = {
 const CreateListPopup = ({ open, onClose, boardId, listData, refetch }) => {
   const classes = useStyles();
 
-  const [createList] = useMutation(CREATE_LIST);
+  const [createList] = useMutation(CREATE_LIST_ON_BOARD);
   const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = () => {
