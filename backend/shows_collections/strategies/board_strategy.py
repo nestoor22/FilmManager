@@ -111,4 +111,4 @@ class BoardStrategy(BaseCollectionStrategy):
         board_lists = BoardLists.objects.filter(board_id=collection_id)
         return Shows.objects.filter(
             listshowrelation__list__boardlists__in=board_lists
-        ).count()
+        )

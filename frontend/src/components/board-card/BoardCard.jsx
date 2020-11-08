@@ -34,14 +34,19 @@ const BoardCard = ({ refetch, boardInfo }) => {
         }
         history.push(`/boards/${boardInfo.id}/view`);
       }}
-      style={{
-        backgroundImage: `url('${require('./milky-way-2695569_960_720.jpg')}')`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-      }}
     >
       <div className={classes.boardTileContent}>
+        <div className={classes.showsInCollectionWrapper}>
+          {boardInfo?.shows.map((showInfo) => {
+            return (
+              <img
+                className={classes.miniPoster}
+                src={showInfo.posterUrl}
+                alt={'Poster'}
+              />
+            );
+          })}
+        </div>
         <div className={classes.boardHeaderWrapper}>
           <Typography className={classes.boardName}>
             {boardInfo.name}

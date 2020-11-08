@@ -2,20 +2,35 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   boardTile: {
-    height: '280px',
     width: '800px',
     borderRadius: '3px',
-    paddingTop: '72px',
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     '&:hover': {
       cursor: 'pointer',
     },
     marginBottom: '40px',
   },
+  showsInCollectionWrapper: {
+    minHeight: '72px',
+    maxWidth: 'fit-content',
+    backgroundColor: '#073947',
+    display: 'flex',
+    overflowX: 'scroll',
+    '&::-webkit-scrollbar': {
+      height: '3px',
+    },
+    '&::-webkit-scrollbar-track': {
+      background: '#C2C2C2',
+      borderRadius: '2px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: '#335267',
+      opacity: 0.48,
+      borderRadius: '2px',
+    },
+  },
   boardTileContent: {
     height: '208px',
-    paddingLeft: '10px',
-    paddingRight: '10px',
     backgroundColor: '#073947',
     position: 'relative',
     '&:hover': {
@@ -34,6 +49,8 @@ const useStyles = makeStyles({
     height: '38px',
     alignItems: 'center',
     position: 'relative',
+    paddingLeft: '10px',
+    paddingRight: '10px',
   },
   infoIcon: {
     position: 'absolute',
@@ -49,6 +66,8 @@ const useStyles = makeStyles({
   marksWrapper: {
     display: 'flex',
     marginTop: '20px',
+    paddingLeft: '10px',
+    paddingRight: '10px',
   },
   markText: {
     fontSize: '15px',
@@ -56,12 +75,19 @@ const useStyles = makeStyles({
     minWidth: '140px',
     marginRight: '45px',
   },
+  miniPoster: {
+    maxHeight: '72px',
+    maxWidth: '40px',
+    display: 'flex',
+  },
   cardFooter: {
     display: 'flex',
     width: '100%',
     position: 'absolute',
     height: '40px',
     alignItems: 'center',
+    paddingLeft: '10px',
+    paddingRight: '10px',
     bottom: 0,
   },
   actionsBtns: {
@@ -78,7 +104,7 @@ const useStyles = makeStyles({
     },
   },
   disabled: {
-    color: '#295E6D !important'
+    color: '#295E6D !important',
   },
   avatarImage: {
     height: '30px',
