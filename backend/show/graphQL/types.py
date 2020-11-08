@@ -1,4 +1,5 @@
 import graphene
+
 from bs4 import BeautifulSoup
 from graphene_django import DjangoObjectType
 

@@ -49,9 +49,8 @@ class CollectionsQuery(graphene.ObjectType):
         if user_followed_collections and not filters:
             if not user_id:
                 raise Exception("User is not logged in")
-            print('HERE')
             return get_user_followed_collections(user_id)
-        print(user_collections)
+
         if user_collections:
             if not user_id:
                 raise Exception("User is not logged in")

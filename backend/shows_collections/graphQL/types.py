@@ -2,11 +2,15 @@ import graphene
 
 from graphene_django import DjangoObjectType
 from user.graphQL.types import UserType
+from show.graphQL.types import ShowsType
+from ..strategies.context import CollectionsContext
+from ..helpers import get_context_for_obj
 from ..models import (
     BoardLists,
     BoardFollowers,
     List,
-    ListShowRelation
+    ListShowRelation,
+    Board
 )
 
 
@@ -36,28 +40,41 @@ class FiltersType(graphene.InputObjectType):
 
 class CollectionType(graphene.ObjectType):
     id = graphene.Int()
-    owner = graphene.Field(UserType)
-    name = graphene.String()
-    created_at = graphene.DateTime()
-    description = graphene.String()
-    tags = graphene.List(graphene.String)
     followers = graphene.Int()
     shared_times = graphene.Int()
-    lists = graphene.List(ShowsListType)
-    is_followed = graphene.Boolean()
-    average_show_rating = graphene.Float()
     shows_number = graphene.Int()
+
+    average_show_rating = graphene.Float()
+
+    is_followed = graphene.Boolean()
     can_edit = graphene.Boolean()
     is_owner = graphene.Boolean()
     is_open = graphene.Boolean()
 
+    name = graphene.String()
+    description = graphene.String()
+
+    created_at = graphene.DateTime()
+
+    owner = graphene.Field(UserType)
+
+    tags = graphene.List(graphene.String)
+    lists = graphene.List(ShowsListType)
+    shows = graphene.List(ShowsType)
+
     @staticmethod
     def resolve_lists(parent, info):
-        return List.objects.filter(boardlists__board__id=parent.id)
+        if isinstance(parent, Board):
+            return List.objects.filter(boardlists__board__id=parent.id)
 
     @staticmethod
     def resolve_average_show_rating(parent, info):
-        return 0
+        collections_context = get_context_for_obj(parent)
+
+        if collections_context:
+            return collections_context.compute_average_show_rating(
+                collection_id=parent.id
+            )
 
     @staticmethod
     def resolve_is_owner(parent, info):
@@ -66,7 +83,20 @@ class CollectionType(graphene.ObjectType):
 
     @staticmethod
     def resolve_shows_number(parent, info):
-        return 0
+        collections_context = get_context_for_obj(parent)
+
+        if collections_context:
+            return collections_context.get_shows_number_in_collection(
+                    collection_id=parent.id
+                )
+
+    @staticmethod
+    def resolve_shows(parent, info):
+        collections_context = get_context_for_obj(parent)
+
+        if collections_context:
+            return collections_context.get_shows_elements_in_collection(
+                collection_id=parent.id)
 
     @staticmethod
     def resolve_is_followed(parent, info):

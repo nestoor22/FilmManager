@@ -1,4 +1,6 @@
 from .strategies.context import CollectionsContext
+from .models import Board, List
+
 
 EXISTING_COLLECTIONS_TYPE = ['board', 'list']
 
@@ -45,6 +47,7 @@ def get_filtered_collections(user_id, user_followed_collections, filters):
     return sorted(
         result, key=lambda x: getattr(x, 'created_at'), reverse=True)
 
+
 def get_all_collections():
     result = []
 
@@ -56,3 +59,11 @@ def get_all_collections():
 
     return sorted(
         result, key=lambda x: getattr(x, 'created_at'), reverse=True)
+
+
+def get_context_for_obj(collection_obj):
+    if isinstance(collection_obj, Board):
+        return CollectionsContext('board')
+
+    elif isinstance(collection_obj, List):
+        return CollectionsContext('list')

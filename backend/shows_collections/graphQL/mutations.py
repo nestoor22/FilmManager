@@ -39,7 +39,7 @@ class CreateCollectionMutation(graphene.Mutation):
         collection_context.create()
 
         return CreateCollectionMutation(
-            id=collection_context.strategy.collection_obj.id
+            id=collection_context._strategy.collection_obj.id
         )
 
 

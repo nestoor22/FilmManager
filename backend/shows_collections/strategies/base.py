@@ -45,6 +45,14 @@ class BaseCollectionStrategy(ABC):
     def get_followed_collections(self):
         raise NotImplemented()
 
+    @abstractmethod
+    def get_all_existing_collections(self):
+        raise NotImplemented()
+
+    @abstractmethod
+    def get_shows_elements_in_collection(self, collection_id):
+        raise NotImplemented()
+
     def get_user_collections(self):
         return self.model.objects.filter(owner_id=self.user_id)
 
@@ -87,7 +95,3 @@ class BaseCollectionStrategy(ABC):
     @staticmethod
     def get_min_max_values(values):
         return min(values), max(values)
-
-    @abstractmethod
-    def get_all_existing_collections(self):
-        raise NotImplemented()

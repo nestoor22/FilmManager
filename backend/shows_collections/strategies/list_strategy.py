@@ -44,7 +44,8 @@ class ListStrategy(BaseCollectionStrategy):
 
     def compute_average_show_rating(self, collection_id):
         shows_ids = ListShowRelation.objects.filter(
-            list_id=collection_id).values_list('show_id', flat=True)
+            list_id=collection_id
+        ).values_list('show_id', flat=True)
 
         average_shows_rating = Shows.objects.filter(
             show_id__in=shows_ids).aggregate(
@@ -88,3 +89,10 @@ class ListStrategy(BaseCollectionStrategy):
     def get_followed_collections(self):
         return self.model.objects.filter(
             listfollowers__user_id=self.user_id, is_outside_board=True)
+
+    def get_shows_elements_in_collection(self, collection_id):
+        shows_ids = ListShowRelation.objects.filter(
+            list_id=collection_id
+        ).values_list('show_id', flat=True)
+
+        return Shows.objects.filter(show_id__in=shows_ids)
