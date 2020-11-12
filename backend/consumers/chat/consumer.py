@@ -2,7 +2,7 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from asgiref.sync import sync_to_async
 
-from .models import ChatMessages, Chat
+from chat.models import ChatMessages, Chat
 from serializers.customSerializer import CustomSerializer
 
 
