@@ -1,127 +1,48 @@
 import React from 'react';
-import { useSnackbar } from 'notistack';
 import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import Avatar from '@material-ui/core/Avatar';
-import ShareIcon from '@material-ui/icons/Share';
-import Typography from '@material-ui/core/Typography';
-import { Button } from '@material-ui/core';
-
-
-import { BOARD } from 'graphql/queries/collections';
-import { AppHeader, PopoverWrapper } from 'components';
-import ListMark from 'assets/icons/list-dot-mark.svg';
+import { COLLECTION } from 'graphql/queries/collections';
+import { AppHeader } from 'components';
 import ShowsList from '../../../components/shows-list/ShowsList';
 
 import useStyles from './styles';
+import CollectionInfoSidebar from './components/InfoSidebar';
 
 const OpenBoard = () => {
   const classes = useStyles();
   const { id } = useParams();
 
-  const { enqueueSnackbar } = useSnackbar();
-  const { data, refetch } = useQuery(BOARD, { variables: { boardId: id } });
+  const { data, refetch } = useQuery(COLLECTION, {
+    variables: { collectionId: id, collectionType: 'board' },
+  });
 
-  const [copied, setCopied] = React.useState(false);
   const [lists, setLists] = React.useState([]);
 
   React.useEffect(() => {
-    if (copied) {
-      enqueueSnackbar('Copied !', { variant: 'success' });
-      setCopied(false);
+    if (data?.collection?.lists) {
+      setLists(data?.collection?.lists);
     }
-  }, [copied, enqueueSnackbar]);
-
-  React.useEffect(() => {
-    if (data?.board?.lists) {
-      setLists(data?.board?.lists);
-    }
-  }, [data?.board?.lists]);
-
-  const handleAddListToBoard = () => {
-    if (lists.find((list) => list.newlyCreated === true)) {
-      return;
-    }
-    setLists(lists.concat({ newlyCreated: true }));
-  };
+  }, [data?.collection?.lists]);
 
   return (
     <div className={classes.root}>
       <AppHeader />
       {data && (
         <div className={classes.contentWrapper}>
-          <div className={classes.infoSidebar}>
-            <div className={classes.headerWrapper}>
-              <Typography className={classes.header}>
-                {data?.board.name}
-              </Typography>
-              <PopoverWrapper text={'Copy share link'}>
-                <div style={{ width: '20px' }}>
-                  <CopyToClipboard
-                    text={data?.board.name}
-                    onCopy={() => setCopied(true)}
-                  >
-                    <ShareIcon className={classes.shareIcon} />
-                  </CopyToClipboard>
-                </div>
-              </PopoverWrapper>
-            </div>
-            <Typography className={classes.description}>
-              {data?.board.description}
-            </Typography>
-            <div className={classes.ownersBlockWrapper}>
-              <Typography className={classes.subheader}>Managed by:</Typography>
-              <div className={classes.avatarsWrapper}>
-                {data?.board.members &&
-                  data?.board.members.map((member, index) => {
-                    return member.photo ? (
-                      <Avatar
-                        key={index}
-                        className={classes.avatarImage}
-                        src={member.photo}
-                      />
-                    ) : (
-                      <Avatar key={index} className={classes.avatarImage}>
-                        {member.firstName[0] + member.lastName[0]}
-                      </Avatar>
-                    );
-                  })}
-              </div>
-            </div>
-            <div className={classes.listsBlockWrapper}>
-              <Typography className={classes.subheader}>Lists:</Typography>
-              <div className={classes.listsNamesWrapper}>
-                {data?.board.lists.map((item, index) => {
-                  return (
-                    <div className={classes.listName}>
-                      <img alt="" src={ListMark} />
-                      <Typography className={classes.listNameTitle}>
-                        {item.name}
-                      </Typography>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-            {data.board.canEdit && (
-              <Button
-                onClick={handleAddListToBoard}
-                className={classes.addNewListBtn}
-              >
-                Add new list
-              </Button>
-            )}
-          </div>
+          <CollectionInfoSidebar
+            collectionData={data?.collection}
+            lists={lists}
+            setLists={setLists}
+          />
           <div className={classes.listsContent}>
             {lists?.map((list, index) => {
               return (
                 <ShowsList
-                  boardId={data.board.id}
+                  boardId={data.collection.id}
                   list={list}
                   index={index}
-                  canAddItems={data.board.canEdit}
+                  canAddItems={data.collection.canEdit}
                   refetch={refetch}
                 />
               );

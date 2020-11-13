@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 
 from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
+
 from ..models import List, Board
 
 
@@ -9,16 +11,16 @@ class BaseCollectionStrategy(ABC):
     model = None
 
     def __init__(self, data=None, user_id=None):
-        self.collection_data = data
         self.user_id = user_id
+        self.collection_data = data
         self.collection_obj = None
 
     @abstractmethod
-    def create_related_collection(self, collection_data):
+    def create_related_collection(self, collection_data: dict):
         raise NotImplemented()
 
     @abstractmethod
-    def add_members_to_collection(self, members_list):
+    def add_members_to_collection(self, members_list: list):
         raise NotImplemented()
 
     @abstractmethod
@@ -30,15 +32,16 @@ class BaseCollectionStrategy(ABC):
         raise NotImplemented()
 
     @abstractmethod
-    def compute_average_show_rating(self, collection_id):
+    def compute_average_show_rating(self, collection_id: int):
         raise NotImplemented()
 
     @abstractmethod
-    def get_shows_number_in_collection(self, collection_id):
+    def get_shows_number_in_collection(self, collection_id: int):
         raise NotImplemented()
 
     @abstractmethod
-    def get_filtered_collections(self, user_followed_collections, filters):
+    def get_filtered_collections(
+            self, user_followed_collections: list, filters: dict):
         raise NotImplemented()
 
     @abstractmethod
@@ -56,13 +59,19 @@ class BaseCollectionStrategy(ABC):
     def get_user_collections(self):
         return self.model.objects.filter(owner_id=self.user_id)
 
+    def get_collection(self):
+        try:
+            return self.model.objects.get(id=self.collection_data['id'])
+        except ObjectDoesNotExist:
+            return {}
+
     def delete(self):
         return self.model.objects.filter(
             id=self.collection_data['id']
         ).delete()
 
     def prepare_filtered_query(
-            self, filters, get_followed_collections
+            self, filters: dict, get_followed_collections: bool
     ):
         filter_query = Q()
 
@@ -93,5 +102,5 @@ class BaseCollectionStrategy(ABC):
         return filter_query
 
     @staticmethod
-    def get_min_max_values(values):
+    def get_min_max_values(values: list):
         return min(values), max(values)

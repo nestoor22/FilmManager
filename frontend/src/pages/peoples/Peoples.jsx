@@ -69,7 +69,7 @@ const PeoplePage = () => {
 
   React.useEffect(() => {
     getUsers();
-  }, []);
+  }, [getUsers]);
 
   return (
     <div className={classes.root}>

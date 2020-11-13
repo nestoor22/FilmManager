@@ -1,13 +1,13 @@
 import graphene
 
-from ..models import Board
 from .types import CollectionType, FiltersType, ShowsListType, List
 
 from ..helpers import (
     get_user_collections,
     get_filtered_collections,
     get_user_followed_collections,
-    get_all_collections
+    get_all_collections,
+    get_collection
 )
 
 
@@ -21,7 +21,12 @@ class ShowsListsQuery(graphene.ObjectType):
 
 
 class CollectionsQuery(graphene.ObjectType):
-    board = graphene.Field(CollectionType, board_id=graphene.Int(required=True))
+    collection = graphene.Field(
+        CollectionType,
+        collection_id=graphene.Int(required=True),
+        collection_type=graphene.String(required=True)
+    )
+
     collections = graphene.List(
         CollectionType,
         user_followed_collections=graphene.Boolean(),
@@ -30,11 +35,11 @@ class CollectionsQuery(graphene.ObjectType):
     )
 
     @staticmethod
-    def resolve_board(parent, info, board_id):
-        try:
-            return Board.objects.get(id=board_id)
-        except Board.DoesNotExist:
-            return None
+    def resolve_collection(parent, info, collection_id, collection_type):
+        return get_collection(
+            collection_id=collection_id,
+            collection_type=collection_type
+        )
 
     @staticmethod
     def resolve_collections(

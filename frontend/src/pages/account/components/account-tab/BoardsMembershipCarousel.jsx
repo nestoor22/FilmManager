@@ -6,7 +6,7 @@ import Slider from 'react-slick';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
-import BoardCard from '../../../../components/board-card/BoardCard';
+import CollectionCard from '../../../../components/board-card/CollectionCard';
 
 import useStyles from './styles';
 
@@ -93,7 +93,7 @@ const BoardsMembershipCarousel = ({ boards, refetch }) => {
       <Slider className={classes.listLick} {...settings}>
         {boards.map((boardInfo, index) => {
           return (
-            <BoardCard refetch={refetch} key={index} boardInfo={boardInfo} />
+            <CollectionCard refetch={refetch} key={index} boardInfo={boardInfo} />
           );
         })}
       </Slider>

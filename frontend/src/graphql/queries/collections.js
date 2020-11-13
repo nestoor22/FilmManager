@@ -17,6 +17,7 @@ export const COLLECTIONS = gql`
       averageShowRating
       isFollowed
       showsNumber
+      isBoard
       lists {
         id
         name
@@ -44,9 +45,9 @@ export const COLLECTIONS = gql`
   }
 `;
 
-export const BOARD = gql`
-  query board($boardId: Int!) {
-    board(boardId: $boardId) {
+export const COLLECTION = gql`
+  query collection($collectionId: Int!, $collectionType: String!) {
+    collection(collectionId: $collectionId, collectionType: $collectionType) {
       id
       sharedTimes
       isOpen
@@ -60,6 +61,12 @@ export const BOARD = gql`
         lastName
         email
         photo
+      }
+      shows {
+        showId
+        title
+        releaseDate
+        posterUrl
       }
       lists {
         id

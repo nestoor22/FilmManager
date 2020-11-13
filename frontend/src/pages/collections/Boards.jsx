@@ -19,7 +19,7 @@ import {
 
 import { COLLECTIONS } from 'graphql/queries/collections';
 import CustomCheckBoxField from '../../components/custom-checkbox-fields/CustomCheckBoxField';
-import CollectionCard from '../../components/board-card/BoardCard';
+import CollectionCard from '../../components/board-card/CollectionCard';
 
 import useStyles from './styles';
 
@@ -81,7 +81,7 @@ const Boards = ({ boardFilter, reset }) => {
       userFollowedCollections: value === 1,
       userCollections: value === 2,
     });
-  }, [value]);
+  }, [value, refetch]);
 
   return (
     <div className={classes.root}>
@@ -243,7 +243,7 @@ const Boards = ({ boardFilter, reset }) => {
                 <CollectionCard
                   refetch={refetch}
                   key={index}
-                  boardInfo={collectionInfo}
+                  collectionInfo={collectionInfo}
                 />
               );
             })}

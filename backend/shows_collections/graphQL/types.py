@@ -1,9 +1,9 @@
 import graphene
 
 from graphene_django import DjangoObjectType
+
 from user.graphQL.types import UserType
 from show.graphQL.types import ShowsType
-from ..strategies.context import CollectionsContext
 from ..helpers import get_context_for_obj
 from ..models import (
     BoardLists,
@@ -50,6 +50,7 @@ class CollectionType(graphene.ObjectType):
     can_edit = graphene.Boolean()
     is_owner = graphene.Boolean()
     is_open = graphene.Boolean()
+    is_board = graphene.Boolean()
 
     name = graphene.String()
     description = graphene.String()
@@ -68,6 +69,10 @@ class CollectionType(graphene.ObjectType):
             return List.objects.filter(boardlists__board__id=parent.id)
 
     @staticmethod
+    def resolve_is_board(parent, info):
+        return isinstance(parent, Board)
+
+    @staticmethod
     def resolve_average_show_rating(parent, info):
         collections_context = get_context_for_obj(parent)
 
@@ -79,7 +84,7 @@ class CollectionType(graphene.ObjectType):
     @staticmethod
     def resolve_is_owner(parent, info):
         return int(parent.owner_id) == \
-               int(info.context.session.get("_auth_user_id"))
+               int(info.context.session.get("_auth_user_id", -1))
 
     @staticmethod
     def resolve_shows_number(parent, info):

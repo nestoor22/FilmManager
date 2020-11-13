@@ -52,3 +52,6 @@ class CollectionsContext(object):
 
     def get_shows_elements_in_collection(self, collection_id):
         return self._strategy.get_shows_elements_in_collection(collection_id)
+
+    def get_collection(self):
+        return self._strategy.get_collection()

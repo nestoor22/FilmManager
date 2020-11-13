@@ -61,6 +61,14 @@ def get_all_collections():
         result, key=lambda x: getattr(x, 'created_at'), reverse=True)
 
 
+def get_collection(collection_id, collection_type):
+    collection_context = CollectionsContext(
+        collection_type=collection_type,
+        collection_data={'id': collection_id}
+    )
+    return collection_context.get_collection()
+
+
 def get_context_for_obj(collection_obj):
     if isinstance(collection_obj, Board):
         return CollectionsContext('board')

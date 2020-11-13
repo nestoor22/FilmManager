@@ -4,7 +4,6 @@ import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 
 import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 
@@ -14,7 +13,7 @@ import { FOLLOW_BOARD } from 'graphql/mutations/boards';
 
 import useStyles from './styles';
 
-const BoardCard = ({ refetch, boardInfo }) => {
+const CollectionCard = ({ refetch, collectionInfo }) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
@@ -29,15 +28,19 @@ const BoardCard = ({ refetch, boardInfo }) => {
     <div
       className={classes.boardTile}
       onDoubleClick={() => {
-        if (!boardInfo.isOpen && !boardInfo.isFollowed) {
+        if (!collectionInfo.isOpen && !collectionInfo.isFollowed) {
           return;
         }
-        history.push(`/boards/${boardInfo.id}/view`);
+        if (collectionInfo.isBoard) {
+          history.push(`/boards/${collectionInfo.id}/view`);
+        } else {
+          history.push(`/lists/${collectionInfo.id}/view`);
+        }
       }}
     >
       <div className={classes.boardTileContent}>
         <div className={classes.showsInCollectionWrapper}>
-          {boardInfo?.shows.map((showInfo) => {
+          {collectionInfo?.shows.map((showInfo) => {
             return (
               <img
                 className={classes.miniPoster}
@@ -50,17 +53,17 @@ const BoardCard = ({ refetch, boardInfo }) => {
         </div>
         <div className={classes.boardHeaderWrapper}>
           <Typography className={classes.boardName}>
-            {boardInfo.name}
+            {collectionInfo.name}
           </Typography>
           <div className={classes.infoIcon}>
             <PopoverWrapper
-              text={boardInfo.description}
+              text={collectionInfo.description}
               children={<img alt="" src={InfoIcon} />}
             />
           </div>
         </div>
         <div>
-          {boardInfo.tags.map((tag, index) => {
+          {collectionInfo.tags.map((tag, index) => {
             return (
               <Chip
                 key={index}
@@ -73,52 +76,52 @@ const BoardCard = ({ refetch, boardInfo }) => {
         </div>
         <div className={classes.marksWrapper}>
           <Typography className={classes.markText}>
-            Followers: {boardInfo.followers}
+            Followers: {collectionInfo.followers}
           </Typography>
           <Typography className={classes.markText}>
-            Average show rating: {boardInfo.averageShowRating}
+            Average show rating: {collectionInfo.averageShowRating}
           </Typography>
           <Typography className={classes.markText}>
             Rating place: 2134
           </Typography>
           <Typography className={classes.markText}>
-            Items on board: {boardInfo.showsNumber}
+            Items on board: {collectionInfo.showsNumber}
           </Typography>
         </div>
         <div className={classes.cardFooter}>
-          {!boardInfo.isOwner && (
+          {!collectionInfo.isOwner && (
             <div className={classes.actionsBtns}>
               <Button
                 onClick={(e) => {
                   followBoard({
                     variables: {
-                      boardId: boardInfo.id,
-                      unfollow: boardInfo.isFollowed,
+                      boardId: collectionInfo.id,
+                      unfollow: collectionInfo.isFollowed,
                     },
                   }).then(() => {
                     enqueueSnackbar(
-                      boardInfo.isFollowed ? 'Unfollow !' : 'Followed!',
+                      collectionInfo.isFollowed ? 'Unfollow !' : 'Followed!',
                       {
                         variant: 'success',
                       }
                     );
-                    if (boardInfo.isFollowed) {
+                    if (collectionInfo.isFollowed) {
                       refetch();
                     }
-                    boardInfo.isFollowed = !boardInfo.isFollowed;
+                    collectionInfo.isFollowed = !collectionInfo.isFollowed;
                     setChangeFollowedStatus(!changeFollowedStatus);
                   });
                 }}
-                disabled={!boardInfo.isOpen}
+                disabled={!collectionInfo.isOpen}
                 classes={{
                   root: classes.actionBtnText,
                   disabled: classes.disabled,
                 }}
               >
-                {boardInfo.isFollowed ? 'Unfollow' : 'Follow'}
+                {collectionInfo.isFollowed ? 'Unfollow' : 'Follow'}
               </Button>
               <Button
-                disabled={boardInfo.isOpen}
+                disabled={collectionInfo.isOpen}
                 classes={{
                   root: classes.actionBtnText,
                   disabled: classes.disabled,
@@ -134,4 +137,4 @@ const BoardCard = ({ refetch, boardInfo }) => {
   );
 };
 
-export default BoardCard;
+export default CollectionCard;

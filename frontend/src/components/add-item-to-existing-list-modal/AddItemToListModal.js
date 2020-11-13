@@ -73,20 +73,22 @@ const AddItemToListModal = ({ open, showId, onClose }) => {
                   </AccordionSummary>
                   <AccordionDetails classes={{ root: classes.detailsRoot }}>
                     <List classes={{ root: classes.listRoot }}>
-                      {board.lists.map((list) => (
-                        <ListItem
-                          onClick={() => handleAddItem(list.id)}
-                          className={classes.listName}
-                        >
-                          {list.name}
-                        </ListItem>
-                      ))}
+                      {board.lists.map((list) => {
+                        return (
+                          <ListItem
+                            onClick={() => handleAddItem(list.id)}
+                            className={classes.listName}
+                          >
+                            {list.name}
+                          </ListItem>
+                        );
+                      })}
                     </List>
                   </AccordionDetails>
                 </Accordion>
               );
             } else {
-              return;
+              return '';
             }
           })}
       </div>
