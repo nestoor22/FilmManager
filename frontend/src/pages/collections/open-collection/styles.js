@@ -177,6 +177,17 @@ const useStyles = makeStyles({
       outline: 'none',
     },
   },
+  listItems: {
+    marginTop: '30px',
+    display: 'flex',
+    width: '100%',
+    flexWrap: 'wrap',
+  },
+  searchWrapper: {
+    minWidth: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+  },
 });
 
 export default useStyles;

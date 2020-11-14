@@ -63,10 +63,20 @@ export const COLLECTION = gql`
         photo
       }
       shows {
-        showId
         title
-        releaseDate
+        plot
         posterUrl
+        showtype
+        usersRating
+        currentUserRating
+        releaseDate
+        imdbRating
+        genres {
+          genreName
+        }
+        actors {
+          name
+        }
       }
       lists {
         id

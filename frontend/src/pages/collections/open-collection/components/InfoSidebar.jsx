@@ -12,7 +12,13 @@ import ListMark from 'assets/icons/list-dot-mark.svg';
 
 import useStyles from './styles';
 
-const CollectionInfoSidebar = ({ collectionData, lists, setLists }) => {
+const CollectionInfoSidebar = ({
+  collectionData,
+  displayAddNewItem,
+  showAddNewItem,
+  lists,
+  setLists,
+}) => {
   const classes = useStyles();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -101,6 +107,14 @@ const CollectionInfoSidebar = ({ collectionData, lists, setLists }) => {
           className={classes.addNewListBtn}
         >
           Add new list
+        </Button>
+      )}
+      {collectionData.canEdit && !collectionData.isBoard && (
+        <Button
+          onClick={() => showAddNewItem(!displayAddNewItem)}
+          className={classes.addNewListBtn}
+        >
+          {displayAddNewItem ? 'Close Search' : 'Add new item'}
         </Button>
       )}
     </div>
