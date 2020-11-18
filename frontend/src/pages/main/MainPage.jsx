@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { AppHeader, ItemCard } from 'components';
 import { SHOWS } from 'graphql/queries/shows';
-
+import socketObj from '../../notificationSocketConfig';
 import useStyles from './styles';
 
 function MainPage() {
@@ -44,8 +44,9 @@ function MainPage() {
   });
 
   document.body.style.backgroundImage = 'none';
-  document.body.style.background = 'rgb(7,57,71)'
-  document.body.style.background = 'linear-gradient(45deg, rgba(7,57,71,1) 0%, rgba(41,94,109,1) 9%, rgba(186,199,203,1) 100%)';
+  document.body.style.background = 'rgb(7,57,71)';
+  document.body.style.background =
+    'linear-gradient(45deg, rgba(7,57,71,1) 0%, rgba(41,94,109,1) 9%, rgba(186,199,203,1) 100%)';
 
   const settings = {
     infinite: true,

@@ -1,5 +1,6 @@
 import Input from './input/Input';
 import Loader from './loader/Loader';
+import ErrorBox from './error-box/ErrorBox';
 import ItemCard from './item-card/ItemCard';
 import TabPanel from './tabs-panel/TabsPanel';
 import ItemsList from './items-list/ItemsList';
@@ -14,6 +15,7 @@ import SimpleInput from './simple-input/SimpleInput';
 import FormButtons from './form-buttons/FormButtons';
 import CustomChips from './custom-chips/CustomChips';
 import SingleDatePicker from './date-picker/DatePicker';
+import ReviewsBlock from './reviews-block/ReviewsBlock';
 import RateShowForm from './rate-show-form/RateShowForm';
 import CustomChartLegend from './chart-legend/ChartLegend';
 import AsyncChipsInput from './chips-input/AsyncChipsInput';
@@ -22,20 +24,19 @@ import ColorButtonsGroup from './color-buttons/ColorButtons';
 import PopoverWrapper from './popover-wrapper/PopoverWrapper';
 import SimplePieChart from './simple-pie-chart/SimplePieChart';
 import GeneralShowInfo from './general-show-info/GeneralShowInfo';
-import CreateBoardPopUp from './create-collection-popup/CreateCollectionPopUp';
+import CreateListPopup from './create-list-popup/CreateListPopup';
 import CustomCityPicker from './custom-city-picker/CustomCityPicker';
 import ConfirmationDialog from './confirmation-popup/ConfirmationPopup';
+import CustomSliderField from './custom-slider-field/CustomSliderField';
 import ShowDetailsDialog from './show-details-dialog/ShowDetailsDialog';
+import AccountPreviewBlock from './account-preview-block/AccountPreviewBlock';
 import CustomCountryPicker from './custom-country-picker/CustomCountryPicker';
 import BoardsStatisticsTab from './boards-statistics-tabs/BoardsStatisticsTab';
-import CustomSliderField from './custom-slider-field/CustomSliderField';
-import CreateListPopup from './create-list-popup/CreateListPopup';
+import CreateBoardPopUp from './create-collection-popup/CreateCollectionPopUp';
+import NotificationContainer from './notification-container/NotificationContainer';
 import { AddItemToListSearch } from './add-item-to-list-search/AddItemToListSearch';
 import AddItemToListModal from './add-item-to-existing-list-modal/AddItemToListModal';
-import ReviewsBlock from './reviews-block/ReviewsBlock';
 import ReviewBlockForAccountTab from './review-block-for-account-tab/ReviewBlockForAccountTab';
-import AccountPreviewBlock from './account-preview-block/AccountPreviewBlock';
-import ErrorBox from './error-box/ErrorBox';
 export {
   Input,
   Loader,
@@ -75,4 +76,5 @@ export {
   ReviewsBlock,
   AccountPreviewBlock,
   ReviewBlockForAccountTab,
+  NotificationContainer,
 };

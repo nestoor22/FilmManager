@@ -98,7 +98,6 @@ class CollectionType(graphene.ObjectType):
     @staticmethod
     def resolve_shows(parent, info):
         collections_context = get_context_for_obj(parent)
-
         if collections_context:
             return collections_context.get_shows_elements_in_collection(
                 collection_id=parent.id)
