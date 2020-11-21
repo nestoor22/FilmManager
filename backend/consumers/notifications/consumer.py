@@ -3,8 +3,6 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from asgiref.sync import sync_to_async
 
-from shows_collections.models import Board, List
-
 
 class NotificationsConsumer(AsyncWebsocketConsumer):
     async def connect(self):

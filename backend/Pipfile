@@ -23,6 +23,7 @@ psycopg2-binary = "*"
 celery = "==5"
 sendgrid = "*"
 django-crontab = "*"
+redis = "*"
 
 [requires]
 python_version = "3.8.3"

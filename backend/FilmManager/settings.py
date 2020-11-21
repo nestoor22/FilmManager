@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     "show",
     "shows_collections",
     "communities",
-    "chat"
+    "chat",
+    "notifications"
 ]
 
 MIDDLEWARE = [
